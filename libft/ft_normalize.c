@@ -1,12 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_normalize.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/28 16:40:51 by tseche           ###   ########.fr       */
+/*   Created: 2025/10/16 16:27:22 by tseche            #+#    #+#             */
+/*   Updated: 2025/10/29 18:34:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+/*
+return the positive form of n
+*/
+int	ft_normalizenbr(int n)
+{
+	if (n < 0)
+		return (n * -1);
+	return (n);
+}
