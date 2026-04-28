@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/28 17:32:03 by tseche           ###   ########.fr       */
+/*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
+/*   Updated: 2026/04/28 17:33:00 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#include "../../libft/libft.h"
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <math.h>
-
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include "../mlx_linux/mlx.h"
-
-#endif
+bool check_map(char *name){
+	if (!ft_strendwith(name, "cub"))
+		return (false);
+	return (true);
+}

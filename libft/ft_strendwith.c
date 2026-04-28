@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strendwith.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/28 17:32:03 by tseche           ###   ########.fr       */
+/*   Created: 2026/01/13 18:11:30 by tseche            #+#    #+#             */
+/*   Updated: 2026/04/28 17:31:34 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#include "./libft.h"
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <math.h>
-
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include "../mlx_linux/mlx.h"
-
-#endif
+bool	str_end_with(char *s, char *pattern)
+{
+	s += ft_strlen(s) - ft_strlen(pattern);
+	while (*s && *s == *pattern && s++ && pattern ++)
+		;
+	if (!*s)
+		return (true);
+	return (false);
+}

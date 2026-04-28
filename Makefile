@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/04/28 17:00:12 by tseche           ###   ########.fr        #
+#    Updated: 2026/04/28 17:21:19 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,13 @@ CC	= cc
 
 SRC_DIR = ./src/
 SUB_DIR = parsing graphic
+
 VPATH = $(SRC_DIR) \
 	$(addprefix $(SRC_DIR)/, $(SUB_DIR))
 
 SRC_PARSING = 
 SRC_GRAPHIC = 
+
 SRCS = main.c $(SRC_PARSING) $(SRC_GRAPHIC)
 
 # --- MLX ---
@@ -49,6 +51,14 @@ LIBNAME = libft.a
 LIBDIR = libft
 LIB = $(LIBDIR)/$(LIBNAME)
 LIBMAKE =  $(MAKE) --no-print-directory -C $(LIBDIR) -j
+
+# --- GNL ---
+
+GNLNAME = gnl.a
+GNLDIR = gnl
+GNL = $(GNLDIR)/$(GNLNAME)
+GNLMAKE = $(MAKE) --no-print-directory -C $(GNLDIR) -j
+
 
 # --- LOGIC ---
 

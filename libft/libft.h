@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:23:15 by tseche            #+#    #+#             */
-/*   Updated: 2026/01/08 18:04:44 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/28 17:27:03 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdint.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
@@ -74,6 +75,7 @@ size_t	ft_strlen(const char *src);
 size_t	ft_strnlen(const char *src, size_t maxlen);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strnumocc(char *s, char c);
+bool	str_end_with(char *s, char *pattern);
 
 int		ft_strncmp(char *s1, char *s2, unsigned int n);
 
