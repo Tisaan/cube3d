@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/04/29 11:53:15 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/04/29 15:42:25 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SUB_DIR = parsing graphic
 VPATH = $(SRC_DIR) \
 	$(addprefix $(SRC_DIR)/, $(SUB_DIR))
 
-SRC_PARSING = utils.c
+SRC_PARSING = utils.c parser.c
 SRC_GRAPHIC = 
 
 SRCS = main.c $(SRC_PARSING) $(SRC_GRAPHIC)

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 13:35:50 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/29 15:41:19 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 #include "../gnl/get_next_line.h"
 #include "../mlx/includes/mlx.h"
 
-#include "parsing.h"
-
 typedef mlx_window_create_info	t_win_infos;
 
 typedef struct s_vect
@@ -37,8 +35,10 @@ typedef struct s_vect
 
 typedef struct s_map
 {
-	char	**map;
+	char	**grid;
 	t_vect	*player_pos;
+	int		width;
+	int		height;
 }				t_map;
 
 typedef struct s_data
@@ -47,8 +47,8 @@ typedef struct s_data
 	mlx_window		win;
 	t_win_infos		win_infos;
 	t_map			*map;
-	t_texture_path	texture[4];
-	t_pceilfloor	floorceil[2];
+	//t_texture_path	texture[4];
+	//t_pceilfloor	floorceil[2];
 	
 }				t_data;
 

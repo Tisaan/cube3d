@@ -6,11 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 14:51:31 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/29 15:41:51 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../includes/parsing.h"
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -47,27 +48,25 @@ static bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *win_infos
 int	main(int ac, char **av)
 {
 	mlx_color	color;
-	mlx_context	mlx;
-	t_win_infos	win_infos;
-	mlx_window	win;
+	t_data	data;
 
 	if (ac != 2)
 	{
 		ft_print_error("Invalid number of arguments.\n");
 		return (1);
 	}
-	(void)av;
-	mlx = mlx_init();
-	win_infos = (t_win_infos){0};
-	if (!init_window(mlx, &win, &win_infos))
+	data = parse(av[1]);
+	data.mlx = mlx_init();
+	data.win_infos = (t_win_infos){0};
+	if (!init_window(data.mlx, &data.win, &data.win_infos))
 	{
-		mlx_destroy_context(mlx);
+		mlx_destroy_context(data.mlx);
 		return (1);
 	}
 	color.rgba = 0x00FF00FF;
-	draw_square(win, mlx, 500, 500, 500, color);
-	mlx_loop(mlx);
-	mlx_destroy_window(mlx, win);
-	mlx_destroy_context(mlx);
+	draw_square(data.win, data.mlx, 500, 500, 500, color);
+	mlx_loop(data.mlx);
+	mlx_destroy_window(data.mlx, data.win);
+	mlx_destroy_context(data.mlx);
 	return (0);
 }
