@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 16:16:58 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:18:11 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,18 @@ static const char	*g_errors[ERROR_MAX] = {
 };
 // --- STRUCT ---
 
-typedef enum e_eptexture{
+typedef enum e_direction_id{
 	NO,
 	SO,
 	WE,
 	EA,
-}				t_eptexture;
+	INV
+}				t_direction_id;
 
 typedef struct s_texture_path
 {
-	char *path;
-	t_eptexture dir;
+	char			*path;
+	t_direction_id	dir;
 }				t_texture_path;
 
 typedef enum e_pceilfloor{

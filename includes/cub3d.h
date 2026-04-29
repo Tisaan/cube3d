@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 16:16:48 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:29:35 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_data
 	t_win_infos		win_infos;
 	t_map			*map;
 	t_texture_path	texture[4];
-	t_pceilfloor	floorceil[2];
+	t_prgb			plans_color[2];
 }				t_data;
 
 #endif

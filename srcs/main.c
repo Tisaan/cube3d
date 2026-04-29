@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 16:35:11 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/29 18:56:49 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ int	main(int ac, char **av)
 	data = parse(av[1]);
 	if (data.map == NULL)
 		return (1);
+	printf("%d: %s\n", data.texture[0].dir, data.texture[0].path);
+	printf("%d: %s\n", data.texture[1].dir, data.texture[1].path);
+	printf("%d: %s\n", data.texture[2].dir, data.texture[2].path);
+	printf("%d: %s\n", data.texture[3].dir, data.texture[3].path);
 	data.mlx = mlx_init();
 	data.win_infos = (t_win_infos){0};
 	if (!init_window(data.mlx, &data.win, &data.win_infos))
