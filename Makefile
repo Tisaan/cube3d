@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/04/29 11:19:02 by tseche           ###   ########.fr        #
+#    Updated: 2026/04/29 11:53:15 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NC     := \033[0m # No Color
 
 # --- Compilation ---
 NAME = cub3D
-CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes -lSDL2 -lm -lVulkan 
+CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes
 CC	= cc
 
 # --- Directory ---
@@ -86,10 +86,11 @@ libs:
 
 $(NAME): $(OBJS)
 	@printf "$(BLUE)🔗 Creating Executable $@...$(NC)\n"
-	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJS) $(MLX) -L$(LIBDIR) -l:$(LIBNAME) -L$(GNLDIR) -l:$(GNLNAME) -o $(NAME)
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJS) $(MLX) -L$(LIBDIR) -l:$(LIBNAME) -L$(GNLDIR) -l:$(GNLNAME) -lSDL2 -o $(NAME)
 	@printf "$(GREEN)✅ Created $@$(NC)\n"
 	
 $(OBJ_DIR)/%.o : %.c
+	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	
 clean: libclean
