@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/28 19:42:21 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/29 10:39:18 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
-#include "../mlx_linux/mlx.h"
+#include "../mlx/includes/mlx.h"
 
 #include "parsing.h"
 
