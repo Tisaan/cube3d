@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 15:41:51 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/29 16:35:11 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	data = parse(av[1]);
+	if (data.map == NULL)
+		return (1);
 	data.mlx = mlx_init();
 	data.win_infos = (t_win_infos){0};
 	if (!init_window(data.mlx, &data.win, &data.win_infos))

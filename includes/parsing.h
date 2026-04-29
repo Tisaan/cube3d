@@ -6,13 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 15:40:45 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/29 16:16:58 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-# include "cub3d.h"
 
 // --- ERROR ---
 
@@ -84,6 +83,8 @@ typedef struct s_prgb{
 	int rgb[3];
 	t_pceilfloor type;
 }				t_prgb;
+
+typedef struct s_data	t_data;
 
 t_data	parse(char *map_path);
 

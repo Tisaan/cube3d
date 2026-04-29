@@ -6,13 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:11:30 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/28 17:31:34 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/29 16:33:45 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-bool	str_end_with(char *s, char *pattern)
+bool	ft_strendwith(char *s, char *pattern)
 {
 	s += ft_strlen(s) - ft_strlen(pattern);
 	while (*s && *s == *pattern && s++ && pattern ++)
