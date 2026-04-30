@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/01/12 16:49:44 by tseche           ###   ########.fr        #
+#    Updated: 2026/04/30 17:01:03 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ SRCS = ft_isalnum.c \
 	ft_isdigit.c \
 	ft_isascii.c \
 	ft_isprint.c \
+	ft_ispace.c \
+	ft_isempty. \
 	ft_strlen.c \
 	ft_memset.c \
 	ft_bzero.c \

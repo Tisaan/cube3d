@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:23:15 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 16:14:50 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/30 17:12:56 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+bool	ft_isspace(int n);
+bool	ft_isempty(char *s);
 
 int		ft_normalizenbr(int n);
 int		ft_isoneof(int c, char *set);
