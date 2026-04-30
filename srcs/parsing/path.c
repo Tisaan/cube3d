@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/30 15:30:12 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/30 18:41:43 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	get_rel_path(char *line)
 		else if (*line == '.' && dot <= 2)
 			dot++;
 		else if (*line == '/' || *line == '.')
-			return (-18);
+			return (-7);
 		else if (*line == '"' || *line == '\'')
-			return (-18);
+			return (-7);
 		line++;
 		len++;
 	}
@@ -39,19 +39,19 @@ int	get_rel_path(char *line)
 
 int	len_path(char *line, int quote[2])
 {
-	char	cpy;
+	char	*cpy;
 
 	cpy = line;
 	while (*line || *line == '\n')
 	{
-		if (*line == '(' || *line == ')' && quote[1])
+		if ((*line == '(' || *line == ')') && quote[1])
 			break ;
 		else if (*line == '(' || *line == ')')
-			return (-18);
+			return (-7);
 		else if (*line == '\'' && (quote[1] == 0 || quote[0] == '\''))
-			return (-18);
+			return (-7);
 		else if (*line == '"' && (quote[1] == 0 || quote[0] == '"'))
-			return (-18);
+			return (-7);
 		line++;
 	}
 	return (line - cpy);
@@ -72,10 +72,10 @@ char *get_path(char *line)
 		quote[0] = *line++;
  	}
 	pre = get_rel_path(line);
-	if (pre == -18)
+	if (pre == -7)
 		return (NULL);
 	len = len_path(line, quote);
-	if (len == -18)
+	if (len == -7)
 		return (NULL);
 	str = ft_substr(cpy, 0, pre + line - cpy + len);
 	if (!str)

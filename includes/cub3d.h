@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/29 17:29:35 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/30 21:08:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <sys/time.h>
 #include <math.h>
 
@@ -41,6 +42,7 @@ typedef struct s_map
 	t_vect	*player_pos;
 	int		width;
 	int		height;
+	int		*start;// [0] = x, [1] = y, [2] = direction
 }				t_map;
 
 typedef struct s_data

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/04/29 18:57:07 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/04/30 19:20:35 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <unistd.h>
+
+int	map_size(char *name);
 
 void	free_all(t_data *data)
 {
@@ -68,7 +70,7 @@ static t_prgb	rgb_str_to_int(char	*str)
 	return (color);
 }
 
-static bool	parse_map_data(int fd, t_data *data)
+static bool	parse_map_data(int fd, t_data *data, int *count)
 {
 	char			*line;
 	t_direction_id	id;
@@ -76,13 +78,15 @@ static bool	parse_map_data(int fd, t_data *data)
 	bool			match;
 
 	line = get_next_line(fd);
+	*count += 1;
 	while (line)
 	{
 		i = 0;
-		while(ft_strncmp(line, "\n", 1) == 0)
+		while(ft_isempty(line))
 		{
 			free(line);
 			line = get_next_line(fd);
+			*count += 1;
 		}
 		i += skip_spaces(&line[i]);
 		if (line[i] == '0' || line[i] == '1')
@@ -114,6 +118,7 @@ static bool	parse_map_data(int fd, t_data *data)
 		}
 		free(line);
 		line = get_next_line(fd);
+		*count  += 1;
 	}
 	return (true);
 }
@@ -122,6 +127,7 @@ t_data	parse(char *map_path)
 {
 	t_data	data = {0};
 	int		fd;
+	int		count;
 
 	//check map_path extension
 	data.map = NULL;
@@ -131,13 +137,16 @@ t_data	parse(char *map_path)
 		return (data);
 	}
 	//parse map_args
+
+	//int	size = map_size(map_path);
+
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("Error");
 		return (data);
 	}
-	if (!parse_map_data(fd, &data))
+	if (!parse_map_data(fd, &data, &count))
 	{
 		close(fd);
 		return (data);
