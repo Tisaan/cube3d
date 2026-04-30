@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:23:15 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/28 17:27:03 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/29 16:14:50 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ size_t	ft_strlen(const char *src);
 size_t	ft_strnlen(const char *src, size_t maxlen);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strnumocc(char *s, char c);
-bool	str_end_with(char *s, char *pattern);
+bool	ft_strendwith(char *s, char *pattern);
 
 int		ft_strncmp(char *s1, char *s2, unsigned int n);
 

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/28 19:42:21 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/29 17:29:35 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,11 @@
 
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
-#include "../mlx_linux/mlx.h"
+#include "../mlx/includes/mlx.h"
 
 #include "parsing.h"
 
-typedef struct s_win
-{
-	//image
-	//win
-	//
-}				t_win;
+typedef mlx_window_create_info	t_win_infos;
 
 typedef struct s_vect
 {
@@ -42,17 +37,20 @@ typedef struct s_vect
 
 typedef struct s_map
 {
-	char	**map;
+	char	**grid;
 	t_vect	*player_pos;
+	int		width;
+	int		height;
 }				t_map;
 
 typedef struct s_data
 {
+	mlx_context		mlx;
+	mlx_window		win;
+	t_win_infos		win_infos;
 	t_map			*map;
-	t_win 			*windows;
-	t_texture_path 	texture[4];
-	t_pceilfloor	floorceil[2];
-	
+	t_texture_path	texture[4];
+	t_prgb			plans_color[2];
 }				t_data;
 
 #endif
