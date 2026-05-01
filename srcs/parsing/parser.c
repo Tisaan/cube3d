@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/01 11:10:03 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/01 13:21:07 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static bool	parse_map_data(int fd, t_data *data, int *count)
 		{
 			free(line);
 			line = get_next_line(fd);
-			*count += 1;
 		}
 		i += skip_spaces(&line[i]);
 		if (line[i] == '0' || line[i] == '1')
@@ -124,9 +123,10 @@ static bool	parse_map_data(int fd, t_data *data, int *count)
 t_data	parse(char *map_path)
 {
 	t_data	data = {0};
-	int		fd;
+	int		fd[2];
 	int		count;
 	int		size_file;
+	int		err;
 
 	//check map_path extension
 	data.map = NULL;
@@ -138,19 +138,44 @@ t_data	parse(char *map_path)
 	
 
 	size_file = map_size(map_path);
-
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
+	if (size_file < 0)
+	{
+		throw_error(size_file);
+		return ((t_data){0});
+	}
+	fd[0] = open(map_path, O_RDONLY);
+	fd[1] = open(map_path, O_RDONLY);
+	if (fd[0] == -1 || fd[1] == -1)
 	{
 		perror("Error");
 		return (data);
 	}
-	if (!parse_map_data(fd, &data, &count))
+	if (!parse_map_data(fd[1], &data, &count))
 	{
-		close(fd);
+		close(fd[0]);
+		close(fd[1]);
 		return (data);
 	}
-	data.map = malloc(sizeof(t_map));
+	close(fd[1]);
+	data.map = ft_calloc(sizeof(t_map), 1);
+	err = get_map(fd[0], data.map, size_file, count);
+	if (err < 0)
+	{
+		throw_error(err);
+		return ((t_data){0});
+	}
+	close(fd[0]);
+	err = check_map(data.map);
+	if (err < 0)
+	{
+		// voir si return ou exit
+		throw_error(err);
+		return ((t_data){0});
+	}
 	
+	// printf("MAP:\n");
+	// for (int i= 0; data.map->grid[i]; i++)
+	// 	printf("%s", data.map->grid[i]);
+	// printf("start:\n x:%d\ny:%d\ndir:%d\n", data.map->start[0], data.map->start[1], data.map->start[2]);
 	return (data);
 }

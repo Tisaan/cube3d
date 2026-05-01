@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/04/30 18:19:16 by tseche           ###   ########.fr        #
+#    Updated: 2026/05/01 15:45:23 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,10 @@ SUB_DIR = parsing graphic
 VPATH = $(SRC_DIR) \
 	$(addprefix $(SRC_DIR)/, $(SUB_DIR))
 
-SRC_PARSING = path.c parser.c map.c
+SRC_PARSING = 	path.c \
+				parser.c \
+				map.c \
+				error.c
 SRC_GRAPHIC = 
 
 SRCS = main.c $(SRC_PARSING) $(SRC_GRAPHIC)
@@ -102,6 +105,8 @@ libclean:
 	@make -C $(LIBDIR) fclean --no-print-directory
 	@printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
 	@make -C $(GNLDIR) fclean --no-print-directory
+# @printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
+# @make -C $(MLXDIR) fclean --no-print-directory
 
 fclean: clean libclean
 	@printf "$(RED)🗑️ Removing Executable $(NAME)...$(NC)\n"

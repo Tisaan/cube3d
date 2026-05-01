@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/01 11:10:09 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/01 12:18:29 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	get_rel_path(char *line)
 		else if (*line == '.' && dot <= 2)
 			dot++;
 		else if (*line == '/' || *line == '.')
-			return (-7);
+			return (-ERROR_INV_PATH_TEXTURE);
 		else if (*line == '"' || *line == '\'')
-			return (-7);
+			return (-ERROR_INV_PATH_TEXTURE);
 		line++;
 		len++;
 	}
@@ -47,11 +47,11 @@ int	len_path(char *line, int quote[2])
 		if ((*line == '(' || *line == ')') && quote[1])
 			break ;
 		else if (*line == '(' || *line == ')')
-			return (-7);
+			return (-ERROR_INV_PATH_TEXTURE);
 		else if (*line == '\'' && (quote[1] == 0 || quote[0] == '\''))
-			return (-7);
+			return (-ERROR_INV_PATH_TEXTURE);
 		else if (*line == '"' && (quote[1] == 0 || quote[0] == '"'))
-			return (-7);
+			return (-ERROR_INV_PATH_TEXTURE);
 		line++;
 	}
 	return (line - cpy);
@@ -72,12 +72,10 @@ char *get_path(char *line)
 		quote[0] = *line++;
  	}
 	pre = get_rel_path(line);
-	printf("pre: %d\n", pre);
-	if (pre == -7)
+	if (pre == -ERROR_INV_PATH_TEXTURE)
 		return (NULL);
 	len = len_path(line, quote);
-	printf("len_path: %d\n", len);
-	if (len == -7)
+	if (len == -ERROR_INV_PATH_TEXTURE)
 		return (NULL);
 	str = ft_substr(cpy, 0, pre + line - cpy + len);
 	if (!str)
