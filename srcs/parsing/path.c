@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/30 18:41:43 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/01 10:58:24 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_rel_path(char *line)
 	len = 0;
 	dot = 0;
 	slash = 0;
-	while (ft_isalpha(*line))
+	while (!ft_isalpha(*line))
 	{
 		if (*line == '/' && slash == 0)
 			dot = 0;
@@ -42,7 +42,7 @@ int	len_path(char *line, int quote[2])
 	char	*cpy;
 
 	cpy = line;
-	while (*line || *line == '\n')
+	while (*line && *line != '\n')
 	{
 		if ((*line == '(' || *line == ')') && quote[1])
 			break ;
@@ -72,9 +72,11 @@ char *get_path(char *line)
 		quote[0] = *line++;
  	}
 	pre = get_rel_path(line);
+	printf("pre: %d\n", pre);
 	if (pre == -7)
 		return (NULL);
 	len = len_path(line, quote);
+	printf("len_path: %d\n", len);
 	if (len == -7)
 		return (NULL);
 	str = ft_substr(cpy, 0, pre + line - cpy + len);

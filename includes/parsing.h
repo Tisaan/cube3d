@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/30 19:18:00 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/01 10:59:39 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ typedef struct s_prgb{
 typedef struct s_data	t_data;
 
 t_data	parse(char *map_path);
+char	*get_path(char *line);
 
 #endif

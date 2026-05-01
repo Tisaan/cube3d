@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/04/30 19:20:35 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/01 10:48:45 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ static bool	parse_map_data(int fd, t_data *data, int *count)
 		else if (id != INV)
 		{
 			i += 2;
-			i += skip_spaces(line);
+			i += skip_spaces(&line[i]);
 			data->texture[id].dir = id;
-			data->texture[id].path = ft_strdup(&line[i]);
+			data->texture[id].path = get_path(&line[i]);
 			if (data->texture[id].path == NULL)
 			{
 				free(line);
