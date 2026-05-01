@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/01 10:46:06 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/01 12:54:23 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include "../includes/parsing.h"
 #include <sys/wait.h>
 #include <unistd.h>
+
+void	display_map_data(t_data data)
+{
+	printf("%d: <%s>\n", data.texture[0].dir, data.texture[0].path);
+	printf("%d: <%s>\n", data.texture[1].dir, data.texture[1].path);
+	printf("%d: <%s>\n", data.texture[2].dir, data.texture[2].path);
+	printf("%d: <%s>\n", data.texture[3].dir, data.texture[3].path);
+	printf("Ceiling color: (%d, %d, %d)\tFloor color: (%d, %d, %d)\n", data.plans_color[CEILING - 5].rgb[0],data.plans_color[CEILING - 5].rgb[1],data.plans_color[CEILING - 5].rgb[2],
+		data.plans_color[FLOOR - 5].rgb[0],data.plans_color[FLOOR - 5].rgb[1],data.plans_color[FLOOR - 5].rgb[2]);
+}
 
 static void	ft_print_error(const char *msg)
 {
@@ -58,10 +68,7 @@ int	main(int ac, char **av)
 	data = parse(av[1]);
 	if (data.map == NULL)
 		return (1);
-	printf("%d: <%s>\n", data.texture[0].dir, data.texture[0].path);
-	printf("%d: <%s>\n", data.texture[1].dir, data.texture[1].path);
-	printf("%d: <%s>\n", data.texture[2].dir, data.texture[2].path);
-	printf("%d: <%s>\n", data.texture[3].dir, data.texture[3].path);
+	display_map_data(data);
 	data.mlx = mlx_init();
 	data.win_infos = (t_win_infos){0};
 	if (!init_window(data.mlx, &data.win, &data.win_infos))

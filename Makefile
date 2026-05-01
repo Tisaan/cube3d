@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/01 15:45:23 by tseche           ###   ########.fr        #
+#    Updated: 2026/05/01 15:57:40 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,9 @@ VPATH = $(SRC_DIR) \
 SRC_PARSING = 	path.c \
 				parser.c \
 				map.c \
-				error.c
+				error.c \
+				map_data.c \
+				parser_utils.c
 SRC_GRAPHIC = 
 
 SRCS = main.c $(SRC_PARSING) $(SRC_GRAPHIC)

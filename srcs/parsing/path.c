@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/01 12:18:29 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/01 16:01:36 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ char *get_path(char *line)
 
 	cpy = line;
 	line += skip_spaces(line);
-	if (*line == '\'' || *line == '"'){
+	if (*line == '\'' || *line == '"')
 		quote[1] = 1;
+	if (*line == '\'' || *line == '"')
 		quote[0] = *line++;
- 	}
 	pre = get_rel_path(line);
 	if (pre == -ERROR_INV_PATH_TEXTURE)
 		return (NULL);
