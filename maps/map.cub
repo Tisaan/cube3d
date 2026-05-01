@@ -1,9 +1,9 @@
-NO test
+NO       test
 SO test_2
 WE test_3
 
 EA test 4
 
 
-F 255,0,0
-C 0,200,0
+F           255,110                            ,0
+C	100, 255    ,     45
