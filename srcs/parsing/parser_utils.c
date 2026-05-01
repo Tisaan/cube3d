@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:09:16 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/01 15:46:50 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/01 17:07:20 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,25 @@ int	rgb_str_to_int(char	*str, t_prgb *color)
 		i += skip_digits(&str[i]);
 		j++;
 	}
-	return (1);
+	if (str[i])
+		i += skip_spaces(&str[i]);
+	if (str[i])
+		return (-ERROR_INV_COLOR);
+	return (NO_ERROR);
 }
+
+int	check_map_data(t_data data)
+{
+	t_texture_path	*texture;
+	t_prgb			*colors;
+
+	texture = data.texture;
+	colors = data.plans_color;
+	if (texture[0].path == NULL || texture[1].path == NULL || texture[2].path == NULL ||
+		texture[3].path == NULL)
+		return (-MISS_TEXTURE);
+	if (colors[0].type == EMPT || colors[1].type == EMPT)
+		return (-MISS_COLOR);
+	return (NO_ERROR);
+}
+

@@ -1,9 +1,13 @@
 NO       test
 SO ../test_2
-WE test_3
+WE test_3 
 
-EA test_4
+                    EA test_4
+
+C 100, 255, 45
+F 250    54 42 
+
+00000000010101010
 
 
-F           255,110                            ,0
-C	100, 255    ,     45
+
