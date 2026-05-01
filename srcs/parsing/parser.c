@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/04/30 19:20:35 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/01 11:08:30 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <unistd.h>
-
-int	map_size(char *name);
 
 void	free_all(t_data *data)
 {
@@ -103,7 +101,7 @@ static bool	parse_map_data(int fd, t_data *data, int *count)
 			i += 2;
 			i += skip_spaces(line);
 			data->texture[id].dir = id;
-			data->texture[id].path = ft_strdup(&line[i]);
+			data->texture[id].path = get_path(&line[i]);
 			if (data->texture[id].path == NULL)
 			{
 				free(line);
@@ -128,6 +126,7 @@ t_data	parse(char *map_path)
 	t_data	data = {0};
 	int		fd;
 	int		count;
+	int		size_file;
 
 	//check map_path extension
 	data.map = NULL;
@@ -136,9 +135,9 @@ t_data	parse(char *map_path)
 		ft_putstr_fd("Invalid map extension. The map extension must be '.cub'.\n", STDERR_FILENO);
 		return (data);
 	}
-	//parse map_args
+	
 
-	//int	size = map_size(map_path);
+	size_file = map_size(map_path);
 
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
@@ -152,5 +151,6 @@ t_data	parse(char *map_path)
 		return (data);
 	}
 	data.map = malloc(sizeof(t_map));
+	
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/30 21:08:39 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/01 10:42:14 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	map_size(char *name)
 	if (fd == -1)
 	{
 		perror("ERROR");
-		return (-8);
+		return (-10);
 	}
 	size = 0;
 	line = get_next_line(fd);
@@ -153,7 +153,7 @@ int	get_map(int fd, t_map *data, int count)
 			break ;
 		len = ft_strlen(line);
 		if (!ft_strnstr(line, "01NEWS", len) && end)
-			return (-5);
+			return (-7);
 		else if (ft_strnstr(line, "01", len))
 			find = 1;
 		else if (skip_pattern(line, " 01NEWS") != len -1)
