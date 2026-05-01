@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/01 13:27:31 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/01 16:27:14 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char *get_path(char *line)
 	pre = get_rel_path(line);
 	if (pre == -7)
 		return (NULL);
-	len = len_path(line, quote);
+	len = len_path(&line[pre], quote);
 	if (len == -7)
 		return (NULL);
 	str = ft_substr(cpy, 0, pre + line - cpy + len);

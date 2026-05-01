@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/01 15:37:27 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/01 16:00:55 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ int	parse_map_data(int fd, t_data *data, int *count)
 		else if (line && line[i] && id != INV)
 		{
 			i += 2;
-			i += skip_spaces(&line[i]);
+			i += skip_pattern(&line[i], "\t \r");
+			if (!line || !line[i] || line[i] == '\n')
+			{
+				free(line);
+				return (-ERROR_INV_PATH_TEXTURE);
+			}
 			data->texture[id].dir = id;
 			if (line[i])
 				data->texture[id].path = get_path(&line[i]);
