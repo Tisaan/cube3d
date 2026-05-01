@@ -1,8 +1,8 @@
 NO       test
-SO test_2
+SO ../test_2
 WE test_3
 
-EA test 4
+EA test_4
 
 
 F 255,0,0
