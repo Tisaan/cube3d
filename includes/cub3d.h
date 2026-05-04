@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/30 21:08:13 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 14:25:37 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
 #include "../mlx/includes/mlx.h"
+#include "../mlx/includes/mlx_extended.h"
 
 #include "parsing.h"
 
@@ -44,6 +45,14 @@ typedef struct s_map
 	int		height;
 	int		*start;// [0] = x, [1] = y, [2] = direction
 }				t_map;
+
+typedef struct	s_img
+{
+	mlx_image	asset;
+	char		*path;
+	int			width;
+	int			height;
+}				t_img;
 
 typedef struct s_data
 {
