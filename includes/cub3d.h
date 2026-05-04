@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 14:25:37 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/04 17:35:51 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,19 @@
 
 typedef mlx_window_create_info	t_win_infos;
 
+typedef enum	e_key_code
+{
+	Q_KEY = 20,
+	ESC_KEY = 41,
+	F_KEY = 9,
+}	t_key_code;
+
+typedef enum	e_win_event
+{
+	WIN_CLOSE = 0,
+	WIN_RESIZE = 8,
+}	t_win_event;
+
 typedef struct s_vect
 {
 	float	x;
@@ -46,14 +59,6 @@ typedef struct s_map
 	int		*start;// [0] = x, [1] = y, [2] = direction
 }				t_map;
 
-typedef struct	s_img
-{
-	mlx_image	asset;
-	char		*path;
-	int			width;
-	int			height;
-}				t_img;
-
 typedef struct s_data
 {
 	mlx_context		mlx;
@@ -63,5 +68,14 @@ typedef struct s_data
 	t_texture_path	texture[4];
 	t_prgb			plans_color[2];
 }				t_data;
+
+typedef struct	s_img
+{
+	mlx_image	asset;
+	t_data		*data;
+	char		*path;
+	int			width;
+	int			height;
+}				t_img;
 
 #endif
