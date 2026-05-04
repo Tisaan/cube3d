@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 12:52:06 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 12:55:38 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef enum e_error_map
 	NO_ERROR,
 	INC_EXT,
 	INC_CHAR,
+	EMPT_MAP,
 	INV_MAP,
 	INV_CUT_MAP, 
 	INV_WALL_MAP,
@@ -44,6 +45,7 @@ static const char	*g_errors[ERROR_MAX] = {
 "the map provided is not a .cub file\n",
 "An unrecognize character has been found\n",
 "the map is empty\n",
+"Invalid map\n",
 "the map is cut in multiple part\n",
 "the map is not properly walled\n",
 "The Map contains no starting point\n",
@@ -54,7 +56,7 @@ static const char	*g_errors[ERROR_MAX] = {
 "A file couldn't be opened\n",
 "A texture file couldn't be opened\n",
 "The path of one of the texture is invalid\n",
-"Invalid color format, < 0 or > 255\n",
+"Invalid color format, make sure to use only 3 unsigned short numbers !\n",
 "Erreur malloc\n",
 };
 
@@ -126,5 +128,6 @@ void	throw_error(int err);
 int		get_identifier(char *line);
 int		rgb_str_to_int(char	*str, t_prgb *color);
 void	free_all(t_data *data);
+int		check_map_data(t_data data);
 
 #endif

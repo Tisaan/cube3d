@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/01 16:00:55 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/01 16:52:55 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int	parse_map_data(int fd, t_data *data, int *count)
 	char	*line;
 	int		id;
 	int		i;
+	int		ret;
 	bool	match;
 
 	line = get_next_line(fd);
 	*count += 1;
 	init_map_data(data);
+	ret = INV_MAP;
 	while (line)
 	{
 		i = 0;
@@ -82,8 +84,13 @@ int	parse_map_data(int fd, t_data *data, int *count)
 			return (-ERROR_INV_PATH_TEXTURE);
 		}
 		free(line);
+		ret = check_map_data(*data);
+		if (ret == NO_ERROR)
+			return (ret);
 		line = get_next_line(fd);
 		*count  += 1;
 	}
-	return (NO_ERROR);
+	if (ret > 0)
+		ret *= -1;
+	return (ret);
 }

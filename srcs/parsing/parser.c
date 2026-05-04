@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/04 12:37:59 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 12:56:40 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,6 @@
 #include <unistd.h>
 
 int	map_size(char *name);
-
-int	check_map_data(t_data data)
-{
-	t_texture_path	*texture;
-	t_prgb			*colors;
-
-	texture = data.texture;
-	colors = data.plans_color;
-	if (texture[0].path == NULL || texture[1].path == NULL || texture[2].path == NULL ||
-		texture[3].path == NULL)
-		return (-MISS_TEXTURE);
-	if (colors[0].type == EMPT || colors[1].type == EMPT)
-		return (-MISS_COLOR);
-	return (NO_ERROR);
-}
 
 void	free_all(t_data *data)
 {
@@ -82,12 +67,6 @@ t_data	parse(char *map_path)
 	if (ret < 0)
 	{
 		close(fd);
-		ft_putstr_fd((char *)g_errors[ret * -1], 2);
-		return (data);
-	}
-	ret = check_map_data(data);
-	if (ret < 0)
-	{
 		ft_putstr_fd((char *)g_errors[ret * -1], 2);
 		return (data);
 	}
