@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:20:27 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/04 14:21:08 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 18:34:37 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*gnl_calloc(size_t n, size_t size)
 
 	if (n == 0)
 	{
-		tmp = malloc(0);
+		tmp = malloc(1);
 		if (tmp == NULL)
 			return (NULL);
 		return (tmp);
