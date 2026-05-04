@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 18:44:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 18:46:35 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ int	walled(t_map *map)
 			if (ft_isoneof(map->grid[i][j], "NEWS") && find == 0)
 			{
 				find = 1;
-				map->start = (int [3]){i, j, get_dir(map->grid[i][j])};
+				map->start[0] = i;
+				map->start[1] = j;
+				map->start[2] = get_dir(map->grid[i][j]);
 			}
 			else if (ft_isoneof(map->grid[i][j], "NEWS"))
 				return (-TOO_MUCH_STRT);
