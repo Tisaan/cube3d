@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/01/16 16:07:29 by tseche           ###   ########.fr        #
+#    Updated: 2026/05/04 14:19:54 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ BONUS = get_next_line.c \
 
 OBJS = $(SRCS:%.c=%.o)
 OBJSB = $(BONUS:%.c=%.o)
+
 
 all: $(NAME)
 
