@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 12:55:38 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 14:42:32 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_map
 }				t_map;
 
 t_data	parse(char *map_path);
-int		get_map(int fd, t_map *data, int size, int skip);
+int		get_map(int fd, t_map *data, int size);
 int		walled(t_map *map);
 int		get_start(t_map *map);
 int		check_map(t_map *map);

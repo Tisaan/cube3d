@@ -5,30 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 15:50:52 by marvin            #+#    #+#             */
-/*   Updated: 2026/01/16 16:11:14 by tseche           ###   ########.fr       */
+/*   Created: 2025/10/31 11:56:36 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/04 14:20:14 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 # include <stdlib.h>
 # include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-# endif
-
 char	*get_next_line(int fd);
+char	*gnl_calloc(size_t n, size_t size);
+char	*gnl_substr(char **s);
+char	*ft_strfdup(char *s, int index);
+char	*set_substr(const char *s, int len);
+int		ft_strlen_sep(const char *s, char sep);
+int		gnl_strchr(const char *s, char c);
 
-size_t	gnl_ft_strlen(char *src);
-
-char	*gnl_ft_strdup(char *src);
-
-char	*gnl_ft_strchr(char *src, char lf);
-
-char	*gnl_ft_strjoin(char *po, char *pt);
-
-char	*gnl_ft_substr(char *src, unsigned int start, size_t len);
 #endif

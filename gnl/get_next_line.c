@@ -3,76 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>		        +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 21:30:04 by tseche            #+#    #+#             */
-/*   Updated: 2024/10/29 22:54:00 by tseche	          ###   ########.fr       */
+/*   Created: 2025/10/31 11:52:52 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/04 14:21:55 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*read_file(int fd, char *line, char *buff)
+static char	*fill_gnl_buffer(char *gnl_buffer, char *buff)
 {
-	int		nb_read;
-	char	*temp;
+	int		len;
+	int		i;
+	int		j;
+	char	*new_buff;
 
-	nb_read = 1;
-	while (nb_read > 0)
+	len = ft_strlen_sep(gnl_buffer, '\0') + ft_strlen_sep(buff, '\0');
+	new_buff = gnl_calloc((len + 1), sizeof(char));
+	if (!new_buff)
+		return (NULL);
+	i = 0;
+	while (gnl_buffer && gnl_buffer[i])
 	{
-		nb_read = read(fd, buff, BUFFER_SIZE);
-		if (nb_read == -1)
-		{
-			free(line);
-			return (NULL);
-		}
-		else if (nb_read == 0)
-			break ;
-		buff[nb_read] = '\0';
-		if (!line)
-			line = gnl_ft_strdup("");
-		temp = line;
-		line = gnl_ft_strjoin(temp, buff);
-		free(temp);
-		if (gnl_ft_strchr(buff, '\n'))
-			break ;
+		new_buff[i] = gnl_buffer[i];
+		i++;
 	}
-	return (line);
+	j = 0;
+	while (buff[j])
+		new_buff[i++] = buff[j++];
+	new_buff[i] = '\0';
+	free(gnl_buffer);
+	return (new_buff);
 }
 
-char	*rm_line(char *ret)
+char	*set_substr(const char *s, int len)
 {
+	char	*sub;
 	int		i;
-	char	*line;
 
+	sub = gnl_calloc((len + 1), sizeof(char));
+	if (!sub)
+		return (NULL);
 	i = 0;
-	while (ret[i] != '\n' && ret[i] != '\0')
-		i++;
-	if (ret[i] == '\0')
-		return (NULL);
-	line = gnl_ft_substr(ret, i + 1, gnl_ft_strlen(ret) - i);
-	if (!*line)
+	while (s[i])
 	{
-		free(line);
-		return (NULL);
+		sub[i] = s[i];
+		if (s[i] == '\n')
+		{
+			i++;
+			break ;
+		}
+		i++;
 	}
-	ret[i + 1] = '\0';
-	return (line);
+	sub[i] = '\0';
+	return (sub);
+}
+
+static int	read_line(int fd, char **gnl_buffer)
+{
+	int		rd_state;
+	char	*buff;
+
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
+		return (-1);
+	rd_state = 1;
+	while (rd_state > 0 && !gnl_strchr(*gnl_buffer, '\n'))
+	{
+		rd_state = read(fd, buff, BUFFER_SIZE);
+		if (rd_state < 0)
+		{
+			free(buff);
+			free(*gnl_buffer);
+			*gnl_buffer = NULL;
+			return (-1);
+		}
+		if (rd_state == 0)
+			break ;
+		buff[rd_state] = '\0';
+		*gnl_buffer = fill_gnl_buffer(*gnl_buffer, buff);
+	}
+	free(buff);
+	return (rd_state);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
-	char		*ret;
-	char		*buff;
+	static char	*gnl_buffer = NULL;
+	char		*line;
+	int			rd_state;
 
-	buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	ret = read_file(fd, line, buff);
-	free(buff);
-	if (!ret)
+	rd_state = read_line(fd, &gnl_buffer);
+	if (rd_state < 0)
 		return (NULL);
-	line = rm_line(ret);
-	return (ret);
+	if (gnl_buffer && !gnl_buffer[0] && rd_state == 0)
+	{
+		free(gnl_buffer);
+		gnl_buffer = NULL;
+		return (NULL);
+	}
+	else if (gnl_buffer && gnl_buffer[0] && rd_state == 0)
+	{
+		line = gnl_substr(&gnl_buffer);
+		free(gnl_buffer);
+		gnl_buffer = NULL;
+		return (line);
+	}
+	line = gnl_substr(&gnl_buffer);
+	return (line);
 }

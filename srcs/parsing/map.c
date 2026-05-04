@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/01 13:12:20 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 16:51:17 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,49 +50,30 @@ int	get_dir(int c)
 	return (WE);
 }
 
-int	get_start(t_map *map)
-{
-	int i;
-	int	j;
-	int	find;
-
-	i = 0;
-	find = 0;
-	while (map->grid[i])
-	{
-		j = 0;
-		while (map->grid[i][j])
-		{
-			if (ft_isoneof(map->grid[i][j], "NEWS") && find == 0)
-			{
-				find = 1;
-				map->start = (int [3]){i, j, get_dir(map->grid[i][j])};
-			}
-			else if (ft_isoneof(map->grid[i][j], "NEWS"))
-				return (-TOO_MUCH_STRT);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
 bool	around(t_map *map, int x, size_t y)
 {
 	char	*line;
 
 	line = map->grid[x];
-	if (line[y] == '1')
+	if (line[y] == '1' || ft_isspace(line[y]))
 		return (true);
 	else if (y == ft_strlen(line) || x == 0 || x == map->height)
 		return (false);
-	else if (!ft_isoneof(map->grid[x - 1][y], "01"))
+	else if (ft_isoneof(map->grid[x - 1][y], " "))
 		return (false);
-	else if (!ft_isoneof(map->grid[x + 1][y], "01"))
+	else if (ft_isoneof(map->grid[x - 1][y - 1], " "))
 		return (false);
-	else if (!ft_isoneof(map->grid[x][y - 1], "01"))
+	else if (ft_isoneof(map->grid[x - 1][y + 1], " "))
 		return (false);
-	else if (!ft_isoneof(map->grid[x][y + 1], "01"))
+	else if (ft_isoneof(map->grid[x + 1][y], " \t\n"))
+		return (false);
+	else if (ft_isoneof(map->grid[x + 1][y - 1], " "))
+		return (false);
+	else if (ft_isoneof(map->grid[x + 1][y + 1], " "))
+		return (false);
+	else if (ft_isoneof(map->grid[x][y - 1], " \t\n"))
+		return (false);
+	else if (ft_isoneof(map->grid[x][y + 1], " \t\n"))
 		return (false);
 	return (true);
 }
@@ -102,22 +83,40 @@ int	walled(t_map *map)
 	int	i;
 	int	j;
 	int	first;
+	int	find;
 
 	i = 0;
+	find = 0;
 	while (map->grid[i])
 	{
 		j = 0;
+		j += skip_spaces(map->grid[i]);
+		first = 1;
 		while (map->grid[i][j])
 		{
-			j += skip_spaces(map->grid[i]);
-			first = 1;
-			if (first && map->grid[i][j] != '0')
+			if (map->grid[i][j] == '\n')
+				break ;
+			if (first && map->grid[i][j] != '1')
+			{
+				printf("x:%d, y:%d\n", i, j);
 				return (-INV_WALL_MAP);
-			else
+			}
+				else
 				first = 0;
 			if (!around(map, i, j))
+			{
+				printf("x:%d, y:%d\n", i, j);
 				return (-INV_WALL_MAP);
+			}
+			if (ft_isoneof(map->grid[i][j], "NEWS") && find == 0)
+			{
+				find = 1;
+				map->start = (int [3]){i, j, get_dir(map->grid[i][j])};
+			}
+			else if (ft_isoneof(map->grid[i][j], "NEWS"))
+				return (-TOO_MUCH_STRT);
 			j++;
+			first = 0;
 		}
 		i++;
 	}
@@ -129,35 +128,37 @@ int	check_map(t_map *map)
 	int	err;
 
 	err = walled(map);
-	if (err < 0)
-		return (err);
-	err = get_start(map);
+	if (!map->start)
+		return (-NOT_ENO_STRT);
 	return (err);
 }
 
-int	get_map(int fd, t_map *data, int size, int skip)
+bool	is_pattern_char_present(char *line, char *pat)
+{
+	int i;
+
+	i = 0;
+	while (line && line[i])
+	{
+		if (ft_isoneof(line[i], pat))
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+int	get_map(int fd, t_map *data, int size)
 {
 	char	*line;
-	int		len;
 	int		end;
+	int		len;
 	int		find;
 	int		i;
 
-	data->grid = malloc(sizeof(char *) * (size - skip + 1));
-	data->height = size - skip;
+	data->grid = malloc(sizeof(char *) * (size + 1));
+	data->height = size;
 	
 	line = get_next_line(fd);
-	while (skip > 1)
-	{
-		free(line);
-		line = get_next_line(fd);
-		skip--;
-	}
-	while (line && ft_isempty(line))
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
 	end = 0;
 	find = 0;
 	i = 0;
@@ -165,25 +166,28 @@ int	get_map(int fd, t_map *data, int size, int skip)
 	{
 		while (line && ft_isempty(line))
 		{
-			end = 1;
+			if (find)
+				end = 1;
 			free(line);
 			line = get_next_line(fd);
 		}
 		if (!line)
 			break ;
 		len = ft_strlen(line);
-		if (!ft_strnstr(line, "01NEWS", len) && end)
+		if (!is_pattern_char_present(line, "01NEWS") && end)
 			return (-NOT_ENO_STRT);
-		else if (ft_strnstr(line, "01", len))
+		else if (is_pattern_char_present(line, "01"))
 			find = 1;
 		else if (skip_pattern(line, " 01NEWS") != len -1)
 			return (-INC_CHAR);
 		if (len > data->width)
-			data->width = ft_strlen(line);
-		data->grid[i++] = line;
+			data->width = len;
+		data->grid[i++] = ft_strdup(line);
+		free(line);
+		line = get_next_line(fd);
 	}
 	data->grid[i] = NULL; 
 	if (!find)
-		return (-4);
+		return (-EMPT_MAP);
 	return (1);
 }

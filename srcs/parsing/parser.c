@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/04 12:56:40 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 16:38:11 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_data	parse(char *map_path)
 		return (data);
 	}
 	
-
+	count = 0;
 	size_file = map_size(map_path);
 	if (size_file < 0)
 	{
@@ -67,18 +67,21 @@ t_data	parse(char *map_path)
 	if (ret < 0)
 	{
 		close(fd);
-		ft_putstr_fd((char *)g_errors[ret * -1], 2);
+		throw_error(ret);
 		return (data);
 	}
-	close(fd);
 	data.map = ft_calloc(sizeof(t_map), 1);
-	err = get_map(fd, data.map, size_file, count);
+	err = get_map(fd, data.map, size_file - count);
 	if (err < 0)
 	{
 		throw_error(err);
 		return ((t_data){0});
 	}
 	close(fd);
+	// printf("MAP:\n");
+	// for (int i = 0; data.map->grid[i]; i++)
+	// 	printf("%s", data.map->grid[i]);
+	
 	err = check_map(data.map);
 	if (err < 0)
 	{
@@ -86,10 +89,7 @@ t_data	parse(char *map_path)
 		throw_error(err);
 		return ((t_data){0});
 	}
-	
-	printf("MAP:\n");
-	for (int i= 0; data.map->grid[i]; i++)
-		printf("%s", data.map->grid[i]);
 	printf("start:\n x:%d\ny:%d\ndir:%d\n", data.map->start[0], data.map->start[1], data.map->start[2]);
+	
 	return (data);
 }
