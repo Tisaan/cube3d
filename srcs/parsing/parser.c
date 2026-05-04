@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/01 16:47:23 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/04 16:38:11 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_data	parse(char *map_path)
 	int		fd;
 	int		ret;
 	int		count;
+	int		size_file;
+	int		err;
 
 	//check map_path extension
 	data.map = NULL;
@@ -47,10 +49,14 @@ t_data	parse(char *map_path)
 		ft_putstr_fd("Invalid map extension. The map extension must be '.cub'.\n", STDERR_FILENO);
 		return (data);
 	}
-	//parse map_args
-
-	//int	size = map_size(map_path);
-
+	
+	count = 0;
+	size_file = map_size(map_path);
+	if (size_file < 0)
+	{
+		throw_error(size_file);
+		return ((t_data){0});
+	}
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
 	{
@@ -61,9 +67,29 @@ t_data	parse(char *map_path)
 	if (ret < 0)
 	{
 		close(fd);
-		ft_putstr_fd((char *)g_errors[ret * -1], 2);
+		throw_error(ret);
 		return (data);
 	}
-	data.map = malloc(sizeof(t_map));
+	data.map = ft_calloc(sizeof(t_map), 1);
+	err = get_map(fd, data.map, size_file - count);
+	if (err < 0)
+	{
+		throw_error(err);
+		return ((t_data){0});
+	}
+	close(fd);
+	// printf("MAP:\n");
+	// for (int i = 0; data.map->grid[i]; i++)
+	// 	printf("%s", data.map->grid[i]);
+	
+	err = check_map(data.map);
+	if (err < 0)
+	{
+		// voir si return ou exit
+		throw_error(err);
+		return ((t_data){0});
+	}
+	printf("start:\n x:%d\ny:%d\ndir:%d\n", data.map->start[0], data.map->start[1], data.map->start[2]);
+	
 	return (data);
 }

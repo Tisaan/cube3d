@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/04 13:45:10 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/04 18:56:37 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	parse_map_data(int fd, t_data *data, int *count)
 		{
 			free(line);
 			line = get_next_line(fd);
-			*count += 1;
 		}
 		if (line && line[i])
 			i += skip_spaces(&line[i]);
@@ -83,10 +82,10 @@ int	parse_map_data(int fd, t_data *data, int *count)
 			free(line);
 			return (-ERROR_INV_PATH_TEXTURE);
 		}
-		free(line);
 		ret = check_map_data(*data);
 		if (ret == NO_ERROR)
 			return (ret);
+		free(line);
 		line = get_next_line(fd);
 		*count  += 1;
 	}

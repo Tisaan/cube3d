@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:09:16 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/01 17:07:20 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/04 13:49:50 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,9 @@ int	rgb_str_to_int(char	*str, t_prgb *color)
 		i += skip_digits(&str[i]);
 		j++;
 	}
-	if (str[i])
-		i += skip_spaces(&str[i]);
-	if (str[i])
-		return (-ERROR_INV_COLOR);
-	return (NO_ERROR);
+	if (ft_isempty(&str[i]))
+		return (NO_ERROR);
+	return (-ERROR_INV_COLOR);
 }
 
 int	check_map_data(t_data data)

@@ -6,12 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/01 17:01:25 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/04 18:37:21 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+
+
 
 // --- ERROR ---
 
@@ -19,11 +21,10 @@ typedef enum e_error_map
 {
 	NO_ERROR,
 	INC_EXT,
-	INC_WALL,
 	INC_CHAR,
 	EMPT_MAP,
 	INV_MAP,
-	INV_CUT_MAP,
+	INV_CUT_MAP, 
 	INV_WALL_MAP,
 	NOT_ENO_STRT,
 	TOO_MUCH_STRT,
@@ -38,28 +39,11 @@ typedef enum e_error_map
 	ERROR_MAX,
 }		t_error_map;
 
-static const char	*g_errors[ERROR_MAX] = {
-("WTF an error has been "
-		"thrown, but no error was detected\n"),
-"the map provided is not a .cub file\n",
-"The map hasn't been properly walled\n",
-"An unrecognize character has been found\n",
-"the map is empty\n",
-"Invalid map\n",
-"the map is cut in multiple part\n",
-"the map is not properly walled\n",
-"The Map contains no starting point\n",
-"The map cointains too much starting point\n",
-"A texture path is missing\n",
-"A color is missing in the map\n",
-"Invalid texture path provided\n",
-"A file couldn't be opened\n",
-"A texture file couldn't be opened\n",
-"The path of one of the texture is invalid\n",
-"Invalid color format, make sure to use only 3 unsigned short numbers !\n",
-"Erreur malloc\n",
-};
 // --- STRUCT ---
+
+typedef struct s_data	t_data;
+
+// ---- TEXTURE ----
 
 typedef enum e_direction_id{
 	NO,
@@ -86,13 +70,38 @@ typedef struct s_prgb{
 	t_pceilfloor type;
 }				t_prgb;
 
-typedef struct s_data	t_data;
+// ---- MAP ----
+
+typedef struct s_vect
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_vect;
+
+typedef struct s_map
+{
+	char	**grid;
+	t_vect	*player_pos;
+	int		width;
+	int		height;
+	int		*start;// [0] = x, [1] = y, [2] = direction
+}				t_map;
 
 t_data	parse(char *map_path);
-int		parse_map_data(int fd, t_data *data, int *count);
+int		get_map(int fd, t_map *data, int size);
+int		walled(t_map *map);
+int		get_start(t_map *map);
+int		check_map(t_map *map);
+int	parse_map_data(int fd, t_data *data, int *count);
+
 
 // --- PATH ---
 char	*get_path(char *line);
+int		map_size(char *name);
+
+// --- ERROR --- 
+void	throw_error(int err);
 
 // --- UTILS ---
 int		get_identifier(char *line);
