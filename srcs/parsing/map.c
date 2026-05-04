@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 16:51:17 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 18:44:30 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	check_map(t_map *map)
 {
 	int	err;
 
+	map->start = malloc(sizeof(int) * 3);
 	err = walled(map);
 	if (!map->start)
 		return (-NOT_ENO_STRT);
