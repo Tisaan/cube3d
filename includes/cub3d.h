@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/01 13:37:57 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 12:51:41 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_data
 	t_map			*map;
 	t_texture_path	texture[4];
 	t_prgb			plans_color[2];
-	t_error			*error;
 }				t_data;
 
 #endif

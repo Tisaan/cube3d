@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/01 15:59:06 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/04 12:37:59 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ t_data	parse(char *map_path)
 		return ((t_data){0});
 	}
 	
-	// printf("MAP:\n");
-	// for (int i= 0; data.map->grid[i]; i++)
-	// 	printf("%s", data.map->grid[i]);
-	// printf("start:\n x:%d\ny:%d\ndir:%d\n", data.map->start[0], data.map->start[1], data.map->start[2]);
+	printf("MAP:\n");
+	for (int i= 0; data.map->grid[i]; i++)
+		printf("%s", data.map->grid[i]);
+	printf("start:\n x:%d\ny:%d\ndir:%d\n", data.map->start[0], data.map->start[1], data.map->start[2]);
 	return (data);
 }
