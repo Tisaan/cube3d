@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 12:36:12 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 15:39:30 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,24 @@
 #include <unistd.h>
 
 int	map_size(char *name);
+
+t_map	*init_map_metadata(int size)
+{
+	t_map	*map;
+
+	map = ft_calloc(sizeof(t_map), 1);
+	if (!map)
+		throw_error(ERROR_MALLOC);
+	if (!map)
+		return (NULL);
+	map->height = size;
+	map->grid = malloc(sizeof(char *) * (size + 1));
+	if (!map->grid)
+		throw_error(-ERROR_MALLOC);
+	if (!map->grid)
+		return (NULL);
+	return (map);
+}
 
 t_data	*parse_map(int fd, t_data *data, int size_file)
 {
@@ -30,15 +48,15 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 		throw_error(err);
 		return (NULL);
 	}
-	data->map = ft_calloc(sizeof(t_map), 1);
-	err = get_map(fd, data->map, size_file - count);
-	if (err < 0)
-	{
-		throw_error(err);
+	data->map = init_map_metadata(size_file - count);
+	if (!data->map)
 		return (NULL);
-	}
-	close(fd);
-	err = check_map(data->map);
+	err = get_map(fd, data->map);
+	if (err < 0)
+		throw_error(err);
+	if (err < 0)
+		return (NULL);
+	err = check_map(data->map, fd);
 	if (err < 0)
 		throw_error(err);
 	if (err < 0)

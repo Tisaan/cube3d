@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/05 12:28:01 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/05/05 15:47:40 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,10 @@ SRC_PARSING = 	path.c \
 				error.c \
 				map_data.c \
 				parser_utils.c \
-				init.c
+				init.c \
+				map_utils.c \
+				map_utils2.c \
+
 SRC_UTILS =		free.c \
 				debug.c \
 
