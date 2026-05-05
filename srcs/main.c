@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 12:02:05 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/05 12:30:55 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static int	process(t_data *data)
 
 	init_pip_boy(&pip_boy, data);
 	draw(&pip_boy);
-	mlx_on_event(data->mlx, data->win, MLX_KEYDOWN, key_hooks, &data);
-	mlx_on_event(data->mlx, data->win, MLX_WINDOW_EVENT, window_hook, &data);
+	mlx_on_event(data->mlx, data->win, MLX_KEYDOWN, key_hooks, data);
+	mlx_on_event(data->mlx, data->win, MLX_WINDOW_EVENT, window_hook, data);
 	mlx_loop(data->mlx);
 	mlx_destroy_image(data->mlx, pip_boy.asset);
 	return (0);
