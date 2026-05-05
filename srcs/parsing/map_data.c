@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 15:50:28 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 16:03:42 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,6 @@ static int	parse_texture(t_data *data, char *line, int *i, int id)
 	return (NO_ERROR);
 }
 
-static int parse_map_loop(t_data *data, char *line, int *i)
-{
-	int	id;
-	int	ret;
-
-	id = get_identifier(&line[*i]);
-	if (parse_colors(data, line, i, id) < 0)
-		return (-ERROR_INV_COLOR);
-	ret = parse_texture(data, line, i, id);
-	if (ret < 0)
-		return (ret);
-	else
-	{
-		free(line);
-		return (-ERROR_INV_PATH_TEXTURE);
-	}
-	return (NO_ERROR);
-}
-
 static int	skip_until_id(char *line, int fd)
 {
 	int	i;
@@ -86,6 +67,25 @@ static int	skip_until_id(char *line, int fd)
 	if (line && line[i])
 		i += skip_spaces(&line[i]);
 	return (i);
+}
+
+static int parse_map_loop(t_data *data, char *line, int *i)
+{
+	int	id;
+	int	ret;
+
+	id = get_identifier(&line[*i]);
+	if (parse_colors(data, line, i, id) < 0)
+		return (-ERROR_INV_COLOR);
+	ret = parse_texture(data, line, i, id);
+	if (ret < 0)
+		return (ret);
+	else if (ret != 0)
+	{
+		free(line);
+		return (-ERROR_INV_PATH_TEXTURE);
+	}
+	return (NO_ERROR);
 }
 
 int	parse_map_data(int fd, t_data *data, int *count)
