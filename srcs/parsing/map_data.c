@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 18:31:33 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 18:39:40 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	parse_texture(t_data *data, char *line, int *i, int id)
 	{
 		*i += 2;
 		*i += skip_pattern(&line[*i], "\t \r");
-		if (!line || !line[*i] || line[*i] == '\n')
+		if (!line || !line[*i] || ft_isempty(&line[*i]))
 		{
 			free(line);
 			return (-ERROR_INV_PATH_TEXTURE);

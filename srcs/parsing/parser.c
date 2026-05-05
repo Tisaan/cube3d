@@ -6,11 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 18:16:37 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 19:05:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include "../../includes/utils.h"
 #include <stdbool.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -32,6 +33,7 @@ t_map	*init_map_metadata(int size)
 		throw_error(-ERROR_MALLOC);
 	if (!map->grid)
 		return (NULL);
+	map->start = NULL;
 	return (map);
 }
 
@@ -41,6 +43,9 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 	int		err;
 
 	count = 0;
+	data->map = init_map_metadata(size_file - count);
+	if (!data->map)
+		return (NULL);
 	err = parse_map_data(fd, data, &count);
 	if (err < 0)
 	{
@@ -48,15 +53,12 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 		throw_error(err);
 		return (NULL);
 	}
-	data->map = init_map_metadata(size_file - count);
-	if (!data->map)
-		return (NULL);
 	err = get_map(fd, data->map);
 	if (err < 0)
 		throw_error(err);
 	if (err < 0)
 		return (NULL);
-	err = check_map(data->map, fd);
+	err = check_map(data->map);
 	if (err < 0)
 		throw_error(err);
 	if (err < 0)
@@ -69,12 +71,13 @@ t_data	parse(char *map_path)
 	t_data	data;
 	int		fd;
 	int		size_file;
+	void	*truc;
 
 	data.map = NULL;
 	if (!ft_strendwith(map_path, ".cub"))
 	{
 		throw_error(INC_EXT);
-		return (data);
+		return ((t_data){0});
 	}
 	size_file = map_size(map_path);
 	if (size_file < 0)
@@ -85,9 +88,16 @@ t_data	parse(char *map_path)
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error");
-		return (data);
+		throw_error(ERROR_OPEN);
+		return ((t_data){0});
 	}
-	parse_map(fd, &data, size_file);
+	truc = parse_map(fd, &data, size_file);
+	if (!truc)
+	{
+		free_all(&data, fd);
+		close(fd);
+		return ((t_data ){0});
+	}
+	close(fd);
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:40:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 15:46:05 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 19:19:49 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ bool	around(t_map *map, int x, size_t y)
 		return (true);
 	else if (y == ft_strlen(line) || x == 0 || x == map->height)
 		return (false);
-	else if (ft_isoneof(map->grid[x - 1][y], " "))
+	else if (ft_isoneof(map->grid[x - 1][y], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x - 1][y - 1], " "))
+	else if (ft_isoneof(map->grid[x - 1][y - 1], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x - 1][y + 1], " "))
+	else if (ft_isoneof(map->grid[x - 1][y + 1], " \t\n"))
 		return (false);
 	else if (ft_isoneof(map->grid[x + 1][y], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x + 1][y - 1], " "))
+	else if (ft_isoneof(map->grid[x + 1][y - 1], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x + 1][y + 1], " "))
+	else if (ft_isoneof(map->grid[x + 1][y + 1], " \t\n"))
 		return (false);
 	else if (ft_isoneof(map->grid[x][y - 1], " \t\n"))
 		return (false);
@@ -74,11 +74,10 @@ int	walled(t_map *map)
 	return (1);
 }
 
-int	check_map(t_map *map, int fd)
+int	check_map(t_map *map)
 {
 	int	err;
 
-	close(fd);
 	map->start = malloc(sizeof(int) * 3);
 	err = walled(map);
 	if (!map->start)

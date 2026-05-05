@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:09:16 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 18:29:48 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 19:13:02 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	rgb_str_to_int(char	*str, t_prgb *color)
 		i += skip_digits(&str[i]);
 		j++;
 	}
-	if (ft_isempty(&str[i]))
+	if (ft_isempty(&str[i]) && j == 3)
 		return (NO_ERROR);
 	return (-ERROR_INV_COLOR);
 }

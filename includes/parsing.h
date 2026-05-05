@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 18:30:05 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 19:05:37 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_data	parse(char *map_path);
 int		get_map(int fd, t_map *data);
 int		walled(t_map *map);
 int		get_start(t_map *map);
-int		check_map(t_map *map, int fd);
+int		check_map(t_map *map);
 int	parse_map_data(int fd, t_data *data, int *count);
 
 // --- INIT ---
