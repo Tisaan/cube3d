@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 14:46:51 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 15:48:02 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 16:48:41 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*repline(char *line, int fd, int *rep, int count)
 		if (count)
 			*rep += 1;
 		free(line);
-		get_next_line(fd);
+		line = get_next_line(fd);
 	}
 	return (line);
 }
@@ -42,14 +42,14 @@ int	line_wall(t_map *map, int *ij, int *first, int *find)
 	while (map->grid[ij[0]][ij[1]])
 	{
 		if (map->grid[ij[0]][ij[1]] == '\n')
-			continue ;
+			break ;
 		if (*first && map->grid[ij[0]][ij[1]] != '1')
 			return (-INV_WALL_MAP);
 		else
 			*first = 0;
 		if (!around(map, ij[0], ij[1]))
 			return (-INV_WALL_MAP);
-		if (ft_isoneof(map->grid[ij[0]][ij[1]], "NEWS") && *find == 0)
+		if (ft_isoneof(map->grid[ij[0]][ij[1]], "NEWS") && *find == 1)
 		{
 			*find = 1;
 			map->start[0] = ij[0];

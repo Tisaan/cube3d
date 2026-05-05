@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 16:03:42 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 17:00:52 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int	parse_texture(t_data *data, char *line, int *i, int id)
 			return (-ERROR_MALLOC);
 		}
 	}
+	if (id == INV)
+		return (-ERROR_INV_PATH_TEXTURE);
 	return (NO_ERROR);
 }
 

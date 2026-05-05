@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 16:01:38 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 16:31:32 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ int	get_map(int fd, t_map *data)
 		if (!line)
 			break ;
 		err = validate(line, data, i++, find);
-		if (err < 0)
-			free(line);
 		if (err < 0)
 			return (err);
 		line = get_next_line(fd);
