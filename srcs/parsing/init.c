@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 11:57:41 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/05 12:21:15 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ void	init_map_data(t_data *data)
 	data->plans_color[0].type = EMPT;
 	data->plans_color[1].type = EMPT;
 }
-

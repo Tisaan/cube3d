@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/04 14:15:36 by tseche           ###   ########.fr        #
+#    Updated: 2026/05/05 12:28:01 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ_DIR = ./obj
 INC_DIR = ./includes
 
 SRC_DIR = ./srcs/
-SUB_DIR = parsing graphic
+SUB_DIR = parsing utils hooks
 
 VPATH = $(SRC_DIR) \
 	$(addprefix $(SRC_DIR)/, $(SUB_DIR))
@@ -41,10 +41,14 @@ SRC_PARSING = 	path.c \
 				map.c \
 				error.c \
 				map_data.c \
-				parser_utils.c
-SRC_GRAPHIC = 
+				parser_utils.c \
+				init.c
+SRC_UTILS =		free.c \
+				debug.c \
 
-SRCS = main.c $(SRC_PARSING) $(SRC_GRAPHIC)
+SRC_HOOKS = hooks.c
+
+SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS)
 
 # --- MLX ---
 
