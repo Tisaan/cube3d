@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 15:41:16 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 16:01:38 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ int	map_size(char *name)
 	}
 	size = 0;
 	line = get_next_line(fd);
-	line = repline(line, fd, &size, 1);
+	while (line)
+	{
+		size += !ft_isempty(line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
 	if (size == 0)
 		return (-INV_MAP);
 	close(fd);
