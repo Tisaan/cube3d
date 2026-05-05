@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 15:39:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 18:16:37 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_map	*init_map_metadata(int size)
 	if (!map)
 		return (NULL);
 	map->height = size;
-	map->grid = malloc(sizeof(char *) * (size + 1));
+	map->grid = ft_calloc(sizeof(char *), (size + 1));
 	if (!map->grid)
 		throw_error(-ERROR_MALLOC);
 	if (!map->grid)

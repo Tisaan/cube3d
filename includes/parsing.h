@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 15:46:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 18:30:05 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	throw_error(int err);
 // --- UTILS ---
 int		get_identifier(char *line);
 int		rgb_str_to_int(char	*str, t_prgb *color);
-int		check_map_data(t_data data);
+int		check_map_data(t_data data, char *line);
 char	*repline(char *line, int fd, int *rep, int count);
 bool	is_pattern_char_present(char *line, char *pat);
 int		check_char_present_map(char *line, int *find_end, int len);

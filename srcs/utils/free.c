@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 12:18:48 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/05 18:24:07 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@
 void	free_all(t_data *data)
 {
 	if (data->map && data->map->grid)
+	{
+		for (int i = 0; i < data->map->height; i++)
+			free(data->map->grid[i]);
 		free(data->map->grid);
+	}
+	if (data->map->start)
+		free(data->map->start);
 	if (data->map)
 		free(data->map);
 	if (data->texture[NO].path)

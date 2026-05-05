@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 17:00:52 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 18:31:33 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ static int	parse_texture(t_data *data, char *line, int *i, int id)
 			return (-ERROR_INV_PATH_TEXTURE);
 		}
 		data->texture[id].dir = id;
-		if (line[*i])
-			data->texture[id].path = get_path(&line[*i]);
+		data->texture[id].path = get_path(&line[*i]);
 		if (data->texture[id].path == NULL)
 		{
 			free(line);
@@ -52,26 +51,29 @@ static int	parse_texture(t_data *data, char *line, int *i, int id)
 		}
 	}
 	if (id == INV)
+	{
+		free(line);
 		return (-ERROR_INV_PATH_TEXTURE);
+	}
 	return (NO_ERROR);
 }
 
-static int	skip_until_id(char *line, int fd)
+static int	skip_until_id(char **line, int fd)
 {
 	int	i;
 
 	i = 0;
-	while (line && ft_isempty(line))
+	while (*line && ft_isempty(*line))
 	{
-		free(line);
-		line = get_next_line(fd);
+		free(*line);
+		*line = get_next_line(fd);
 	}
-	if (line && line[i])
-		i += skip_spaces(&line[i]);
+	if (*line && (*line)[i])
+		i += skip_spaces(&((*line)[i]));
 	return (i);
 }
 
-static int parse_map_loop(t_data *data, char *line, int *i)
+static int	parse_map_loop(t_data *data, char *line, int *i)
 {
 	int	id;
 	int	ret;
@@ -102,19 +104,19 @@ int	parse_map_data(int fd, t_data *data, int *count)
 	line = get_next_line(fd);
 	while (line)
 	{
-		i = skip_until_id(line, fd);
+		i = skip_until_id(&line, fd);
 		if (line && (line[i] == '0' || line[i] == '1'))
 			break ;
 		ret = parse_map_loop(data, line, &i);
 		if (ret < 0)
 			return (ret);
-		ret = check_map_data(*data);
+		ret = check_map_data(*data, line);
 		if (ret == NO_ERROR)
 			return (ret);
-		free(line);
 		line = get_next_line(fd);
 		*count += 1;
 	}
 	ret *= (ret > 0) * -1 + (ret <= 0) * 1;
+	free(line);
 	return (ret);
 }

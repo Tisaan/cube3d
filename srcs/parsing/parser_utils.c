@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:09:16 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 11:53:20 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/05 18:29:48 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ int	rgb_str_to_int(char	*str, t_prgb *color)
 	return (-ERROR_INV_COLOR);
 }
 
-int	check_map_data(t_data data)
+int	check_map_data(t_data data, char *line)
 {
 	t_texture_path	*texture;
 	t_prgb			*colors;
 
+	free(line);
 	texture = data.texture;
 	colors = data.plans_color;
 	if (texture[0].path == NULL || texture[1].path == NULL
