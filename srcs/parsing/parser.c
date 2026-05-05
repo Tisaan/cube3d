@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 11:42:47 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/05 12:36:12 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,47 @@
 
 int	map_size(char *name);
 
+t_data	*parse_map(int fd, t_data *data, int size_file)
+{
+	int		count;
+	int		err;
+
+	count = 0;
+	err = parse_map_data(fd, data, &count);
+	if (err < 0)
+	{
+		close(fd);
+		throw_error(err);
+		return (NULL);
+	}
+	data->map = ft_calloc(sizeof(t_map), 1);
+	err = get_map(fd, data->map, size_file - count);
+	if (err < 0)
+	{
+		throw_error(err);
+		return (NULL);
+	}
+	close(fd);
+	err = check_map(data->map);
+	if (err < 0)
+		throw_error(err);
+	if (err < 0)
+		return (NULL);
+	return (data);
+}
+
 t_data	parse(char *map_path)
 {
 	t_data	data;
 	int		fd;
-	int		ret;
-	int		count;
 	int		size_file;
-	int		err;
 
-	//check map_path extension
 	data.map = NULL;
 	if (!ft_strendwith(map_path, ".cub"))
 	{
-		ft_putstr_fd("Invalid map extension. The map extension must be '.cub'.\n", STDERR_FILENO);
+		throw_error(INC_EXT);
 		return (data);
 	}
-	
-	count = 0;
 	size_file = map_size(map_path);
 	if (size_file < 0)
 	{
@@ -47,33 +70,6 @@ t_data	parse(char *map_path)
 		perror("Error");
 		return (data);
 	}
-	ret = parse_map_data(fd, &data, &count);
-	if (ret < 0)
-	{
-		close(fd);
-		throw_error(ret);
-		return (data);
-	}
-	data.map = ft_calloc(sizeof(t_map), 1);
-	err = get_map(fd, data.map, size_file - count);
-	if (err < 0)
-	{
-		throw_error(err);
-		return ((t_data){0});
-	}
-	close(fd);
-	// printf("MAP:\n");
-	// for (int i = 0; data.map->grid[i]; i++)
-	// 	printf("%s", data.map->grid[i]);
-	
-	err = check_map(data.map);
-	if (err < 0)
-	{
-		// voir si return ou exit
-		throw_error(err);
-		return ((t_data){0});
-	}
-	printf("start:\n x:%d\ny:%d\ndir:%d\n", data.map->start[0], data.map->start[1], data.map->start[2]);
-	
+	parse_map(fd, &data, size_file);
 	return (data);
 }

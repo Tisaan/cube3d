@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 12:02:16 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/05 12:23:11 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	display_map_data(t_data data)
 	printf("%d: <%s>\n", data.texture[3].dir, data.texture[3].path);
 	printf("Ceiling color: (%d, %d, %d)\tFloor color: (%d, %d, %d)\n", data.plans_color[CEILING - 5].rgb[0],data.plans_color[CEILING - 5].rgb[1],data.plans_color[CEILING - 5].rgb[2],
 		data.plans_color[FLOOR - 5].rgb[0],data.plans_color[FLOOR - 5].rgb[1],data.plans_color[FLOOR - 5].rgb[2]);
+	printf("Map:\n");
+	for (int i = 0; data.map->grid[i]; i++)
+		printf("%s", data.map->grid[i]);
+	printf("start:\n x:%d\ny:%d\ndir:%d\n", data.map->start[0], data.map->start[1], data.map->start[2]);
 }
 
 void	ft_print_error(const char *msg)
