@@ -6,21 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/04 18:56:37 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 11:56:45 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-static void	init_map_data(t_data *data)
-{
-	data->texture[0].path = NULL;
-	data->texture[1].path = NULL;
-	data->texture[2].path = NULL;
-	data->texture[3].path = NULL;
-	data->plans_color[0].type = EMPT;
-	data->plans_color[1].type = EMPT;
-}
+#include "../../includes/utils.h"
 
 int	parse_map_data(int fd, t_data *data, int *count)
 {
@@ -37,7 +28,7 @@ int	parse_map_data(int fd, t_data *data, int *count)
 	while (line)
 	{
 		i = 0;
-		while(line && ft_isempty(line))
+		while (line && ft_isempty(line))
 		{
 			free(line);
 			line = get_next_line(fd);
@@ -51,7 +42,8 @@ int	parse_map_data(int fd, t_data *data, int *count)
 		{
 			match = line[i] == 'F';
 			i++;
-			if (rgb_str_to_int(&line[i], &data->plans_color[match]) == -ERROR_INV_COLOR)
+			if (rgb_str_to_int(&line[i], &data->plans_color[match])
+				== -ERROR_INV_COLOR)
 			{
 				free(line);
 				return (-ERROR_INV_COLOR);
@@ -87,7 +79,7 @@ int	parse_map_data(int fd, t_data *data, int *count)
 			return (ret);
 		free(line);
 		line = get_next_line(fd);
-		*count  += 1;
+		*count += 1;
 	}
 	if (ret > 0)
 		ret *= -1;

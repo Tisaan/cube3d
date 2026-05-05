@@ -6,12 +6,35 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/01 15:44:31 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 12:18:48 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	free_map(t_map *map)
+// void	free_map(t_map *map)
+// {
+// }
+
+void	free_all(t_data *data)
 {
+	if (data->map && data->map->grid)
+		free(data->map->grid);
+	if (data->map)
+		free(data->map);
+	if (data->texture[NO].path)
+		free(data->texture[NO].path);
+	if (data->texture[SO].path)
+		free(data->texture[SO].path);
+	if (data->texture[WE].path)
+		free(data->texture[WE].path);
+	if (data->texture[EA].path)
+		free(data->texture[EA].path);
+}
+
+void	clean_exit(t_data *data)
+{
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_context(data->mlx);
+	free_all(data);
 }

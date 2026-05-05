@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:09:16 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/04 13:49:50 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 11:53:20 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ int	get_identifier(char *line)
 	return (INV);
 }
 
+static int	skip_non_digit(char *str, int *i)
+{
+	while (str && str[*i] && !ft_isdigit(str[*i]))
+	{
+		if (ft_isalpha(str[*i]) || str[*i] == '-')
+			return (-ERROR_INV_COLOR);
+		*i += 1;
+	}
+	return (NO_ERROR);
+}
+
 int	rgb_str_to_int(char	*str, t_prgb *color)
 {
 	int		i;
@@ -41,12 +52,8 @@ int	rgb_str_to_int(char	*str, t_prgb *color)
 	color->rgb[2] = -1;
 	while (str && str[i] && j < 3)
 	{
-		while(str && str[i] && !ft_isdigit(str[i]))
-		{
-			if (ft_isalpha(str[i]) || str[i] == '-')
-				return (-ERROR_INV_COLOR);
-			i++;
-		}
+		if (skip_non_digit(str, &i) < 0)
+			return (-ERROR_INV_COLOR);
 		if (!str[i])
 			break ;
 		color->rgb[j] = ft_atoi(&str[i]);
@@ -67,11 +74,10 @@ int	check_map_data(t_data data)
 
 	texture = data.texture;
 	colors = data.plans_color;
-	if (texture[0].path == NULL || texture[1].path == NULL || texture[2].path == NULL ||
-		texture[3].path == NULL)
+	if (texture[0].path == NULL || texture[1].path == NULL
+		|| texture[2].path == NULL || texture[3].path == NULL)
 		return (-MISS_TEXTURE);
 	if (colors[0].type == EMPT || colors[1].type == EMPT)
 		return (-MISS_COLOR);
 	return (NO_ERROR);
 }
-

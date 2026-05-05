@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 18:46:35 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 11:36:05 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	walled(t_map *map)
 				printf("x:%d, y:%d\n", i, j);
 				return (-INV_WALL_MAP);
 			}
-				else
+			else
 				first = 0;
 			if (!around(map, i, j))
 			{

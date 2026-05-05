@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/04 16:38:11 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 11:42:47 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,9 @@
 
 int	map_size(char *name);
 
-void	free_all(t_data *data)
-{
-	if (data->map && data->map->grid)
-		free(data->map->grid);
-	if (data->map)
-		free(data->map);
-	if (data->texture[NO].path)
-		free(data->texture[NO].path);
-	if (data->texture[SO].path)
-		free(data->texture[SO].path);
-	if (data->texture[WE].path)
-		free(data->texture[WE].path);
-	if (data->texture[EA].path)
-		free(data->texture[EA].path);
-}
-
 t_data	parse(char *map_path)
 {
-	t_data	data = {0};
+	t_data	data;
 	int		fd;
 	int		ret;
 	int		count;

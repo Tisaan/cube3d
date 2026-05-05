@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 12:56:43 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 11:38:06 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	len_path(char *line, int quote[2])
 	return (line - cpy);
 }
 
-char *get_path(char *line)
+char	*get_path(char *line)
 {
 	int		quote[2];
 	char	*str;

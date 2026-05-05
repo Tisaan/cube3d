@@ -6,14 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 18:37:21 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 11:58:08 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-
-
 
 // --- ERROR ---
 
@@ -95,6 +93,9 @@ int		get_start(t_map *map);
 int		check_map(t_map *map);
 int	parse_map_data(int fd, t_data *data, int *count);
 
+// --- INIT ---
+
+void	init_map_data(t_data *data);
 
 // --- PATH ---
 char	*get_path(char *line);
@@ -106,7 +107,6 @@ void	throw_error(int err);
 // --- UTILS ---
 int		get_identifier(char *line);
 int		rgb_str_to_int(char	*str, t_prgb *color);
-void	free_all(t_data *data);
 int		check_map_data(t_data data);
 
 #endif

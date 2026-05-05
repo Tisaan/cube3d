@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/04 18:56:23 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 11:14:34 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ typedef enum	e_win_event
 	WIN_RESIZE = 8,
 }	t_win_event;
 
-typedef struct s_vect
-{
-	float	x;
-	float	y;
-	float	z;
-}				t_vect;
-
-typedef struct s_map
-{
-	char	**grid;
-	t_vect	*player_pos;
-	int		width;
-	int		height;
-	int		*start;// [0] = x, [1] = y, [2] = direction
-}				t_map;
+// typedef struct s_vect
+// {
+// 	float	x;
+// 	float	y;
+// 	float	z;
+// }				t_vect;
+//
+// typedef struct s_map
+// {
+// 	char	**grid;
+// 	t_vect	*player_pos;
+// 	int		width;
+// 	int		height;
+// 	int		*start;// [0] = x, [1] = y, [2] = direction
+// }				t_map;
 
 typedef struct s_data
 {
@@ -77,5 +77,9 @@ typedef struct	s_img
 	int			width;
 	int			height;
 }				t_img;
+
+// Hooks
+void	key_hooks(int key, void *param);
+void	window_hook(int event, void *param);
 
 #endif
