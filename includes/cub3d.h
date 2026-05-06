@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 12:26:49 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 17:39:53 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #include "../mlx/includes/mlx_extended.h"
 
 #include "parsing.h"
+#include "player.h"
 
 typedef mlx_window_create_info	t_win_infos;
 
@@ -43,21 +44,18 @@ typedef enum	e_win_event
 	WIN_RESIZE = 8,
 }	t_win_event;
 
-// typedef struct s_vect
-// {
-// 	float	x;
-// 	float	y;
-// 	float	z;
-// }				t_vect;
-//
-// typedef struct s_map
-// {
-// 	char	**grid;
-// 	t_vect	*player_pos;
-// 	int		width;
-// 	int		height;
-// 	int		*start;// [0] = x, [1] = y, [2] = direction
-// }				t_map;
+typedef struct s_vect
+{
+	float	x;
+	float	y;
+}			t_vect;
+
+typedef struct	s_vect3
+{
+	float	x;
+	float	y;
+	float	z;
+}			t_vect3;
 
 typedef struct s_data
 {

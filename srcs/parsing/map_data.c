@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 17:00:52 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/05 18:09:54 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ int	parse_map_data(int fd, t_data *data, int *count)
 	int		i;
 	int		ret;
 
-	*count += 1;
 	init_map_data(data);
 	ret = INV_MAP;
 	line = get_next_line(fd);
+	*count += 1;
 	while (line)
 	{
 		i = skip_until_id(line, fd);
@@ -115,6 +115,7 @@ int	parse_map_data(int fd, t_data *data, int *count)
 		line = get_next_line(fd);
 		*count += 1;
 	}
+	free(line);
 	ret *= (ret > 0) * -1 + (ret <= 0) * 1;
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 15:46:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/06 17:09:43 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,9 @@ typedef struct s_prgb{
 
 // ---- MAP ----
 
-typedef struct s_vect
-{
-	float	x;
-	float	y;
-	float	z;
-}				t_vect;
-
 typedef struct s_map
 {
 	char	**grid;
-	t_vect	*player_pos;
 	int		width;
 	int		height;
 	int		*start;// [0] = x, [1] = y, [2] = direction
@@ -91,7 +83,7 @@ int		get_map(int fd, t_map *data);
 int		walled(t_map *map);
 int		get_start(t_map *map);
 int		check_map(t_map *map, int fd);
-int	parse_map_data(int fd, t_data *data, int *count);
+int		parse_map_data(int fd, t_data *data, int *count);
 
 // --- INIT ---
 
