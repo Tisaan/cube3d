@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/06 19:59:35 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 20:12:34 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_data
 {
 	mlx_context		mlx;
 	mlx_window		win;
-	mlx_image		wall_asset;
+	mlx_image		wall_assets[4];
 	t_win_infos		win_infos;
 	t_map			*map;
 	t_texture_path	texture[4];

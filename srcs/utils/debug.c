@@ -6,32 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/06 19:51:58 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 20:17:47 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include "../../includes/player.h"
 
-static void	set_img_pixel(t_data *data, mlx_image img)
-{
-	int			x;
-	int			y;
-	mlx_color	color;
-
-	color.rgba = 0xFFFFFFFF;
-	y = 0;
-	while (y < WALL_SIZE - 1)
-	{
-		x = 0;
-		while (x < WALL_SIZE - 1)
-		{
-			mlx_set_image_pixel(data->mlx, img, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
 
 int	render_2D_map(t_data *data)
 {
@@ -40,10 +21,6 @@ int	render_2D_map(t_data *data)
 	int			y;
 
 	map = data->map;
-	data->wall_asset = mlx_new_image(data->mlx, WALL_SIZE, WALL_SIZE);
-	if (data->wall_asset == MLX_NULL_HANDLE)
-		return (-ERROR_LOAD_ASSET);
-	set_img_pixel(data, data->wall_asset);
 	y = 0;
 	while (map->grid[y])
 	{
@@ -51,7 +28,7 @@ int	render_2D_map(t_data *data)
 		while (map->grid[y][x])
 		{
 			if (map->grid[y][x] == '1')
-				mlx_put_image_to_window(data->mlx, data->win, data->wall_asset, x * WALL_SIZE, y * WALL_SIZE);
+				mlx_put_image_to_window(data->mlx, data->win, data->wall_assets[0], x * WALL_SIZE, y * WALL_SIZE);
 			x++;
 		}
 		y++;
