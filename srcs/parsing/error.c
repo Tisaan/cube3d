@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:23:04 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 12:00:04 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 17:47:05 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ const char	**get_tab_error(void)
 		"the map is cut in multiple part\n",
 		"the map is not properly walled\n",
 		"The Map contains no starting point\n",
-		"The map cointains too much starting point\n",
+		"The map contains too much starting point\n",
 		"A texture path is missing\n",
 		"A color is missing in the map\n",
 		"Invalid texture path provided\n",
