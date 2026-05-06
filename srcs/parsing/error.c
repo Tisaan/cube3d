@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:23:04 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 12:00:04 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 19:31:05 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ const char	**get_tab_error(void)
 		"The map cointains too much starting point\n",
 		"A texture path is missing\n",
 		"A color is missing in the map\n",
+		"Failed to load wall asset\n",
 		"Invalid texture path provided\n",
 		"A file couldn't be opened\n",
 		"A texture file couldn't be opened\n",

@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.h                                           :+:      :+:    :+:   */
+/*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/06 19:22:29 by pcaplat          ###   ########.fr       */
+/*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/06 18:52:05 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
-# include "vectors.h"
+#ifndef VECTORS_H
+# define VECTORS_H
 
-typedef struct s_data	t_data;
-
-typedef struct	s_player
+typedef struct s_vect
 {
-	t_vect		pos;
-	int			size;
-	float		aov; // angle of view
-	float		fov; //convention : 90deg mais 60deg fine
-}				t_player;
+	float	x;
+	float	y;
+}			t_vect;
 
-int	init_player(t_data *data);
+typedef struct	s_vect3
+{
+	float	x;
+	float	y;
+	float	z;
+}			t_vect3;
 
 #endif

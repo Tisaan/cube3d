@@ -6,15 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 12:18:48 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 19:54:37 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// void	free_map(t_map *map)
-// {
-// }
 
 void	free_all(t_data *data)
 {

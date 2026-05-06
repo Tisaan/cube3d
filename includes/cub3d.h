@@ -6,12 +6,18 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/06 17:39:53 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 19:49:27 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
+# ifndef WALL_SIZE
+#  define WALL_SIZE 64
+# endif
+# ifndef FOV_ANGLE
+#  define FOV_ANGLE 60
+# endif
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -44,33 +50,21 @@ typedef enum	e_win_event
 	WIN_RESIZE = 8,
 }	t_win_event;
 
-typedef struct s_vect
-{
-	float	x;
-	float	y;
-}			t_vect;
-
-typedef struct	s_vect3
-{
-	float	x;
-	float	y;
-	float	z;
-}			t_vect3;
-
 typedef struct s_data
 {
 	mlx_context		mlx;
 	mlx_window		win;
+	mlx_image		wall_asset;
 	t_win_infos		win_infos;
 	t_map			*map;
 	t_texture_path	texture[4];
 	t_prgb			plans_color[2];
+	t_player		*player;
 }				t_data;
 
 typedef struct	s_img
 {
 	mlx_image	asset;
-	t_data		*data;
 	char		*path;
 	int			width;
 	int			height;

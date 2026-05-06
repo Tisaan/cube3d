@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/06 17:09:43 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 19:30:26 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum e_error_map
 	TOO_MUCH_STRT,
 	MISS_TEXTURE,
 	MISS_COLOR,
+	ERROR_LOAD_ASSET,
 	ERROR_INV_PATH_TEXTURE,
 	ERROR_OPEN,
 	ERROR_OPEN_TEXTURE,

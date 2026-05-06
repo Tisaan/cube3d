@@ -6,11 +6,67 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 12:23:11 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/06 19:51:58 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include "../../includes/player.h"
+
+static void	set_img_pixel(t_data *data, mlx_image img)
+{
+	int			x;
+	int			y;
+	mlx_color	color;
+
+	color.rgba = 0xFFFFFFFF;
+	y = 0;
+	while (y < WALL_SIZE - 1)
+	{
+		x = 0;
+		while (x < WALL_SIZE - 1)
+		{
+			mlx_set_image_pixel(data->mlx, img, x, y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
+int	render_2D_map(t_data *data)
+{
+	t_map		*map;
+	int			x;
+	int			y;
+
+	map = data->map;
+	data->wall_asset = mlx_new_image(data->mlx, WALL_SIZE, WALL_SIZE);
+	if (data->wall_asset == MLX_NULL_HANDLE)
+		return (-ERROR_LOAD_ASSET);
+	set_img_pixel(data, data->wall_asset);
+	y = 0;
+	while (map->grid[y])
+	{
+		x = 0;
+		while (map->grid[y][x])
+		{
+			if (map->grid[y][x] == '1')
+				mlx_put_image_to_window(data->mlx, data->win, data->wall_asset, x * WALL_SIZE, y * WALL_SIZE);
+			x++;
+		}
+		y++;
+	}
+	// mlx_destroy_image(data->mlx, wall);
+	return (NO_ERROR);
+}
+
+void	display_player_data(t_player *player)
+{
+	printf("=== PLAYER DATA ===\n");
+	printf("player start: (%f, %f) facing: %f\n", player->pos.x, player->pos.y, player->aov);
+	printf("size: %d\n", player->size);
+	printf("fov: %f\n", player->fov);
+}
 
 void	display_map_data(t_data data)
 {
@@ -34,5 +90,4 @@ void	ft_print_error(const char *msg)
 void	init_pip_boy(t_img *img, t_data *data)
 {
 	img->asset = mlx_new_image_from_file(data->mlx, "assets/pip_boy.png", &img->width, &img->height);
-	img->data = data;
 }
