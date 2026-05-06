@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:40:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/06 19:01:58 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 20:03:38 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,23 @@ bool	around(t_map *map, int x, size_t y)
 	char	*line;
 
 	line = map->grid[x];
-	if (line[y] == '1' || ft_isspace(line[y]))
+	if (line[y] && (line[y] == '1' || ft_isspace(line[y])))
 		return (true);
+	if (!map->grid[x+1] || !map->grid[x-1])
+		return (false);
 	else if (y == ft_strlen(line) || x == 0 || x == map->height)
 		return (false);
-	else if (ft_isoneof(map->grid[x - 1][y], " "))
+	else if (ft_isoneof(map->grid[x - 1][y], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x - 1][y - 1], " "))
+	else if (ft_isoneof(map->grid[x-1][y - 1], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x - 1][y + 1], " "))
+	else if (ft_isoneof(map->grid[x-1][y + 1], " \t\n"))
 		return (false);
 	else if (ft_isoneof(map->grid[x + 1][y], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x + 1][y - 1], " "))
+	else if (ft_isoneof(map->grid[x+1][y - 1], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x + 1][y + 1], " "))
+	else if (ft_isoneof(map->grid[x+1][y + 1], " \t\n"))
 		return (false);
 	else if (ft_isoneof(map->grid[x][y - 1], " \t\n"))
 		return (false);
@@ -66,19 +68,20 @@ int	walled(t_map *map)
 		j = 0;
 		j += skip_spaces(map->grid[i]);
 		first = 1;
-		err = line_wall(map, (int *)((int [2]){i, j}), &find, &first);
+		err = line_wall(map, (int *)((int [2]){i, j}), &first, &find);
 		if (err < 0)
 			return (err);
 		i++;
 	}
+	if (!find)
+		return (-NOT_ENO_STRT);
 	return (1);
 }
 
-int	check_map(t_map *map, int fd)
+int	check_map(t_map *map)
 {
 	int	err;
 
-	close(fd);
 	map->start = malloc(sizeof(int) * 3);
 	err = walled(map);
 	if (!map->start)
