@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 11:08:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/06 19:42:15 by pcaplat          ###   ########.fr       */
+/*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/06 19:22:29 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
-# include "cub3d.h"
+#ifndef PLAYER_H
+# define PLAYER_H
+# include "vectors.h"
 
-void	display_map_data(t_data data);
-void	display_player_data(t_player *player);
-void	init_pip_boy(t_img *img, t_data *data);
-void	ft_print_error(const char *msg);
-int		render_2D_map(t_data *data);
+typedef struct s_data	t_data;
+
+typedef struct	s_player
+{
+	t_vect		pos;
+	int			size;
+	float		aov; // angle of view
+	float		fov; //convention : 90deg mais 60deg fine
+}				t_player;
+
+int	init_player(t_data *data);
 
 #endif

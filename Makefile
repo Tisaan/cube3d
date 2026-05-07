@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/05 15:47:40 by tseche           ###   ########.fr        #
+#    Updated: 2026/05/06 18:54:47 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC_PARSING = 	path.c \
 				init.c \
 				map_utils.c \
 				map_utils2.c \
+				player.c
 
 SRC_UTILS =		free.c \
 				debug.c \

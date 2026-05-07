@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/06 20:01:33 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/07 11:25:42 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum e_error_map
 	TOO_MUCH_STRT,
 	MISS_TEXTURE,
 	MISS_COLOR,
+	ERROR_LOAD_ASSET,
 	ERROR_INV_PATH_TEXTURE,
 	ERROR_OPEN,
 	ERROR_OPEN_TEXTURE,
@@ -70,17 +71,9 @@ typedef struct s_prgb{
 
 // ---- MAP ----
 
-typedef struct s_vect
-{
-	float	x;
-	float	y;
-	float	z;
-}				t_vect;
-
 typedef struct s_map
 {
 	char	**grid;
-	t_vect	*player_pos;
 	int		width;
 	int		height;
 	int		*start;// [0] = x, [1] = y, [2] = direction
