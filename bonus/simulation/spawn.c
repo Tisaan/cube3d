@@ -6,64 +6,67 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 11:23:24 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/07 11:24:22 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/07 11:42:59 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
-#include "../../includes/vector.h"
+#include "../../includes/vectors.h"
 
-t_vect3		find_center(t_map *map)
+int	*find_center(t_map *map)
 {
-	return ((t_vect3){.x = map.height / 2; .y = map.width / 2; .z = 0})
+	return ((int *)(int [3]){map->height / 2, map->width / 2, 0});
 }
 
-int	spawn_safe(t_map *map, t_vect pos)
+int	spawn_safe(t_map *map, int *pos)
 {
-	if (!map->grid[pos.x][pox.y])
+	if (!map->grid[pos[0]][pos[1]])
 		return (-1);
-	return (map->grid[pos.x][pox.y] == '0');
+	return (map->grid[pos[0]][pos[1]] == '0');
 }
 
-t_vect3	l_shape(t_map *map, t_vect3 pos, int i){
-	t_vect3		npos;
+int	*l_shape(t_map *map, int *pos, int i){
+	int			*npos;
 	const int 	table[3] = {-1, 0, 1};
 	int			num;
 	int			sum;
 
 	num = table[i % 3];
-	switch (i % 4){
-		case (0):{
-			sum = pos.x + 2 + pos.y + num;
-			npos = (t_vect){.x = pos.x + 2; .y = pos.y + num, .z = sum};
-		}
-		case (1):{
-			sum = pos.x - 2 + pos.y + num;
-			npos = (t_vect){.x = pos.x - 2; .y = pos.y + num, .z = sum};
-		}
-		case (2):{
-			sum = pos.x + num + pos.y + 2;
-			npos = (t_vect){.x = pos.x + num; .y = pos.y + 2, .z = sum};
-		}
-		case (3):{
-			sum = pos.x + num + pos.y - 2;
-			npos = (t_vect){.x = pos.x + num; .y = pos.y - 2, .z = sum};
-		}
+	if (i % 4 == 0)
+	{
+		sum = pos[0] + 2 + pos[1] + num;
+		npos = (int *)(int [3]){pos[0] + 2, pos[1] + num, sum};
+	}
+	else if (i % 4 == 1)
+	{
+		sum = pos[0] - 2 + pos[1] + num;
+		npos = (int *)(int [3]){pos[0] - 2, pos[1] + num, sum};
+	}
+	else if (i % 4 == 2)
+	{
+		sum = pos[0] + num + pos[1] + 2;
+		npos = (int *)(int [3]){pos[0] + num, pos[1] + 2, sum};
+	}
+	else if (i % 4 == 3)
+	{
+		sum = pos[0] + num + pos[1] - 2;
+		npos = (int *)(int [3]){pos[0] + num, pos[1] - 2, sum};
 	}
 	return (npos);
 }
 
-t_vect3	spawn(t_map *map){
-	t_vect3	c_pos;
+int	*spawn(t_map *map){
+	int	*c_pos;
 	int     i;
 	bool	check;
+	int		err;
 
 	c_pos = find_center(map);
 	i = 0;
 	check = true;
 	while (check){
-		c_pos = l_shape(c_pos, i);
-		err = spawn_safe(map, c_pos)
+		c_pos = l_shape(map, c_pos, i);
+		err = spawn_safe(map, c_pos);
 		if (err == -1)
 			c_pos = find_center(map);
 		else if (err)
