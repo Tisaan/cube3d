@@ -17,10 +17,8 @@
 
 //cycle: 1 si len(seed) == 8, sinon 0
 //seed: NULL si non provided par user
-int	*get_range(int cycle, int *seed)
+void	get_range(int *range, int cycle, int *seed)
 {
-	int		range[2];
-
 	range[0] = 2222222;
 	range[1] = 6666666;
 	if (cycle)
@@ -35,15 +33,14 @@ int	*get_range(int cycle, int *seed)
 		else if (*seed > range[1])
 			*seed -= range[1];
 	}
-	return (range);
 }
 
 int	gen_seed(int min, int max)
 {
-	int		range;
-	static 	first = 1;
-	int		limit;
-	int		value;
+	int			range;
+	static int 	first = 1;
+	int			limit;
+	int			value;
 
 	if (first)
 	{
@@ -96,7 +93,7 @@ void debug_seed(t_map_simu *map)
     printf("ftow:%d\n", map->ftow);
     if (map->wtos)
         printf("wtos:%d\n", map->wtos);
-    printf("door:%d\n", map->door);
+    printf("door:%f\n", map->door);
     printf("wall:%d\n", (int)map->wall);
     printf("width:%d\n", map->width);
     printf("height:%d\n", map->height);

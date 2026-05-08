@@ -65,4 +65,5 @@ char	**get_map_from_simu(t_map_simu *map)
 		}
 		i++;
 	}
+	return (nmap);
 }

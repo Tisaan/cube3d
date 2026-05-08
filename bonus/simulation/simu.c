@@ -42,9 +42,9 @@ void	apply_rule(t_map_simu *map, int x, int y)
 
 	nb = moore_neighborhood(map->map, x, y);
 	if (map->map[x][y] == 0 && map->stof == nb)
-		map->map[x][y] == 4;
+		map->map[x][y] = 4;
 	if (map->map[x][y] == 1 && !between(map->min, map->ftof, nb))
-		map->map[x][y] == 5;
+		map->map[x][y] = 5;
 	if (map->len == 8)
 	{
 		if (map->map[x][y] == 2 && map->wtos == nb)
@@ -119,7 +119,7 @@ void	apply_wall(t_map_simu *map)
 		while (y < map->width)
 		{
 			if (map->map[x][y] == 1)
-				wall(map->map, x, y, map->wall);
+				wall(map, x, y, &check);
 			y++;
 		}
 		x++;
@@ -128,7 +128,7 @@ void	apply_wall(t_map_simu *map)
 		apply_wall(map);
 }
 
-char	**simulate(t_map_simu *map)
+void	simulate(t_map_simu *map)
 {
 	int	x;
 	int	y;

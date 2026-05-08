@@ -14,10 +14,15 @@
 
 int main()
 {
-	const int	*range = get_range(1, NULL);
+	int	range[2];
+	get_range(range, 1, NULL);
 	int			seed = gen_seed(range[0], range[1]);
 	t_map_simu	*map = seed_to_mapsimu(seed);
-	char		**nmap = simulate(map);
-	int			*spoint = spawn(nmap);
+	map->map = ft_calloc(map->height, sizeof(int *));
+	for (int i = 0; i < map->height; i++)
+		map->map[i] = ft_calloc(sizeof(int), map->width);
+	simulate(map);
+	char **nmap = get_map_from_simu(map);
+	int			*spoint = spawn(map);
 	nmap[spoint[0]][spoint[1]] = "NSEW"[spoint[2]];
 }
