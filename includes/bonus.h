@@ -45,10 +45,10 @@ typedef struct s_map_simu
 bool		between(int a, int b, int c);
 bool		had_space_neighbour(int **map, int x, size_t y);
 void		place_door(t_map_simu *map);
-int			*get_range(int cycle, int *seed);
+void		get_range(int *range, int cycle, int *seed);
 int			gen_seed(int min, int max);
 t_map_simu	*seed_to_mapsimu(int seed);
-char		**simulate(t_map_simu *map);
-int			*spawn(t_map *map);
-
+void		simulate(t_map_simu *map);
+int			*spawn(t_map_simu *map);
+char	**get_map_from_simu(t_map_simu *map);
 #endif
