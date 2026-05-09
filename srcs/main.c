@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/06 20:16:25 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/09 10:18:32 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,13 @@ static bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos)
 	return (true);
 }
 
-// static void	draw(t_img *img)
+// void	render(void *param)
 // {
-// 	mlx_color	color;
-// 	float		scale_width;
-// 	float		scale_height;
+// 	t_data	*data;
 //
-// 	printf("Function called\n");
-// 	color.rgba = 0xF000000;
-// 	mlx_clear_window(img->data->mlx, img->data->win, color);
-// 	scale_width = (float)img->data->win_infos.width / (float)img->width;
-// 	scale_height = (float)img->data->win_infos.height / (float)img->height;
-// 	mlx_put_transformed_image_to_window(img->data->mlx, img->data->win,
-// 		img->asset, 0, 0, scale_width * 1.0f, scale_height * 1.0f, 0.0f);
+// 	data = (t_data *)param;
+// 	render_2D_map(data);
 // }
-
-void	render(void *param)
-{
-	t_data	*data;
-
-	data = (t_data *)param;
-	render_2D_map(data);
-}
 
 static int	process(t_data *data)
 {
@@ -62,9 +47,10 @@ static int	process(t_data *data)
 	if (ret < 0)
 		return (ret);
 	display_player_data(data->player);
+	render_2D_map(data);
 	mlx_on_event(data->mlx, data->win, MLX_KEYDOWN, key_hooks, data);
 	mlx_on_event(data->mlx, data->win, MLX_WINDOW_EVENT, window_hook, data);
-	mlx_add_loop_hook(data->mlx, render, data);
+	mlx_add_loop_hook(data->mlx, render_player, data);
 	mlx_loop(data->mlx);
 	return (NO_ERROR);
 }

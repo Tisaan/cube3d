@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/06 20:17:47 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/08 17:06:40 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,6 @@
 #include "../../includes/player.h"
 
 
-int	render_2D_map(t_data *data)
-{
-	t_map		*map;
-	int			x;
-	int			y;
-
-	map = data->map;
-	y = 0;
-	while (map->grid[y])
-	{
-		x = 0;
-		while (map->grid[y][x])
-		{
-			if (map->grid[y][x] == '1')
-				mlx_put_image_to_window(data->mlx, data->win, data->wall_assets[0], x * WALL_SIZE, y * WALL_SIZE);
-			x++;
-		}
-		y++;
-	}
-	// mlx_destroy_image(data->mlx, wall);
-	return (NO_ERROR);
-}
 
 void	display_player_data(t_player *player)
 {
