@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/07 17:53:06 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/09 18:29:44 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ t_map_simu	*seed_to_mapsimu(int seed)
 	i += 2;
 	map->door = (float)(((int)(seed / (powl(10, map->len - i++)))) % 10) / 10;
 	map->wall = (int)(seed / (powl(10, map->len - i++))) % 2;
-	map->width = (seed % 1000);
-	map->height = seed / powl(10, map->len - 3);
+	map->width = (seed % 1000) / 4;
+	map->height = seed / powl(10, map->len - 3) / 4;
 	map->min = 2;
 	map->max = 6;
 	if (map->len == 8)
@@ -87,6 +87,7 @@ t_map_simu	*seed_to_mapsimu(int seed)
 
 void debug_seed(t_map_simu *map)
 {
+	printf("iter:%d\n", map->iter);
     printf("len:%d\n", map->len);
     printf("stof:%d\n", map->stof);
     printf("ftof:%d\n", map->ftof);

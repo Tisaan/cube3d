@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:15:18 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/07 17:39:44 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/09 16:28:42 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,22 @@ bool	between(int a, int b, int c)
 	return ((c >= a && c <= b) || (c >= b && c <= a));
 }
 
-bool	had_space_neighbour(int **map, int x, size_t y)
+bool	had_space_neighbour(t_map_simu *map, int x, size_t y)
 {
-	if (map[x - 1][y] && map[x - 1][y] == 0)
-		return (true);
-	else if (map[x-1][y - 1] && map[x-1][y - 1] == 0)
-		return (true);
-	else if (map[x-1][y + 1] && map[x-1][y + 1] == 0)
-		return (true);
-	else if (map[x + 1][y] && map[x + 1][y] == 0)
-		return (true);
-	else if (map[x+1][y - 1] && map[x+1][y - 1] == 0)
-		return (true);
-	else if (map[x+1][y + 1] && map[x+1][y + 1] == 0)
-		return (true);
-	else if (map[x][y - 1] && map[x][y - 1] == 0)
-		return (true);
-	else if (map[x][y + 1] && map[x][y + 1] == 0)
-		return (true);
+	int i;
+	int	j;
+
+	i = -1;
+	while (i <= 1)
+	{
+		j = -1;
+		while (j <= 1)
+		{
+			if (map->map[(map->height + i + x) % map->height][(map->width + j + y) % map->width] == ' ')
+				return (true);
+		}
+		
+	}
 	return (false);
 }
 

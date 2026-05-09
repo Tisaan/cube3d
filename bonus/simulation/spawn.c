@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 11:23:24 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/07 18:34:08 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/09 18:14:57 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include "../../includes/vectors.h"
 
 
-int	spawn_safe(int **map, int *pos)
+int	spawn_safe(char **map, int *pos)
 {
 	if (!map[pos[0]][pos[1]])
+		return (-2);
+	if (map[pos[0]][pos[1]] && map[pos[0]][pos[1]] == '0')
 		return (-1);
 	return (map[pos[0]][pos[1]] == 1);
 }
@@ -60,7 +62,7 @@ int	*spawn(t_map_simu *map){
 	c_pos = (int [3]){map->height / 2, map->width / 2, 0};
 	i = 0;
 	check = true;
-	while (check){
+	while (check && i < 50){
 		c_pos = l_shape(c_pos, i);
 		err = spawn_safe(map->map, c_pos);
 		if (err == -1)
@@ -69,5 +71,7 @@ int	*spawn(t_map_simu *map){
 			check = false;
 		i++;
 	}
+	if (i == 50)
+		c_pos = (int [3]){-1, 0, 0};
 	return (c_pos);
 }
