@@ -6,28 +6,25 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 17:04:03 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/09 17:37:46 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/10 09:53:17 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	render_player(void *param)
+static void	render_player(t_data *data)
 {
 	t_player	*player;
-	t_data		*data;
 	int			px;
 	int			py;
 
-	data = (t_data *)param;
 	player = data->player;
-	px = (int)player->pos.x * WALL_SIZE;
-	py = (int)player->pos.y * WALL_SIZE;
-	printf("player pos: (%d, %d)\n", px, py);
-	mlx_put_image_to_window(data->mlx, data->win, player->sprite, py, px);
+	px = (int)player->pos.x;
+	py = (int)player->pos.y;
+	mlx_put_image_to_window(data->mlx, data->win, player->sprite, px, py);
 }
 
-int	render_2D_map(t_data *data)
+static void	render_2D_map(t_data *data)
 {
 	t_map		*map;
 	int			x;
@@ -42,9 +39,27 @@ int	render_2D_map(t_data *data)
 		{
 			if (map->grid[y][x] == '1')
 				mlx_put_image_to_window(data->mlx, data->win, data->wall_assets[0], x * WALL_SIZE, y * WALL_SIZE);
+			else
+				mlx_put_image_to_window(data->mlx, data->win, data->floor_asset, x * WALL_SIZE, y * WALL_SIZE);
 			x++;
 		}
 		y++;
 	}
-	return (NO_ERROR);
 }
+
+void	render(void *param)
+{
+	t_data		*data;
+	mlx_color	bg;
+
+	data = (t_data *)param;
+	bg.r = 125;
+	bg.g = 125;
+	bg.b = 125;
+	bg.a = 100;
+	mlx_clear_window(data->mlx, data->win, bg);
+	render_2D_map(data);
+	render_player(data);
+}
+
+

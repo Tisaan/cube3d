@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.h                                           :+:      :+:    :+:   */
+/*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/10 01:12:27 by pcaplat          ###   ########.fr       */
+/*   Created: 2026/05/10 00:26:14 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/10 09:45:30 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
-# include "vectors.h"
-# include "../mlx/includes/mlx.h"
+#include "../../includes/cub3d.h"
 
-typedef struct s_data	t_data;
-
-typedef struct	s_player
+void	set_vect(t_vect *vect, float x, float y)
 {
-	mlx_image	sprite;
-	t_vect		pos;
-	int			size;
-	float		aov; // angle of view
-	float		fov; //convention : 90deg mais 60deg fine
-}				t_player;
+	vect->x = x;
+	vect->y = y;
+}
 
-int		init_player(t_data *data);
+t_vect	vect_sum(const t_vect v1, const t_vect v2)
+{
+	t_vect	new_v;
 
-#endif
+	new_v.x = v1.x + v2.x;
+	new_v.y = v1.y + v2.y;
+	return (new_v);
+}
+
+t_vect	vect_multiply(const t_vect v, float factor)
+{
+	t_vect	new_v;
+
+	new_v.x = v.x * factor;
+	new_v.y = v.y * factor;
+	return (new_v);
+}

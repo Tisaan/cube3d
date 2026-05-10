@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/08 17:32:41 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/05/10 00:54:31 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC_PARSING = 	path.c \
 
 SRC_UTILS =		free.c \
 				debug.c \
+				vectors.c
 
 SRC_RAYCAST =	player.c \
 				render.c

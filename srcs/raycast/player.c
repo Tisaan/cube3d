@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:30:15 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/09 10:13:10 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/10 00:39:37 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ int	init_player(t_data *data)
 		free(data->player);
 		return (-ERROR_MALLOC);
 	}
+
+	//debug
 	color.rgba = 0x0000FFFF;
 	for (int y = 0; y < 32; y++)
 		for (int x = 0; x < 32; x++)
 			mlx_set_image_pixel(data->mlx, data->player->sprite, x, y, color);
+
 	data->player->aov = (float)(data->map->start[2]);
 	data->player->fov = FOV_ANGLE;
 	data->player->size = WALL_SIZE / 2;
-	data->player->pos.x = data->map->start[0];
-	data->player->pos.y = data->map->start[1];
+	data->player->pos.x = data->map->start[0] * WALL_SIZE;
+	data->player->pos.y = data->map->start[1] * WALL_SIZE;
 	return (NO_ERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/06 18:52:05 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/10 01:23:07 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,9 @@ typedef struct	s_vect3
 	float	y;
 	float	z;
 }			t_vect3;
+
+void	set_vect(t_vect *vect, float x, float y);
+t_vect	vect_multiply(const t_vect v, float factor);
+t_vect	vect_sum(const t_vect v1, const t_vect v2);
 
 #endif

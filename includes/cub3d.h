@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/06 20:12:34 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/10 01:27:04 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ typedef enum	e_key_code
 	Q_KEY = 20,
 	ESC_KEY = 41,
 	F_KEY = 9,
+	W_KEY = 26,
+	A_KEY = 4,
+	S_KEY = 22,
+	D_KEY = 7,
+	UP = 82,
+	LEFT = 80,
+	DOWN = 81,
+	RIGHT = 79
 }	t_key_code;
 
 typedef enum	e_win_event
@@ -55,6 +63,8 @@ typedef struct s_data
 	mlx_context		mlx;
 	mlx_window		win;
 	mlx_image		wall_assets[4];
+	mlx_image		ceil_asset;
+	mlx_image		floor_asset;
 	t_win_infos		win_infos;
 	t_map			*map;
 	t_texture_path	texture[4];
@@ -73,5 +83,6 @@ typedef struct	s_img
 // Hooks
 void	key_hooks(int key, void *param);
 void	window_hook(int event, void *param);
+void	render(void *param);
 
 #endif
