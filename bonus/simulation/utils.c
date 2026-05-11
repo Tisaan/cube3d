@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:15:18 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/09 16:28:42 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/11 16:10:20 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,25 @@ bool	between(int a, int b, int c)
 
 bool	had_space_neighbour(t_map_simu *map, int x, size_t y)
 {
-	int i;
-	int	j;
-
-	i = -1;
-	while (i <= 1)
+	if (map->map[x + 1][y + 1] &&
+		map->map[x + 1][y] && 
+		map->map[x + 1][y - 1] &&
+		map->map[x][y + 1] &&
+		map->map[x][y - 1] &&
+		map->map[x - 1][y - 1] &&
+		map->map[x - 1][y] &&
+		map->map[x - 1][y + 1]
+	)
 	{
-		j = -1;
-		while (j <= 1)
-		{
-			if (map->map[(map->height + i + x) % map->height][(map->width + j + y) % map->width] == ' ')
-				return (true);
-		}
-		
+		if (map->map[x + 1][y + 1] == ' ' ||
+		map->map[x + 1][y] == ' ' ||
+		map->map[x + 1][y - 1] == ' ' ||
+		map->map[x][y + 1] == ' ' ||
+		map->map[x][y - 1] == ' ' ||
+		map->map[x - 1][y - 1] == ' ' ||
+		map->map[x - 1][y] == ' ' ||
+		map->map[x - 1][y + 1] == ' ')
+			return (true);
 	}
 	return (false);
 }

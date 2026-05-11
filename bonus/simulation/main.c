@@ -6,11 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/09 18:28:53 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/11 17:44:21 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
+
+
 
 int main()
 {
@@ -25,16 +27,39 @@ int main()
 		map->map[i] = ft_calloc(sizeof(int), map->width + 1);
 		for (int j = 0; j < map->width; j++)
 		{
-			if (i % 2 == 1)
+			if ((j + i) % 2 == 1)
 				map->map[i][j] = ' ';
-			else
-				map->map[i][j] = '0';
 		}
-		printf("%s\n", map->map[i]);
 	}
-	simulate(map);
+
+	int	nb = map->stof + map->ftof + map->ftow;
+	int i = -2;
+	printf("nb: %d\n", nb);
+	while (i <= 2)
+	{
+		int j = -2;
+		while (j <= 2)
+		{
+			if (nb > 0)
+			{
+				map->map[(map->height / 2) + i][(map->width / 2) + j] = '0';
+				nb--;
+			}
+			else 
+				break ;
+			j++;
+		}
+		i++;
+	}
+	printf("map:\n");
 	for (int i = 0; map->map[i]; i++)
 		printf("%s\n", map->map[i]);
+	printf("end\n");
+	simulate(map);
+	printf("map:\n");
+	for (int i = 0; map->map[i]; i++)
+		printf("%s\n", map->map[i]);
+	printf("end\n");
 	//int			*spoint = spawn(map);
 	//printf("spawn[%d]\n", spoint[0]);
 	// if (spoint[0] == -1)

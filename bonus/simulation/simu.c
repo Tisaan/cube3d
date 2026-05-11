@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/09 18:08:39 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/11 17:54:36 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	apply_rule(t_map_simu *map, int x, int y)
 		map->map[x][y] += 4;
 	if (map->map[x][y] == '0' && between(map->min, map->ftof, nb))
 		map->map[x][y] += 4;
+	if (map->map[x][y] == '0' && map->ftow == nb)
+		map->map[x][y] = '1';
 	if (map->len == 8)
 	{
 		if (map->map[x][y] == '1' && map->wtos == nb)
@@ -63,9 +65,11 @@ void	update_simu(t_map_simu *map)
 		{
 			if (map->map[x][y] == (' ' + 4))
 				map->map[x][y] = '0';
-			if (map->map[x][y] == ('0' + 4))
-				map->map[x][y] = '1';
-			if (map->map[x][y] == ('1' + 4))
+			else if (map->map[x][y] == ('0' + 4))
+				map->map[x][y] = '0';
+			else if (map->map[x][y] == '0')
+				map->map[x][y] = ' ';
+			else if (map->map[x][y] == ('1' + 4))
 				map->map[x][y] = ' ';
 			y++;
 		}
@@ -103,18 +107,37 @@ void	apply_wall(t_map_simu *map)
 {
 	int	x;
 	int	y;
+	int i;
 
-	x = 0;
-	while (map->map[x])
+	x = 1;
+	while (x < map->height - 1)
 	{
-		y = 0;
-		while (map->map[x][y])
+		y = 1;
+		while (y < map->width - 1)
 		{
 			if (map->map[x][y] == '0')
 				wall(map, x, y);
 			y++;
 		}
 		x++;
+	}
+	i = 0;
+	while (i < map->width)
+	{
+		if (map->map[0][i] == '0')
+			map->map[0][i] = '1';
+		if (map->map[map->height - 1][i] == '0')
+			map->map[map->height - 1][i] = '1';
+		i++;
+	}
+	i = 0;
+	while (i < map->height)
+	{
+		if (map->map[i][0] == '0')
+			map->map[i][0] = '1';
+		if (map->map[i][map->width - 1] == '0')
+			map->map[i][map->width - 1] = '1';
+		i++;
 	}
 }
 
@@ -138,9 +161,12 @@ void	simulate(t_map_simu *map)
 			x++;
 		}
 		update_simu(map);
-		printf("iter[%d]\n", iter - map->iter);
-		for (int i = 0; map->map[i] && i < 10; i++)
-			printf("%s\n", map->map[i]);
+		if (map->iter % 4 == 0)
+		{
+			printf("iter[%d]\n", iter - map->iter);
+			for (int i = 0; map->map[i]; i++)
+				printf("%s\n", map->map[i]);
+		}
 		map->iter--;
 	}
 	apply_wall(map);
