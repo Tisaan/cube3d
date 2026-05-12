@@ -6,31 +6,35 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/10 10:16:31 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/12 09:27:26 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #ifndef SPEED
-# define  SPEED	5
+# define  SPEED	10
 #endif
 
 #include "../../includes/cub3d.h"
 
-static bool	is_colliding (t_player *player, t_vect velocity, t_map *map)
+static bool	is_colliding (t_player *player, t_vect direction, t_map *map)
 {
-	int			px;
-	int			py;
+	int	px;
+	int	py;
+	int	offset;
 
 	py = player->pos.y;
 	px = player->pos.x;
-	printf("map_w: %d, map_h: %d\n", map->width, map->height);
-	if (px + velocity.x > map->width * WALL_SIZE)
+	offset = 0;
+	if (direction.x == 1.0 || direction.y == 1.0)
+		offset = player->size - 1;
+	printf("dx: %f, dy: %f\n", direction.x, direction.y);
+	if (player->pos.x + direction.x + offset > map->width * WALL_SIZE)
 		return (true);
-	if (py + velocity.y > map->height * WALL_SIZE)
+	if (player->pos.y + direction.y + offset > map->height * WALL_SIZE)
 		return (true);
-	py = (py + velocity.y * SPEED) / WALL_SIZE;
-	px = (px + velocity.x * SPEED) / WALL_SIZE;
+	py = (int)(py + offset + (direction.y * SPEED)) / WALL_SIZE;
+	px = (int)(px + offset + (direction.x * SPEED)) / WALL_SIZE;
 	printf("new_pos(%d, %d)\n", px, py);
 	if (map->grid[py][px] == '1')
 		return (true);
@@ -39,22 +43,21 @@ static bool	is_colliding (t_player *player, t_vect velocity, t_map *map)
 
 static void	movement_hooks(int key, t_data *data)
 {
-	t_vect		velocity;
-
-	set_vect(&velocity, 0, 0);
+	set_vect(&data->player->dir, 0, 0);
 	if (key == W_KEY || key == UP)
-		velocity.y -= 1;
+		data->player->dir.y -= 1;
 	if (key == S_KEY || key == DOWN)
-		velocity.y += 1;
+		data->player->dir.y += 1;
 	if (key == A_KEY || key == LEFT)
-		velocity.x -= 1;
+		data->player->dir.x -= 1;
 	if (key == D_KEY || key == RIGHT)
-		velocity.x += 1;
-	if ((velocity.x != 0 || velocity.y != 0) && !is_colliding(data->player, velocity, data->map))
+		data->player->dir.x += 1;
+	if ((data->player->dir.x != 0 || data->player->dir.y != 0) && !is_colliding(data->player, data->player->dir, data->map))
 	{
-		velocity = vect_multiply(velocity, SPEED);
-		data->player->pos = vect_sum(data->player->pos, velocity);
+		data->player->dir = vect_multiply(data->player->dir, SPEED);
+		data->player->pos = vect_sum(data->player->pos, data->player->dir);
 	}
+	printf("player after movement: (%f, %f)\n", data->player->pos.x, data->player->pos.y);
 }
 
 void	key_hooks(int key, void *param)

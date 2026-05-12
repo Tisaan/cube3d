@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/10 01:27:04 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/10 10:57:07 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # endif
 # ifndef FOV_ANGLE
 #  define FOV_ANGLE 60
+# endif
+# ifndef ROT_SPEED
+#  define ROT_SPEED (PI / 2)
 # endif
 
 #include <stdbool.h>
