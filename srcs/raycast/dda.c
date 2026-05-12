@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:48:33 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 16:51:09 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/12 18:46:27 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ static void	init_dda(t_ray *ray, t_vect *tile, t_vect *step, t_data *data)
 	set_vect(&player_pos, data->player->pos.x / WALL_SIZE, data->player->pos.y / WALL_SIZE);
 	tile->x = (int)(data->player->pos.x) / WALL_SIZE;
 	tile->y = (int)data->player->pos.y / WALL_SIZE;
-	printf("Player pos: (%f, %f)\n", data->player->pos.x, data->player->pos.y);
-	printf("Tile initial: (%f, %f)\n", tile->x, tile->y);
-	printf("Map size: %dx%d\n\n", data->map->width, data->map->height);
-	printf("dir (%f, %f)\n\n", data->player->dir.x, data->player->dir.y);
+	// printf("Player pos: (%f, %f)\n", data->player->pos.x, data->player->pos.y);
+	// printf("Tile initial: (%f, %f)\n", tile->x, tile->y);
+	// printf("Map size: %dx%d\n", data->map->width, data->map->height);
+	// printf("dir (%f, %f)\n", data->player->dir.x, data->player->dir.y);
+	// printf("camera (%f, %f)\n", data->player->camera.x, data->player->camera.y);
 	if (ray->dir.x == 0)
 		ray->delta_dist.x = INFINITY;
 	else
@@ -64,8 +65,9 @@ float	dda(t_ray *ray, t_data *data)
 	bool	is_colliding;
 
 	init_dda(ray, &tile, &step, data);
-	printf("tile (%f, %f), step(%f, %f)\n", tile.x, tile.y, step.x, step.y);
+	// printf("tile (%f, %f), step(%f, %f)\n", tile.x, tile.y, step.x, step.y);
 	is_colliding = false;
+	side = 0;
 	while (is_colliding == false)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
@@ -82,10 +84,13 @@ float	dda(t_ray *ray, t_data *data)
 		}
 		if (tile.y < 0 || tile.y >= data->map->height
 			|| tile.x < 0 || tile.x >= data->map->width)
-			break ;
+			return (ray->side_dist.y - ray->delta_dist.y);
 		if ((int)tile.x >= (int)ft_strlen(data->map->grid[(int)tile.y]))
+		{
+			is_colliding = true;
 			break ;
-		if (data->map->grid[(int)tile.y][(int)tile.x] == '1')
+		}
+		if (data->map->grid[(int)tile.y][(int)tile.x] != '0')
 			is_colliding = true;
 	}
 	if (side == 0)

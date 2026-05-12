@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 16:16:51 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/12 18:40:36 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ float	dda(t_ray *ray, t_data *data);
 
 static void	draw_3D(t_data *data, float wall_dist, int x)
 {
-	mlx_color	color;
+	mlx_color	wall_color;
+	mlx_color	ceil_color;
+	mlx_color	floor_color;
 	int			wall_height;
 	int			start;
 	int			end;
-	// float		fov;
+	int			y;
 
-	// fov = 1.0f / tan(33.0f * M_PI / 180.0f);
+	if (wall_dist < 0.00001f)
+		wall_dist = 0.00001f;
 	wall_height = (int)(data->win_infos.height / wall_dist);
 
 	start = -wall_height / 2 + data->win_infos.height / 2;
@@ -32,11 +35,26 @@ static void	draw_3D(t_data *data, float wall_dist, int x)
 	end = wall_height / 2 +  data->win_infos.height / 2;
 	if (end >= data->win_infos.height)
 		end = data->win_infos.height - 1;
-	color.rgba = 0xFFFFFFFF;
-	while (start < end)
+
+	wall_color.rgba = 0x888888FF;
+	ceil_color.rgba = 0x00AA00FF;
+	floor_color.rgba = 0xFF0000FF;
+
+	y = 0;
+	while (y < start)
 	{
-		mlx_pixel_put(data->mlx, data->win, x, start, color);
-		start++;
+		mlx_set_image_pixel(data->mlx, data->frame, x, y, ceil_color);
+		y++;
+	}
+	while (y < end)
+	{
+		mlx_set_image_pixel(data->mlx, data->frame, x, y, wall_color);
+		y++;
+	}
+	while (y < data->win_infos.height)
+	{
+		mlx_set_image_pixel(data->mlx, data->frame, x, y, floor_color);
+		y++;
 	}
 }
 
@@ -57,7 +75,7 @@ int	raycast(t_data *data, t_player *player)
 		ray.dir.y = player->dir.y + player->camera.y * camera_x;
 		// printf("ray (%f, %f)\n", ray.dir.x, ray.dir.y);
 		wall_dist = dda(&ray, data);
-		printf("%f\n", wall_dist);
+		// printf("%f\n", wall_dist);
 		draw_3D(data, wall_dist, x);
 		x++;
 	}

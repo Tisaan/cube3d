@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/10 01:17:25 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/12 17:52:52 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	init_game(t_data *data)
 	data->floor_asset = mlx_new_image(data->mlx, WALL_SIZE, WALL_SIZE);
 	if (data->floor_asset == MLX_NULL_HANDLE)
 		return (-ERROR_LOAD_ASSET);
+	data->frame = mlx_new_image(data->mlx, data->win_infos.width, data->win_infos.height);
 	color.rgba = 0xFFFFFFFF;
 	set_img_pixel(data, data->wall_assets[0], color);
 	color.r = 0;

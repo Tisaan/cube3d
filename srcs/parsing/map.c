@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/06 18:19:35 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/12 19:01:17 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int	validate(char *line, t_map *data, int i, int *find)
 	int		len;
 	int		res;
 
-	len = ft_strlen(line);
+	len = ft_strlen(line) - 1;
 	res = check_char_present_map(line, find, len);
 	if (res < 0)
 		return (res);
 	if (len > data->width)
 		data->width = len;
-	data->grid[i] = ft_strdup(line);
+	data->grid[i] = ft_strndup(line, 0, ft_strlen(line) - 2);
 	free(line);
 	if (!data->grid[i])
 		return (-ERROR_MALLOC);
