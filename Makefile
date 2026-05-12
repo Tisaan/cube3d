@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/10 00:54:31 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/05/12 12:55:40 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,10 +48,13 @@ SRC_PARSING = 	path.c \
 
 SRC_UTILS =		free.c \
 				debug.c \
-				vectors.c
+				vectors.c \
+				utils.c
 
 SRC_RAYCAST =	player.c \
-				render.c
+				render.c \
+				ray.c \
+				dda.c
 
 SRC_HOOKS = hooks.c
 
@@ -102,7 +105,7 @@ libs:
 
 $(NAME): $(OBJS)
 	@printf "$(BLUE)🔗 Creating Executable $@...$(NC)\n"
-	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJS) $(MLX) -L$(LIBDIR) -l:$(LIBNAME) -L$(GNLDIR) -l:$(GNLNAME) -lSDL2 -o $(NAME)
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJS) $(MLX) -L$(LIBDIR) -l:$(LIBNAME) -L$(GNLDIR) -l:$(GNLNAME) -lm -lSDL2 -o $(NAME)
 	@printf "$(GREEN)✅ Created $@$(NC)\n"
 	
 $(OBJ_DIR)/%.o : %.c

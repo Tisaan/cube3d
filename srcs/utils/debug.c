@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/08 17:06:40 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/12 15:43:01 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 void	display_player_data(t_player *player)
 {
 	printf("=== PLAYER DATA ===\n");
-	printf("player start: (%f, %f) facing: %f\n", player->pos.x, player->pos.y, player->aov);
+	printf("player start: (%f, %f)\n", player->pos.x, player->pos.y);
 	printf("size: %d\n", player->size);
-	printf("fov: %f\n", player->fov);
 }
 
 void	display_map_data(t_data data)

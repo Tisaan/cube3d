@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 09:27:26 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/12 15:37:27 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,49 +17,30 @@
 
 #include "../../includes/cub3d.h"
 
-static bool	is_colliding (t_player *player, t_vect direction, t_map *map)
-{
-	int	px;
-	int	py;
-	int	offset;
-
-	py = player->pos.y;
-	px = player->pos.x;
-	offset = 0;
-	if (direction.x == 1.0 || direction.y == 1.0)
-		offset = player->size - 1;
-	printf("dx: %f, dy: %f\n", direction.x, direction.y);
-	if (player->pos.x + direction.x + offset > map->width * WALL_SIZE)
-		return (true);
-	if (player->pos.y + direction.y + offset > map->height * WALL_SIZE)
-		return (true);
-	py = (int)(py + offset + (direction.y * SPEED)) / WALL_SIZE;
-	px = (int)(px + offset + (direction.x * SPEED)) / WALL_SIZE;
-	printf("new_pos(%d, %d)\n", px, py);
-	if (map->grid[py][px] == '1')
-		return (true);
-	return (false);
-}
-
-static void	movement_hooks(int key, t_data *data)
-{
-	set_vect(&data->player->dir, 0, 0);
-	if (key == W_KEY || key == UP)
-		data->player->dir.y -= 1;
-	if (key == S_KEY || key == DOWN)
-		data->player->dir.y += 1;
-	if (key == A_KEY || key == LEFT)
-		data->player->dir.x -= 1;
-	if (key == D_KEY || key == RIGHT)
-		data->player->dir.x += 1;
-	if ((data->player->dir.x != 0 || data->player->dir.y != 0) && !is_colliding(data->player, data->player->dir, data->map))
-	{
-		data->player->dir = vect_multiply(data->player->dir, SPEED);
-		data->player->pos = vect_sum(data->player->pos, data->player->dir);
-	}
-	printf("player after movement: (%f, %f)\n", data->player->pos.x, data->player->pos.y);
-}
-
+// static void	movement_hooks(int key, t_data *data)
+// {
+// 	int	x;
+// 	int	y;
+//
+// 	data->player->speed = data->delta * 5.0;
+// 	data->player->rot_speed = data->delta * 3.0;
+// 	if (key == W_KEY || key == UP)
+// 	{
+// 		x = (int)(data->player->pos.x + (data->player->dir.x * data->player->speed)) / WALL_SIZE;
+// 		y = (int)(data->player->pos.y) / WALL_SIZE;
+// 		if (data->map->grid[y][x] == '0')
+// 			data->player->pos.x += data->player->dir.x * data->player->speed;
+// 		y = (int)(data->player->pos.y + (data->player->dir.y * data->player->speed)) / WALL_SIZE;
+// 		x = (int)(data->player->pos.x) / WALL_SIZE;
+// 		if (data->map->grid[y][x] == '0')
+// 			data->player->pos.y += data->player->dir.y * data->player->speed;
+// 	}
+// 	// if (key == S_KEY || key == DOWN)
+// 	// if (key == A_KEY || key == LEFT)
+// 	// if (key == D_KEY || key == RIGHT)
+// 	// if ((data->player->dir.x != 0 || data->player->dir.y != 0))
+// }
+//
 void	key_hooks(int key, void *param)
 {
 	t_data	*data;
@@ -81,7 +62,7 @@ void	key_hooks(int key, void *param)
 			mlx_set_window_fullscreen(data->mlx, data->win, false);
 		}
 	}
-	movement_hooks(key, data);
+//	movement_hooks(key, data);
 }
 
 void	window_hook(int event, void *param)

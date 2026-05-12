@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/10 10:57:07 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/12 16:34:56 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #  define WALL_SIZE 64
 # endif
 # ifndef FOV_ANGLE
-#  define FOV_ANGLE 60
+#  define FOV_ANGLE 66
 # endif
 # ifndef ROT_SPEED
 #  define ROT_SPEED (PI / 2)
@@ -73,6 +73,7 @@ typedef struct s_data
 	t_texture_path	texture[4];
 	t_prgb			plans_color[2];
 	t_player		*player;
+	float			delta;
 }				t_data;
 
 typedef struct	s_img
@@ -82,6 +83,13 @@ typedef struct	s_img
 	int			width;
 	int			height;
 }				t_img;
+
+typedef struct	s_timer
+{
+	struct timeval	current_time;
+	struct timeval	start_time;
+	float			fps;
+}					t_timer;
 
 // Hooks
 void	key_hooks(int key, void *param);

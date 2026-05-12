@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 11:25:47 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 11:14:54 by pcaplat          ###   ########.fr       */
+/*   Created: 2026/05/12 10:09:42 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/12 11:59:41 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef	RAYCAST_H
+# define RAYCAST_H
 # include "cub3d.h"
 
-void	free_all(t_data *data, int fd);
-void	clean_exit(t_data *data);
-float	ft_abs(float nb);
+typedef struct	s_ray
+{
+	t_vect	dir;
+	t_vect	delta_dist;
+	t_vect	side_dist;
+}			t_ray;
+
+int	raycast(t_data *data, t_player *player);
 
 #endif

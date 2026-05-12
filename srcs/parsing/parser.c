@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/05 19:05:24 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/12 15:52:17 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_map	*init_map_metadata(int size)
 		throw_error(ERROR_MALLOC);
 	if (!map)
 		return (NULL);
-	map->height = size;
 	map->grid = ft_calloc(sizeof(char *), (size + 1));
 	if (!map->grid)
 		throw_error(-ERROR_MALLOC);
@@ -53,6 +52,7 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 		throw_error(err);
 		return (NULL);
 	}
+	data->map->height = size_file - count;
 	err = get_map(fd, data->map);
 	if (err < 0)
 		throw_error(err);
