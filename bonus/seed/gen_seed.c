@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
+#include <stdio.h>
 #include <time.h>
 #include <math.h>
 
@@ -30,6 +31,20 @@ void	get_range(int *range, int *seed)
 	}
 }
 
+bool	check_seed(int seed)
+{
+	int	digit;
+
+	while (seed != 0)
+	{
+		digit = seed % 10;
+		if (digit == 0)
+			return (false);
+		seed /= 10;
+	}
+	return (true);
+}
+
 int	gen_seed(int min, int max)
 {
 	int			range;
@@ -47,6 +62,8 @@ int	gen_seed(int min, int max)
 	value = rand();
 	while (value >= limit)
 		value = rand();
+	if (!check_seed(min + (value % range)))
+		return (gen_seed(min, max));
 	return (min + (value % range));
 }
 
@@ -71,8 +88,9 @@ t_map_simu	*seed_to_mapsimu(int seed)
 	return (map);
 }
 
-void debug_seed(t_map_simu *map)
+void debug_seed(t_map_simu *map, int seed)
 {
+	printf("seed:%d\n", seed);
 	printf("iter:%d\n", map->iter);
     printf("len:%d\n", map->len);
     printf("space:%d\n", map->space);

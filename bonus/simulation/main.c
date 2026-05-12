@@ -45,33 +45,28 @@ void	make_grid(t_map_simu *map)
 
 	int_to_bin_str(map->floor, bfloor);
 	int_to_bin_str(map->space, bspace);
-	write(1, "f:", 2);
-	write(1, bfloor, ft_strlen(bfloor));
-	write(1, "\n", 1);
-	write(1, "s:", 1);
-	write(1, bspace, ft_strlen(bspace));
-	write(1, "\n", 1);
 	flag = true;
-	for (int i = 0; map->map[i]; i++)
+	for (int i = 0; i <= map->height; i++)
 	{
 		num = 0;
-		while ((map->width - num) > 0)
+		while (num < map->width)
 		{
 			if (flag)
 			{
 				if (num % 2)
-					num += ft_strlcat(map->map[i], bfloor, 33);
+					num += ft_strlcat(&map->map[i][num], bfloor, 33);
 				else 
-					num += ft_strlcat(map->map[i], bspace, 33);
+					num += ft_strlcat(&map->map[i][num], bspace, 33);
 			}
 			else
 			{
 				if (num % 2)
-					num += ft_strlcat(map->map[i], bspace, 33);
+					num += ft_strlcat(&map->map[i][num], bspace, 33);
 				else 
-					num += ft_strlcat(map->map[i], bfloor, 33);
+					num += ft_strlcat(&map->map[i][num], bfloor, 33);
 			}
 		}
+		map->map[i][map->width] = 0;
 		flag = !flag;
 	}
 }
@@ -82,34 +77,32 @@ int main()
 	get_range(range, NULL);
 	int			seed = gen_seed(range[0], range[1]);
 	t_map_simu	*map = seed_to_mapsimu(seed);
-	map->map = ft_calloc(map->height + 1, sizeof(int *));
-	debug_seed(map);
 
-	for (int i = 0; i < map->height; i++)
-	{
+	debug_seed(map, seed);
+	map->map = ft_calloc(map->height + 1, sizeof(int *));
+	for (int i = 0; i <= map->height; i++)
 		map->map[i] = ft_calloc(sizeof(int), map->width + 1);
-		map->map[map->width] = 0;
-	}
+	
 	make_grid(map);
-	write(1, "out", 3);
 	printf("map:\n");
-	for (int i = 0; map->map[i]; i++)
+	for (int i = 0; i <= map->height; i++)
 		printf("%s\n", map->map[i]);
 	printf("end\n");
 	simulate(map);
 	printf("map:\n");
-	for (int i = 0; map->map[i]; i++)
+	for (int i = 0; i <= map->height; i++)
 		printf("%s\n", map->map[i]);
 	printf("end\n");
-	//int			*spoint = spawn(map);
-	//printf("spawn[%d]\n", spoint[0]);
-	// if (spoint[0] == -1)
-	// 	printf("no spawn found\n");
-	// else
-	// 	map->map[spoint[0]][spoint[1]] = "NSEW"[spoint[2]];
+	int			*spoint = spawn(map);
+	printf("spawn[%d]\n", spoint[0]);
+	if (spoint[0] == -1)
+		printf("no spawn found\n");
+	else
+		map->map[spoint[0]][spoint[1]] = "NSEW"[spoint[2]];
 	
-	for (int i = 0; i < map->height; i++)
+	for (int i = 0; i <= map->height; i++)
 		free(map->map[i]);
+	free(spoint);
 	free(map->map);
 	free(map);
 }
