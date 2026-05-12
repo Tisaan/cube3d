@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/09 18:29:44 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/12 14:46:43 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,12 @@
 #include <math.h>
 
 
-//cycle: 1 si len(seed) == 8, sinon 0
+
 //seed: NULL si non provided par user
-void	get_range(int *range, int cycle, int *seed)
+void	get_range(int *range, int *seed)
 {
 	range[0] = 2222222;
 	range[1] = 6666666;
-	if (cycle)
-	{
-		range[0] = 11111111;
-		range[1] = 77777777;
-	}
 	if (seed)
 	{
 		if (*seed < range[0])
@@ -65,23 +60,14 @@ t_map_simu	*seed_to_mapsimu(int seed)
 		return (NULL);
 	map->len = ft_count_digits(seed);
 	i = 1;
-	map->stof = seed / (powl(10, map->len - i++));
-	map->ftof = (int)(seed / (powl(10, map->len - i++))) % 10;
-	map->ftow = (int)(seed / (powl(10, map->len - i++))) % 10;
-	if (map->len == 8)
-		map->wtos = (int)(seed / (powl(10, map->len - i++))) % 10;
-	map->iter = (seed % (int)powl(10, map->len - (i - 1)) / 100);
+	map->space = seed / (powl(10, map->len - i++));
+	map->floor = (int)(seed / (powl(10, map->len - i++))) % 10;
+	map->iter = (seed % (int)powl(10, map->len - (i - 1)) / 1000);
 	i += 2;
 	map->door = (float)(((int)(seed / (powl(10, map->len - i++)))) % 10) / 10;
 	map->wall = (int)(seed / (powl(10, map->len - i++))) % 2;
 	map->width = (seed % 1000) / 4;
 	map->height = seed / powl(10, map->len - 3) / 4;
-	map->min = 2;
-	map->max = 6;
-	if (map->len == 8)
-		map->min = 1;
-	if (map->len == 8)
-		map->max = 7;
 	return (map);
 }
 
@@ -89,11 +75,8 @@ void debug_seed(t_map_simu *map)
 {
 	printf("iter:%d\n", map->iter);
     printf("len:%d\n", map->len);
-    printf("stof:%d\n", map->stof);
-    printf("ftof:%d\n", map->ftof);
-    printf("ftow:%d\n", map->ftow);
-    if (map->wtos)
-        printf("wtos:%d\n", map->wtos);
+    printf("space:%d\n", map->space);
+    printf("floor:%d\n", map->floor);
     printf("door:%f\n", map->door);
     printf("wall:%d\n", (int)map->wall);
     printf("width:%d\n", map->width);

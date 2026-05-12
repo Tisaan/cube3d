@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/11 17:54:36 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/12 12:56:59 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,10 @@ void	apply_rule(t_map_simu *map, int x, int y)
 	int		nb;
 
 	nb = moore_neighborhood(map, x, y);
-	if (map->map[x][y] == ' ' && map->stof == nb)
+	if (map->map[x][y] == ' ' && between(3, 6, nb))
 		map->map[x][y] += 4;
-	if (map->map[x][y] == '0' && between(map->min, map->ftof, nb))
+	if (map->map[x][y] == '0' && between(2, 3, nb))
 		map->map[x][y] += 4;
-	if (map->map[x][y] == '0' && map->ftow == nb)
-		map->map[x][y] = '1';
-	if (map->len == 8)
-	{
-		if (map->map[x][y] == '1' && map->wtos == nb)
-			map->map[x][y] += 4;
-	}
 }
 
 void	update_simu(t_map_simu *map)
@@ -67,9 +60,7 @@ void	update_simu(t_map_simu *map)
 				map->map[x][y] = '0';
 			else if (map->map[x][y] == ('0' + 4))
 				map->map[x][y] = '0';
-			else if (map->map[x][y] == '0')
-				map->map[x][y] = ' ';
-			else if (map->map[x][y] == ('1' + 4))
+			else if (map->map[x][y] != '1')
 				map->map[x][y] = ' ';
 			y++;
 		}
