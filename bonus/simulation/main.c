@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 14:45:37 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/13 21:19:39 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	make_grid(t_map_simu *map)
 			else
 			{
 				if (num % 2)
-					num += ft_strlcat(&map->map[i][num], bspace, 33);
+					num += ft_strlcatrev(&map->map[i][num], bspace, 33);
 				else 
-					num += ft_strlcat(&map->map[i][num], bfloor, 33);
+					num += ft_strlcatrev(&map->map[i][num], bfloor, 33);
 			}
 		}
 		map->map[i][map->width] = 0;

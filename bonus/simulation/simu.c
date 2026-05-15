@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   simu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 12:56:59 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/13 21:20:57 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 int		moore_neighborhood(t_map_simu *map, int x, int y)
@@ -43,7 +42,7 @@ void	apply_rule(t_map_simu *map, int x, int y)
 	int		nb;
 
 	nb = moore_neighborhood(map, x, y);
-	if (map->map[x][y] == '0' && between(3, 6, nb))
+	if (map->map[x][y] == '0' && nb == 3)
 		map->map[x][y] += 4;
 	if (map->map[x][y] == '1' && between(2, 3, nb))
 		map->map[x][y] += 4;
@@ -78,9 +77,9 @@ void	wall(t_map_simu *map, int x, int y)
 {
 	int	i;
 	int	j;
-	if (map->wall == 0 && had_space_neighbour(map, x, y))
-		map->map[x][y] = '1'; 
-	if (map->wall == 1 && had_space_neighbour(map, x, y))
+	// if (map->wall == 0 && had_space_neighbour(map, x, y))
+	// 	map->map[x][y] = '1'; 
+	if (had_space_neighbour(map, x, y))
 	{
 		i = -1;
 		while (i <= 1)
@@ -188,6 +187,9 @@ void	simulate(t_map_simu *map)
 		map->iter--;
 	}
 	update_map(map);
+	printf("before wall\n");
+	for (int i = 0; i < map->height; i++)
+		printf("%s\n", map->map[i]);
 	apply_wall(map);
 	place_door(map);
 }
