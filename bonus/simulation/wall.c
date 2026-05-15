@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simu.c                                             :+:      :+:    :+:   */
+/*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/15 15:41:01 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/15 18:16:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	wall(t_map_simu *map, int x, int y)
 			j = -1;
 			while (j <= 1)
 			{
-				if (map->map[(map->height + x + i) % map->height][(map->width + y + j) % map->width] == '0')
+				if (map->map[(map->height + x) % map->height][(map->width + y) % map->width] == '0')
 					map->map[(map->height + x + i) % map->height][(map->width + y + j) % map->width] = '1';
 				j++;
 			}

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/15 17:20:45 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/15 17:44:33 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ long int	gen_seed()
 	srandom(time(NULL));
 	value = ((long long)random() << 32) | random();
     value = min + (value % (max - min + 1));
-	if (value < 0)
-		value *= -1;
 	if (!check_seed(value))
 		return (gen_seed());
 	return (value);
@@ -52,7 +50,7 @@ t_map_simu	*seed_to_mapsimu(long int seed)
 	map->ori_y = ((int)(seed / powl(10, 8)) % 100);
 	map->height = ((int)(seed / powl(10, 5)) % 1000) / 4;
 	map->width = ((long)(seed / 100) % 1000) / 4;
-	map->iter = seed % 100 * 4;
+	map->iter = seed % 100 * 10;
 	map->door = ((float)(seed % 10) / 10);
 	return (map);
 }

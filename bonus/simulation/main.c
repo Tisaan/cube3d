@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/15 17:23:16 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/15 18:15:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,55 @@ void	int_to_bin_str(unsigned long num, char *s)
 			s[index++] = '0';
 		mask >>= 1;
 	}
-	s[index] = 0;
+	s[index] = '\0';
+}
+
+void l_shape(int *pos, int i){
+	const int 	table[3] = {-1, 0, 1};
+	int			num;
+	int			sum;
+
+	num = table[i % 3];
+	if (i % 4 == 0)
+	{
+		sum = pos[0] + 2 + pos[1] + num;
+		pos[0] = pos[0] + 2;
+		pos[1] = pos[1] + num;
+	}
+	else if (i % 4 == 1)
+	{
+		sum = pos[0] - 2 + pos[1] + num;
+		pos[0] = pos[0] - 2;
+		pos[1] = pos[1] + num;
+	}
+	else if (i % 4 == 2)
+	{
+		sum = pos[0] + num + pos[1] + 2;
+		pos[0] = pos[0] + num;
+		pos[1] = pos[1] + 2;
+	}
+	else
+	{
+		sum = pos[0] + num + pos[1] - 2;
+		pos[0] = pos[0] + num;
+		pos[1] = pos[1] - 2;
+	}
 }
 
 void generate_map(long seed, t_map_simu *map){
 	char	*str_seed = ft_calloc(sizeof(char), 65);
     int 	pos[2] = {map->ori_x, map->ori_y};
-    int 	dir[8] = {1, 1, 1, 0, 0, -1, -1, -1}; // moore-neighboorhood
+    int 	dir_x[8] = {1, -1, 1, 0, 0, -1, 1, -1}; // moore-neighboorhood
+	int 	dir_y[8] = {-1, 1, -1, 0, 0, 1, -1, 1};
+	size_t	len;
 
     int_to_bin_str(seed, (char *)str_seed);
     size_t index = 0;
     int i = 0;
+	len = ft_strlen(str_seed);
     while (i < map->iter)
 	{
-        if (!str_seed[index])
+        if (index >= len)
             index = 0; 
         if ((pos[0] < map->height && pos[0] >= 0) &&
 			(pos[1] < map->width && pos[1] >= 0)){
@@ -57,11 +92,13 @@ void generate_map(long seed, t_map_simu *map){
 			pos[0] = map->ori_x;
 			pos[1] = map->ori_y;
 		}
-        pos[0] = pos[0] + dir[(map->iter - i) % 8];
-		pos[1] = pos[1] + dir[(i - map->iter) % 8];
+		l_shape(pos, i);
+        pos[0] = pos[0] + dir_x[(map->iter - i + (i % 2 == 0)) % 8];
+		pos[1] = pos[1] + dir_y[(i - map->iter + (i % 2 == 1)) % 8];
 		i++;
 	}
 	free(str_seed);
+	apply_wall(map);
 }
 
 
