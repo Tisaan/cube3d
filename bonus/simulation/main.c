@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/13 21:19:39 by von              ###   ########.fr       */
+/*   Updated: 2026/05/15 17:23:16 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
 
-void	int_to_bin_str(unsigned int num, char *s)
+void	int_to_bin_str(unsigned long num, char *s)
 {
-	unsigned int	mask;
+	unsigned long	mask;
 	int				index;
 
 	if (num == 0)
@@ -22,7 +22,7 @@ void	int_to_bin_str(unsigned int num, char *s)
 		ft_strcpy(s, "0", 1);
 		return ;
 	}
-	mask = 1 << (sizeof(unsigned int) * 8 - 1);
+	mask = 1UL << (sizeof(unsigned long) * 8 - 1);
 	index = 0;
 	while ((num & mask) == 0)
 		mask >>= 1;
@@ -36,73 +36,68 @@ void	int_to_bin_str(unsigned int num, char *s)
 	s[index] = 0;
 }
 
-void	make_grid(t_map_simu *map)
-{
-	char bfloor[33];
-	char bspace[33];
-	bool	flag;
-	int		num;
+void generate_map(long seed, t_map_simu *map){
+	char	*str_seed = ft_calloc(sizeof(char), 65);
+    int 	pos[2] = {map->ori_x, map->ori_y};
+    int 	dir[8] = {1, 1, 1, 0, 0, -1, -1, -1}; // moore-neighboorhood
 
-	int_to_bin_str(map->floor, bfloor);
-	int_to_bin_str(map->space, bspace);
-	flag = true;
-	for (int i = 0; i <= map->height; i++)
+    int_to_bin_str(seed, (char *)str_seed);
+    size_t index = 0;
+    int i = 0;
+    while (i < map->iter)
 	{
-		num = 0;
-		while (num < map->width)
+        if (!str_seed[index])
+            index = 0; 
+        if ((pos[0] < map->height && pos[0] >= 0) &&
+			(pos[1] < map->width && pos[1] >= 0)){
+			map->map[pos[0]][pos[1]] = str_seed[index++];
+		} 
+        else
 		{
-			if (flag)
-			{
-				if (num % 2)
-					num += ft_strlcat(&map->map[i][num], bfloor, 33);
-				else 
-					num += ft_strlcat(&map->map[i][num], bspace, 33);
-			}
-			else
-			{
-				if (num % 2)
-					num += ft_strlcatrev(&map->map[i][num], bspace, 33);
-				else 
-					num += ft_strlcatrev(&map->map[i][num], bfloor, 33);
-			}
+			pos[0] = map->ori_x;
+			pos[1] = map->ori_y;
 		}
-		map->map[i][map->width] = 0;
-		flag = !flag;
+        pos[0] = pos[0] + dir[(map->iter - i) % 8];
+		pos[1] = pos[1] + dir[(i - map->iter) % 8];
+		i++;
 	}
+	free(str_seed);
 }
+
 
 int main()
 {
-	int	range[2];
-	get_range(range, NULL);
-	int			seed = gen_seed(range[0], range[1]);
+	long int			seed = gen_seed(100000000000, 999999999999);
 	t_map_simu	*map = seed_to_mapsimu(seed);
 
 	debug_seed(map, seed);
 	map->map = ft_calloc(map->height + 1, sizeof(int *));
 	for (int i = 0; i <= map->height; i++)
+	{
 		map->map[i] = ft_calloc(sizeof(int), map->width + 1);
+		ft_memset(map->map[i], ' ', map->width);
+	}
 	
-	make_grid(map);
+	generate_map(seed, map);
 	printf("map:\n");
 	for (int i = 0; i <= map->height; i++)
 		printf("%s\n", map->map[i]);
-	printf("end\n");
-	simulate(map);
-	printf("map:\n");
-	for (int i = 0; i <= map->height; i++)
-		printf("%s\n", map->map[i]);
-	printf("end\n");
-	int			*spoint = spawn(map);
-	printf("spawn[%d]\n", spoint[0]);
-	if (spoint[0] == -1)
-		printf("no spawn found\n");
-	else
-		map->map[spoint[0]][spoint[1]] = "NSEW"[spoint[2]];
+	// printf("end\n");
+	// simulate(map);
+	// printf("map:\n");
+	// for (int i = 0; i <= map->height; i++)
+	// 	printf("%s\n", map->map[i]);
+	// printf("end\n");
+	// int			*spoint = spawn(map);
+	// printf("spawn[%d]\n", spoint[0]);
+	// if (spoint[0] == -1)
+	// 	printf("no spawn found\n");
+	// else
+	// 	map->map[spoint[0]][spoint[1]] = "NSEW"[spoint[2]];
 	
 	for (int i = 0; i <= map->height; i++)
 		free(map->map[i]);
-	free(spoint);
+	// free(spoint);
 	free(map->map);
 	free(map);
 }

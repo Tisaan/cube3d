@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 14:46:43 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/15 17:20:45 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,90 +15,58 @@
 #include <time.h>
 #include <math.h>
 
-
-
-//seed: NULL si non provided par user
-void	get_range(int *range, int *seed)
+bool	check_seed(long seed)
 {
-	range[0] = 2222222;
-	range[1] = 6666666;
-	if (seed)
-	{
-		if (*seed < range[0])
-			*seed += range[0];
-		else if (*seed > range[1])
-			*seed -= range[1];
-	}
-}
-
-bool	check_seed(int seed)
-{
-	int	digit;
-
-	while (seed != 0)
-	{
-		digit = seed % 10;
-		if (digit == 0)
-			return (false);
-		seed /= 10;
-	}
+	if ((seed / powl(10, 10)) >= ((int)(seed / powl(10, 5)) % 1000))
+		return (false);
+	else if (((int)(seed / powl(10, 8)) % 100) >= ((long)(seed / 100) % 1000))
+		return (false);
 	return (true);
 }
 
-int	gen_seed(int min, int max)
+long int	gen_seed()
 {
-	int			range;
-	static int 	first = 1;
-	int			limit;
-	int			value;
+	const long long	min = 100000000000LL;
+    const long long	max = 999999999999LL;
+	long long 		value;
 
-	if (first)
-	{
-		srand(time(NULL));
-		first = 0;
-	}
-	range = max - min + 1;
-	limit = RAND_MAX - (RAND_MAX % range);
-	value = rand();
-	while (value >= limit)
-		value = rand();
-	if (!check_seed(min + (value % range)))
-		return (gen_seed(min, max));
-	return (min + (value % range));
+	srandom(time(NULL));
+	value = ((long long)random() << 32) | random();
+    value = min + (value % (max - min + 1));
+	if (value < 0)
+		value *= -1;
+	if (!check_seed(value))
+		return (gen_seed());
+	return (value);
 }
 
-t_map_simu	*seed_to_mapsimu(int seed)
+t_map_simu	*seed_to_mapsimu(long int seed)
 {
 	t_map_simu	*map;
-	int			i;
 
-	map = ft_calloc(sizeof(t_map_simu), 1);
+	map = calloc(sizeof(t_map_simu), 1);
 	if (!map)
 		return (NULL);
 	map->len = ft_count_digits(seed);
-	i = 1;
-	map->space = seed / (powl(10, map->len - i++));
-	map->floor = (int)(seed / (powl(10, map->len - i++))) % 10;
-	map->iter = (seed % (int)powl(10, map->len - (i - 1)) / 1000);
-	i += 2;
-	map->door = (float)(((int)(seed / (powl(10, map->len - i++)))) % 10) / 10;
-	map->wall = (int)(seed / (powl(10, map->len - i++))) % 2;
-	map->width = (seed % 1000) / 4;
-	map->height = seed / powl(10, map->len - 3) / 4;
+	map->ori_x = (seed / powl(10, 10));
+	map->ori_y = ((int)(seed / powl(10, 8)) % 100);
+	map->height = ((int)(seed / powl(10, 5)) % 1000) / 4;
+	map->width = ((long)(seed / 100) % 1000) / 4;
+	map->iter = seed % 100 * 4;
+	map->door = ((float)(seed % 10) / 10);
 	return (map);
 }
 
-void debug_seed(t_map_simu *map, int seed)
+void debug_seed(t_map_simu *map, long int seed)
 {
-	printf("seed:%d\n", seed);
-	printf("iter:%d\n", map->iter);
+	printf("seed:%ld\n", seed);
     printf("len:%d\n", map->len);
-    printf("space:%d\n", map->space);
-    printf("floor:%d\n", map->floor);
-    printf("door:%f\n", map->door);
-    printf("wall:%d\n", (int)map->wall);
-    printf("width:%d\n", map->width);
+    printf("ori_x:%d\n", map->ori_x);
+    printf("ori_y:%d\n", map->ori_y);
     printf("height:%d\n", map->height);
+    printf("width:%d\n", map->width);
+    printf("iter:%d\n", map->iter);
+	printf("door:%f\n", map->door);
 }
 
 

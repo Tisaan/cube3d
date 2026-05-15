@@ -6,16 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:15:18 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/11 16:10:20 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/15 15:41:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
-
-bool	between(int a, int b, int c)
-{
-	return ((c >= a && c <= b) || (c >= b && c <= a));
-}
 
 bool	had_space_neighbour(t_map_simu *map, int x, size_t y)
 {
