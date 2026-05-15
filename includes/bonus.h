@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/09 17:09:16 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/15 15:35:28 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,11 @@ typedef struct s_map_simu
 	char	**map;
 	int		height;
 	int		width;
-	int		len;// 7 / 8
-	int		space;
-	int		floor;
+	int		len;// 12
 	int		iter;
-	float	door;// e.g: 0.7 = 70%
-	bool	wall;// 0 => 0 to 1, 1 => ' ' => 1
-	int		min;
-	int		max;
+	int		ori_x;
+	int		ori_y;
+	float	door;
 }				t_map_simu;
 
 
@@ -44,10 +41,11 @@ bool		between(int a, int b, int c);
 bool		had_space_neighbour(t_map_simu *map, int x, size_t y);
 void		place_door(t_map_simu *map);
 void		get_range(int *range, int *seed);
-int			gen_seed(int min, int max);
-t_map_simu	*seed_to_mapsimu(int seed);
+long int			gen_seed();
+t_map_simu	*seed_to_mapsimu(long int seed);
 void		simulate(t_map_simu *map);
 int			*spawn(t_map_simu *map);
 char	**get_map_from_simu(t_map_simu *map);
-void 	debug_seed(t_map_simu *map, int);
+void 	debug_seed(t_map_simu *map, long int seed);
+void	apply_wall(t_map_simu *map);
 #endif
