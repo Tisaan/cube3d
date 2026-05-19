@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_seed.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/15 17:44:33 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/19 19:16:13 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 bool	check_seed(long seed)
 {
+	if (seed == 0)
+		return (false);
 	if ((seed / powl(10, 10)) >= ((int)(seed / powl(10, 5)) % 1000))
 		return (false);
 	else if (((int)(seed / powl(10, 8)) % 100) >= ((long)(seed / 100) % 1000))
@@ -31,10 +33,11 @@ long int	gen_seed()
 	long long 		value;
 
 	srandom(time(NULL));
-	value = ((long long)random() << 32) | random();
-    value = min + (value % (max - min + 1));
-	if (!check_seed(value))
-		return (gen_seed());
+	value = 0;
+	while (!check_seed(value)){
+		value = ((long long)random() << 32) | random();
+    	value = min + (value % (max - min + 1));
+	}
 	return (value);
 }
 

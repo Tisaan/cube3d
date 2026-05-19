@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/15 15:35:28 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/19 21:37:47 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ typedef struct s_map_simu
 }				t_map_simu;
 
 
+typedef enum	s_error_map_gen{
+	MAP_EMPTY_GEN,
+	ERROR_MAX_BNS
+}				t_error_map_map;
+
+void    free_str(char **chose);
+void    	free_t_map_simu(t_map_simu **map);
+void		throw_error_bonus(int err);
+bool    	map_empty(t_map_simu *map);
 bool		between(int a, int b, int c);
 bool		had_space_neighbour(t_map_simu *map, int x, size_t y);
 void		place_door(t_map_simu *map);
