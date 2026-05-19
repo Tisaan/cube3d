@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/12 12:55:40 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/05/19 11:28:42 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ_DIR = ./obj
 INC_DIR = ./includes
 
 SRC_DIR = ./srcs/
-SUB_DIR = parsing utils hooks raycast
+SUB_DIR = parsing utils hooks raycast player
 
 VPATH = $(SRC_DIR) \
 	$(addprefix $(SRC_DIR)/, $(SUB_DIR))
@@ -58,7 +58,9 @@ SRC_RAYCAST =	player.c \
 
 SRC_HOOKS = hooks.c
 
-SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST)
+SRC_PLAYER = move.c
+
+SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER)
 
 # --- MLX ---
 

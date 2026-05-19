@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 11:01:07 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 11:27:31 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ typedef struct	s_player
 }				t_player;
 
 int		init_player(t_data *data);
+void	update_player_pos(void *param);
 
 #endif
