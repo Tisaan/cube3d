@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/18 19:22:05 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 14:43:40 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,5 @@ int		check_char_present_map(char *line, int *find_end, int len);
 int		line_wall(t_map *map, int *ij, int *first, int *find);
 bool	around(t_map *map, int x, size_t y);
 int		get_dir(int c);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 21:09:22 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 14:43:07 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int	init_game(t_data *data)
 	color.b = 0;
 	color.a = 1;
 	set_img_pixel(data, data->floor_asset, color);
+	data->keys = (t_keys){0};
 	return (NO_ERROR);
 }

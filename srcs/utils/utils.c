@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:11:39 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/15 11:35:11 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 15:37:25 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ void	time_update(void *param)
 	gettimeofday(&time, NULL);
 	data->delta = (time.tv_sec - data->timer.current_time.tv_sec) + (time.tv_usec - data->timer.current_time.tv_usec) / 1000000.0;
 	data->timer.current_time = time;
-	// printf("delta: %f\n", data->delta);
 	if (data->delta > 0)
 		data->timer.fps = 1.0 / data->delta;
 	else
 		data->timer.fps = 0.0;
+	system("clear");
+	printf("fps: %f\n", data->timer.fps);
 }

@@ -6,57 +6,48 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 13:28:13 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 15:09:00 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../../includes/cub3d.h"	
+#include "../../includes/raycast.h"
 
-static void	normalize(t_vect *vect, float speed)
+
+static void	movement_hooks(int key, t_data *data)
 {
-	float	lenght;
-
-	lenght = sqrtf(vect->x * vect->x + vect->y * vect->x); 
-	if (lenght > speed)
-	{
-		vect->x = vect->x / lenght * speed;
-		vect->y = vect->y / lenght * speed;
-	}
+	if (key == W_KEY)
+		data->keys.w = true;
+	if (key == A_KEY)
+		data->keys.a = true;
+	if (key == S_KEY)
+		data->keys.s = true;
+	if (key == D_KEY)
+		data->keys.d = true;
+	if (key == LEFT)
+		data->keys.left = true;
+	if (key == RIGHT)
+		data->keys.right = true;
 }
 
-static void	movement_hooks(int key, void *param)
+void	key_up_hook(int key, void *param)
 {
-	t_data		*data;
-	t_player	*p;
-	float		speed;
+	t_data	*data;
 
 	data = (t_data *)param;
-	p = data->player;
-	speed = data->delta * PLAYER_SPEED;
-	set_vect(&p->dest, 0.0f, 0.0f);
 	if (key == W_KEY)
-	{
-		p->dest.x += p->dir.x * speed;
-		p->dest.y += p->dir.y * speed;
-	}
+		data->keys.w = false;
 	if (key == S_KEY)
-	{
-		p->dest.x -= p->dir.x * speed;
-		p->dest.y -= p->dir.y * speed;
-	}
-	if (key == D_KEY)
-	{
-		p->dest.x += -p->dir.y * speed;
-		p->dest.y += p->dir.x * speed;
-	}	
+		data->keys.s = false;
 	if (key == A_KEY)
-	{
-		p->dest.x -= -p->dir.y * speed;
-		p->dest.y -= p->dir.x * speed;
-	}
-	normalize(&p->dest, speed);
-	printf("dest(%f, %f)\n", p->dest.x, p->dest.y);
+		data->keys.a = false;
+	if (key == D_KEY)
+		data->keys.d = false;
+	if (key == LEFT)
+		data->keys.left = false;
+	if (key == RIGHT)
+		data->keys.right = false;
 }
 
 void	key_hooks(int key, void *param)
@@ -90,4 +81,12 @@ void	window_hook(int event, void *param)
 	data = (t_data *)param;
 	if (event == WIN_CLOSE)
 		mlx_loop_end(data->mlx);
+}
+
+void	ray_hook(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	raycast(data, data->player);
 }

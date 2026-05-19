@@ -6,12 +6,58 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:15:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 13:39:11 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 15:50:42 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include "../../includes/player.h"
+
+static void	normalize(t_vect *vect, float speed)
+{
+	float	lenght;
+
+	lenght = sqrtf(vect->x * vect->x + vect->y * vect->y); 
+	if (lenght > speed)
+	{
+		vect->x = vect->x / lenght * speed;
+		vect->y = vect->y / lenght * speed;
+	}
+}
+
+static void set_player_dest(t_data* data)
+{
+	t_player	*p;
+	t_keys		keys;
+	float		speed;
+
+	p = data->player;
+	speed = data->delta * PLAYER_SPEED;
+	keys = data->keys;
+	set_vect(&p->dest, 0.0f, 0.0f);
+	if (keys.w)
+	{
+		p->dest.x += p->dir.x * speed;
+		p->dest.y += p->dir.y * speed;
+	}
+	if (keys.s)
+	{
+		p->dest.x -= p->dir.x * speed;
+		p->dest.y -= p->dir.y * speed;
+	}
+	if (keys.d)
+	{
+		p->dest.x += -p->dir.y * speed;
+		p->dest.y += p->dir.x * speed;
+	}	
+	if (keys.a)
+	{
+		p->dest.x -= -p->dir.y * speed;
+		p->dest.y -= p->dir.x * speed;
+	}
+	normalize(&p->dest, speed);
+	printf("dest(%f, %f)\n", p->dest.x, p->dest.y);
+}
 
 static bool	is_wall(t_data *data, float x, float y)
 {
@@ -51,12 +97,13 @@ void	update_player_pos(void *param)
 
 	data = (t_data *)param;
 	p = data->player;
+	set_player_dest(data);
 	if (p->dest.x == 0.0f && p->dest.y == 0.0f)
 		return ;
-	set_vect(&new_pos, (p->pos.x + p->dest.x), 0.0f);
+	set_vect(&new_pos, p->pos.x + p->dest.x, p->pos.y);
 	if (!is_colliding(data, new_pos))
 		p->pos.x = new_pos.x;
-	new_pos.y = p->pos.y + p->dest.y;
+	set_vect(&new_pos, p->pos.x, p->pos.y + p->dest.y);
 	if (!is_colliding(data, new_pos))
 		p->pos.y = new_pos.y;
 }

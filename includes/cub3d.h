@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 12:11:27 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 14:58:02 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ typedef enum	e_win_event
 	WIN_RESIZE = 8,
 }	t_win_event;
 
+typedef struct	s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+}			t_keys;
+
 typedef struct s_data
 {
 	mlx_context		mlx;
@@ -70,6 +80,7 @@ typedef struct s_data
 	t_texture_path	texture[4];
 	t_prgb			plans_color[2];
 	t_player		*player;
+	t_keys			keys;
 	float			delta;
 }				t_data;
 
@@ -83,8 +94,10 @@ typedef struct	s_img
 
 // Hooks
 void	key_hooks(int key, void *param);
+void	key_up_hook(int key, void *param);
 void	window_hook(int event, void *param);
 void	render(void *param);
+void	ray_hook(void *param);
 
 
 #endif

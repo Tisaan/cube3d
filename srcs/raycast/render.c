@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 17:04:03 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 13:43:41 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 14:14:04 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ void	render(void *param)
 
 	data = (t_data *)param;
 	color.rgba = 0x000000FF;
-	for(int y = 0; y < data->win_infos.height; y++)
-		for (int x = 0; x < data->win_infos.width; x++)
-			mlx_set_image_pixel(data->mlx, data->frame, x, y, color);
-	raycast(data, data->player);
+	mlx_clear_window(data->mlx, data->win, color);
+	// for(int y = 0; y < data->win_infos.height; y++)
+	// 	for (int x = 0; x < data->win_infos.width; x++)
+	// 		mlx_set_image_pixel(data->mlx, data->frame, x, y, color);
+	// raycast(data, data->player);
 	mlx_put_image_to_window(data->mlx, data->win, data->frame, 0, 0);
 }
