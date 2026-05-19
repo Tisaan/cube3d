@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 17:04:03 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 18:34:43 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 10:21:44 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,3 @@ void	render(void *param)
 	raycast(data, data->player);
 	mlx_put_image_to_window(data->mlx, data->win, data->frame, 0, 0);
 }
-
-

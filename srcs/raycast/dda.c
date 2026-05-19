@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:48:33 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 18:46:27 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 10:22:56 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	init_dda(t_ray *ray, t_vect *tile, t_vect *step, t_data *data)
 	t_vect	player_pos;
 
 	set_vect(&player_pos, data->player->pos.x / WALL_SIZE, data->player->pos.y / WALL_SIZE);
-	tile->x = (int)(data->player->pos.x) / WALL_SIZE;
-	tile->y = (int)data->player->pos.y / WALL_SIZE;
-	// printf("Player pos: (%f, %f)\n", data->player->pos.x, data->player->pos.y);
+	tile->x = (int)(data->player->pos.x / WALL_SIZE);
+	tile->y = (int)(data->player->pos.y / WALL_SIZE);
 	// printf("Tile initial: (%f, %f)\n", tile->x, tile->y);
+	// printf("Player pos: (%f, %f)\n", data->player->pos.x, data->player->pos.y);
 	// printf("Map size: %dx%d\n", data->map->width, data->map->height);
 	// printf("dir (%f, %f)\n", data->player->dir.x, data->player->dir.y);
 	// printf("camera (%f, %f)\n", data->player->camera.x, data->player->camera.y);

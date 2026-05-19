@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 17:02:31 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/18 19:17:32 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define CUBE3D_H
 # ifndef WALL_SIZE
 #  define WALL_SIZE 64
-# endif
-# ifndef FOV_ANGLE
-#  define FOV_ANGLE 66
-# endif
-# ifndef ROT_SPEED
-#  define ROT_SPEED (PI / 2)
 # endif
 
 #include <stdbool.h>
@@ -37,6 +31,7 @@
 
 #include "parsing.h"
 #include "player.h"
+#include "utils.h"
 
 typedef mlx_window_create_info	t_win_infos;
 
@@ -69,6 +64,7 @@ typedef struct s_data
 	mlx_image		ceil_asset;
 	mlx_image		floor_asset;
 	mlx_image		frame;
+	t_timer			timer;
 	t_win_infos		win_infos;
 	t_map			*map;
 	t_texture_path	texture[4];
@@ -85,16 +81,10 @@ typedef struct	s_img
 	int			height;
 }				t_img;
 
-typedef struct	s_timer
-{
-	struct timeval	current_time;
-	struct timeval	start_time;
-	float			fps;
-}					t_timer;
-
 // Hooks
 void	key_hooks(int key, void *param);
 void	window_hook(int event, void *param);
 void	render(void *param);
+
 
 #endif

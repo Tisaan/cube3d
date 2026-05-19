@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 18:40:36 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/12 20:51:06 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	draw_3D(t_data *data, float wall_dist, int x)
 		end = data->win_infos.height - 1;
 
 	wall_color.rgba = 0x888888FF;
-	ceil_color.rgba = 0x00AA00FF;
-	floor_color.rgba = 0xFF0000FF;
+	ceil_color.rgba = 0x87CEEBFF;
+	floor_color.rgba = 0x141414FF;
 
 	y = 0;
 	while (y < start)

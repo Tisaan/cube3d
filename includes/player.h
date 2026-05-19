@@ -6,12 +6,13 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 14:53:27 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/18 19:20:17 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
+#include "parsing.h"
 # include "vectors.h"
 # include "../mlx/includes/mlx.h"
 
@@ -23,6 +24,7 @@ typedef struct	s_player
 	t_vect		camera;
 	t_vect		pos;
 	t_vect		dir;
+	t_direction_id	facing;
 	int			size;
 	float		speed;
 	float		rot_speed;

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 18:57:02 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/15 11:22:19 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	process(t_data *data)
 	mlx_on_event(data->mlx, data->win, MLX_KEYDOWN, key_hooks, data);
 	mlx_on_event(data->mlx, data->win, MLX_WINDOW_EVENT, window_hook, data);
 	mlx_add_loop_hook(data->mlx, render, data);
+	mlx_add_loop_hook(data->mlx, time_update, data);
+	start_timer(&data->timer);
 	mlx_loop(data->mlx);
 	return (NO_ERROR);
 }

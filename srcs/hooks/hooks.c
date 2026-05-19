@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 15:37:27 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 10:49:18 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,71 @@
 
 #include "../../includes/cub3d.h"
 
-// static void	movement_hooks(int key, t_data *data)
-// {
-// 	int	x;
-// 	int	y;
-//
-// 	data->player->speed = data->delta * 5.0;
-// 	data->player->rot_speed = data->delta * 3.0;
-// 	if (key == W_KEY || key == UP)
-// 	{
-// 		x = (int)(data->player->pos.x + (data->player->dir.x * data->player->speed)) / WALL_SIZE;
-// 		y = (int)(data->player->pos.y) / WALL_SIZE;
-// 		if (data->map->grid[y][x] == '0')
-// 			data->player->pos.x += data->player->dir.x * data->player->speed;
-// 		y = (int)(data->player->pos.y + (data->player->dir.y * data->player->speed)) / WALL_SIZE;
-// 		x = (int)(data->player->pos.x) / WALL_SIZE;
-// 		if (data->map->grid[y][x] == '0')
-// 			data->player->pos.y += data->player->dir.y * data->player->speed;
-// 	}
-// 	// if (key == S_KEY || key == DOWN)
-// 	// if (key == A_KEY || key == LEFT)
-// 	// if (key == D_KEY || key == RIGHT)
-// 	// if ((data->player->dir.x != 0 || data->player->dir.y != 0))
-// }
-//
+static void	movement_hooks(int key, t_data *data)
+{
+	t_vect	new_pos;
+	int		tile_x;
+	int		tile_y;
+	float	save_dir;
+
+	data->player->speed = data->delta * 200.0f;
+	printf("player before (%f, %f)\tspeed: %f\n", data->player->pos.x, data->player->pos.y, data->player->speed);
+	data->player->rot_speed = data->delta * 3.0;
+	if (key == W_KEY || key == UP)
+	{
+		new_pos.x = data->player->pos.x + data->player->dir.x * data->player->speed;
+		new_pos.y = data->player->pos.y;
+		tile_x = (int)(data->player->pos.x + data->player->dir.x * data->player->speed) / WALL_SIZE;
+		tile_y = (int)(data->player->pos.y) / WALL_SIZE;
+		if (data->map->grid[tile_y][tile_x] == '0')
+		{
+			printf("not collinding\n");
+			data->player->pos.x = new_pos.x;
+		}
+		tile_x = (int)(data->player->pos.x) / WALL_SIZE;
+		tile_y = (int)(data->player->pos.y - data->player->dir.y * data->player->speed) / WALL_SIZE;
+		if (data->map->grid[tile_y][tile_x] == '0')
+			data->player->pos.y = new_pos.y;
+		printf("Up is working : (%f, %f)\n", new_pos.x, new_pos.y);
+	}
+	else if (key == S_KEY || key == DOWN)
+	{
+		new_pos.x = data->player->pos.x - data->player->dir.x * data->player->speed;
+		new_pos.y = data->player->pos.y - data->player->dir.y * data->player->speed;
+		tile_x = (int)(data->player->pos.x - data->player->dir.x * data->player->speed) / WALL_SIZE;
+		tile_y = (int)(data->player->pos.y) / WALL_SIZE;
+		if (data->map->grid[tile_x][tile_y])
+			data->player->pos.x = new_pos.x;
+		tile_x = (int)(data->player->pos.x) / WALL_SIZE;
+		tile_y = (int)(data->player->pos.y - data->player->dir.y * data->player->speed) / WALL_SIZE;
+		if (data->map->grid[tile_y][tile_x] == '0')
+			data->player->pos.y = new_pos.y;
+		printf("DOWN\n");
+	}
+
+	else if (key == A_KEY || key == LEFT)
+	{
+		save_dir = data->player->dir.x;
+		data->player->dir.x = data->player->dir.x * cosf(data->player->rot_speed) - data->player->dir.y * sinf(data->player->rot_speed);
+		data->player->dir.y = save_dir * sinf(data->player->rot_speed) + data->player->dir.y * cosf(data->player->rot_speed);
+		save_dir = data->player->camera.x;
+		data->player->camera.x = data->player->camera.x * cosf(data->player->rot_speed) - data->player->camera.y * sinf(data->player->rot_speed);
+		data->player->camera.y = save_dir * sinf(data->player->rot_speed) + data->player->camera.y	* cosf(data->player->rot_speed);
+	}
+	else if (key == D_KEY || key == RIGHT)
+	{
+		save_dir = data->player->dir.x;
+		data->player->dir.x = data->player->dir.x * cosf(-data->player->rot_speed) - data->player->dir.y * sinf(-data->player->rot_speed);
+		data->player->dir.y = save_dir * sinf(-data->player->rot_speed) + data->player->dir.y * cosf(-data->player->rot_speed);
+		save_dir = data->player->camera.x;
+		data->player->camera.x = data->player->camera.x * cosf(-data->player->rot_speed) - data->player->camera.y * sinf(-data->player->rot_speed);
+		data->player->camera.y = save_dir * sinf(-data->player->rot_speed) + data->player->camera.y	* cosf(-data->player->rot_speed);
+	}
+	else
+		return ;
+	// printf("player (%f, %f)\n", data->player->pos.x, data->player->pos.y);
+}
+
 void	key_hooks(int key, void *param)
 {
 	t_data	*data;
@@ -62,7 +103,7 @@ void	key_hooks(int key, void *param)
 			mlx_set_window_fullscreen(data->mlx, data->win, false);
 		}
 	}
-//	movement_hooks(key, data);
+	movement_hooks(key, data);
 }
 
 void	window_hook(int event, void *param)

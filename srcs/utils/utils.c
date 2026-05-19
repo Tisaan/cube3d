@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:11:39 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 14:52:54 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/15 11:35:11 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,22 @@ float	ft_abs(float nb)
 void	start_timer(t_timer *timer)
 {
 	gettimeofday(&timer->start_time, NULL);
-	timer->current_time = (struct timeval){0};
+	timer->current_time = timer->start_time;
 	timer->fps = 0.0;
 }
 
-void	time_update(t_timer *timer, float *delta)
+void	time_update(void *param)
 {
 	struct timeval	time;
+	t_data			*data;
 
+	data = (t_data *)param;
 	gettimeofday(&time, NULL);
-	*delta = (time.tv_sec - timer->current_time.tv_sec) + (time.tv_usec - timer->current_time.tv_usec) / 1000000.0;
-	timer->current_time = time;
-	if (*delta > 0)
-		timer->fps = 1.0 / *delta;
+	data->delta = (time.tv_sec - data->timer.current_time.tv_sec) + (time.tv_usec - data->timer.current_time.tv_usec) / 1000000.0;
+	data->timer.current_time = time;
+	// printf("delta: %f\n", data->delta);
+	if (data->delta > 0)
+		data->timer.fps = 1.0 / data->delta;
 	else
-		timer->fps = 0.0;
+		data->timer.fps = 0.0;
 }
