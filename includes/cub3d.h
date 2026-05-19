@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 11:00:35 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 12:11:27 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define CUBE3D_H
 # ifndef WALL_SIZE
 #  define WALL_SIZE 64
-# endif
-# ifndef PLAYER_RADIUS
-#  define PLAYER_RADIUS 16
 # endif
 
 #include <stdbool.h>

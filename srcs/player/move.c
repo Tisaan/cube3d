@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:15:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 11:48:21 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 13:39:11 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ static bool	is_wall(t_data *data, float x, float y)
 	return (false);
 }
 
-static bool	is_colliding(t_data *data, float x, float y)
+static bool	is_colliding(t_data *data, t_vect pos)
 {
-	if (is_wall(data, x, y - PLAYER_RADIUS))
+	if (is_wall(data, pos.x, pos.y - PLAYER_RADIUS))
 		return (true);
-	if (is_wall(data, x, y + PLAYER_RADIUS))
+	if (is_wall(data, pos.x, pos.y + PLAYER_RADIUS))
 		return (true);
-	if (is_wall(data, x - PLAYER_RADIUS, y))
+	if (is_wall(data, pos.x - PLAYER_RADIUS, pos.y))
 		return (true);
-	if (is_wall(data, x + PLAYER_RADIUS, y))
+	if (is_wall(data, pos.x + PLAYER_RADIUS, pos.y))
 		return (true);
 	return (false);
 }
@@ -47,9 +47,16 @@ void	update_player_pos(void *param)
 {
 	t_data		*data;
 	t_player	*p;
+	t_vect		new_pos;
 
 	data = (t_data *)param;
 	p = data->player;
-	if (is_colliding(data, p->pos.x, p->pos.y))
-		printf("player is collinding !\n");
+	if (p->dest.x == 0.0f && p->dest.y == 0.0f)
+		return ;
+	set_vect(&new_pos, (p->pos.x + p->dest.x), 0.0f);
+	if (!is_colliding(data, new_pos))
+		p->pos.x = new_pos.x;
+	new_pos.y = p->pos.y + p->dest.y;
+	if (!is_colliding(data, new_pos))
+		p->pos.y = new_pos.y;
 }
