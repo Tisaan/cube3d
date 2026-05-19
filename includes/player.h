@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/18 19:20:17 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 11:01:07 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct	s_player
 	t_vect		camera;
 	t_vect		pos;
 	t_vect		dir;
-	t_direction_id	facing;
 	int			size;
 	float		speed;
 	float		rot_speed;
