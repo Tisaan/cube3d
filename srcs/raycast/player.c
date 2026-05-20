@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:30:15 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 14:14:14 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/20 17:20:55 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static void	set_player_orientation(t_player *player, t_direction_id dir)
 	else if (dir == WE)
 	{
 		set_vect(&player->dir, -1, 0);
-		set_vect(&player->camera, 0, 0.66);
+		set_vect(&player->camera, 0, -0.66);
 	}
 	else if (dir == EA)
 	{
 		set_vect(&player->dir, 1, 0);
-		set_vect(&player->camera, 0, -0.66);
+		set_vect(&player->camera, 0, 0.66);
 	}
 }
 

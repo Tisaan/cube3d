@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 14:46:51 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 19:09:26 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/20 17:09:05 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	line_wall(t_map *map, int *ij, int *first, int *find)
 			map->start[0] = ij[0];
 			map->start[1] = ij[1];
 			map->start[2] = get_dir(map->grid[ij[0]][ij[1]]);
+			map->grid[ij[0]][ij[1]] = '0';
 		}
 		else if (ft_isoneof(map->grid[ij[0]][ij[1]], "NEWS"))
 			return (-TOO_MUCH_STRT);
