@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 14:26:15 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/20 17:40:27 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,22 @@
 
 float	dda(t_ray *ray, t_data *data);
 
-static void	draw_3D(t_data *data, float wall_dist, int x)
+static mlx_color	get_wall_color(t_direction_id face)
+{
+	mlx_color	color;
+
+	if (face == NO)
+		color.rgba = 0x05003dFF; // dark blue
+	else if (face == SO)
+		color.rgba = 0x400205FF; // dark red
+	else if (face == WE)
+		color.rgba = 0x230042FF; // dark purple
+	else
+		color.rgba = 0x042601FF; // dark green
+	return (color);
+}
+
+static void	draw_3D(t_data *data, float wall_dist, int x, t_direction_id ray_face)
 {
 	mlx_color	wall_color;
 	mlx_color	ceil_color;
@@ -36,7 +51,7 @@ static void	draw_3D(t_data *data, float wall_dist, int x)
 	if (end >= data->win_infos.height)
 		end = data->win_infos.height - 1;
 
-	wall_color.rgba = 0x888888FF;
+	wall_color = get_wall_color(ray_face);
 	ceil_color.rgba = 0x87CEEBFF;
 	floor_color.rgba = 0x141414FF;
 
@@ -76,7 +91,7 @@ int	raycast(t_data *data, t_player *player)
 		// printf("ray (%f, %f)\n", ray.dir.x, ray.dir.y);
 		wall_dist = dda(&ray, data);
 		// printf("%f\n", wall_dist);
-		draw_3D(data, wall_dist, x);
+		draw_3D(data, wall_dist, x, ray.face);
 		x++;
 	}
 	return (NO_ERROR);

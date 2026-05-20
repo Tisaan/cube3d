@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:48:33 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 10:22:56 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/20 17:34:07 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,16 @@ float	dda(t_ray *ray, t_data *data)
 			is_colliding = true;
 	}
 	if (side == 0)
+	{
+		if (ray->dir.x > 0)
+			ray->face = WE;
+		else
+			ray->face = EA;
 		return (ray->side_dist.x - ray->delta_dist.x);
+	}
+	if (ray->dir.y > 0)
+		ray->face = NO;
+	else
+		ray->face = SO;
 	return (ray->side_dist.y - ray->delta_dist.y);
 }
