@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 00:26:14 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/10 09:45:30 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 15:59:53 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,17 @@ t_vect	vect_multiply(const t_vect v, float factor)
 	new_v.x = v.x * factor;
 	new_v.y = v.y * factor;
 	return (new_v);
+}
+
+void	rotate_vect(t_vect *vect, float angle)
+{
+	float	cos_a;
+	float	sin_a;
+	float	old_x;
+
+	cos_a = cosf(angle);
+	sin_a = sinf(angle);
+	old_x = vect->x;
+	vect->x = vect->x * cos_a - vect->y * sin_a;
+	vect->y = old_x * sin_a + vect->y * cos_a;
 }

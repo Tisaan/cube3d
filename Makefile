@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/19 11:28:42 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/05/19 16:08:10 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ SRC_RAYCAST =	player.c \
 
 SRC_HOOKS = hooks.c
 
-SRC_PLAYER = move.c
+SRC_PLAYER = move.c \
+			 rotate.c
 
 SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER)
 

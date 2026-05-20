@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 12:16:34 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/19 16:07:32 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # endif
 # ifndef PLAYER_RADIUS
 #  define PLAYER_RADIUS 16
+# endif
+# ifndef PLAYER_ROT_SPEED
+#  define PLAYER_ROT_SPEED	3.0f
 # endif
 
 #include "parsing.h"
@@ -37,5 +40,6 @@ typedef struct	s_player
 
 int		init_player(t_data *data);
 void	update_player_pos(void *param);
+void	update_player_rot(void *param);
 
 #endif

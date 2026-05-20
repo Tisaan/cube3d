@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 16:00:47 by pcaplat          ###   ########.fr       */
+/*   Created: 2026/05/19 16:02:56 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/19 16:12:20 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORS_H
-# define VECTORS_H
+#include "../../includes/cub3d.h"
 
-typedef struct s_vect
+void	update_player_rot(void *param)
 {
-	float	x;
-	float	y;
-}			t_vect;
+	t_data	*data;
+	float	rot;
 
-void	set_vect(t_vect *vect, float x, float y);
-void	rotate_vect(t_vect *vect, float angle);
-t_vect	vect_multiply(const t_vect v, float factor);
-t_vect	vect_sum(const t_vect v1, const t_vect v2);
-
-#endif
+	data = (t_data *)param;
+	rot = data->delta * PLAYER_ROT_SPEED;
+	if (data->keys.right)
+	{
+		rotate_vect(&data->player->dir, -rot);
+		rotate_vect(&data->player->camera, -rot);
+	}
+	if (data->keys.left)
+	{
+		rotate_vect(&data->player->dir, rot);
+		rotate_vect(&data->player->camera, rot);
+	}
+}
