@@ -67,8 +67,8 @@
 				pos[0] = map->ori_x;
 				pos[1] = map->ori_y;
 			}
-			// get the next position like the knight in chess
-			// and than one of is moore-neighboor
+			// get the next position in a l_shape like the knight in chess
+			// and then one of is moore-neighboor
 			l_shape(pos, i);
 			pos[0] = pos[0] + dir_x[(map->iter - i + (i % 2 == 0)) % 8];
 			pos[1] = pos[1] + dir_y[(i - map->iter + (i % 2 == 1)) % 8];
