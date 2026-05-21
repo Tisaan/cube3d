@@ -6,14 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/21 10:26:59 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/21 15:36:08 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 #include <stddef.h>
-
+#include <stdbool.h>
 // --- ERROR ---
 
 typedef enum e_error_map

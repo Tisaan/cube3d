@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/19 16:08:10 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/05/21 15:41:22 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,8 +124,8 @@ libclean:
 	@make -C $(LIBDIR) fclean --no-print-directory
 	@printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
 	@make -C $(GNLDIR) fclean --no-print-directory
-# @printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
-# @make -C $(MLXDIR) fclean --no-print-directory
+	@printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
+	@make -C $(MLXDIR) fclean --no-print-directory
 
 fclean: clean libclean
 	@printf "$(RED)🗑️ Removing Executable $(NAME)...$(NC)\n"
