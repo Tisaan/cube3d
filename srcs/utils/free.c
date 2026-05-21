@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/12 17:16:12 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/21 10:38:46 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	free_all(t_data *data, int fd)
 void	clean_exit(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->wall_assets[0]);
+	mlx_destroy_image(data->mlx, data->wall_assets[1]);
+	mlx_destroy_image(data->mlx, data->wall_assets[2]);
+	mlx_destroy_image(data->mlx, data->wall_assets[3]);
 	mlx_destroy_image(data->mlx, data->player->sprite);
-	mlx_destroy_image(data->mlx, data->floor_asset);
 	mlx_destroy_image(data->mlx, data->frame);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_context(data->mlx);

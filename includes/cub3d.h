@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 14:58:02 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/21 12:59:12 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ typedef struct s_data
 	mlx_context		mlx;
 	mlx_window		win;
 	mlx_image		wall_assets[4];
-	mlx_image		ceil_asset;
-	mlx_image		floor_asset;
 	mlx_image		frame;
+	mlx_color		ceil_color;
+	mlx_color		floor_color;
 	t_timer			timer;
 	t_win_infos		win_infos;
 	t_map			*map;

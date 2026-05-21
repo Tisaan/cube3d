@@ -6,14 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 15:09:00 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/21 13:47:08 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../../includes/cub3d.h"	
 #include "../../includes/raycast.h"
-
 
 static void	movement_hooks(int key, t_data *data)
 {

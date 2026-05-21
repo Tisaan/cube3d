@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 14:43:07 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/21 13:48:08 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,47 +23,41 @@ void	init_map_data(t_data *data)
 	data->plans_color[1].type = EMPT;
 }
 
-static void	set_img_pixel(t_data *data, mlx_image img, mlx_color color)
+int	init_wall_assets(t_data *data)
 {
-	int			x;
-	int			y;
+	int	i;
+	int	width;
+	int	height;
 
-	y = 0;
-	while (y < WALL_SIZE - 1)
+	i = 0;
+	while (i < 4)
 	{
-		x = 0;
-		while (x < WALL_SIZE - 1)
-		{
-			mlx_set_image_pixel(data->mlx, img, x, y, color);
-			x++;
-		}
-		y++;
+		data->wall_assets[i] = mlx_new_image_from_file(data->mlx, data->texture[i].path, &width, &height);
+		if (data->wall_assets[i] == MLX_NULL_HANDLE)
+			return (-ERROR_LOAD_ASSET);
+		if (width != WALL_SIZE || height != WALL_SIZE)
+			return (-ERROR_IMG_SIZE);
+		i++;
 	}
+	return (NO_ERROR);
 }
 
 int	init_game(t_data *data)
 {
 	int	ret;
-	mlx_color	color;
 
 	ret = init_player(data);
 	if (ret < 0)
 		return (ret);
 	display_player_data(data->player);
-	data->wall_assets[0] = mlx_new_image(data->mlx, WALL_SIZE, WALL_SIZE);
-	if (data->wall_assets[0] == MLX_NULL_HANDLE)
-		return (-ERROR_LOAD_ASSET);
-	data->floor_asset = mlx_new_image(data->mlx, WALL_SIZE, WALL_SIZE);
-	if (data->floor_asset == MLX_NULL_HANDLE)
-		return (-ERROR_LOAD_ASSET);
+	ret = init_wall_assets(data);
+	if (ret < 0)
+		return (ret);
 	data->frame = mlx_new_image(data->mlx, data->win_infos.width, data->win_infos.height);
-	color.rgba = 0xFFFFFFFF;
-	set_img_pixel(data, data->wall_assets[0], color);
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
-	color.a = 1;
-	set_img_pixel(data, data->floor_asset, color);
+	if (data->frame == MLX_NULL_HANDLE)
+		return(-ERROR_LOAD_ASSET);
 	data->keys = (t_keys){0};
+	data->floor_color = rgb_to_color(data->plans_color[1], 100);
+	data->ceil_color = rgb_to_color(data->plans_color[0], 100);
 	return (NO_ERROR);
 }

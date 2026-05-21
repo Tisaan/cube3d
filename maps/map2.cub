@@ -1,7 +1,7 @@
-NO test
-SO ../test_2
-WE test_3 
-EA test_4
+NO assets/bluestone.png
+SO assets/greystone.png
+WE assets/redbrick.png
+EA assets/mossy.png
 
 F 255,0,0
 C 0,200,0

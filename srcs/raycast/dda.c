@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:48:33 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/20 17:34:07 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/21 14:33:26 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ float	dda(t_ray *ray, t_data *data)
 	t_vect	tile;
 	t_vect	step;
 	int		side;
+	float	dist;
 	bool	is_colliding;
 
 	init_dda(ray, &tile, &step, data);
@@ -84,7 +85,27 @@ float	dda(t_ray *ray, t_data *data)
 		}
 		if (tile.y < 0 || tile.y >= data->map->height
 			|| tile.x < 0 || tile.x >= data->map->width)
-			return (ray->side_dist.y - ray->delta_dist.y);
+		{
+			 if (side == 0)
+			{
+				if (ray->dir.x > 0)
+					ray->face = EA;
+				else
+					ray->face = WE;
+				dist = ray->side_dist.x - ray->delta_dist.x;
+				if (dist < 0.0001f)
+					dist = 0.0001f;
+				return (dist);
+			}
+			if (ray->dir.y > 0)
+				ray->face = SO;
+			else
+				ray->face = NO;
+			dist = ray->side_dist.y - ray->delta_dist.y;
+			if (dist < 0.0001f)
+				dist = 0.0001f;
+			return (dist);
+		}
 		if ((int)tile.x >= (int)ft_strlen(data->map->grid[(int)tile.y]))
 		{
 			is_colliding = true;
