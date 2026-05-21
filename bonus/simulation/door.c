@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:19:07 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/11 16:34:34 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/21 16:04:55 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	door_placeable(t_map_simu *map, int x, int y)
 {
 	if (map->map[x + 1][y] &&
-		map->map[x - 1][y] && 
+		map->map[x - 1][y] &&
 		map->map[x][y + 1] &&
 		map->map[x][y - 1])
 	{

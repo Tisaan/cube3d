@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:15:18 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 21:25:13 by von              ###   ########.fr       */
+/*   Updated: 2026/05/21 16:26:59 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	had_space_neighbour(t_map_simu *map, int x, size_t y)
         int ny = y + dy[i];
 
         // Check if the neighbor is within grid boundaries
-        if (nx >= 0 && nx < map->width && ny >= 0 && ny < map->height)
+        if (nx >= 0 && nx < map->height && ny >= 0 && ny < map->width)
 		{
 			// printf("x:%d, y:%d, height:%d, width:%d\n", nx, ny, map->height, map->width);
 			if (map->map[nx][ny] == ' ')
@@ -72,4 +72,18 @@ void	throw_error_bonus(int err)
 	{
 		printf("Unknown error thrown in bonus\n");
 	}
+}
+
+int	add_digit_number(long int nb)
+{
+	int	sum;
+
+	sum = 0;
+	while (nb > 9)
+	{
+		sum += nb % 10;
+		nb /= 10;
+	}
+	sum += nb % 10;
+	return (sum);
 }

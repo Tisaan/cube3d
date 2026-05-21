@@ -3,41 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 21:45:26 by von              ###   ########.fr       */
+/*   Updated: 2026/05/21 21:18:10 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
 
-void	int_to_bin_str(unsigned long num, char *s)
+void	int_to_bin_str(unsigned long num, char *dest)
 {
 	unsigned long	mask;
 	int				index;
 
 	if (num == 0)
 	{
-		ft_strcpy(s, "0", 1);
+		ft_strcpy(dest, "0", 1);
 		return ;
 	}
 	mask = 1UL << (sizeof(unsigned long) * 8 - 1);
 	index = 0;
 	while ((num & mask) == 0)
 		mask >>= 1;
-	while (mask != 0){
+	while (mask != 0)
+	{
 		if (num & mask)
-			s[index++] = '1';
+			dest[index++] = '1';
 		else
-			s[index++] = '0';
+			dest[index++] = '0';
 		mask >>= 1;
 	}
-	s[index] = '\0';
+	dest[index] = '\0';
 }
 
-void l_shape(int *pos, int i){
-	const int 	table[3] = {-1, 0, 1};
+void	l_shape(int *pos, int i)
+{
+	const int	table[3] = {-1, 0, 1};
 	int			num;
 
 	num = table[i % 3];
@@ -63,83 +65,113 @@ void l_shape(int *pos, int i){
 	}
 }
 
-void generate_map(long seed, t_map_simu *map){
-	__attribute__((__cleanup__(free_str))) char	*str_seed = ft_calloc(sizeof(char), 65);
-    int 	pos[2] = {map->ori_x, map->ori_y};
-    int 	dir_x[8] = {1, -1, 1, 0, 0, -1, 1, -1}; // moore-neighboorhood
-	int 	dir_y[8] = {-1, 1, -1, 0, 0, 1, -1, 1};
-	size_t	len;
-
-    int_to_bin_str(seed, (char *)str_seed);
-    size_t index = 0;
-    int i = 0;
-	len = ft_strlen(str_seed);
-	int	total = 0;
-    while (i < map->iter)
+void	link_zero(t_map_simu *map)
+{
+	for (int i = 2; i < map->height - 2; i++)
 	{
-        if (index >= len)
-            index = 0; 
-        if ((pos[0] < map->height && pos[0] >= 0) &&
-			(pos[1] < map->width && pos[1] >= 0)){
-			if (map->map[pos[0]][pos[1]] == '0'){
+		for (int j = 2; j < map->width - 2; j++)
+		{
+			if (map->map[i][j] == '0'){
+				if (map->map[i - 2][j] == '0')
+					map->map[i - 1][j] = '0';
+				if (map->map[i + 2][j] == '0')
+					map->map[i + 1][j] = '0';
+				if (map->map[i][j - 2] == '0')
+					map->map[i][j - 1] = '0';
+				if (map->map[i][j + 2] == '0')
+					map->map[i][j + 1] = '0';
+			}
+		}
+	}
+}
+
+void	generate_map(t_map_simu *map, long int seed)
+{
+	char	*str_seed = ft_calloc(sizeof(char), 65);
+	int			pos[2];
+	const int	dir_x[8] = {1, -1, 1, 0, 0, -1, 1, -1};
+	const int	dir_y[8] = {-1, 1, -1, 0, 0, 1, -1, 1};
+	int			i;
+	int			total;
+	size_t			index;
+
+	i = 0;
+	total = 0;
+	pos[0] = map->ori_x;
+	pos[1] = map->ori_y;
+	index = 0;
+	int_to_bin_str(seed, (char *)str_seed);
+	while (i < map->iter)
+	{
+		if (index >= ft_strlen(str_seed))
+			index = 0;
+		if ((pos[0] < map->height && pos[0] >= 0)
+			&& (pos[1] < map->width && pos[1] >= 0))
+		{
+			if (map->map[pos[0]][pos[1]] == '0')
+			{
 				pos[0] = pos[0] + dir_x[(map->iter - i + total) % 8];
-				pos[1] = pos[1] + dir_y[(i + total - map->iter) % 8];
+				pos[1] = pos[1] + dir_y[(i - map->iter) % 8];
 				total++;
 				if (total == map->iter)
-					return ;
+					break ;
 				continue ;
 			}
 			map->map[pos[0]][pos[1]] = str_seed[index++];
-		} 
-        else
+		}
+		else
 		{
 			pos[0] = map->ori_x;
 			pos[1] = map->ori_y;
 		}
 		l_shape(pos, i);
-        pos[0] = pos[0] + dir_x[(map->iter - i + (i % 2 == 0)) % 8];
+		pos[0] = pos[0] + dir_x[(map->iter - i + (i % 2 == 0)) % 8];
 		pos[1] = pos[1] + dir_y[(i - map->iter + (i % 2 == 1)) % 8];
 		i++;
-		printf("map iter[%d]:\n", i);
-		for (int j = 0; j <= map->height; j++)
-			printf("%s\n", map->map[j]);
 	}
+	link_zero(map);
 	apply_wall(map);
+	place_door(map);
+	free(str_seed);
 }
 
-
-int main()
+int	main(void)
 {
-	long int			seed = gen_seed();
-	__attribute__((__cleanup__(free_t_map_simu))) t_map_simu	*map = seed_to_mapsimu(seed);
+	const long int	seed = gen_seed();
+ 	t_map_simu		*map;
 
-	debug_seed(map, seed);
+	map = seed_to_mapsimu(seed);
+	debug_seed(map, seed, 0);
 	map->map = ft_calloc(map->height + 1, sizeof(int *));
 	for (int i = 0; i <= map->height; i++)
 	{
 		map->map[i] = ft_calloc(sizeof(int), map->width + 1);
 		ft_memset(map->map[i], ' ', map->width);
 	}
-	
-	generate_map(seed, map);
+	generate_map(map, seed);
 	if (map_empty(map))
 	{
 		throw_error_bonus(MAP_EMPTY_GEN);
+		free_t_map_simu(map);
 		return (1);
 	}
-	printf("map:\n");
-	for (int i = 0; i <= map->height; i++)
-		printf("%s\n", map->map[i]);
-	// printf("end\n");
-	// simulate(map);
-	// printf("map:\n");
-	// for (int i = 0; i <= map->height; i++)
-	// 	printf("%s\n", map->map[i]);
-	// printf("end\n");
-	// int			*spoint = spawn(map);
-	// printf("spawn[%d]\n", spoint[0]);
-	// if (spoint[0] == -1)
-	// 	printf("no spawn found\n");
-	// else
-	// 	map->map[spoint[0]][spoint[1]] = "NSEW"[spoint[2]];
+	// changer pour trouver le 0 le plus proche car peux etre en dehors de la gene
+	map->map[map->ori_x][map->ori_y] = "NSEW"[add_digit_number(seed) % 4];
+	debug_seed(map, seed, 1);
+
+	t_two_group result = find_biggest_groups(map, map->height);
+
+    printf("1st largest '0' group (size: %d)\n", result.first.count);
+    for (int i = 0; i < result.first.count; i++)
+        printf("(%d,%d) ", result.first.coords[i].row, result.first.coords[i].col);
+    printf("\n");
+
+    printf("2nd largest '0' group (size: %d)\n", result.second.count);
+    for (int i = 0; i < result.second.count; i++)
+        printf("(%d,%d) ", result.second.coords[i].row, result.second.coords[i].col);
+    printf("\n");
+
+    free_group(&result.first);
+    free_group(&result.second);
+	free_t_map_simu(map);
 }

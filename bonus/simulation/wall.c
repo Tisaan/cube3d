@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 19:15:29 by von              ###   ########.fr       */
+/*   Updated: 2026/05/21 15:56:51 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	wall(t_map_simu *map, int x, int y)
 			j = -1;
 			while (j <= 1)
 			{
-				if (map->map[(map->height + x) % map->height][(map->width + y) % map->width] == '0'
-					&& (j != 0 && i != 0))
-					map->map[(map->height + x + i) % map->height][(map->width + y + j) % map->width] = '1';
+				if (map->map[x + i][y + j] == ' ')
+					map->map[x + i][y + j] = '1';
 				j++;
 			}
 			i++;
@@ -51,24 +50,24 @@ void	apply_wall(t_map_simu *map)
 		}
 		x++;
 	}
-	// i = 0;
-	// while (i <= map->width)
-	// {
-	// 	if (map->map[0][i] == '0')
-	// 		map->map[0][i] = '1';
-	// 	if (map->map[map->height][i] == '0')
-	// 		map->map[map->height][i] = '1';
-	// 	i++;
-	// }
-	// i = 0;
-	// while (i <= map->height)
-	// {
-	// 	if (map->map[i][0] == '0')
-	// 		map->map[i][0] = '1';
-	// 	if (map->map[i][map->width] == '0')
-	// 		map->map[i][map->width] = '1';
-	// 	i++;
-	// }
+	int i = 0;
+	while (i <= map->width)
+	{
+		if (map->map[0][i] == '0')
+			map->map[0][i] = '1';
+		if (map->map[map->height][i] == '0')
+			map->map[map->height][i] = '1';
+		i++;
+	}
+	i = 0;
+	while (i <= map->height)
+	{
+		if (map->map[i][0] == '0')
+			map->map[i][0] = '1';
+		if (map->map[i][map->width] == '0')
+			map->map[i][map->width] = '1';
+		i++;
+	}
 }
 
 
