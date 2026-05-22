@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 01:41:06 by von              ###   ########.fr       */
+/*   Updated: 2026/05/22 14:40:29 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,17 @@ void	l_shape(int *pos, int i)
 
 void	link_zero(t_map_simu *map)
 {
-	for (int i = 2; i < map->height - 2; i++)
+	int	i;
+	int	j;
+
+	i = 2;
+	while (i < map->height - 2)
 	{
-		for (int j = 2; j < map->width - 2; j++)
+		j = 2;
+		while (j < map->width - 2)
 		{
-			if (map->map[i][j] == '0'){
+			if (map->map[i][j] == '0')
+			{
 				if (map->map[i - 2][j] == '0')
 					map->map[i - 1][j] = '0';
 				if (map->map[i + 2][j] == '0')
@@ -81,29 +87,29 @@ void	link_zero(t_map_simu *map)
 				if (map->map[i][j + 2] == '0')
 					map->map[i][j + 1] = '0';
 			}
+			j++;
 		}
+		i++;
 	}
 }
 
-void	generate_map(t_map_simu *map, long int seed)
+void	gen_map_algo(t_map_simu *map, char *seed)
 {
-	char	*str_seed = ft_calloc(sizeof(char), 65);
 	int			pos[2];
 	const int	dir_x[8] = {1, -1, 1, 0, 0, -1, 1, -1};
 	const int	dir_y[8] = {-1, 1, -1, 0, 0, 1, -1, 1};
 	int			i;
 	int			total;
-	size_t			index;
+	size_t		index;
 
 	i = 0;
 	total = 0;
 	pos[0] = map->ori_x;
 	pos[1] = map->ori_y;
 	index = 0;
-	int_to_bin_str(seed, (char *)str_seed);
 	while (i < map->iter)
 	{
-		if (index >= ft_strlen(str_seed))
+		if (index >= ft_strlen(seed))
 			index = 0;
 		if ((pos[0] < map->height && pos[0] >= 0)
 			&& (pos[1] < map->width && pos[1] >= 0))
@@ -117,7 +123,7 @@ void	generate_map(t_map_simu *map, long int seed)
 					break ;
 				continue ;
 			}
-			map->map[pos[0]][pos[1]] = str_seed[index++];
+			map->map[pos[0]][pos[1]] = seed[index++];
 		}
 		else
 		{
@@ -129,10 +135,23 @@ void	generate_map(t_map_simu *map, long int seed)
 		pos[1] = pos[1] + dir_y[(i - map->iter + (i % 2 == 1)) % 8];
 		i++;
 	}
+}
+
+bool	generate_map(t_map_simu *map, long int seed)
+{
+	char	*str_seed;
+
+
+	str_seed = ft_calloc(sizeof(char), 65);
+	if (!str_seed)
+		return (false);
+	int_to_bin_str(seed, (char *)str_seed);
+	gen_map_algo(map, str_seed);
 	link_zero(map);
 	apply_wall(map);
 	place_door(map);
 	free(str_seed);
+	return (true);
 }
 
 int	main(void)
@@ -147,7 +166,12 @@ int	main(void)
 		map->map[i] = ft_calloc(sizeof(int), map->width + 1);
 		ft_memset(map->map[i], ' ', map->width);
 	}
-	generate_map(map, seed);
+	if (!generate_map(map, seed))
+	{
+		free_t_map_simu(map);
+		throw_error_bonus(ERROR_MALLOC);
+		return (1);
+	}
 	if (map_empty(map))
 	{
 		debug_seed(map, seed, 0);
@@ -155,6 +179,8 @@ int	main(void)
 		free_t_map_simu(map);
 		return (1);
 	}
+	map->spawn = (t_int3){.zero = -1, .one = 0,
+		.two = "NSEW"[add_digit_number(seed) % 4]};
 	if (place_spawn(map, seed) == 0)
 	{
 		throw_error_bonus(MAP_NO_SPAWN);

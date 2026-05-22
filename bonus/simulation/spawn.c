@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 01:19:29 by von               #+#    #+#             */
-/*   Updated: 2026/05/22 02:09:53 by von              ###   ########.fr       */
+/*   Updated: 2026/05/22 14:41:01 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_map	*convert_map_simu_to_map(t_map_simu *map)
 	nmap->start = ft_calloc(sizeof(int), 3);
 	if (!nmap->start)
 		return (NULL);
-	nmap->start[0] = map->spawn[0];
-	nmap->start[1] = map->spawn[1];
-	nmap->start[2] = map->spawn[2];
+	nmap->start[0] = map->spawn.zero;
+	nmap->start[1] = map->spawn.one;
+	nmap->start[2] = map->spawn.two;
 	return (nmap);
 }
 
@@ -46,8 +46,6 @@ int	place_spawn(t_map_simu *map, long int seed)
 
 	min = map->height;
 	i = 0;
-	map->spawn[0] = -1;
-	map->spawn[2] = "NSEW"[add_digit_number(seed) % 4];
 	while (i < map->height)
 	{
 		j = 0;
@@ -56,15 +54,15 @@ int	place_spawn(t_map_simu *map, long int seed)
 			if (map->map[i][j] == '0' && chebyshev(map, i, j) < min)
 			{
 				min = chebyshev(map, i, j);
-				map->spawn[0] = i;
-				map->spawn[1] = j;
+				map->spawn = (t_int3){.zero = i,
+					.one = j, .two = map->spawn.two};
 			}
 			j++;
 		}
 		i++;
 	}
-	if (map->spawn[0] == -1)
+	if (map->spawn.zero == -1)
 		return (0);
-	map->map[map->spawn[0]][map->spawn[1]] = map->spawn[2];
+	map->map[map->spawn.zero][map->spawn.one] = map->spawn.two;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/21 15:56:51 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/22 14:26:59 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	wall(t_map_simu *map, int x, int y)
 {
 	int	i;
 	int	j;
+
 	if (had_space_neighbour(map, x, y))
 	{
 		i = -1;
@@ -30,6 +31,30 @@ void	wall(t_map_simu *map, int x, int y)
 			}
 			i++;
 		}
+	}
+}
+
+void	wall_border(t_map_simu *map)
+{
+	int	x;
+
+	x = 0;
+	while (x <= map->width)
+	{
+		if (map->map[0][x] == '0')
+			map->map[0][x] = '1';
+		if (map->map[map->height][x] == '0')
+			map->map[map->height][x] = '1';
+		x++;
+	}
+	x = 0;
+	while (x <= map->height)
+	{
+		if (map->map[x][0] == '0')
+			map->map[x][0] = '1';
+		if (map->map[x][map->width] == '0')
+			map->map[x][map->width] = '1';
+		x++;
 	}
 }
 
@@ -50,24 +75,5 @@ void	apply_wall(t_map_simu *map)
 		}
 		x++;
 	}
-	int i = 0;
-	while (i <= map->width)
-	{
-		if (map->map[0][i] == '0')
-			map->map[0][i] = '1';
-		if (map->map[map->height][i] == '0')
-			map->map[map->height][i] = '1';
-		i++;
-	}
-	i = 0;
-	while (i <= map->height)
-	{
-		if (map->map[i][0] == '0')
-			map->map[i][0] = '1';
-		if (map->map[i][map->width] == '0')
-			map->map[i][map->width] = '1';
-		i++;
-	}
+	wall_border(map);
 }
-
-
