@@ -25,7 +25,7 @@
 	<br>`"⠀0⠀"` -> `"101"`
 	<br>`"⠀⠀   "` &emsp; `"111"`
   - Doors: try to place a door when a `'1'` has 2 adjacent `'0'` with a **door_chance** probability;
-  - Start: we still need to have a starting point to spawn so we'll take to closest `'0'` of **ori_x** and **ori_y**
+  - Start: we still need to have a starting point to spawn so we'll take to closest[²](#spawn-reference) `'0'` of **ori_x** and **ori_y**
 
 ## In-depth implementation
 - Generation:
@@ -86,6 +86,9 @@
 ### door-reference:
  &emsp;- doors are the only non-deterministic "object" of the generation 'cause there are generate with the help of pseudo-randomness.
 
+### spawn-reference:
+	- we use the chebychev distance to get the closest possible spawn point. MAX(abs(**ori_x** - **x**), abs(**ori_y** - **y**))
+
 ### algorithm-reference:
-	- already-place '0': we only check for '0' and not '1' 'cause we want '1' to be replace to maximize the size of the map
+	- already-place `'0`': we only check for `'0'` and not `'1'` 'cause we want `'1'` to be replace to maximize the size of the map
 	- connect-region : we use a depth-first search algorithm bind with the von-neuman neighboor to find the biggest '0' 's region

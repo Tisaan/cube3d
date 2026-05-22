@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/21 21:18:10 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/22 01:41:06 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ int	main(void)
  	t_map_simu		*map;
 
 	map = seed_to_mapsimu(seed);
-	debug_seed(map, seed, 0);
 	map->map = ft_calloc(map->height + 1, sizeof(int *));
 	for (int i = 0; i <= map->height; i++)
 	{
@@ -151,27 +150,18 @@ int	main(void)
 	generate_map(map, seed);
 	if (map_empty(map))
 	{
+		debug_seed(map, seed, 0);
 		throw_error_bonus(MAP_EMPTY_GEN);
 		free_t_map_simu(map);
 		return (1);
 	}
-	// changer pour trouver le 0 le plus proche car peux etre en dehors de la gene
-	map->map[map->ori_x][map->ori_y] = "NSEW"[add_digit_number(seed) % 4];
+	if (place_spawn(map, seed) == 0)
+	{
+		throw_error_bonus(MAP_NO_SPAWN);
+		free_t_map_simu(map);
+		return (1);
+	}
 	debug_seed(map, seed, 1);
-
-	t_two_group result = find_biggest_groups(map, map->height);
-
-    printf("1st largest '0' group (size: %d)\n", result.first.count);
-    for (int i = 0; i < result.first.count; i++)
-        printf("(%d,%d) ", result.first.coords[i].row, result.first.coords[i].col);
-    printf("\n");
-
-    printf("2nd largest '0' group (size: %d)\n", result.second.count);
-    for (int i = 0; i < result.second.count; i++)
-        printf("(%d,%d) ", result.second.coords[i].row, result.second.coords[i].col);
-    printf("\n");
-
-    free_group(&result.first);
-    free_group(&result.second);
+	debug_seed(map, seed, 0);
 	free_t_map_simu(map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_seed.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/21 18:12:36 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/22 01:39:44 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ void	debug_seed(t_map_simu *map, long int seed, bool print)
 	printf("width:%d\n", map->width);
 	printf("iter:%d\n", map->iter);
 	printf("door:%f\n", map->door);
+	printf("spawn:{%d, %d, %d}\n", map->spawn[0], map->spawn[1], map->spawn[2]);
 }
