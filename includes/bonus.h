@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 14:36:23 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/22 15:25:31 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_map_simu	*seed_to_mapsimu(long int seed);
 void 		debug_seed(t_map_simu *map, long int seed, bool print);
 
 //----------[spawn.c]-----------
-int			place_spawn(t_map_simu *map, long int seed);
+int			place_spawn(t_map_simu *map);
 t_map		*convert_map_simu_to_map(t_map_simu *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 14:40:29 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/22 15:25:44 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ int	main(void)
 	}
 	map->spawn = (t_int3){.zero = -1, .one = 0,
 		.two = "NSEW"[add_digit_number(seed) % 4]};
-	if (place_spawn(map, seed) == 0)
+	if (place_spawn(map) == 0)
 	{
 		throw_error_bonus(MAP_NO_SPAWN);
 		free_t_map_simu(map);

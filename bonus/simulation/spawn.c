@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 01:19:29 by von               #+#    #+#             */
-/*   Updated: 2026/05/22 14:41:01 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/22 15:25:14 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	chebyshev(t_map_simu *map, int x, int y)
 	return (abs(map->ori_y - y));
 }
 
-int	place_spawn(t_map_simu *map, long int seed)
+int	place_spawn(t_map_simu *map)
 {
 	int	min;
 	int	i;
