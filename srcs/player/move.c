@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:15:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 16:02:52 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 16:33:49 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	normalize(t_vect *vect, float speed)
 {
 	float	lenght;
 
-	lenght = sqrtf(vect->x * vect->x + vect->y * vect->y); 
+	lenght = sqrtf(vect->x * vect->x + vect->y * vect->y);
 	if (lenght > speed)
 	{
 		vect->x = vect->x / lenght * speed;
@@ -25,16 +25,8 @@ static void	normalize(t_vect *vect, float speed)
 	}
 }
 
-static void set_player_dest(t_data* data)
+static void	switch_player_dest(t_player *p, float speed, t_keys keys)
 {
-	t_player	*p;
-	t_keys		keys;
-	float		speed;
-
-	p = data->player;
-	speed = data->delta * PLAYER_SPEED;
-	keys = data->keys;
-	set_vect(&p->dest, 0.0f, 0.0f);
 	if (keys.w)
 	{
 		p->dest.x += p->dir.x * speed;
@@ -49,14 +41,27 @@ static void set_player_dest(t_data* data)
 	{
 		p->dest.x += -p->dir.y * speed;
 		p->dest.y += p->dir.x * speed;
-	}	
+	}
 	if (keys.a)
 	{
 		p->dest.x -= -p->dir.y * speed;
 		p->dest.y -= p->dir.x * speed;
 	}
+
+}
+
+static void	set_player_dest(t_data *data)
+{
+	t_player	*p;
+	t_keys		keys;
+	float		speed;
+
+	p = data->player;
+	speed = data->delta * PLAYER_SPEED;
+	keys = data->keys;
+	set_vect(&p->dest, 0.0f, 0.0f);
+	switch_player_dest(p, speed, keys);
 	normalize(&p->dest, speed);
-	printf("dest(%f, %f)\n", p->dest.x, p->dest.y);
 }
 
 static bool	is_wall(t_data *data, float x, float y)

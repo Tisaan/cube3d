@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/21 14:27:04 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 16:46:39 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ static void	draw_col(t_data *data, float wall_dist, int x, t_ray *ray)
 	step = (float)WALL_SIZE / wall_height;
 	curr_pos = (start_end[0] - data->win_infos.height / 2 + wall_height / 2) * step;
 	if (start_end[0] < 0)
+	{
+		curr_pos = -start_end[0] * step;
 		start_end[0] = 0;
+	}
 	if (start_end[1] > data->win_infos.height)
 		start_end[1] = data->win_infos.height;
 	int y = 0;
