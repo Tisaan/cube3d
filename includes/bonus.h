@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 02:09:28 by von              ###   ########.fr       */
+/*   Updated: 2026/05/22 14:36:23 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define BONUS_H
 
 #include "cub3d.h"
+
+typedef struct s_int3
+{
+	int	zero;
+	int	one;
+	int	two;
+}				t_int3;
 
 typedef struct s_map_simu
 {
@@ -25,7 +32,7 @@ typedef struct s_map_simu
 	int		ori_x;
 	int		ori_y;
 	float	door;
-	int		spawn[3];
+	t_int3	spawn;
 }				t_map_simu;
 
 typedef enum	s_error_map_gen{
