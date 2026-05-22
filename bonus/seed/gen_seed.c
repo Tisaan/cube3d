@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 15:24:53 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/22 16:07:15 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ void	debug_seed(t_map_simu *map, long int seed, bool print)
 	printf("width:%d\n", map->width);
 	printf("iter:%d\n", map->iter);
 	printf("door:%f\n", map->door);
-	printf("spawn:{%d, %d, %d}\n", map->spawn.zero, map->spawn.one, map->spawn.two);
+	printf("spawn:{%d, %d, %d}\n", map->spawn.zero,
+		map->spawn.one, map->spawn.two);
 }
