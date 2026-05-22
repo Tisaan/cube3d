@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 00:26:14 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 15:59:53 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 17:24:15 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,16 @@ void	rotate_vect(t_vect *vect, float angle)
 	old_x = vect->x;
 	vect->x = vect->x * cos_a - vect->y * sin_a;
 	vect->y = old_x * sin_a + vect->y * cos_a;
+}
+
+void	normalize(t_vect *vect, float speed)
+{
+	float	lenght;
+
+	lenght = sqrtf(vect->x * vect->x + vect->y * vect->y);
+	if (lenght > speed)
+	{
+		vect->x = vect->x / lenght * speed;
+		vect->y = vect->y / lenght * speed;
+	}
 }

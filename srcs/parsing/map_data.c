@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/06 20:02:48 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 17:29:26 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ int	parse_map_data(int fd, t_data *data, int *count)
 		line = get_next_line(fd);
 		*count += 1;
 	}
-	free(line);
 	ret *= (ret > 0) * -1 + (ret <= 0) * 1;
 	free(line);
 	return (ret);

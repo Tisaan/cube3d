@@ -6,15 +6,29 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/21 10:38:46 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 17:23:54 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// void	free_map(t_map *map)
-// {
-// }
+static void	free_map(t_data *data)
+{
+	int	i;
+
+	if (!data->map || !data->map->grid)
+		return ;
+	i = 0;
+	while (data->map->grid[i])
+	{
+		free(data->map->grid[i]);
+		i++;
+	}
+	if (data->map->start)
+		free(data->map->start);
+	if (data->map)
+		free(data->map);
+}
 
 void	free_all(t_data *data, int fd)
 {
@@ -26,16 +40,9 @@ void	free_all(t_data *data, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (data->map && data->map->grid)
-	{
-		for (int i = 0; i < data->map->height; i++)
-			free(data->map->grid[i]);
-		free(data->map->grid);
-	}
-	if (data->map->start)
-		free(data->map->start);
-	if (data->map)
-		free(data->map);
+	if (fd != -1)
+		close(fd);
+	free_map(data);
 	if (data->texture[NO].path)
 		free(data->texture[NO].path);
 	if (data->texture[SO].path)

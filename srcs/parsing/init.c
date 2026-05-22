@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/21 13:48:08 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 17:27:12 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	init_wall_assets(t_data *data)
 	i = 0;
 	while (i < 4)
 	{
-		data->wall_assets[i] = mlx_new_image_from_file(data->mlx, data->texture[i].path, &width, &height);
+		data->wall_assets[i] = mlx_new_image_from_file(data->mlx,
+				data->texture[i].path, &width, &height);
 		if (data->wall_assets[i] == MLX_NULL_HANDLE)
 			return (-ERROR_LOAD_ASSET);
 		if (width != WALL_SIZE || height != WALL_SIZE)
@@ -53,9 +54,10 @@ int	init_game(t_data *data)
 	ret = init_wall_assets(data);
 	if (ret < 0)
 		return (ret);
-	data->frame = mlx_new_image(data->mlx, data->win_infos.width, data->win_infos.height);
+	data->frame = mlx_new_image(data->mlx, data->win_infos.width,
+			data->win_infos.height);
 	if (data->frame == MLX_NULL_HANDLE)
-		return(-ERROR_LOAD_ASSET);
+		return (-ERROR_LOAD_ASSET);
 	data->keys = (t_keys){0};
 	data->floor_color = rgb_to_color(data->plans_color[1], 100);
 	data->ceil_color = rgb_to_color(data->plans_color[0], 100);

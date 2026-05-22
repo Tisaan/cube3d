@@ -6,24 +6,12 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:15:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/22 16:33:49 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 16:54:07 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include "../../includes/player.h"
-
-static void	normalize(t_vect *vect, float speed)
-{
-	float	lenght;
-
-	lenght = sqrtf(vect->x * vect->x + vect->y * vect->y);
-	if (lenght > speed)
-	{
-		vect->x = vect->x / lenght * speed;
-		vect->y = vect->y / lenght * speed;
-	}
-}
 
 static void	switch_player_dest(t_player *p, float speed, t_keys keys)
 {
@@ -47,7 +35,6 @@ static void	switch_player_dest(t_player *p, float speed, t_keys keys)
 		p->dest.x -= -p->dir.y * speed;
 		p->dest.y -= p->dir.x * speed;
 	}
-
 }
 
 static void	set_player_dest(t_data *data)

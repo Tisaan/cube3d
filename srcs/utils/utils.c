@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:11:39 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/21 13:44:02 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 17:25:28 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 float	ft_abs(float nb)
 {
-	if (nb < 0) 
+	if (nb < 0)
 		return (nb * -1);
 	return (nb);
 }
@@ -32,7 +32,7 @@ mlx_color	rgb_to_color(t_prgb rgb, int alpha)
 	color.g = rgb.rgb[1];
 	color.b = rgb.rgb[2];
 	color.a = alpha;
-	return(color);
+	return (color);
 }
 
 void	start_timer(t_timer *timer)
@@ -49,7 +49,8 @@ void	time_update(void *param)
 
 	data = (t_data *)param;
 	gettimeofday(&time, NULL);
-	data->delta = (time.tv_sec - data->timer.current_time.tv_sec) + (time.tv_usec - data->timer.current_time.tv_usec) / 1000000.0;
+	data->delta = (time.tv_sec - data->timer.current_time.tv_sec)
+		+ (time.tv_usec - data->timer.current_time.tv_usec) / 1000000.0;
 	data->timer.current_time = time;
 	if (data->delta > 0)
 		data->timer.fps = 1.0 / data->delta;

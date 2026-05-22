@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/12 15:52:17 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/22 17:42:42 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ t_map	*init_map_metadata(int size)
 	return (map);
 }
 
+static int	get_and_check_map(t_data *data, int fd)
+{
+	int	err;
+
+	err = get_map(fd, data->map);
+	if (err < 0)
+		return (err);
+	err = check_map(data->map);
+	if (err < 0)
+		return (err);
+	return (NO_ERROR);
+}
+
 t_data	*parse_map(int fd, t_data *data, int size_file)
 {
 	int		count;
@@ -53,16 +66,12 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 		return (NULL);
 	}
 	data->map->height = size_file - count;
-	err = get_map(fd, data->map);
+	err = get_and_check_map(data, fd);
 	if (err < 0)
+	{
 		throw_error(err);
-	if (err < 0)
 		return (NULL);
-	err = check_map(data->map);
-	if (err < 0)
-		throw_error(err);
-	if (err < 0)
-		return (NULL);
+	}
 	return (data);
 }
 
@@ -96,7 +105,7 @@ t_data	parse(char *map_path)
 	{
 		free_all(&data, fd);
 		close(fd);
-		return ((t_data ){0});
+		return ((t_data){0});
 	}
 	close(fd);
 	return (data);
