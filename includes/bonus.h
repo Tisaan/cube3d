@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 15:25:31 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/27 16:20:39 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BONUS_H
 
 #include "cub3d.h"
+#include <pthread.h>
 
 typedef struct s_int3
 {
@@ -21,6 +22,49 @@ typedef struct s_int3
 	int	one;
 	int	two;
 }				t_int3;
+
+typedef struct s_point
+{
+	int row;
+	int col;
+}				t_point;
+
+//-------------[BFS]-------------
+
+//-------------[QUEUE]-----------
+typedef struct 	s_queue{
+    t_point 		*data;
+    int				front;
+	int				rear;
+	int				capacity;
+	pthread_mutex_t	mutex;
+}				t_queue;
+
+//-------------[PATH]-----------
+typedef struct s_path{
+    t_point *points;
+    int count;
+    int capacity;
+} 				t_path;
+
+//------------[DATA]------------
+typedef struct {
+    t_queue *forward_queue;
+	t_queue	*backward_queue;
+    bool 	**forward_visited;
+	bool	**backward_visited;
+    t_point **forward_parent;
+	t_point	**backward_parent;
+    char 	**grid;
+    int		rows;
+	int		cols;
+    t_point start;
+	t_point end;
+	t_point	meeting_point;
+    bool found;
+    pthread_mutex_t found_mutex;
+    pthread_cond_t found_cond;
+} BFSData;
 
 typedef struct s_map_simu
 {
@@ -65,5 +109,18 @@ void 		debug_seed(t_map_simu *map, long int seed, bool print);
 //----------[spawn.c]-----------
 int			place_spawn(t_map_simu *map);
 t_map		*convert_map_simu_to_map(t_map_simu *map);
+
+//----------[Queue/method.c]-------
+t_queue* create_queue(int capacity);
+void enqueue(t_queue *q, t_point p);
+t_point dequeue(t_queue *q);
+bool is_empty(t_queue *q);
+void free_queue(t_queue *q);
+
+//----------[Path/method.c]-------
+t_path* create_path(int capacity);
+void add_to_path(t_path *p, t_point t_point);
+void reverse_path(t_path *p);
+t_path* find_shortest_path(char **grid, int rows, int cols, t_point start, t_point end);
 
 #endif
