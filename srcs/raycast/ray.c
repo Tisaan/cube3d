@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/28 13:23:42 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/28 13:26:45 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,67 +74,6 @@ static void	set_col_pixels(t_data *data, t_ray *ray, int x, float wall_dist)
 		mlx_set_image_pixel(data->mlx, data->frame, x, y++, data->floor_color);
 }
 
-// static void	draw_col(t_data *data, float wall_dist, int x, t_ray *ray)
-// {
-// 	int			wall_height;
-// 	int	 	   start_end[2];
-// 	int	 	   asset_pos[3];
-// 	float		curr_pos;
-// 	float		wall_x;
-// 	float		step;
-// 	mlx_color	pixel;
-//
-// 	wall_height = (int)(data->win_infos.height / wall_dist);
-// 	start_end[0] = -wall_height / 2 + data->win_infos.height / 2;
-// 	start_end[1] = wall_height / 2 +  data->win_infos.height / 2;
-// 	if (ray->face == EA || ray->face == WE)
-// 		wall_x = data->player->pos.y / WALL_SIZE + wall_dist * ray->dir.y;
-// 	else
-// 		wall_x = data->player->pos.x / WALL_SIZE + wall_dist * ray->dir.x;
-// 	wall_x -= floorf(wall_x);
-// 	asset_pos[0] = (int)(wall_x * WALL_SIZE);
-// 	if (asset_pos[0] < 0)
-// 		asset_pos[0] = 0;
-// 	if (asset_pos[0] >= WALL_SIZE)
-// 		asset_pos[0] = WALL_SIZE - 1;
-// 	if ((ray->face == EA && ray->dir.x > 0)
-//     || (ray->face == WE && ray->dir.x < 0)
-//     || (ray->face == NO && ray->dir.y < 0)
-//     || (ray->face == SO && ray->dir.y > 0))
-// 		asset_pos[0] = WALL_SIZE - asset_pos[0] - 1;
-// 	step = (float)WALL_SIZE / wall_height;
-// 	curr_pos = (start_end[0] - data->win_infos.height / 2 + wall_height / 2) * step;
-// 	if (start_end[0] < 0)
-// 	{
-// 		curr_pos = -start_end[0] * step;
-// 		start_end[0] = 0;
-// 	}
-// 	if (start_end[1] > data->win_infos.height)
-// 		start_end[1] = data->win_infos.height;
-// 	int y = 0;
-// 	while (y < start_end[0])
-// 	{
-// 		mlx_set_image_pixel(data->mlx, data->frame, x, y, data->ceil_color);
-// 		y++;
-// 	}
-// 	while (y < start_end[1])
-// 	{
-// 		asset_pos[1] = (int)curr_pos;
-// 		if (asset_pos[1] < 0)
-// 			asset_pos[1] = 0;
-// 		if (asset_pos[1] >= WALL_SIZE)
-// 			asset_pos[1] = WALL_SIZE - 1;
-// 		pixel = mlx_get_image_pixel(data->mlx, data->wall_assets[ray->face], asset_pos[0], asset_pos[1]);
-// 		mlx_set_image_pixel(data->mlx, data->frame, x, y, pixel);
-// 		curr_pos += step;
-// 		y++;
-// 	}
-// 	while (y < data->win_infos.height)
-// 	{
-// 		mlx_set_image_pixel(data->mlx, data->frame, x, y, data->floor_color);
-// 		y++;
-// 	}
-// }
 
 int	raycast(t_data *data, t_player *player)
 {
@@ -148,12 +87,9 @@ int	raycast(t_data *data, t_player *player)
 	while (x < data->win_infos.width)
 	{
 		camera_x = 2 * x / (float)(data->win_infos.width) - 1;
-		// printf("c_x : %f\n", camera_x);
 		ray.dir.x= player->dir.x + player->camera.x * camera_x;
 		ray.dir.y = player->dir.y + player->camera.y * camera_x;
-		// printf("ray (%f, %f)\n", ray.dir.x, ray.dir.y);
 		wall_dist = dda(&ray, data);
-		// printf("%f\n", wall_dist);
 		set_col_pixels(data, &ray, x, wall_dist);
 		x++;
 	}
