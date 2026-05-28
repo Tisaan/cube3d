@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/21 15:41:22 by tseche           ###   ########.fr        #
+#    Updated: 2026/05/28 11:42:04 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC_UTILS =		free.c \
 SRC_RAYCAST =	player.c \
 				render.c \
 				ray.c \
+				ray_utils.c \
 				dda.c
 
 SRC_HOOKS = hooks.c

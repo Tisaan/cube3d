@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:48:33 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/21 14:33:26 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/28 11:44:27 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,18 @@
 #include "../../includes/utils.h"
 #include <math.h>
 
-static float	calc_side_dist_x(t_data *data, t_ray *ray, t_vect *step)
+static void	calc_side_dist_x(t_data *data, t_ray *ray, t_vect *tile, t_vect *step)
 {
-	return (0.0);
+	if (ray->dir.x < 0)
+	{
+		step->x = -1;
+		ray->side_dist.x = (data->player->pos.x / WALL_SIZE - tile->x) * ray->delta_dist.x;
+	}
+	else
+	{
+		step->x = 1;
+		ray->side_dist.x = (tile->x + 1.0 - data->player->pos.x / WALL_SIZE) * ray->delta_dist.x;
+	}
 }
 
 static void	init_dda(t_ray *ray, t_vect *tile, t_vect *step, t_data *data)
@@ -35,16 +44,7 @@ static void	init_dda(t_ray *ray, t_vect *tile, t_vect *step, t_data *data)
 		ray->delta_dist.y = INFINITY;
 	else
 		ray->delta_dist.y = ft_abs(1.0 / ray->dir.y);
-	if (ray->dir.x < 0)
-	{
-		step->x = -1;
-		ray->side_dist.x = (data->player->pos.x / WALL_SIZE - tile->x) * ray->delta_dist.x;
-	}
-	else
-	{
-		step->x = 1;
-		ray->side_dist.x = (tile->x + 1.0 - data->player->pos.x / WALL_SIZE) * ray->delta_dist.x;
-	}
+	calc_side_dist_x(data, ray, tile, step);
 	if (ray->dir.y < 0)
 	{
 		step->y = -1;
@@ -57,74 +57,52 @@ static void	init_dda(t_ray *ray, t_vect *tile, t_vect *step, t_data *data)
 	}
 }
 
+static float	calc_wall_dist(t_ray *ray)
+{
+	float	dist;
+
+	dist = 0.0;
+	if (ray->face == EA || ray->face == WE)
+		dist = ray->side_dist.x - ray->delta_dist.x;
+	else
+		dist = ray->side_dist.y - ray->delta_dist.y;
+	if (dist < 0.0001f)
+		dist = 0.0001f;
+	return (dist);
+}
+
+static bool	check_collision(t_data *data, t_vect tile)
+{
+	if ((int)tile.x >= (int)ft_strlen(data->map->grid[(int)tile.y]))
+		return (true);
+	if (data->map->grid[(int)tile.y][(int)tile.x] != '0')
+		return (true);
+	return (false);
+}
+
 float	dda(t_ray *ray, t_data *data)
 {
 	t_vect	tile;
 	t_vect	step;
-	int		side;
 	float	dist;
 	bool	is_colliding;
 
 	init_dda(ray, &tile, &step, data);
-	// printf("tile (%f, %f), step(%f, %f)\n", tile.x, tile.y, step.x, step.y);
 	is_colliding = false;
-	side = 0;
+	ray->side = 0;
 	while (is_colliding == false)
 	{
-		if (ray->side_dist.x < ray->side_dist.y)
-		{
-			ray->side_dist.x += ray->delta_dist.x;
-			tile.x += step.x;
-			side = 0;
-		}
-		else
-		{
-			ray->side_dist.y += ray->delta_dist.y;
-			tile.y += step.y;
-			side = 1;
-		}
+		set_ray_side(ray, &tile, step);
 		if (tile.y < 0 || tile.y >= data->map->height
-			|| tile.x < 0 || tile.x >= data->map->width)
+				|| tile.x < 0 || tile.x >= data->map->width)
 		{
-			 if (side == 0)
-			{
-				if (ray->dir.x > 0)
-					ray->face = EA;
-				else
-					ray->face = WE;
-				dist = ray->side_dist.x - ray->delta_dist.x;
-				if (dist < 0.0001f)
-					dist = 0.0001f;
-				return (dist);
-			}
-			if (ray->dir.y > 0)
-				ray->face = SO;
-			else
-				ray->face = NO;
-			dist = ray->side_dist.y - ray->delta_dist.y;
-			if (dist < 0.0001f)
-				dist = 0.0001f;
+			set_ray_face(ray);
+			dist = calc_wall_dist(ray);
 			return (dist);
 		}
-		if ((int)tile.x >= (int)ft_strlen(data->map->grid[(int)tile.y]))
-		{
-			is_colliding = true;
-			break ;
-		}
-		if (data->map->grid[(int)tile.y][(int)tile.x] != '0')
-			is_colliding = true;
+		is_colliding = check_collision(data, tile);
 	}
-	if (side == 0)
-	{
-		if (ray->dir.x > 0)
-			ray->face = WE;
-		else
-			ray->face = EA;
-		return (ray->side_dist.x - ray->delta_dist.x);
-	}
-	if (ray->dir.y > 0)
-		ray->face = NO;
-	else
-		ray->face = SO;
-	return (ray->side_dist.y - ray->delta_dist.y);
+	set_ray_face(ray);
+	dist = calc_wall_dist(ray);
+	return (dist);
 }

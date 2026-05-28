@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/22 16:51:58 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/28 11:38:44 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,6 @@
 #include "../../includes/raycast.h"
 
 float	dda(t_ray *ray, t_data *data);
-
-// static mlx_color	get_wall_color(t_direction_id face)
-// {
-// 	mlx_color	color;
-//
-// 	if (face == NO)
-// 		color.rgba = 0x05003dFF; // dark blue
-// 	else if (face == SO)
-// 		color.rgba = 0x400205FF; // dark red
-// 	else if (face == WE)
-// 		color.rgba = 0x230042FF; // dark purple
-// 	else
-// 		color.rgba = 0x042601FF; // dark green
-// 	return (color);
-// }
 
 static void	draw_col(t_data *data, float wall_dist, int x, t_ray *ray)
 {
@@ -91,48 +76,6 @@ static void	draw_col(t_data *data, float wall_dist, int x, t_ray *ray)
 		y++;
 	}
 }
-
-// static void	draw_3D(t_data *data, float wall_dist, int x, t_direction_id ray_face)
-// {
-// 	mlx_color	wall_color;
-// 	mlx_color	ceil_color;
-// 	mlx_color	floor_color;
-// 	int			wall_height;
-// 	int			start;
-// 	int			end;
-// 	int			y;
-//
-// 	if (wall_dist < 0.00001f)
-// 		wall_dist = 0.00001f;
-// 	wall_height = (int)(data->win_infos.height / wall_dist);
-// 	start = -wall_height / 2 + data->win_infos.height / 2;
-// 	if (start < 0)
-// 		start = 0;
-// 	end = wall_height / 2 +  data->win_infos.height / 2;
-// 	if (end >= data->win_infos.height)
-// 		end = data->win_infos.height - 1;
-//
-// 	wall_color = get_wall_color(ray_face);
-// 	ceil_color.rgba = 0x87CEEBFF;
-// 	floor_color.rgba = 0x141414FF;
-//
-// 	y = 0;
-// 	while (y < start)
-// 	{
-// 		mlx_set_image_pixel(data->mlx, data->frame, x, y, ceil_color);
-// 		y++;
-// 	}
-// 	while (y < end)
-// 	{
-// 		mlx_set_image_pixel(data->mlx, data->frame, x, y, wall_color);
-// 		y++;
-// 	}
-// 	while (y < data->win_infos.height)
-// 	{
-// 		mlx_set_image_pixel(data->mlx, data->frame, x, y, floor_color);
-// 		y++;
-// 	}
-// }
 
 int	raycast(t_data *data, t_player *player)
 {
