@@ -15,6 +15,11 @@
 #include "../../includes/utils.h"
 #include <math.h>
 
+static float	calc_side_dist_x(t_data *data, t_ray *ray, t_vect *step)
+{
+	return (0.0);
+}
+
 static void	init_dda(t_ray *ray, t_vect *tile, t_vect *step, t_data *data)
 {
 	t_vect	player_pos;
@@ -22,11 +27,6 @@ static void	init_dda(t_ray *ray, t_vect *tile, t_vect *step, t_data *data)
 	set_vect(&player_pos, data->player->pos.x / WALL_SIZE, data->player->pos.y / WALL_SIZE);
 	tile->x = (int)(data->player->pos.x / WALL_SIZE);
 	tile->y = (int)(data->player->pos.y / WALL_SIZE);
-	// printf("Tile initial: (%f, %f)\n", tile->x, tile->y);
-	// printf("Player pos: (%f, %f)\n", data->player->pos.x, data->player->pos.y);
-	// printf("Map size: %dx%d\n", data->map->width, data->map->height);
-	// printf("dir (%f, %f)\n", data->player->dir.x, data->player->dir.y);
-	// printf("camera (%f, %f)\n", data->player->camera.x, data->player->camera.y);
 	if (ray->dir.x == 0)
 		ray->delta_dist.x = INFINITY;
 	else
