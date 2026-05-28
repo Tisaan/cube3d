@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:09:42 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/28 11:43:39 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/28 12:15:01 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ typedef struct	s_ray
 	t_direction_id	face;
 }					t_ray;
 
+// Raycaster main functions
 int	raycast(t_data *data, t_player *player);
+float	dda(t_ray *ray, t_data *data);
 
-// Ray Utils 
+// Ray util functions
 void	set_ray_face(t_ray *ray);
 void	set_ray_side(t_ray *ray, t_vect *tile, t_vect step);
 

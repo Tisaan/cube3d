@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:11:39 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/22 17:25:28 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/28 12:37:44 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,13 @@ void	time_update(void *param)
 		data->timer.fps = 0.0;
 	system("clear");
 	printf("fps: %f\n", data->timer.fps);
+}
+
+int	clamp_pos(int p, int min, int max)
+{
+	if (p < min)
+		return (min);
+	if (p > max)
+		return (max);
+	return (p);
 }
