@@ -31,6 +31,28 @@ static bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos)
 	return (true);
 }
 
+static int	ready(t_data *data)
+{
+	int	ret;
+
+	display_map_data(*data);
+	data->mlx = mlx_init();
+	data->win_infos = (t_win_infos){0};
+	if (!init_window(data->mlx, &data->win, &data->win_infos))
+	{
+		free_all(data, -1);
+		mlx_destroy_context(data->mlx);
+		return (1);
+	}
+	ret = init_game(data);
+	if (ret < 0)
+	{
+		throw_error(ret);
+		return (1);
+	}
+	return (ret);
+}
+
 static int	process(t_data *data)
 {
 	mlx_on_event(data->mlx, data->win, MLX_KEYDOWN, key_hooks, data);
@@ -59,21 +81,9 @@ int	main(int ac, char **av)
 	data = parse(av[1]);
 	if (data.map == NULL)
 		return (1);
-	display_map_data(data);
-	data.mlx = mlx_init();
-	data.win_infos = (t_win_infos){0};
-	if (!init_window(data.mlx, &data.win, &data.win_infos))
-	{
-		free_all(&data, -1);
-		mlx_destroy_context(data.mlx);
-		return (1);
-	}
-	ret = init_game(&data);
+	ret = ready(&data);
 	if (ret < 0)
-	{
-		throw_error(ret);
-		return (1);
-	}
+		return (ret);
 	ret = process(&data);
 	if (ret < 0)
 		throw_error(ret);

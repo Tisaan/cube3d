@@ -59,7 +59,6 @@ void	clean_exit(t_data *data)
 	mlx_destroy_image(data->mlx, data->wall_assets[1]);
 	mlx_destroy_image(data->mlx, data->wall_assets[2]);
 	mlx_destroy_image(data->mlx, data->wall_assets[3]);
-	mlx_destroy_image(data->mlx, data->player->sprite);
 	mlx_destroy_image(data->mlx, data->frame);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_context(data->mlx);

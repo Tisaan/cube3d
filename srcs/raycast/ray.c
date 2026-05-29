@@ -27,10 +27,10 @@ static int	get_texture_x(t_player *p, t_ray *ray, float wall_dist)
 	texture_x = (int)(obj_x * WALL_SIZE);
 	texture_x = clamp_pos(texture_x, 0, WALL_SIZE - 1);
 	if ((ray->face == EA && ray->dir.x > 0)
-			|| (ray->face == WE && ray->dir.x < 0)
-			|| (ray->face == NO && ray->dir.y < 0)
-			|| (ray->face == SO && ray->dir.y > 0))
-			texture_x = WALL_SIZE - texture_x - 1;
+		|| (ray->face == WE && ray->dir.x < 0)
+		|| (ray->face == NO && ray->dir.y < 0)
+		|| (ray->face == SO && ray->dir.y > 0))
+		texture_x = WALL_SIZE - texture_x - 1;
 	return (texture_x);
 }
 
@@ -48,7 +48,8 @@ static void	set_obj_pixels(t_data *d, t_ray *ray, t_obj obj, int xs[2])
 	while (y < obj.end)
 	{
 		texture_y = clamp_pos((int)curr_pos, 0, WALL_SIZE - 1);
-		pixel = mlx_get_image_pixel(d->mlx, d->wall_assets[ray->face], xs[1], texture_y);
+		pixel = mlx_get_image_pixel(d->mlx, d->wall_assets[ray->face],
+				xs[1], texture_y);
 		mlx_set_image_pixel(d->mlx, d->frame, xs[0], y++, pixel);
 		curr_pos += step;
 	}
@@ -62,7 +63,7 @@ static void	set_col_pixels(t_data *data, t_ray *ray, int x, float wall_dist)
 	int		xs[2];
 
 	obj = get_obj(&data->win_infos, wall_dist);
-	texture_x = get_texture_x(data->player, ray, wall_dist);	
+	texture_x = get_texture_x(data->player, ray, wall_dist);
 	y = 0;
 	while (y < obj.start)
 		mlx_set_image_pixel(data->mlx, data->frame, x, y++, data->ceil_color);
@@ -73,7 +74,6 @@ static void	set_col_pixels(t_data *data, t_ray *ray, int x, float wall_dist)
 	while (y < data->win_infos.height)
 		mlx_set_image_pixel(data->mlx, data->frame, x, y++, data->floor_color);
 }
-
 
 int	raycast(t_data *data, t_player *player)
 {
@@ -87,7 +87,7 @@ int	raycast(t_data *data, t_player *player)
 	while (x < data->win_infos.width)
 	{
 		camera_x = 2 * x / (float)(data->win_infos.width) - 1;
-		ray.dir.x= player->dir.x + player->camera.x * camera_x;
+		ray.dir.x = player->dir.x + player->camera.x * camera_x;
 		ray.dir.y = player->dir.y + player->camera.y * camera_x;
 		wall_dist = dda(&ray, data);
 		set_col_pixels(data, &ray, x, wall_dist);

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
 #include "../../includes/raycast.h"
 
 void	set_ray_side(t_ray *ray, t_vect *tile, t_vect step)
@@ -27,7 +26,6 @@ void	set_ray_side(t_ray *ray, t_vect *tile, t_vect step)
 		tile->y += step.y;
 		ray->side = 1;
 	}
-
 }
 
 void	set_ray_face(t_ray *ray)

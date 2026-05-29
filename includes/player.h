@@ -30,7 +30,6 @@ typedef struct s_data	t_data;
 
 typedef struct	s_player
 {
-	mlx_image	sprite;
 	t_vect		camera;
 	t_vect		pos;
 	t_vect		dir;

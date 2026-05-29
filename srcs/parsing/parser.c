@@ -75,12 +75,32 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 	return (data);
 }
 
+static int	parse_step(t_data *data, char *map_path, int size)
+{
+	int		fd;
+	void	*ptr;
+
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+	{
+		throw_error(ERROR_OPEN);
+		return (ERROR_OPEN);
+	}
+	ptr = parse_map(fd, data, size);
+	if (!ptr)
+	{
+		free_all(data, fd);
+		close(fd);
+		return (-1);
+	}
+	close(fd);
+	return (0);
+}
+
 t_data	parse(char *map_path)
 {
 	t_data	data;
-	int		fd;
 	int		size_file;
-	void	*truc;
 
 	data.map = NULL;
 	if (!ft_strendwith(map_path, ".cub"))
@@ -94,19 +114,7 @@ t_data	parse(char *map_path)
 		throw_error(size_file);
 		return ((t_data){0});
 	}
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-	{
-		throw_error(ERROR_OPEN);
+	if (parse_step(&data, map_path, size_file) < 0)
 		return ((t_data){0});
-	}
-	truc = parse_map(fd, &data, size_file);
-	if (!truc)
-	{
-		free_all(&data, fd);
-		close(fd);
-		return ((t_data){0});
-	}
-	close(fd);
 	return (data);
 }

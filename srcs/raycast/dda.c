@@ -15,45 +15,47 @@
 #include "../../includes/utils.h"
 #include <math.h>
 
-static void	calc_side_dist_x(t_data *data, t_ray *ray, t_vect *tile, t_vect *step)
+static void	calc_side_dist_x(t_player *p, t_ray *r, t_vect *tile, t_vect *step)
 {
-	if (ray->dir.x < 0)
+	if (r->dir.x < 0)
 	{
 		step->x = -1;
-		ray->side_dist.x = (data->player->pos.x / WALL_SIZE - tile->x) * ray->delta_dist.x;
+		r->side_dist.x = (p->pos.x / WALL_SIZE - tile->x) * r->delta_dist.x;
 	}
 	else
 	{
 		step->x = 1;
-		ray->side_dist.x = (tile->x + 1.0 - data->player->pos.x / WALL_SIZE) * ray->delta_dist.x;
+		r->side_dist.x = (tile->x + 1.0 - p->pos.x / WALL_SIZE);
+		r->side_dist.x *= r->delta_dist.x;
 	}
 }
 
-static void	init_dda(t_ray *ray, t_vect *tile, t_vect *step, t_data *data)
+static void	init_dda(t_ray *r, t_vect *tile, t_vect *step, t_player *p)
 {
 	t_vect	player_pos;
 
-	set_vect(&player_pos, data->player->pos.x / WALL_SIZE, data->player->pos.y / WALL_SIZE);
-	tile->x = (int)(data->player->pos.x / WALL_SIZE);
-	tile->y = (int)(data->player->pos.y / WALL_SIZE);
-	if (ray->dir.x == 0)
-		ray->delta_dist.x = INFINITY;
+	set_vect(&player_pos, p->pos.x / WALL_SIZE, p->pos.y / WALL_SIZE);
+	tile->x = (int)(p->pos.x / WALL_SIZE);
+	tile->y = (int)(p->pos.y / WALL_SIZE);
+	if (r->dir.x == 0)
+		r->delta_dist.x = INFINITY;
 	else
-		ray->delta_dist.x = ft_abs(1.0 / ray->dir.x);
-	if (ray->dir.y == 0)
-		ray->delta_dist.y = INFINITY;
+		r->delta_dist.x = ft_abs(1.0 / r->dir.x);
+	if (r->dir.y == 0)
+		r->delta_dist.y = INFINITY;
 	else
-		ray->delta_dist.y = ft_abs(1.0 / ray->dir.y);
-	calc_side_dist_x(data, ray, tile, step);
-	if (ray->dir.y < 0)
+		r->delta_dist.y = ft_abs(1.0 / r->dir.y);
+	calc_side_dist_x(p, r, tile, step);
+	if (r->dir.y < 0)
 	{
 		step->y = -1;
-		ray->side_dist.y = (data->player->pos.y / WALL_SIZE - tile->y) * ray->delta_dist.y;
+		r->side_dist.y = (p->pos.y / WALL_SIZE - tile->y) * r->delta_dist.y;
 	}
 	else
 	{
 		step->y = 1;
-		ray->side_dist.y = (tile->y + 1.0 - data->player->pos.y / WALL_SIZE) * ray->delta_dist.y;
+		r->side_dist.y = (tile->y + 1.0 - p->pos.y / WALL_SIZE);
+		r->side_dist.y *= r->delta_dist.y;
 	}
 }
 
@@ -87,14 +89,14 @@ float	dda(t_ray *ray, t_data *data)
 	float	dist;
 	bool	is_colliding;
 
-	init_dda(ray, &tile, &step, data);
+	init_dda(ray, &tile, &step, data->player);
 	is_colliding = false;
 	ray->side = 0;
 	while (is_colliding == false)
 	{
 		set_ray_side(ray, &tile, step);
 		if (tile.y < 0 || tile.y >= data->map->height
-				|| tile.x < 0 || tile.x >= data->map->width)
+			|| tile.x < 0 || tile.x >= data->map->width)
 		{
 			set_ray_face(ray);
 			dist = calc_wall_dist(ray);
