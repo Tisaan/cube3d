@@ -6,13 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 17:23:54 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/29 15:05:44 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	free_map(t_data *data)
+void	free_map(t_data *data)
 {
 	int	i;
 
@@ -31,6 +31,18 @@ static void	free_map(t_data *data)
 		free(data->map);
 }
 
+void	free_texture_paths(t_data *data)
+{
+	if (data->texture[NO].path)
+		free(data->texture[NO].path);
+	if (data->texture[SO].path)
+		free(data->texture[SO].path);
+	if (data->texture[WE].path)
+		free(data->texture[WE].path);
+	if (data->texture[EA].path)
+		free(data->texture[EA].path);
+}
+
 void	free_all(t_data *data, int fd)
 {
 	char	*line;
@@ -44,14 +56,7 @@ void	free_all(t_data *data, int fd)
 	if (fd != -1)
 		close(fd);
 	free_map(data);
-	if (data->texture[NO].path)
-		free(data->texture[NO].path);
-	if (data->texture[SO].path)
-		free(data->texture[SO].path);
-	if (data->texture[WE].path)
-		free(data->texture[WE].path);
-	if (data->texture[EA].path)
-		free(data->texture[EA].path);
+	free_texture_paths(data);
 	if (data->player)
 		free(data->player);
 }

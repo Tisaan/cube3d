@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/22 17:42:42 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/29 15:06:23 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ static int	parse_step(t_data *data, char *map_path, int size)
 	ptr = parse_map(fd, data, size);
 	if (!ptr)
 	{
-		free_all(data, fd);
+		free_map(data);
+		free_texture_paths(data);
 		close(fd);
 		return (-1);
 	}

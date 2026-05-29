@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include "../../includes/debug.h"
 
 void	init_map_data(t_data *data)
 {
@@ -50,7 +49,6 @@ int	init_game(t_data *data)
 	ret = init_player(data);
 	if (ret < 0)
 		return (ret);
-	display_player_data(data->player);
 	ret = init_wall_assets(data);
 	if (ret < 0)
 		return (ret);

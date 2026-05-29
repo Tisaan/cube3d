@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/19 16:09:20 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/29 15:07:29 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int	ready(t_data *data)
 {
 	int	ret;
 
-	display_map_data(*data);
 	data->mlx = mlx_init();
 	data->win_infos = (t_win_infos){0};
 	if (!init_window(data->mlx, &data->win, &data->win_infos))
@@ -78,6 +77,7 @@ int	main(int ac, char **av)
 		ft_print_error("Invalid number of arguments.\n");
 		return (1);
 	}
+	data = (t_data){0};
 	data = parse(av[1]);
 	if (data.map == NULL)
 		return (1);
