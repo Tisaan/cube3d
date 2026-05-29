@@ -56,8 +56,6 @@ void	time_update(void *param)
 		data->timer.fps = 1.0 / data->delta;
 	else
 		data->timer.fps = 0.0;
-	system("clear");
-	printf("fps: %f\n", data->timer.fps);
 }
 
 int	clamp_pos(int p, int min, int max)

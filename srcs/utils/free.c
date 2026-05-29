@@ -24,6 +24,7 @@ static void	free_map(t_data *data)
 		free(data->map->grid[i]);
 		i++;
 	}
+	free(data->map->grid);
 	if (data->map->start)
 		free(data->map->start);
 	if (data->map)
@@ -51,6 +52,8 @@ void	free_all(t_data *data, int fd)
 		free(data->texture[WE].path);
 	if (data->texture[EA].path)
 		free(data->texture[EA].path);
+	if (data->player)
+		free(data->player);
 }
 
 void	clean_exit(t_data *data)
