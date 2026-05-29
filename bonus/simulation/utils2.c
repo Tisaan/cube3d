@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 16:05:33 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 16:14:18 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/29 13:46:43 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/bonus.h"
 
 void	int_to_bin_str(unsigned long num, char *dest)
 {

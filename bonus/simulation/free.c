@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:43:53 by von               #+#    #+#             */
-/*   Updated: 2026/05/21 17:55:16 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/29 22:18:34 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	free_t_map_simu(t_map_simu *map)
 
 	i = 0;
 	while (i <= map->height)
-	{
-		free(map->map[i]);
-		i++;
-	}
+		free(map->map[i++]);
 	free(map->map);
 	free(map);
 }

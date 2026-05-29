@@ -3,39 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 16:56:57 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/30 01:19:46 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
 
-void	l_shape(t_int2 pos, int i, t_map_simu *map)
+void	l_shape(t_point *pos, int i, t_map_simu *map)
 {
-	const int	table[3] = {-1, 0, 1};
 	int			num;
 
-	num = table[i % 3];
+	num = (int [3]){-1, 0, 1}[(map->ori_x + map->ori_y + i) % 3];
 	if (i % 4 == 0)
 	{
-		pos = (t_int2){.zero = pos.zero + 2, .one = pos.one + num};
+		(*pos).x = (*pos).x + 2;
+		(*pos).y = (*pos).y + num;
 	}
 	else if (i % 4 == 1)
 	{
-		pos = (t_int2){.zero = pos.zero - 2, .one = pos.one + num};
+		
+		(*pos).x = (*pos).x - 2;
+		(*pos).y = (*pos).y + num;
 	}
 	else if (i % 4 == 2)
 	{
-		pos = (t_int2){.zero = pos.zero + num, .one = pos.one + 2};
+		
+		(*pos).x = (*pos).x + num;
+		(*pos).y = (*pos).y + 2;
 	}
 	else
 	{
-		pos = (t_int2){.zero = pos.zero + num, .one = pos.one - 2};
+		
+		(*pos).x = (*pos).x + num;
+		(*pos).y = (*pos).y - 2;
 	}
-	pos.zero += ((int [8])dir_x)[(map->iter - i + (i % 2 == 0)) % 8];
-	pos.one += ((int [8])dir_y)[(i - map->iter + (i % 2 == 1)) % 8];
+	(*pos).x = (*pos).x + ((int [8])dir_x)[(map->iter - i + ((map->ori_x + i) % 2 == 0)) % 8];
+	(*pos).y = (*pos).y + ((int [8])dir_y)[(map->iter - i + ((map->ori_y + i) % 2 == 1)) % 8];
 }
 
 void	link_zero(t_map_simu *map)
@@ -59,6 +65,30 @@ void	link_zero(t_map_simu *map)
 					map->map[i][j - 1] = '0';
 				if (map->map[i][j + 2] == '0')
 					map->map[i][j + 1] = '0';
+				if (map->map[i - 2][j - 2] == '0')
+				{
+					//map->map[i - 2][j - 1] = '0';
+					map->map[i - 1][j - 2] = '0';
+					//map->map[i - 1][j - 1] = '0';
+				}
+				if (map->map[i + 2][j + 2] == '0')
+				{
+					//map->map[i + 2][j + 1] = '0';
+					map->map[i + 1][j + 2] = '0';
+					//map->map[i + 1][j + 1] = '0';
+				}
+				if (map->map[i - 2][j + 2] == '0')
+				{
+					//map->map[i - 2][j + 1] = '0';
+					map->map[i - 1][j + 2] = '0';
+					//map->map[i - 1][j + 1] = '0';
+				}
+				if (map->map[i + 2][j - 2] == '0')
+				{
+					//map->map[i + 2][j - 1] = '0';
+					map->map[i + 1][j - 2] = '0';
+					//map->map[i + 1][j - 1] = '0';
+				}
 			}
 			j++;
 		}
@@ -66,38 +96,150 @@ void	link_zero(t_map_simu *map)
 	}
 }
 
-void	gen_map_algo(t_map_simu *map, char *seed, t_int2 pos, int total)
+void	place_asset(t_map_simu *map, t_pointlist *p)
+{
+	if (p->len == 0 || p->len == 1)
+		return ;
+	for (int iter = 1; iter < p->len; iter++)
+	{
+		t_point prev = p->point[iter - 1];
+		t_point pos = p->point[iter];
+
+		while (prev.x < pos.x || prev.y < pos.y)
+		{
+        	if (prev.y < pos.y)
+			{
+				prev.y++;
+				map->map[prev.x][prev.y] = '0';
+			}
+        	if (prev.x < pos.x)
+			{
+				prev.x++;
+				map->map[prev.x][prev.y] = '0';
+			}
+    	}
+		//if (pos.x >= prev.x)
+		//{
+		//	for (int i = prev.x; i >= pos.x; i--)
+		//	{
+		//		if (prev.y >= pos.y)
+		//		{
+		//			for (int j = prev.y; j >= pos.y; j--)
+		//				map->map[i][j] = '0';
+		//		}
+		//		else
+		//		{
+		//			for (int j = prev.y; j <= pos.y; j++)
+		//				map->map[i][j] = '0';
+		//		}
+		//	}
+		//}
+		//else
+		//{
+		//	for (int i = prev.x; i <= pos.x; i++)
+		//	{
+		//		if (prev.y >= pos.y)
+		//		{
+		//			for (int j = prev.y; j >= pos.y; j--)
+		//				map->map[i][j] = '0';
+		//		}
+		//		else
+		//		{
+		//			for (int j = prev.y; j <= pos.y; j++)
+		//				map->map[i][j] = '0';
+		//		}
+		//	}
+		//}
+	}
+}
+
+void	gen_map_algo(t_map_simu *map, char *seed, t_point pos, int total)
 {
 	int			i;
 	size_t		index;
+	t_pointlist	*list;
 
 	i = 0;
 	index = 0;
+	(void)index;
+	(void)seed;
+	list = initpoints(map->iter *2);
+	if (!list)
+		return ;
 	while (i < map->iter)
 	{
-		if ((pos.zero < map->height && pos.zero >= 0)
-			&& (pos.one < map->width && pos.one >= 0))
+		if ((pos.x < map->height && pos.x >= 0)
+			&& (pos.y < map->width && pos.y >= 0))
 		{
-			if (map->map[pos.zero][pos.one] != '0')
+			if (map->map[pos.x][pos.y] == '0')
 			{
-				pos.zero += ((int [8])dir_x)[(map->iter - i) % 8];
-				pos.one += ((int [8])dir_y)[(i - map->iter) % 8];
-				if (++total == map->iter)
+				if (addpoint(list, pos) < 0)
+				{
+					place_asset(map, list);
+					free_pointlist(list);
 					return ;
+				}
+				pos.x += ((int [8])dir_x)[(map->iter - variant_gen_x) % 8];
+				pos.y += ((int [8])dir_y)[(map->iter - variant_gen_y) % 8];
+				if (++total == map->iter)
+				{
+					free_pointlist(list);
+					return ;
+				}
+				if ((pos.x < map->height && pos.x >= 0) && (pos.y < map->width && pos.y >= 0))
+				{
+					if (addpoint(list, pos) < 0)
+					{
+						place_asset(map, list);
+						free_pointlist(list);
+						return ;
+					}
+				}
 				continue ;
 			}
-			map->map[pos.zero][pos.one] = seed[(ft_strlen(seed) + index++)
+			map->map[pos.x][pos.y] = seed[(ft_strlen(seed) + index++)
 				% ft_strlen(seed)];
+			//map->map[pos.x][pos.y] = '0';
+			if (addpoint(list, pos) < 0)
+			{
+				place_asset(map, list);
+				free_pointlist(list);
+				return ;
+			}
+			place_asset(map, list);
+			resetpointlist(list);
 		}
 		else
-			pos = (t_int2){.zero = map->ori_x, .one = map->ori_y};
-		l_shape(pos, i++, map);
+		{
+			pos.x = map->ori_x;
+			pos.y = map->ori_y;
+		}
+		if (addpoint(list, pos) < 0)
+		{
+			place_asset(map, list);
+			free_pointlist(list);
+			return ;
+		}
+		l_shape(&pos, i, map);
+		if ((pos.x < map->height && pos.x >= 0) && (pos.y < map->width && pos.y >= 0))
+		{
+			if (addpoint(list, pos) < 0)
+			{
+				place_asset(map, list);
+				free_pointlist(list);
+				return ;
+			}
+		}
+		i++;
 	}
+	free_pointlist(list);
 }
 
 bool	generate_map(t_map_simu *map, long int seed)
 {
 	char	*str_seed;
+	const t_point	val = {.x = map->ori_x,
+		.y = map->ori_y};
 
 	str_seed = ft_calloc(sizeof(char), 65);
 	if (!str_seed)
@@ -107,14 +249,14 @@ bool	generate_map(t_map_simu *map, long int seed)
 		return (false);
 	}
 	int_to_bin_str(seed, (char *)str_seed);
-	gen_map_algo(map, str_seed, (t_int2){.zero = map->ori_x,
-		.one = map->ori_y}, 0);
+	gen_map_algo(map, str_seed, val, 0);
 	link_zero(map);
 	apply_wall(map);
 	place_door(map);
 	free(str_seed);
 	if (map_empty(map))
 	{
+		debug_seed(map, seed, 0);
 		throw_error_bonus(MAP_EMPTY_GEN);
 		free_t_map_simu(map);
 		return (false);
@@ -129,11 +271,11 @@ int	main(void)
 	int				i;
 
 	map = seed_to_mapsimu(seed);
-	map->map = ft_calloc(map->height + 1, sizeof(int *));
+	map->map = ft_calloc(map->height + 1, sizeof(char *));
 	i = 0;
 	while (i <= map->height)
 	{
-		map->map[i] = ft_calloc(sizeof(int), map->width + 1);
+		map->map[i] = ft_calloc(sizeof(char), map->width + 1);
 		ft_memset(map->map[i], ' ', map->width);
 		i++;
 	}
@@ -141,6 +283,13 @@ int	main(void)
 		return (1);
 	map->spawn = (t_int3){.zero = -1, .one = 0,
 		.two = "NSEW"[add_digit_number(seed) % 4]};
+	//map->map = rm_emptyline(map);
+	if (!map->map)
+	{
+		throw_error_bonus(ERR_MALLOC_BNS);
+		free_t_map_simu(map);
+		return (1);
+	}
 	if (place_spawn(map) == 0)
 	{
 		throw_error_bonus(MAP_NO_SPAWN);

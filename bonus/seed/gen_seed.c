@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_seed.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 16:07:15 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/30 00:00:01 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,27 @@ t_map_simu	*seed_to_mapsimu(long int seed)
 
 void	debug_seed(t_map_simu *map, long int seed, bool print)
 {
-	int	i;
+	int		i;
+	bool	found;
 
 	if (print)
 	{
 		i = 0;
+		found = false;
 		printf("map:\n");
 		while (i <= map->height)
-			printf("%s\n", map->map[i++]);
+		{
+			if (ft_isempty(map->map[i]) && !found)
+			{
+				i++;
+				continue ;
+			}
+			if (!ft_isempty(map->map[i]) && !found)
+				found = true;
+			if (!ft_isempty(map->map[i]) && found)
+				printf("%s\n", map->map[i]);
+			i++;
+		}
 		printf("end map\n");
 		return ;
 	}

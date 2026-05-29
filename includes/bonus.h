@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/27 16:20:39 by von              ###   ########.fr       */
+/*   Updated: 2026/05/30 01:21:42 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@
 #include "cub3d.h"
 #include <pthread.h>
 
+#define dir_x {1, -1, 1, 0, 0, -1, 1, -1}
+#define dir_y {-1, 1, -1, 0, 0, 1, -1, 1}
+
+//----------[tweak de la gen]------
+#define other
+#if defined(big)
+# define variant_gen_y (i + map->ori_y)
+# define variant_gen_x (i + map->ori_x)
+#elif defined(mini)
+# define variant_gen_x (i)
+# define variant_gen_y (i)
+#else
+# define variant_gen_x (i + map->ori_y + map->ori_x)
+# define variant_gen_y (i + map->ori_y + map->ori_x)
+#endif
+
 typedef struct s_int3
 {
 	int	zero;
@@ -23,48 +39,25 @@ typedef struct s_int3
 	int	two;
 }				t_int3;
 
+typedef struct s_int2
+{
+	int	zero;
+	int	one;
+}				t_int2;
+
 typedef struct s_point
 {
-	int row;
-	int col;
+	int x;
+	int y;
 }				t_point;
 
-//-------------[BFS]-------------
-
-//-------------[QUEUE]-----------
-typedef struct 	s_queue{
-    t_point 		*data;
-    int				front;
-	int				rear;
-	int				capacity;
-	pthread_mutex_t	mutex;
-}				t_queue;
-
-//-------------[PATH]-----------
-typedef struct s_path{
-    t_point *points;
-    int count;
-    int capacity;
-} 				t_path;
-
-//------------[DATA]------------
-typedef struct {
-    t_queue *forward_queue;
-	t_queue	*backward_queue;
-    bool 	**forward_visited;
-	bool	**backward_visited;
-    t_point **forward_parent;
-	t_point	**backward_parent;
-    char 	**grid;
-    int		rows;
-	int		cols;
-    t_point start;
-	t_point end;
-	t_point	meeting_point;
-    bool found;
-    pthread_mutex_t found_mutex;
-    pthread_cond_t found_cond;
-} BFSData;
+typedef struct	s_pointlist
+{
+	t_point	*point;
+	int		curr;
+	int		len;
+	int		size_max;
+}				t_pointlist;
 
 typedef struct s_map_simu
 {
@@ -82,17 +75,23 @@ typedef struct s_map_simu
 typedef enum	s_error_map_gen{
 	MAP_EMPTY_GEN,
 	MAP_NO_SPAWN,
+	ERR_MALLOC_BNS,
 	ERROR_MAX_BNS
 }				t_error_map_map;
 
 
-
+//-----------[pointlist/method.c]-----
+t_pointlist	*initpoints(int size);
+int	addpoint(t_pointlist *l, t_point p);
+void	resetpointlist(t_pointlist *l);
+void	free_pointlist(t_pointlist *l);
 
 //----------[utils.c]-----------
 int			add_digit_number(long int nb);
 void		throw_error_bonus(int err);
 bool    	map_empty(t_map_simu *map);
 bool		had_space_neighbour(t_map_simu *map, int x, size_t y);
+void		int_to_bin_str(unsigned long num, char *dest);
 
 //----------[free.c]-----------
 void		free_t_map_simu(t_map_simu *map);
@@ -109,18 +108,5 @@ void 		debug_seed(t_map_simu *map, long int seed, bool print);
 //----------[spawn.c]-----------
 int			place_spawn(t_map_simu *map);
 t_map		*convert_map_simu_to_map(t_map_simu *map);
-
-//----------[Queue/method.c]-------
-t_queue* create_queue(int capacity);
-void enqueue(t_queue *q, t_point p);
-t_point dequeue(t_queue *q);
-bool is_empty(t_queue *q);
-void free_queue(t_queue *q);
-
-//----------[Path/method.c]-------
-t_path* create_path(int capacity);
-void add_to_path(t_path *p, t_point t_point);
-void reverse_path(t_path *p);
-t_path* find_shortest_path(char **grid, int rows, int cols, t_point start, t_point end);
 
 #endif

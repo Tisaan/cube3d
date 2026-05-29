@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isempty.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:47:23 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/05 17:54:20 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/29 22:14:58 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool	ft_isempty(char *s)
 {
+	if (!s || !*s)
+		return (true);
 	while (ft_isspace(*s) && s++)
 		;
 	return (!*s);
