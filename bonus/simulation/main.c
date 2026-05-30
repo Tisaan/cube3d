@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 01:19:46 by von              ###   ########.fr       */
+/*   Updated: 2026/05/30 12:29:01 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,47 +109,52 @@ void	place_asset(t_map_simu *map, t_pointlist *p)
 		{
         	if (prev.y < pos.y)
 			{
-				prev.y++;
-				map->map[prev.x][prev.y] = '0';
+				map->count++;
+				map->map[prev.x][++prev.y] = '0';
 			}
         	if (prev.x < pos.x)
 			{
-				prev.x++;
-				map->map[prev.x][prev.y] = '0';
+				map->count++;
+				map->map[++prev.x][prev.y] = '0';
 			}
     	}
-		//if (pos.x >= prev.x)
-		//{
-		//	for (int i = prev.x; i >= pos.x; i--)
-		//	{
-		//		if (prev.y >= pos.y)
-		//		{
-		//			for (int j = prev.y; j >= pos.y; j--)
-		//				map->map[i][j] = '0';
-		//		}
-		//		else
-		//		{
-		//			for (int j = prev.y; j <= pos.y; j++)
-		//				map->map[i][j] = '0';
-		//		}
-		//	}
-		//}
-		//else
-		//{
-		//	for (int i = prev.x; i <= pos.x; i++)
-		//	{
-		//		if (prev.y >= pos.y)
-		//		{
-		//			for (int j = prev.y; j >= pos.y; j--)
-		//				map->map[i][j] = '0';
-		//		}
-		//		else
-		//		{
-		//			for (int j = prev.y; j <= pos.y; j++)
-		//				map->map[i][j] = '0';
-		//		}
-		//	}
-		//}
+		while (prev.x > pos.x || prev.y > pos.y)
+		{
+        	if (prev.y > pos.y)
+			{
+				map->count++;
+				map->map[prev.x][--prev.y] = '0';
+			}
+        	if (prev.x > pos.x)
+			{
+				map->count++;
+				map->map[--prev.x][prev.y] = '0';
+			}
+		}
+	}
+}
+
+void	place_struct(t_map_simu *map, char *seed)
+{
+	int	i;
+	int	j;
+	int	index;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(seed);
+	index = 0;
+	while (i <= map->height)
+	{
+		j = 0;
+		while (j <= map->width)
+		{
+			if (map->map[i][j] == '0' && nb_zero_neighbour(map, i, j) >= 6
+				&& seed[(len + index++) % len] == '1')
+				map->map[i][j] = '1';
+			j++;
+		}
+		i++;
 	}
 }
 
@@ -199,7 +204,8 @@ void	gen_map_algo(t_map_simu *map, char *seed, t_point pos, int total)
 			}
 			map->map[pos.x][pos.y] = seed[(ft_strlen(seed) + index++)
 				% ft_strlen(seed)];
-			//map->map[pos.x][pos.y] = '0';
+			
+			map->count++;
 			if (addpoint(list, pos) < 0)
 			{
 				place_asset(map, list);
@@ -251,6 +257,7 @@ bool	generate_map(t_map_simu *map, long int seed)
 	int_to_bin_str(seed, (char *)str_seed);
 	gen_map_algo(map, str_seed, val, 0);
 	link_zero(map);
+	place_struct(map, str_seed);
 	apply_wall(map);
 	place_door(map);
 	free(str_seed);
@@ -283,7 +290,6 @@ int	main(void)
 		return (1);
 	map->spawn = (t_int3){.zero = -1, .one = 0,
 		.two = "NSEW"[add_digit_number(seed) % 4]};
-	//map->map = rm_emptyline(map);
 	if (!map->map)
 	{
 		throw_error_bonus(ERR_MALLOC_BNS);

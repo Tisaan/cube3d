@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 00:00:01 by von              ###   ########.fr       */
+/*   Updated: 2026/05/30 12:03:33 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_map_simu	*seed_to_mapsimu(long int seed)
 	map->width = ((long)(seed / 100) % 1000) / 4;
 	map->iter = seed % 100 * 100;
 	map->door = ((float)(seed % 10) / 10);
+	map->count = 0;
 	return (map);
 }
 

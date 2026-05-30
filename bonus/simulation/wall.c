@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 01:15:34 by von              ###   ########.fr       */
+/*   Updated: 2026/05/30 12:35:29 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ void	apply_wall(t_map_simu *map)
 	int	y;
 
 	x = 1;
-	while (x <= map->height)
+	while (x < map->height)
 	{
 		y = 1;
-		while (y <= map->width)
+		while (y < map->width)
 		{
 			if (map->map[x][y] == '0' && had_space_neighbour(map, x, y))
 				wall(map, x, y);

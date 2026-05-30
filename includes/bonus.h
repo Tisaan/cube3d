@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 01:21:42 by von              ###   ########.fr       */
+/*   Updated: 2026/05/30 12:26:07 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #define dir_y {-1, 1, -1, 0, 0, 1, -1, 1}
 
 //----------[tweak de la gen]------
-#define other
+#define big
 #if defined(big)
 # define variant_gen_y (i + map->ori_y)
 # define variant_gen_x (i + map->ori_x)
@@ -70,6 +70,7 @@ typedef struct s_map_simu
 	int		ori_y;
 	float	door;
 	t_int3	spawn;
+	int		count;
 }				t_map_simu;
 
 typedef enum	s_error_map_gen{
@@ -92,6 +93,7 @@ void		throw_error_bonus(int err);
 bool    	map_empty(t_map_simu *map);
 bool		had_space_neighbour(t_map_simu *map, int x, size_t y);
 void		int_to_bin_str(unsigned long num, char *dest);
+int			nb_zero_neighbour(t_map_simu *map, int x, size_t y);
 
 //----------[free.c]-----------
 void		free_t_map_simu(t_map_simu *map);
