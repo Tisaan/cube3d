@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   ft_strlcatrev.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/30 15:07:19 by von              ###   ########.fr       */
+/*   Created: 2026/05/13 20:24:13 by von               #+#    #+#             */
+/*   Updated: 2026/05/13 21:20:01 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORS_H
-# define VECTORS_H
+#include "libft.h"
 
- typedef struct s_vect
+size_t	ft_strlcatrev(char *dest, const char *src, size_t size)
 {
-	float	x;
-	float	y;
-}			t_vect;
+	size_t	l;
 
-void	set_vect(t_vect *vect, float x, float y);
-void	rotate_vect(t_vect *vect, float angle);
-t_vect	vect_multiply(const t_vect v, float factor);
-t_vect	vect_sum(const t_vect v1, const t_vect v2);
-void	normalize(t_vect *vect, float speed);
-
-#endif
+	l = ft_strnlen(dest, size);
+	if (l == size)
+	{
+		l += ft_strlen(src);
+		return (l);
+	}
+	l += ft_strlcpy(dest + l, src, size - l);
+	return (l);
+}

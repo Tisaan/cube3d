@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/21 15:36:08 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/30 15:07:15 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_map
 t_data	parse(char *map_path);
 int		get_map(int fd, t_map *data);
 int		walled(t_map *map);
-int		get_start(t_map *map);
 int		check_map(t_map *map);
 int		parse_map_data(int fd, t_data *data, int *count);
 

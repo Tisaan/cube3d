@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   ft_strlcpyrev.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/30 15:07:19 by von              ###   ########.fr       */
+/*   Created: 2026/05/13 20:25:02 by von               #+#    #+#             */
+/*   Updated: 2026/05/13 20:26:52 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORS_H
-# define VECTORS_H
+#include "libft.h"
 
- typedef struct s_vect
+size_t	ft_strlcpyrev(char *dst, const char *src, size_t size)
 {
-	float	x;
-	float	y;
-}			t_vect;
+	char	*tmp;
+    int     i;
 
-void	set_vect(t_vect *vect, float x, float y);
-void	rotate_vect(t_vect *vect, float angle);
-t_vect	vect_multiply(const t_vect v, float factor);
-t_vect	vect_sum(const t_vect v1, const t_vect v2);
-void	normalize(t_vect *vect, float speed);
-
-#endif
+	tmp = dst;
+    i = ft_strlen(src);
+	if (!size--)
+		return (ft_strlen(src));
+	while (*src && size && size--)
+		*dst++ = src[i--];
+	*dst = '\0';
+	return (dst - tmp + ft_strlen(src));
+}

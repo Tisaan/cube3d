@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/30 15:07:19 by von              ###   ########.fr       */
+/*   Created: 2026/05/19 19:43:53 by von               #+#    #+#             */
+/*   Updated: 2026/05/29 22:18:34 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORS_H
-# define VECTORS_H
+#include "../../includes/bonus.h"
 
- typedef struct s_vect
+void	free_t_map_simu(t_map_simu *map)
 {
-	float	x;
-	float	y;
-}			t_vect;
+	int	i;
 
-void	set_vect(t_vect *vect, float x, float y);
-void	rotate_vect(t_vect *vect, float angle);
-t_vect	vect_multiply(const t_vect v, float factor);
-t_vect	vect_sum(const t_vect v1, const t_vect v2);
-void	normalize(t_vect *vect, float speed);
-
-#endif
+	i = 0;
+	while (i <= map->height)
+		free(map->map[i++]);
+	free(map->map);
+	free(map);
+}
