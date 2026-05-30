@@ -1,2 +1,8 @@
 pour avoir des doors:
-	909781276647
+	big:909781276647
+
+triangle:
+	big:781356886287
+
+
+big:297295795246

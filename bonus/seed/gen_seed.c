@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 12:03:33 by von              ###   ########.fr       */
+/*   Updated: 2026/05/30 13:01:48 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 
 bool	check_seed(long seed)
 {
-	if (seed == 0)
+	if (seed == 0 || seed < 0)
+		return (false);
+	if (ft_count_digits(seed) != 12)
 		return (false);
 	if ((seed / powl(10, 10)) >= ((int)(seed / powl(10, 5)) % 1000))
 		return (false);

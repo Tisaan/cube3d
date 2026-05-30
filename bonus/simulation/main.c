@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:42:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 12:29:01 by von              ###   ########.fr       */
+/*   Updated: 2026/05/30 13:14:34 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,10 +271,34 @@ bool	generate_map(t_map_simu *map, long int seed)
 	return (true);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	t_map_simu		*map;
-	const long int	seed = gen_seed();
+	t_map_simu	*map;
+	long int	seed;
+	if (ac == 3 && ft_strncmp(av[1], "seed\0", 5) == 0)
+	{
+		if (ft_strlen(av[2]) == (size_t)skip_digits(av[2]) && ft_strlen(av[2]) == 12)
+		{
+			seed = ft_atol(av[2]);
+			if (seed < 0 || !check_seed(seed))
+			{
+				throw_error_bonus(SEED_INVALID);
+				return (1);
+			}
+		}
+		else
+		{
+			throw_error_bonus(SEED_INVALID);
+			return (1);
+		}
+	}
+	else if (ac != 1)// changer ca pour gen une seed aleatoire que si ac == 2 et av[1] == "seed"
+	{
+		throw_error_bonus(ERR_ARGS);
+		return (1);
+	}
+	else
+		seed = gen_seed();
 	int				i;
 
 	map = seed_to_mapsimu(seed);
