@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:40:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 17:34:16 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 11:29:15 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	around(t_map *map, int x, size_t y)
 	if (map->grid[x][y] && (map->grid[x][y] == '1'
 		|| ft_isspace(map->grid[x][y])))
 		return (true);
-	if (!map->grid[x + 1] || !map->grid[x - 1])
+	if (!map->grid[x + 1] || (x - 1 >= 0 && !map->grid[x - 1]))
 		return (false);
 	else if (y == ft_strlen(map->grid[x]) || x == 0 || x == map->height)
 		return (false);
