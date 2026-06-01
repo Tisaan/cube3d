@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:40:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 11:29:15 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 12:09:40 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ bool	around(t_map *map, int x, size_t y)
 		return (false);
 	else if (y == ft_strlen(map->grid[x]) || x == 0 || x == map->height)
 		return (false);
-	else if (ft_isoneof(map->grid[x - 1][y], " \t\n"))
+	else if (x - 1 >= 0 && ft_isoneof(map->grid[x - 1][y], " \t\n"))
 		return (false);
 	else if (ft_isoneof(map->grid[x - 1][y - 1], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x - 1][y + 1], " \t\n"))
+	else if ((int)(y + 1) * WALL_SIZE <= map->width && ft_isoneof(map->grid[x - 1][y + 1], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x + 1][y], " \t\n"))
+	else if ((int)y * WALL_SIZE <= map->width && ft_isoneof(map->grid[x + 1][y], " \t\n"))
 		return (false);
 	else if (ft_isoneof(map->grid[x + 1][y - 1], " \t\n"))
 		return (false);
-	else if (ft_isoneof(map->grid[x + 1][y + 1], " \t\n"))
+	else if ((int)(y + 1) * WALL_SIZE <= map->width && ft_isoneof(map->grid[x + 1][y + 1], " \t\n"))
 		return (false);
 	else if (ft_isoneof(map->grid[x][y - 1], " \t\n"))
 		return (false);
