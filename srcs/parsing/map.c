@@ -81,6 +81,7 @@ int	get_map(int fd, t_map *data)
 		}
 		line = get_next_line(fd);
 	}
+	free(line);
 	if (!*find || *find > 1)
 		return ((*find + 3) * -1);
 	return (1);
