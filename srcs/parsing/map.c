@@ -57,15 +57,13 @@ int	validate(char *line, t_map *data, int i, int *find)
 	return (0);
 }
 
-int	get_map(int fd, t_map *data)
+int	get_map(int fd, t_map *data, int i)
 {
 	char	*line;
 	int		find[2];
-	int		i;
 	int		err;
 
 	line = get_next_line(fd);
-	i = 0;
 	*find = 0;
 	find[1] = 0;
 	while (line)

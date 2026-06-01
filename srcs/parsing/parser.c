@@ -40,7 +40,7 @@ static int	get_and_check_map(t_data *data, int fd)
 {
 	int	err;
 
-	err = get_map(fd, data->map);
+	err = get_map(fd, data->map, 0);
 	if (err < 0)
 		return (err);
 	err = check_map(data->map);

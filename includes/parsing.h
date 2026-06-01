@@ -82,7 +82,8 @@ typedef struct s_map
 }				t_map;
 
 t_data	parse(char *map_path);
-int		get_map(int fd, t_map *data);
+int		get_map(int fd, t_map *data, int i);
+bool	around_step(t_map *map, int x, size_t y);
 int		walled(t_map *map);
 int		get_start(t_map *map);
 int		check_map(t_map *map);

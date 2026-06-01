@@ -23,24 +23,6 @@ int	get_dir(int c)
 	return (WE);
 }
 
-bool	around_step(t_map *map, int x, size_t y)
-{
-	if ((int)y * WALL_SIZE <= map->width
-		&& ft_isoneof(map->grid[x + 1][y], " \t\n"))
-		return (false);
-	else if (x + 1 <= map->height / WALL_SIZE
-		&& ft_isoneof(map->grid[x + 1][y - 1], " \t\n"))
-		return (false);
-	else if ((int)(y + 1 * WALL_SIZE) <= map->width
-		&& ft_isoneof(map->grid[x + 1][y + 1], " \t\n"))
-		return (false);
-	else if (ft_isoneof(map->grid[x][y - 1], " \t\n"))
-		return (false);
-	else if (ft_isoneof(map->grid[x][y + 1], " \t\n"))
-		return (false);
-	return (true);
-}
-
 bool	around(t_map *map, int x, size_t y)
 {
 	if (map->grid[x][y] && (map->grid[x][y] == '1'
