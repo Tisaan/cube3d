@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 10:24:23 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 11:36:44 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	clear_gnl_buffer(int fd)
 {
 	char	*line;
 
+	if (fd < 0)
+		return ;
 	line = get_next_line(fd);
 	while (line)
 	{

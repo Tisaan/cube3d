@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 17:28:35 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 11:39:38 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int	get_map(int fd, t_map *data)
 			break ;
 		err = validate(line, data, i++, find);
 		if (err < 0)
+		{
+			free(line);
 			return (err);
+		}
 		line = get_next_line(fd);
 	}
 	if (!*find || *find > 1)
