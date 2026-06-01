@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/29 15:06:23 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 07:28:03 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 	err = parse_map_data(fd, data, &count);
 	if (err < 0)
 	{
+		clear_gnl_buffer(fd);
 		close(fd);
 		throw_error(err);
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/29 15:05:44 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 07:34:18 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ void	free_all(t_data *data, int fd)
 	free_texture_paths(data);
 	if (data->player)
 		free(data->player);
+}
+
+void	clear_gnl_buffer(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 }
 
 void	clean_exit(t_data *data)

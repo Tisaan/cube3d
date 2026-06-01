@@ -221,3 +221,351 @@
    fun:start_thread
    fun:clone
 }
+{
+   bash_initialize_shell_variables_new_shell_variable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:new_shell_variable
+   fun:make_new_variable.lto_priv.0
+   fun:bind_variable_internal.lto_priv.0
+   fun:initialize_shell_variables
+   fun:shell_initialize
+   fun:main
+}
+
+{
+   bash_initialize_shell_variables_make_new_variable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:make_new_variable.lto_priv.0
+   fun:bind_variable_internal.lto_priv.0
+   fun:initialize_shell_variables
+   fun:shell_initialize
+   fun:main
+}
+
+{
+   bash_initialize_shell_variables_hash_insert
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:hash_insert
+   fun:make_new_variable.lto_priv.0
+   fun:bind_variable_internal.lto_priv.0
+   fun:initialize_shell_variables
+   fun:shell_initialize
+   fun:main
+}
+
+{
+   bash_initialize_shell_variables_hash_create
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:hash_create
+   fun:create_variable_tables.lto_priv.0
+   fun:initialize_shell_variables
+   fun:shell_initialize
+   fun:main
+}
+
+{
+   bash_initialize_shell_variables_hash_create_array
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:hash_create
+   fun:initialize_shell_variables
+   fun:shell_initialize
+   fun:main
+}
+
+{
+   bash_initialize_shell_variables_make_new_array_variable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:make_new_array_variable
+   fun:initialize_shell_variables
+   fun:shell_initialize
+   fun:main
+}
+
+{
+   bash_set_bashopts
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:set_bashopts
+   fun:shell_initialize
+   fun:main
+}
+
+{
+   bash_set_default_locale
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:set_default_locale
+   fun:main
+}
+
+{
+   bash_reader_loop_expand_word_list
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:expand_word_list_internal.lto_priv.0
+   fun:execute_simple_command
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_reader_loop_copy_word_list
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:copy_word_list
+   fun:expand_word_list_internal.lto_priv.0
+   fun:execute_simple_command
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_reader_loop_make_bare_word
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:make_bare_word
+   ...
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_reader_loop_unwind_prot
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:begin_unwind_frame
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_reader_loop_unwind_prot_simple
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:add_unwind_protect_internal.lto_priv.0
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_reader_loop_unwind_prot_simple_command
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:execute_simple_command
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_wait_for_sh_set_lines
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:sh_set_lines_and_columns
+   fun:get_new_window_size
+   fun:wait_for
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_wait_for_pipestatus
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:set_pipestatus_array
+   fun:wait_for
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_stop_pipeline
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:stop_pipeline
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_parse_read_token
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:read_token.constprop.0
+   fun:yyparse
+   fun:parse_command
+   fun:read_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_parse_shell_getc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:shell_getc.lto_priv.0
+   fun:read_token.constprop.0
+   fun:yyparse
+   fun:parse_command
+   fun:read_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_alloc_word_desc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:alloc_word_desc
+   ...
+   fun:read_token.constprop.0
+   fun:yyparse
+   fun:parse_command
+   fun:read_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_make_simple_command
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:make_simple_command
+   fun:yyparse
+   fun:parse_command
+   fun:read_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_fd_to_buffered_stream
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:fd_to_buffered_stream
+   fun:with_input_from_buffered_stream
+   fun:main
+}
+
+{
+   bash_maybe_make_export_env
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   ...
+   fun:maybe_make_export_env.part.0
+   fun:execute_disk_command.lto_priv.0
+   fun:execute_simple_command
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_push_source_array_rshift
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:array_create_element
+   fun:array_rshift
+   ...
+   fun:main
+}
+
+{
+   bash_make_variable_value
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:make_variable_value
+   fun:bind_variable_internal.lto_priv.0
+   fun:set_bashopts
+   fun:shell_initialize
+   fun:main
+}
+
+{
+   bash_list_rest_of_args
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:list_rest_of_args
+   fun:expand_word_internal.lto_priv.0
+   fun:shell_expand_word_list.isra.0
+   fun:expand_word_list_internal.lto_priv.0
+   fun:execute_simple_command
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
+
+{
+   bash_print_cmd_command_print_word_list
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:command_print_word_list.lto_priv.0
+   fun:print_simple_command
+   fun:execute_simple_command
+   fun:execute_command_internal
+   fun:execute_command
+   fun:reader_loop
+   fun:main
+}
