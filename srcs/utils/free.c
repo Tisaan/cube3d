@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 07:34:18 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 10:24:23 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,21 @@ void	clear_gnl_buffer(int fd)
 	}
 }
 
-void	clean_exit(t_data *data)
+void	clean_exit(t_data *data, bool img_destroy)
 {
-	mlx_destroy_image(data->mlx, data->wall_assets[0]);
-	mlx_destroy_image(data->mlx, data->wall_assets[1]);
-	mlx_destroy_image(data->mlx, data->wall_assets[2]);
-	mlx_destroy_image(data->mlx, data->wall_assets[3]);
-	mlx_destroy_image(data->mlx, data->frame);
+	if (img_destroy)
+	{
+		if (data->wall_assets[0] != MLX_NULL_HANDLE)
+			mlx_destroy_image(data->mlx, data->wall_assets[0]);
+		if (data->wall_assets[1] != MLX_NULL_HANDLE)
+			mlx_destroy_image(data->mlx, data->wall_assets[1]);
+		if (data->wall_assets[2] != MLX_NULL_HANDLE)
+			mlx_destroy_image(data->mlx, data->wall_assets[2]);
+		if (data->wall_assets[3] != MLX_NULL_HANDLE)
+			mlx_destroy_image(data->mlx, data->wall_assets[3]);
+		if (data->frame != MLX_NULL_HANDLE)
+			mlx_destroy_image(data->mlx, data->frame);
+	}
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_context(data->mlx);
 	free_all(data, -1);

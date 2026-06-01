@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/29 15:07:29 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 10:33:31 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	ready(t_data *data)
 	if (ret < 0)
 	{
 		throw_error(ret);
-		return (1);
+		return (ret);
 	}
 	return (ret);
 }
@@ -82,11 +82,13 @@ int	main(int ac, char **av)
 	if (data.map == NULL)
 		return (1);
 	ret = ready(&data);
-	if (ret < 0)
-		return (ret);
-	ret = process(&data);
+	if (ret >= 0)
+		ret = process(&data);
 	if (ret < 0)
 		throw_error(ret);
-	clean_exit(&data);
+	if (ret == -ERROR_LOAD_ASSET)
+		clean_exit(&data, false);
+	else
+		clean_exit(&data, true);
 	return (ret < 0);
 }
