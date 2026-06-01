@@ -37,6 +37,27 @@ int	check_char_present_map(char *line, int *find, int len)
 	return (1);
 }
 
+static bool	check_end_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+		i++;
+	i--;
+	if (line[i] == '1')
+		return (true);
+	else if (line[i] == ' ')
+	{
+		while (i >= 0 && line[i] == ' ')
+			i--;
+		if (i >= 0 && line[i] == '1')
+			return (true);
+		return (false);
+	}
+	return (false);
+}
+
 int	line_wall(t_map *map, int *ij, int *first, int *find)
 {
 	while (map->grid[ij[0]][ij[1]])
@@ -47,7 +68,7 @@ int	line_wall(t_map *map, int *ij, int *first, int *find)
 			return (-INV_WALL_MAP);
 		else
 			*first = 0;
-		if (!ft_strendwith(map->grid[ij[0]], "1") || !around(map, ij[0], ij[1]))
+		if (!check_end_line(map->grid[ij[0]]) || !around(map, ij[0], ij[1]))
 			return (-INV_WALL_MAP);
 		if (ft_isoneof(map->grid[ij[0]][ij[1]], "NEWS") && *find == 0)
 		{

@@ -23,6 +23,24 @@ int	get_dir(int c)
 	return (WE);
 }
 
+bool	around_step(t_map *map, int x, size_t y)
+{
+	if ((int)y * WALL_SIZE <= map->width
+		&& ft_isoneof(map->grid[x + 1][y], " \t\n"))
+		return (false);
+	else if (x + 1 <= map->height / WALL_SIZE
+		&& ft_isoneof(map->grid[x + 1][y - 1], " \t\n"))
+		return (false);
+	else if ((int)(y + 1 * WALL_SIZE) <= map->width
+		&& ft_isoneof(map->grid[x + 1][y + 1], " \t\n"))
+		return (false);
+	else if (ft_isoneof(map->grid[x][y - 1], " \t\n"))
+		return (false);
+	else if (ft_isoneof(map->grid[x][y + 1], " \t\n"))
+		return (false);
+	return (true);
+}
+
 bool	around(t_map *map, int x, size_t y)
 {
 	if (map->grid[x][y] && (map->grid[x][y] == '1'
@@ -30,23 +48,19 @@ bool	around(t_map *map, int x, size_t y)
 		return (true);
 	if (!map->grid[x + 1] || (x - 1 >= 0 && !map->grid[x - 1]))
 		return (false);
-	else if (y == ft_strlen(map->grid[x]) || x == 0 || x == map->height)
+	else if (y == ft_strlen(map->grid[x])
+		|| x == 0 || x == map->height)
 		return (false);
-	else if (x - 1 >= 0 && y <= ft_strlen(map->grid[x - 1]) && ft_isoneof(map->grid[x - 1][y], " \t\n"))
+	else if (x - 1 >= 0 && y <= ft_strlen(map->grid[x - 1])
+		&& ft_isoneof(map->grid[x - 1][y], " \t\n"))
 		return (false);
-	else if (x - 1 >= 0 && y - 1 <= ft_strlen(map->grid[x - 1]) && ft_isoneof(map->grid[x - 1][y - 1], " \t\n"))
+	else if (x - 1 >= 0 && y - 1 <= ft_strlen(map->grid[x - 1])
+		&& ft_isoneof(map->grid[x - 1][y - 1], " \t\n"))
 		return (false);
-	else if ((int)(y + 1) * WALL_SIZE <= map->width && ft_isoneof(map->grid[x - 1][y + 1], " \t\n"))
+	else if ((int)(y + 1 * WALL_SIZE) <= map->width
+		&& ft_isoneof(map->grid[x - 1][y + 1], " \t\n"))
 		return (false);
-	else if ((int)y * WALL_SIZE <= map->width && ft_isoneof(map->grid[x + 1][y], " \t\n"))
-		return (false);
-	else if (x + 1 <= map->height / WALL_SIZE && ft_isoneof(map->grid[x + 1][y - 1], " \t\n"))
-		return (false);
-	else if ((int)(y + 1) * WALL_SIZE <= map->width && ft_isoneof(map->grid[x + 1][y + 1], " \t\n"))
-		return (false);
-	else if (ft_isoneof(map->grid[x][y - 1], " \t\n"))
-		return (false);
-	else if (ft_isoneof(map->grid[x][y + 1], " \t\n"))
+	else if (!around_step(map, x, y))
 		return (false);
 	return (true);
 }
