@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:23:04 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/21 10:29:46 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 09:23:24 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ const char	**get_tab_error(void)
 		"The Map contains no starting point\n",
 		"The map contains too much starting point\n",
 		"A texture path is missing\n",
-		"Invalid image size\n",
 		"A color is missing in the map\n",
 		"Failed to load wall asset\n",
+		"Invalid image size\n",
 		"Invalid texture path provided\n",
 		"A file couldn't be opened\n",
 		"A texture file couldn't be opened\n",
 		"The path of one of the texture is invalid\n",
 		("Invalid color format, make sure to use only"
 			" 3 unsigned short numbers !\n"),
-		"Erreur malloc\n",
+		"Malloc Error",
 	};
 
 	return ((const char **)error);
