@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/02 15:23:55 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 14:56:40 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 #include "../includes/player.h"
 
 
+void	display_texture_id(int id)
+{
+	if (id == EA)
+		printf("EA");
+	if (id == WE)
+		printf("WE");
+	if (id == SO)
+		printf("SO");
+	if (id == NO)
+		printf("NO");
+}
 
 void	display_player_data(t_player *player)
 {
@@ -31,8 +42,8 @@ void	display_map_data(t_data data)
 	printf("Ceiling color: (%d, %d, %d)\tFloor color: (%d, %d, %d)\n", data.plans_color[CEILING - 5].rgb[0],data.plans_color[CEILING - 5].rgb[1],data.plans_color[CEILING - 5].rgb[2],
 		data.plans_color[FLOOR - 5].rgb[0],data.plans_color[FLOOR - 5].rgb[1],data.plans_color[FLOOR - 5].rgb[2]);
 	printf("Map:\n");
-	for (int i = 0; i <= data.map->height; i++)
-		printf("%s\n", data.map->grid[i]);
+	for (int i = 0; i < data.map->height; i++)
+		printf("%s", data.map->grid[i]);
 	printf("start:\n x:%d\ny:%d\ndir:%d\n", data.map->start[0], data.map->start[1], data.map->start[2]);
 }
 

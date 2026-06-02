@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 10:56:01 by von              ###   ########.fr       */
+/*   Updated: 2026/06/01 16:30:48 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,29 @@ int	len_path(char *line, int quote[2])
 		line++;
 	}
 	return (line - cpy);
+}
+
+int	set_texture_path(t_texture_path *textures, char *line, int id, int *i)
+{
+	char	*path;
+	int		j;
+
+	j = 0;
+	while (j < 4)
+	{
+		if (textures[j].path)
+		{
+			if ((t_direction_id)id == textures[j].dir)
+				return (-ERROR_MULTIPLE_TEXTURE);
+		}
+		j++;
+	}
+	path = get_path(&line[*i]);
+	if (!path)
+		return (-ERROR_MALLOC);
+	textures[id].dir = id;
+	textures[id].path = path;
+	return (true);
 }
 
 char	*get_path(char *line)

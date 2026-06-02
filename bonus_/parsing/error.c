@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:23:04 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 10:56:33 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:36 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 const char	**get_tab_error(void)
 {
 	static const char	*error[ERROR_MAX] = {
-		("WTF an error has been "
-			"thrown, but no error was detected\n"),
+		"WTF an error has been thrown\n",
 		"the map provided is not a .cub file\n",
 		"An unrecognize character has been found\n",
 		"the map is empty\n",
@@ -26,16 +25,17 @@ const char	**get_tab_error(void)
 		"The Map contains no starting point\n",
 		"The map contains too much starting point\n",
 		"A texture path is missing\n",
-		"Invalid image size\n",
 		"A color is missing in the map\n",
 		"Failed to load wall asset\n",
+		"Invalid image size\n",
 		"Invalid texture path provided\n",
+		"A texture path is defined multiple times\n",
 		"A file couldn't be opened\n",
 		"A texture file couldn't be opened\n",
 		"The path of one of the texture is invalid\n",
 		("Invalid color format, make sure to use only"
 			" 3 unsigned short numbers !\n"),
-		"Erreur malloc\n",
+		"Malloc Error\n",
 	};
 
 	return ((const char **)error);

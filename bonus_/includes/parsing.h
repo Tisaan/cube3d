@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 15:14:59 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 17:49:46 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-#include <stddef.h>
-#include <stdbool.h>
+
+# include <stddef.h>
+# include <stdbool.h>
 // --- ERROR ---
 
 typedef enum e_error_map
@@ -32,6 +33,7 @@ typedef enum e_error_map
 	ERROR_LOAD_ASSET,
 	ERROR_IMG_SIZE,
 	ERROR_INV_PATH_TEXTURE,
+	ERROR_MULTIPLE_TEXTURE,
 	ERROR_OPEN,
 	ERROR_OPEN_TEXTURE,
 	ERROR_PATH_TEXTURE,
@@ -82,7 +84,8 @@ typedef struct s_map
 }				t_map;
 
 void	parse(char *map_path, t_data *data);
-int		get_map(int fd, t_map *data);
+int		get_map(int fd, t_map *data, int i);
+bool	around_step(t_map *map, int x, size_t y);
 int		walled(t_map *map);
 int		check_map(t_map *map);
 int		parse_map_data(int fd, t_data *data, int *count);
@@ -90,11 +93,13 @@ int		parse_map_data(int fd, t_data *data, int *count);
 // --- INIT ---
 
 void	init_map_data(t_data *data);
+int		init_wall_assets(t_data *data);
 int		init_game(t_data *data);
 
 // --- PATH ---
 char	*get_path(char *line);
 int		map_size(char *name);
+int		set_texture_path(t_texture_path *textures, char *line, int id, int *i);
 
 // --- ERROR --- 
 void	throw_error(int err);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 10:56:19 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:19 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,13 @@ int	validate(char *line, t_map *data, int i, int *find)
 	return (0);
 }
 
-int	get_map(int fd, t_map *data)
+int	get_map(int fd, t_map *data, int i)
 {
 	char	*line;
 	int		find[2];
-	int		i;
 	int		err;
 
 	line = get_next_line(fd);
-	i = 0;
 	*find = 0;
 	find[1] = 0;
 	while (line)
@@ -75,9 +73,13 @@ int	get_map(int fd, t_map *data)
 			break ;
 		err = validate(line, data, i++, find);
 		if (err < 0)
+		{
+			free(line);
 			return (err);
+		}
 		line = get_next_line(fd);
 	}
+	free(line);
 	if (!*find || *find > 1)
 		return ((*find + 3) * -1);
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 16:31:28 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 17:04:12 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ int		check_char_present_map(char *line, int *find_end, int len);
 int		line_wall(t_map *map, int *ij, int *first, int *find);
 bool	around(t_map *map, int x, size_t y);
 int		get_dir(int c);
+void	clear_gnl_buffer(int fd);
 
 #endif

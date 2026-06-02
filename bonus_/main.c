@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 15:12:38 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 17:52:53 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/bonus.h"
+#include "includes/cub3d.h"
 #include "includes/parsing.h"
 #include "includes/debug.h"
 #include "includes/utils.h"
 #include "includes/player.h"
+#include "includes/bonus.h"
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -37,9 +38,17 @@ static int	ready(t_data *data)
 
 	data->mlx = mlx_init();
 	data->win_infos = (t_win_infos){0};
+	ret = init_wall_assets(data);
+	if (ret < 0)
+	{
+		free_map(data);
+		free_texture_paths(data);
+		return (ret);
+	}
 	if (!init_window(data->mlx, &data->win, &data->win_infos))
 	{
-		free_all(data, -1);
+		free_map(data);
+		free_texture_paths(data);
 		mlx_destroy_context(data->mlx);
 		return (1);
 	}
@@ -47,7 +56,7 @@ static int	ready(t_data *data)
 	if (ret < 0)
 	{
 		throw_error(ret);
-		return (1);
+		return (ret);
 	}
 	return (ret);
 }
@@ -95,7 +104,7 @@ int	main(int ac, char **av)
 			return (1);
 		}
 	}
-	else if (ac == 2 && ft_strncmp(av[1], "seed\0", 5) == 0)// changer ca pour gen une seed aleatoire que si ac == 2 et av[1] == "seed"
+	else if (ac == 2 && ft_strncmp(av[1], "seed\0", 5) == 0)
 	{
 		seed = gen_seed();
 		data = main_proc(seed);
@@ -121,13 +130,14 @@ int	main(int ac, char **av)
 	if (data->map == NULL)
 		return (1);
 	ret = ready(data);
-	display_map_data(*data);
-	display_player_data(data->player);
 	if (ret < 0)
 		return (ret);
 	ret = process(data);
 	if (ret < 0)
 		throw_error(ret);
-	clean_exit(data);
+	if (ret == -ERROR_LOAD_ASSET)
+		clean_exit(data, false);
+	else
+		clean_exit(data, true);
 	return (ret < 0);
 }

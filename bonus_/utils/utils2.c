@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 14:19:36 by von               #+#    #+#             */
-/*   Updated: 2026/06/02 15:00:32 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 16:39:49 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/bonus.h"
+#include "../includes/debug.h"
 
 void	set_default(t_data *data)
 {
@@ -20,4 +21,5 @@ void	set_default(t_data *data)
 	data->texture[1] = (t_texture_path){.path = "assets/bluestone.png", .dir = SO};
 	data->texture[2] = (t_texture_path){.path = "assets/greystone.png", .dir = WE};
 	data->texture[3] = (t_texture_path){.path = "assets/greystone.png", .dir = EA};
+	
 }

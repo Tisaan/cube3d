@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_proc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 15:24:28 by von               #+#    #+#             */
-/*   Updated: 2026/06/02 15:20:28 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 16:41:34 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ bool	generate_map(t_map_simu *map, long int seed)
 	link_zero(map);
 	place_struct(map, str_seed);
 	apply_wall(map);
-	place_door(map);
+	//place_door(map);
 	free(str_seed);
 	if (map_empty(map))
 	{

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: von <von@student.42.fr>                    +#+  +:+       +#+         #
+#    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/02 14:49:39 by von              ###   ########.fr        #
+#    Updated: 2026/06/02 17:46:07 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC_PARSING = 	path.c \
 				parser_utils.c \
 				init.c \
 				map_utils.c \
-				map_utils2.c \
+				map_utils2.c
 
 SRC_UTILS =		free.c \
 				debug.c \
@@ -80,15 +80,15 @@ SUB_DIR = parsing utils hooks raycast player generation
 
 else
 
-SRC_PARSING = 	path.c \
-				parser.c \
-				map.c \
-				error.c \
-				map_data.c \
-				parser_utils.c \
+SRC_PARSING = 	error.c \
 				init.c \
+				map_data.c \
 				map_utils.c \
 				map_utils2.c \
+				map.c \
+				parser_utils.c \
+				parser.c \
+				path.c \
 
 SRC_UTILS =		free.c \
 				debug.c \
@@ -107,9 +107,6 @@ SRC_HOOKS = hooks.c
 SRC_PLAYER = move.c \
 			 rotate.c
 
-SRC_GEN = 
-
-
 SUB_DIR = parsing utils hooks raycast player
 
 endif
@@ -120,7 +117,7 @@ VPATH := $(DIR) \
 
 
 ifeq ($(MAKECMDGOALS), bonus)
-	SRCS = main.c main_proc.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER) $(SRC_GEN)
+	SRCS = main.c main_proc.c $(SRC_UTILS) $(SRC_PARSING) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER) $(SRC_GEN)
 else
 	SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER)
 endif
@@ -182,7 +179,7 @@ $(OBJ_DIR)/%.o : %.c
 	
 clean: libclean
 	@printf "$(RED)🧹 Cleaning...$(NC)\n"
-	@rm -rf $(OBJS)
+	@rm -rf ./obj/
 
 libclean:
 	@printf "$(RED)🧹 Cleaning... lib-ft$(NC)\n"

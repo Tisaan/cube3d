@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 15:22:52 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 14:46:03 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,5 @@ t_map		*convert_map_simu_to_map(t_map_simu *map);
 
 //----------[main_proc.c]-------
 t_data	*main_proc(long int seed);
-
-//----------[utils/utils.c]-----
-void	set_default(t_data *data);
 
 #endif

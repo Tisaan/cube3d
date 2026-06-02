@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 14:46:51 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 10:56:22 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:21 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,27 @@ int	check_char_present_map(char *line, int *find, int len)
 	return (1);
 }
 
+static bool	check_end_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+		i++;
+	i--;
+	if (line[i] == '1')
+		return (true);
+	else if (line[i] == ' ')
+	{
+		while (i >= 0 && line[i] == ' ')
+			i--;
+		if (i >= 0 && line[i] == '1')
+			return (true);
+		return (false);
+	}
+	return (false);
+}
+
 int	line_wall(t_map *map, int *ij, int *first, int *find)
 {
 	while (map->grid[ij[0]][ij[1]])
@@ -47,7 +68,7 @@ int	line_wall(t_map *map, int *ij, int *first, int *find)
 			return (-INV_WALL_MAP);
 		else
 			*first = 0;
-		if (!around(map, ij[0], ij[1]))
+		if (!check_end_line(map->grid[ij[0]]) || !around(map, ij[0], ij[1]))
 			return (-INV_WALL_MAP);
 		if (ft_isoneof(map->grid[ij[0]][ij[1]], "NEWS") && *find == 0)
 		{
@@ -63,4 +84,22 @@ int	line_wall(t_map *map, int *ij, int *first, int *find)
 		*first = 0;
 	}
 	return (0);
+}
+
+bool	around_step(t_map *map, int x, size_t y)
+{
+	if ((int)y * WALL_SIZE <= map->width
+		&& ft_isoneof(map->grid[x + 1][y], " \t\n"))
+		return (false);
+	else if (x + 1 <= map->height / WALL_SIZE
+		&& ft_isoneof(map->grid[x + 1][y - 1], " \t\n"))
+		return (false);
+	else if ((int)(y + 1 * WALL_SIZE) <= map->width
+		&& ft_isoneof(map->grid[x + 1][y + 1], " \t\n"))
+		return (false);
+	else if (ft_isoneof(map->grid[x][y - 1], " \t\n"))
+		return (false);
+	else if (ft_isoneof(map->grid[x][y + 1], " \t\n"))
+		return (false);
+	return (true);
 }

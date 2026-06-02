@@ -19,5 +19,6 @@ void	display_player_data(t_player *player);
 void	init_pip_boy(t_img *img, t_data *data);
 void	ft_print_error(const char *msg);
 int		render_2D_map(t_data *data);
+void	display_texture_id(int id);
 
 #endif

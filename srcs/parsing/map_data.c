@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/02 16:25:31 by tseche           ###   ########.fr       */
+/*   Created: 20../01 11:07:21 by pcaplat           #+#    #+#             */
+/*   Updated: 20../02 16:25:31 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
-#include "../../includes/utils.h"
-#include "../../includes/debug.h"
+#include "../includes/cub3d.h"
+#include "../includes/utils.h"
+#include "../includes/debug.h"
 
 static int	parse_colors(t_data *data, char *line, int *i, int id)
 {
