@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
+#    By: von <von@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/28 13:21:32 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/06/02 14:49:39 by von              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,59 @@ CC	= cc
 
 # --- Directory ---
 
-OBJ_DIR = ./obj
-
 INC_DIR = ./includes
 
-SRC_DIR = ./srcs/
-SUB_DIR = parsing utils hooks raycast player
+SRC_DIR = srcs
+BONUS_DIR = bonus_
 
-VPATH = $(SRC_DIR) \
-	$(addprefix $(SRC_DIR)/, $(SUB_DIR))
+DIR = $(SRC_DIR)
+ifeq ($(MAKECMDGOALS), bonus)
+	DIR = $(BONUS_DIR)
+endif
+
+OBJ_DIR = ./obj/$(DIR)
+
+ifeq ($(MAKECMDGOALS), bonus)
+SRC_PARSING = 	path.c \
+				parser.c \
+				map.c \
+				error.c \
+				map_data.c \
+				parser_utils.c \
+				init.c \
+				map_utils.c \
+				map_utils2.c \
+
+SRC_UTILS =		free.c \
+				debug.c \
+				vectors.c \
+				utils2.c \
+				utils.c
+
+SRC_RAYCAST =	player.c \
+				render.c \
+				ray.c \
+				ray_utils.c \
+				dda.c \
+				objs.c
+
+SRC_HOOKS = hooks.c
+
+SRC_PLAYER = move.c \
+			 rotate.c
+
+SRC_GEN =   door_bonus.c \
+			free_bonus.c \
+			gen_seed_bonus.c \
+			method_bonus.c \
+			spawn_bonus.c \
+			utils_bonus.c \
+			utils2_bonus.c \
+			wall_bonus.c
+
+SUB_DIR = parsing utils hooks raycast player generation
+
+else
 
 SRC_PARSING = 	path.c \
 				parser.c \
@@ -63,7 +107,23 @@ SRC_HOOKS = hooks.c
 SRC_PLAYER = move.c \
 			 rotate.c
 
-SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER)
+SRC_GEN = 
+
+
+SUB_DIR = parsing utils hooks raycast player
+
+endif
+
+
+VPATH := $(DIR) \
+	$(addprefix $(DIR)/, $(SUB_DIR))
+
+
+ifeq ($(MAKECMDGOALS), bonus)
+	SRCS = main.c main_proc.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER) $(SRC_GEN)
+else
+	SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER)
+endif
 
 # --- MLX ---
 
@@ -93,6 +153,8 @@ OBJS = ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
 all:  libs $(NAME)
 
+bonus: libs $(NAME)
+
 libs:
 	@printf "$(BLUE)📦 Building library in $(LIBDIR)...$(NC)\n"
 	@$(LIBMAKE)
@@ -116,6 +178,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\r\033[2K$(CYAN)📝 Compiling   %s$(R)" "$<"
 	
 clean: libclean
 	@printf "$(RED)🧹 Cleaning...$(NC)\n"
@@ -145,4 +208,4 @@ help:
 	@printf "$(PURPLE)credit:$(NC) Show the people who help with this project\n"
 	
 
-.PHONY: all libs clean libclean fclean re help
+.PHONY: all libs clean bonus libclean fclean re help

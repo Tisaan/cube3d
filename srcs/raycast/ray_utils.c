@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 11:40:09 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/28 11:44:21 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 16:33:48 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/raycast.h"
+#include "../includes/raycast.h"
 
 void	set_ray_side(t_ray *ray, t_vect *tile, t_vect step)
 {

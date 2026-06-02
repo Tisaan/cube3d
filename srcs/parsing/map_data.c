@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   map_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:07:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/29 15:12:26 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 16:31:59 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
-#include "../../includes/utils.h"
+#include "../includes/cub3d.h"
+#include "../includes/utils.h"
 
 static int	parse_colors(t_data *data, char *line, int *i, int id)
 {

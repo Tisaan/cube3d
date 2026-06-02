@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   objs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:11:53 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/28 13:22:47 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 16:33:42 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/raycast.h"
-#include "../../includes/objs.h"
+#include "../includes/raycast.h"
+#include "../includes/objs.h"
 
 t_obj	get_obj(t_win_infos *win, float wall_dist)
 {

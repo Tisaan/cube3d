@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:11:39 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/28 12:37:44 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 16:34:10 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 #include <sys/time.h>
 
-float	ft_abs(float nb)
+inline float	ft_abs(float nb)
 {
 	if (nb < 0)
 		return (nb * -1);
