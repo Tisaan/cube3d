@@ -15,8 +15,7 @@
 const char	**get_tab_error(void)
 {
 	static const char	*error[ERROR_MAX] = {
-		("WTF an error has been "
-			"thrown, but no error was detected\n"),
+		"WTF an error has been thrown\n",
 		"the map provided is not a .cub file\n",
 		"An unrecognize character has been found\n",
 		"the map is empty\n",
@@ -30,12 +29,13 @@ const char	**get_tab_error(void)
 		"Failed to load wall asset\n",
 		"Invalid image size\n",
 		"Invalid texture path provided\n",
+		"A texture path is defined multiple times\n",
 		"A file couldn't be opened\n",
 		"A texture file couldn't be opened\n",
 		"The path of one of the texture is invalid\n",
 		("Invalid color format, make sure to use only"
 			" 3 unsigned short numbers !\n"),
-		"Malloc Error",
+		"Malloc Error\n",
 	};
 
 	return ((const char **)error);

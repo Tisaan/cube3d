@@ -57,6 +57,29 @@ int	len_path(char *line, int quote[2])
 	return (line - cpy);
 }
 
+int	set_texture_path(t_texture_path *textures, char *line, int id, int *i)
+{
+	char	*path;
+	int		j;
+
+	j = 0;
+	while (j < 4)
+	{
+		if (textures[j].path)
+		{
+			if ((t_direction_id)id == textures[j].dir)
+				return (-ERROR_MULTIPLE_TEXTURE);
+		}
+		j++;
+	}
+	path = get_path(&line[*i]);
+	if (!path)
+		return (-ERROR_MALLOC);
+	textures[id].dir = id;
+	textures[id].path = path;
+	return (true);
+}
+
 char	*get_path(char *line)
 {
 	int		quote[2];
