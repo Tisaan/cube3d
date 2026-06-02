@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 11:02:59 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:09 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,17 @@ static int	ready(t_data *data)
 
 	data->mlx = mlx_init();
 	data->win_infos = (t_win_infos){0};
+	ret = init_wall_assets(data);
+	if (ret < 0)
+	{
+		free_map(data);
+		free_texture_paths(data);
+		return (ret);
+	}
 	if (!init_window(data->mlx, &data->win, &data->win_infos))
 	{
-		free_all(data, -1);
+		free_map(data);
+		free_texture_paths(data);
 		mlx_destroy_context(data->mlx);
 		return (1);
 	}
@@ -47,7 +55,7 @@ static int	ready(t_data *data)
 	if (ret < 0)
 	{
 		throw_error(ret);
-		return (1);
+		return (ret);
 	}
 	return (ret);
 }
@@ -87,5 +95,9 @@ int	main(int ac, char **av)
 	ret = process(&data);
 	if (ret < 0)
 		throw_error(ret);
+	if (ret == -ERROR_LOAD_ASSET)
+		clean_exit(&data, false);
+	else
+		clean_exit(&data, true);
 	return (ret < 0);
 }

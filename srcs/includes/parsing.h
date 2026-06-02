@@ -32,6 +32,7 @@ typedef enum e_error_map
 	ERROR_LOAD_ASSET,
 	ERROR_IMG_SIZE,
 	ERROR_INV_PATH_TEXTURE,
+	ERROR_MULTIPLE_TEXTURE,
 	ERROR_OPEN,
 	ERROR_OPEN_TEXTURE,
 	ERROR_PATH_TEXTURE,
@@ -82,7 +83,8 @@ typedef struct s_map
 }				t_map;
 
 t_data	parse(char *map_path);
-int		get_map(int fd, t_map *data);
+int		get_map(int fd, t_map *data, int i);
+bool	around_step(t_map *map, int x, size_t y);
 int		walled(t_map *map);
 int		check_map(t_map *map);
 int		parse_map_data(int fd, t_data *data, int *count);
@@ -90,11 +92,13 @@ int		parse_map_data(int fd, t_data *data, int *count);
 // --- INIT ---
 
 void	init_map_data(t_data *data);
+int		init_wall_assets(t_data *data);
 int		init_game(t_data *data);
 
 // --- PATH ---
 char	*get_path(char *line);
 int		map_size(char *name);
+int		set_texture_path(t_texture_path *textures, char *line, int id, int *i);
 
 // --- ERROR --- 
 void	throw_error(int err);

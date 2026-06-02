@@ -1,0 +1,8 @@
+*.o
+*.a
+*.so
+vgcore.*
+core.*
+*.core
+cub3D
+run.sh

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/01 16:31:02 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:16 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	get_and_check_map(t_data *data, int fd)
 {
 	int	err;
 
-	err = get_map(fd, data->map);
+	err = get_map(fd, data->map, 0);
 	if (err < 0)
 		return (err);
 	err = check_map(data->map);
@@ -61,6 +61,7 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 	err = parse_map_data(fd, data, &count);
 	if (err < 0)
 	{
+		clear_gnl_buffer(fd);
 		close(fd);
 		throw_error(err);
 		return (NULL);
@@ -69,6 +70,7 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 	err = get_and_check_map(data, fd);
 	if (err < 0)
 	{
+		clear_gnl_buffer(fd);
 		throw_error(err);
 		return (NULL);
 	}

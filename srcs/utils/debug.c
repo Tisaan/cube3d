@@ -14,6 +14,17 @@
 #include "../includes/player.h"
 
 
+void	display_texture_id(int id)
+{
+	if (id == EA)
+		printf("EA");
+	if (id == WE)
+		printf("WE");
+	if (id == SO)
+		printf("SO");
+	if (id == NO)
+		printf("NO");
+}
 
 void	display_player_data(t_player *player)
 {

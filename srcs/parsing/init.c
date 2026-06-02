@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/01 16:32:43 by von              ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:34 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,37 @@ void	init_map_data(t_data *data)
 	data->plans_color[1].type = EMPT;
 }
 
+static void	destroy_wall_assets(t_data *data, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i - 1)
+		mlx_destroy_image(data->mlx, data->wall_assets[j++]);
+}
+
 int	init_wall_assets(t_data *data)
 {
 	int	i;
 	int	width;
 	int	height;
+	int	ret;
 
 	i = 0;
-	while (i < 4)
+	ret = 0;
+	while (i < 4 && ret == 0)
 	{
 		data->wall_assets[i] = mlx_new_image_from_file(data->mlx,
 				data->texture[i].path, &width, &height);
 		if (data->wall_assets[i] == MLX_NULL_HANDLE)
-			return (-ERROR_LOAD_ASSET);
+			ret = -ERROR_LOAD_ASSET;
 		if (width != WALL_SIZE || height != WALL_SIZE)
-			return (-ERROR_IMG_SIZE);
+			ret = -ERROR_IMG_SIZE;
 		i++;
 	}
-	return (NO_ERROR);
+	if (ret < 0)
+		destroy_wall_assets(data, i);
+	return (ret);
 }
 
 int	init_game(t_data *data)
@@ -49,9 +62,9 @@ int	init_game(t_data *data)
 	ret = init_player(data);
 	if (ret < 0)
 		return (ret);
-	ret = init_wall_assets(data);
-	if (ret < 0)
-		return (ret);
+	// ret = init_wall_assets(data);
+	// if (ret < 0)
+	// 	return (ret);
 	data->frame = mlx_new_image(data->mlx, data->win_infos.width,
 			data->win_infos.height);
 	if (data->frame == MLX_NULL_HANDLE)
