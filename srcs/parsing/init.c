@@ -62,9 +62,9 @@ int	init_game(t_data *data)
 	ret = init_player(data);
 	if (ret < 0)
 		return (ret);
-	ret = init_wall_assets(data);
-	if (ret < 0)
-		return (ret);
+	// ret = init_wall_assets(data);
+	// if (ret < 0)
+	// 	return (ret);
 	data->frame = mlx_new_image(data->mlx, data->win_infos.width,
 			data->win_infos.height);
 	if (data->frame == MLX_NULL_HANDLE)

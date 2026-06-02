@@ -93,6 +93,7 @@ int		parse_map_data(int fd, t_data *data, int *count);
 // --- INIT ---
 
 void	init_map_data(t_data *data);
+int		init_wall_assets(t_data *data);
 int		init_game(t_data *data);
 
 // --- PATH ---
