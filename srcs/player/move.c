@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:15:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/01 16:33:26 by von              ###   ########.fr       */
+/*   Updated: 2026/05/22 16:54:07 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-#include "../includes/player.h"
+#include "../../includes/cub3d.h"
+#include "../../includes/player.h"
 
 static void	switch_player_dest(t_player *p, float speed, t_keys keys)
 {

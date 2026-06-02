@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 16:34:05 by von              ###   ########.fr       */
+/*   Updated: 2026/05/29 15:05:44 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	free_map(t_data *data)
 {
@@ -59,7 +59,6 @@ void	free_all(t_data *data, int fd)
 	free_texture_paths(data);
 	if (data->player)
 		free(data->player);
-	free(data);
 }
 
 void	clean_exit(t_data *data)

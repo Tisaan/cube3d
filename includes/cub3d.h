@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 16:36:36 by von              ###   ########.fr       */
+/*   Updated: 2026/05/21 12:59:12 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 #include <sys/time.h>
 #include <math.h>
 
-#include "../../libft/libft.h"
-#include "../../gnl/get_next_line.h"
-#include "../../mlx/includes/mlx.h"
-#include "../../mlx/includes/mlx_extended.h"
+#include "../libft/libft.h"
+#include "../gnl/get_next_line.h"
+#include "../mlx/includes/mlx.h"
+#include "../mlx/includes/mlx_extended.h"
 
 #include "parsing.h"
 #include "player.h"
