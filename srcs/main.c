@@ -37,9 +37,17 @@ static int	ready(t_data *data)
 
 	data->mlx = mlx_init();
 	data->win_infos = (t_win_infos){0};
+	ret = init_wall_assets(data);
+	if (ret < 0)
+	{
+		free_map(data);
+		free_texture_paths(data);
+		return (ret);
+	}
 	if (!init_window(data->mlx, &data->win, &data->win_infos))
 	{
-		free_all(data, -1);
+		free_map(data);
+		free_texture_paths(data);
 		mlx_destroy_context(data->mlx);
 		return (1);
 	}
@@ -82,8 +90,9 @@ int	main(int ac, char **av)
 	if (data.map == NULL)
 		return (1);
 	ret = ready(&data);
-	if (ret >= 0)
-		ret = process(&data);
+	if (ret < 0)
+		return (ret);
+	ret = process(&data);
 	if (ret < 0)
 		throw_error(ret);
 	if (ret == -ERROR_LOAD_ASSET)

@@ -32,6 +32,7 @@ typedef enum e_error_map
 	ERROR_LOAD_ASSET,
 	ERROR_IMG_SIZE,
 	ERROR_INV_PATH_TEXTURE,
+	ERROR_MULTIPLE_TEXTURE,
 	ERROR_OPEN,
 	ERROR_OPEN_TEXTURE,
 	ERROR_PATH_TEXTURE,
@@ -92,11 +93,13 @@ int		parse_map_data(int fd, t_data *data, int *count);
 // --- INIT ---
 
 void	init_map_data(t_data *data);
+int		init_wall_assets(t_data *data);
 int		init_game(t_data *data);
 
 // --- PATH ---
 char	*get_path(char *line);
 int		map_size(char *name);
+int		set_texture_path(t_texture_path *textures, char *line, int id, int *i);
 
 // --- ERROR --- 
 void	throw_error(int err);

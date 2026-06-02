@@ -12,6 +12,7 @@
 
 #include "../../includes/cub3d.h"
 #include "../../includes/utils.h"
+#include "../../includes/debug.h"
 
 static int	parse_colors(t_data *data, char *line, int *i, int id)
 {
@@ -33,6 +34,8 @@ static int	parse_colors(t_data *data, char *line, int *i, int id)
 
 static int	parse_texture(t_data *data, char *line, int *i, int id)
 {
+	int	ret;
+
 	if (line && line[*i] && id != INV && id != CEILING && id != FLOOR)
 	{
 		*i += 2;
@@ -42,12 +45,11 @@ static int	parse_texture(t_data *data, char *line, int *i, int id)
 			free(line);
 			return (-ERROR_INV_PATH_TEXTURE);
 		}
-		data->texture[id].dir = id;
-		data->texture[id].path = get_path(&line[*i]);
-		if (data->texture[id].path == NULL)
+		ret = set_texture_path(data->texture, line, id, i);
+		if (ret < 0)
 		{
 			free(line);
-			return (-ERROR_MALLOC);
+			return (ret);
 		}
 	}
 	if (id == INV)
