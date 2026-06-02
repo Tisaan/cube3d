@@ -4,10 +4,17 @@
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
 /*   Updated: 2026/05/07 11:39:25 by tseche           ###   ########.fr       */
+=======
+/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/22 16:54:02 by pcaplat          ###   ########.fr       */
+>>>>>>> parent of 75ab406 (conflict when merge seed)
 =======
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
