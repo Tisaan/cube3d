@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/22 17:28:35 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 18:19:35 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,25 @@ int	validate(char *line, t_map *data, int i, int *find)
 	int		len;
 	int		res;
 
-	len = ft_strlen(line) - 1;
+	len = ft_strlen(line);
 	res = check_char_present_map(line, find, len);
 	if (res < 0)
 		return (res);
 	if (len > data->width)
 		data->width = len;
-	data->grid[i] = ft_strndup(line, 0, ft_strlen(line) - 2);
+	data->grid[i] = ft_strdup(line);
 	free(line);
 	if (!data->grid[i])
 		return (-ERROR_MALLOC);
 	return (0);
 }
 
+//return (-(*find + 3 + *find > 1));
+// reviens a:
+// if (*find > 1)
+// 	return (-INV_CUT_MAP);
+// if (!*find)
+// 	return (-EMPT_MAP);
 int	get_map(int fd, t_map *data)
 {
 	char	*line;
@@ -80,5 +86,6 @@ int	get_map(int fd, t_map *data)
 	}
 	if (!*find || *find > 1)
 		return ((*find + 3) * -1);
+	
 	return (1);
 }

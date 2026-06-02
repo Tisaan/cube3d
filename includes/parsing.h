@@ -6,14 +6,15 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 15:07:15 by von              ###   ########.fr       */
+/*   Updated: 2026/05/22 02:07:04 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+
 #include <stddef.h>
-#include <stdbool.h>
+
 // --- ERROR ---
 
 typedef enum e_error_map
@@ -30,7 +31,6 @@ typedef enum e_error_map
 	MISS_TEXTURE,
 	MISS_COLOR,
 	ERROR_LOAD_ASSET,
-	ERROR_IMG_SIZE,
 	ERROR_INV_PATH_TEXTURE,
 	ERROR_OPEN,
 	ERROR_OPEN_TEXTURE,
@@ -90,7 +90,6 @@ int		parse_map_data(int fd, t_data *data, int *count);
 // --- INIT ---
 
 void	init_map_data(t_data *data);
-int		init_game(t_data *data);
 
 // --- PATH ---
 char	*get_path(char *line);
@@ -109,5 +108,4 @@ int		check_char_present_map(char *line, int *find_end, int len);
 int		line_wall(t_map *map, int *ij, int *first, int *find);
 bool	around(t_map *map, int x, size_t y);
 int		get_dir(int c);
-
 #endif

@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/05/28 13:21:32 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/05/06 18:54:47 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ_DIR = ./obj
 INC_DIR = ./includes
 
 SRC_DIR = ./srcs/
-SUB_DIR = parsing utils hooks raycast player
+SUB_DIR = parsing utils hooks
 
 VPATH = $(SRC_DIR) \
 	$(addprefix $(SRC_DIR)/, $(SUB_DIR))
@@ -45,25 +45,14 @@ SRC_PARSING = 	path.c \
 				init.c \
 				map_utils.c \
 				map_utils2.c \
+				player.c
 
 SRC_UTILS =		free.c \
 				debug.c \
-				vectors.c \
-				utils.c
-
-SRC_RAYCAST =	player.c \
-				render.c \
-				ray.c \
-				ray_utils.c \
-				dda.c \
-				objs.c
 
 SRC_HOOKS = hooks.c
 
-SRC_PLAYER = move.c \
-			 rotate.c
-
-SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER)
+SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS)
 
 # --- MLX ---
 
@@ -110,7 +99,7 @@ libs:
 
 $(NAME): $(OBJS)
 	@printf "$(BLUE)🔗 Creating Executable $@...$(NC)\n"
-	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJS) $(MLX) -L$(LIBDIR) -l:$(LIBNAME) -L$(GNLDIR) -l:$(GNLNAME) -lm -lSDL2 -o $(NAME)
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJS) $(MLX) -L$(LIBDIR) -l:$(LIBNAME) -L$(GNLDIR) -l:$(GNLNAME) -lSDL2 -o $(NAME)
 	@printf "$(GREEN)✅ Created $@$(NC)\n"
 	
 $(OBJ_DIR)/%.o : %.c
@@ -126,8 +115,8 @@ libclean:
 	@make -C $(LIBDIR) fclean --no-print-directory
 	@printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
 	@make -C $(GNLDIR) fclean --no-print-directory
-	@printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
-	@make -C $(MLXDIR) fclean --no-print-directory
+# @printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
+# @make -C $(MLXDIR) fclean --no-print-directory
 
 fclean: clean libclean
 	@printf "$(RED)🗑️ Removing Executable $(NAME)...$(NC)\n"

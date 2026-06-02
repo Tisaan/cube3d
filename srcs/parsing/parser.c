@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/29 15:06:23 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/05 19:05:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_map	*init_map_metadata(int size)
 		throw_error(ERROR_MALLOC);
 	if (!map)
 		return (NULL);
+	map->height = size;
 	map->grid = ft_calloc(sizeof(char *), (size + 1));
 	if (!map->grid)
 		throw_error(-ERROR_MALLOC);
@@ -34,19 +35,6 @@ t_map	*init_map_metadata(int size)
 		return (NULL);
 	map->start = NULL;
 	return (map);
-}
-
-static int	get_and_check_map(t_data *data, int fd)
-{
-	int	err;
-
-	err = get_map(fd, data->map);
-	if (err < 0)
-		return (err);
-	err = check_map(data->map);
-	if (err < 0)
-		return (err);
-	return (NO_ERROR);
 }
 
 t_data	*parse_map(int fd, t_data *data, int size_file)
@@ -65,43 +53,25 @@ t_data	*parse_map(int fd, t_data *data, int size_file)
 		throw_error(err);
 		return (NULL);
 	}
-	data->map->height = size_file - count;
-	err = get_and_check_map(data, fd);
+	err = get_map(fd, data->map);
 	if (err < 0)
-	{
 		throw_error(err);
+	if (err < 0)
 		return (NULL);
-	}
+	err = check_map(data->map);
+	if (err < 0)
+		throw_error(err);
+	if (err < 0)
+		return (NULL);
 	return (data);
-}
-
-static int	parse_step(t_data *data, char *map_path, int size)
-{
-	int		fd;
-	void	*ptr;
-
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-	{
-		throw_error(ERROR_OPEN);
-		return (ERROR_OPEN);
-	}
-	ptr = parse_map(fd, data, size);
-	if (!ptr)
-	{
-		free_map(data);
-		free_texture_paths(data);
-		close(fd);
-		return (-1);
-	}
-	close(fd);
-	return (0);
 }
 
 t_data	parse(char *map_path)
 {
 	t_data	data;
+	int		fd;
 	int		size_file;
+	void	*truc;
 
 	data.map = NULL;
 	if (!ft_strendwith(map_path, ".cub"))
@@ -115,7 +85,19 @@ t_data	parse(char *map_path)
 		throw_error(size_file);
 		return ((t_data){0});
 	}
-	if (parse_step(&data, map_path, size_file) < 0)
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+	{
+		throw_error(ERROR_OPEN);
 		return ((t_data){0});
+	}
+	truc = parse_map(fd, &data, size_file);
+	if (!truc)
+	{
+		free_all(&data, fd);
+		close(fd);
+		return ((t_data ){0});
+	}
+	close(fd);
 	return (data);
 }

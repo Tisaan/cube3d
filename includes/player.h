@@ -6,39 +6,24 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 16:07:32 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/05/06 19:22:29 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
-# ifndef PLAYER_SPEED
-#  define PLAYER_SPEED	200.0f
-# endif
-# ifndef PLAYER_RADIUS
-#  define PLAYER_RADIUS 16
-# endif
-# ifndef PLAYER_ROT_SPEED
-#  define PLAYER_ROT_SPEED	3.0f
-# endif
-
-#include "parsing.h"
 # include "vectors.h"
-# include "../mlx/includes/mlx.h"
 
 typedef struct s_data	t_data;
 
 typedef struct	s_player
 {
-	t_vect		camera;
 	t_vect		pos;
-	t_vect		dir;
-	t_vect		dest;
 	int			size;
+	float		aov; // angle of view
+	float		fov; //convention : 90deg mais 60deg fine
 }				t_player;
 
-int		init_player(t_data *data);
-void	update_player_pos(void *param);
-void	update_player_rot(void *param);
+int	init_player(t_data *data);
 
 #endif

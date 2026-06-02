@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:51:18 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/30 15:07:19 by von              ###   ########.fr       */
+/*   Updated: 2026/05/07 11:39:25 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 	float	y;
 }			t_vect;
 
-void	set_vect(t_vect *vect, float x, float y);
-void	rotate_vect(t_vect *vect, float angle);
-t_vect	vect_multiply(const t_vect v, float factor);
-t_vect	vect_sum(const t_vect v1, const t_vect v2);
-void	normalize(t_vect *vect, float speed);
+typedef struct	s_vect3
+{
+	float	x;
+	float	y;
+	float	z;
+}			t_vect3;
 
 #endif

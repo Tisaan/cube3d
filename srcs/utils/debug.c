@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/30 15:07:28 by von              ###   ########.fr       */
+/*   Updated: 2026/05/09 17:52:21 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,35 @@
 #include "../../includes/player.h"
 
 
+int	render_2D_map(t_data *data)
+{
+	t_map		*map;
+	int			x;
+	int			y;
+
+	map = data->map;
+	y = 0;
+	while (map->grid[y])
+	{
+		x = 0;
+		while (map->grid[y][x])
+		{
+			if (map->grid[y][x] == '1')
+				mlx_put_image_to_window(data->mlx, data->win, data->wall_assets[0], x * WALL_SIZE, y * WALL_SIZE);
+			x++;
+		}
+		y++;
+	}
+	// mlx_destroy_image(data->mlx, wall);
+	return (NO_ERROR);
+}
 
 void	display_player_data(t_player *player)
 {
 	printf("=== PLAYER DATA ===\n");
-	printf("player start: (%f, %f)\n", player->pos.x, player->pos.y);
+	printf("player start: (%f, %f) facing: %f\n", player->pos.x, player->pos.y, player->aov);
 	printf("size: %d\n", player->size);
+	printf("fov: %f\n", player->fov);
 }
 
 void	display_map_data(t_data data)
