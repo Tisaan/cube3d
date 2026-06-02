@@ -6,53 +6,72 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/28 19:42:21 by tseche           ###   ########.fr       */
+/*   Updated: 2026/05/06 20:12:34 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
+# ifndef WALL_SIZE
+#  define WALL_SIZE 64
+# endif
+# ifndef FOV_ANGLE
+#  define FOV_ANGLE 60
+# endif
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <sys/time.h>
 #include <math.h>
 
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
-#include "../mlx_linux/mlx.h"
+#include "../mlx/includes/mlx.h"
+#include "../mlx/includes/mlx_extended.h"
 
 #include "parsing.h"
+#include "player.h"
 
-typedef struct s_win
-{
-	//image
-	//win
-	//
-}				t_win;
+typedef mlx_window_create_info	t_win_infos;
 
-typedef struct s_vect
+typedef enum	e_key_code
 {
-	float	x;
-	float	y;
-	float	z;
-}				t_vect;
+	Q_KEY = 20,
+	ESC_KEY = 41,
+	F_KEY = 9,
+}	t_key_code;
 
-typedef struct s_map
+typedef enum	e_win_event
 {
-	char	**map;
-	t_vect	*player_pos;
-}				t_map;
+	WIN_CLOSE = 0,
+	WIN_RESIZE = 8,
+}	t_win_event;
 
 typedef struct s_data
 {
+	mlx_context		mlx;
+	mlx_window		win;
+	mlx_image		wall_assets[4];
+	t_win_infos		win_infos;
 	t_map			*map;
-	t_win 			*windows;
-	t_texture_path 	texture[4];
-	t_pceilfloor	floorceil[2];
-	
+	t_texture_path	texture[4];
+	t_prgb			plans_color[2];
+	t_player		*player;
 }				t_data;
+
+typedef struct	s_img
+{
+	mlx_image	asset;
+	char		*path;
+	int			width;
+	int			height;
+}				t_img;
+
+// Hooks
+void	key_hooks(int key, void *param);
+void	window_hook(int event, void *param);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/04/28 19:38:02 by tseche           ###   ########.fr        #
+#    Updated: 2026/05/06 18:54:47 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,29 +21,45 @@ NC     := \033[0m # No Color
 
 # --- Compilation ---
 NAME = cub3D
-CFLAGS = -Wall -Werror -Wextra -g 
+CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes
 CC	= cc
 
 # --- Directory ---
 
+OBJ_DIR = ./obj
+
+INC_DIR = ./includes
+
 SRC_DIR = ./srcs/
-SUB_DIR = parsing graphic
+SUB_DIR = parsing utils hooks
 
 VPATH = $(SRC_DIR) \
 	$(addprefix $(SRC_DIR)/, $(SUB_DIR))
 
-SRC_PARSING = utils.c
-SRC_GRAPHIC = 
+SRC_PARSING = 	path.c \
+				parser.c \
+				map.c \
+				error.c \
+				map_data.c \
+				parser_utils.c \
+				init.c \
+				map_utils.c \
+				map_utils2.c \
+				player.c
 
-SRCS = main.c $(SRC_PARSING) $(SRC_GRAPHIC)
+SRC_UTILS =		free.c \
+				debug.c \
+
+SRC_HOOKS = hooks.c
+
+SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS)
 
 # --- MLX ---
 
 #gere si MLX est pas present
-MLXNAME = libmlx.a
-MLXDIR = ./mlx_linux
+MLXNAME = libmlx.so
+MLXDIR = mlx
 MLX = $(MLXDIR)/$(MLXNAME)
-MLXMAKE = $(MAKE) --no-print-directory -C $(MLXDIR) -j
 
 # --- LIBFT --- 
 
@@ -62,55 +78,60 @@ GNLMAKE = $(MAKE) --no-print-directory -C $(GNLDIR) -j
 
 # --- LOGIC ---
 
-OBJS = $(SRCS:%.c=%.o)
+OBJS = ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
 all:  libs $(NAME)
 
 libs:
-	@echo "$(BLUE)📦 Building library in $(LIBDIR)...$(NC)"
+	@printf "$(BLUE)📦 Building library in $(LIBDIR)...$(NC)\n"
 	@$(LIBMAKE)
-	@echo "$(BLUE)📦 Lib_ft created $(NC)"
-	@echo "$(BLUE)📦 Building library in $(GNLDIR)...$(NC)"
+	@printf "$(BLUE)📦 Lib_ft created $(NC)\n"
+
+	@printf "$(BLUE)📦 Building library in $(GNLDIR)...$(NC)\n"
 	@$(GNLMAKE)
-	@echo "$(BLUE)📦 GNL created $(NC)"
-	@test -d "$(MLXDIR)" || git clone https://github.com/42paris/minilibx-linux.git mlx_linux --depth=1
-	@echo "$(BLUE)📦 Building library in $(MLXDIR)...$(NC)"
-	@$(MLXMAKE)
-	@echo "$(BLUE)📦MLX created $(NC)"
+	@printf "$(BLUE)📦 GNL created $(NC)\n"
+	
+	@test -d "$(MLXDIR)" || git clone https://github.com/seekrs/MacroLibX.git mlx
+	@printf "$(BLUE)📦 Building library in $(MLXDIR)...$(NC)\n"
+	@make -s -C $(MLXDIR) -j
+	@printf "$(BLUE)📦MLX created $(NC)\n"
 	
 
 $(NAME): $(OBJS)
-	@echo "$(BLUE)🔗 Creating Executable $@...$(NC)"
-	@$(CC) $(CFLAGS) $(OBJS) -L$(MLXDIR) -l:$(MLXNAME) -lX11 -lm -lXext -L$(LIBDIR) -l:$(LIBNAME) -L$(GNLDIR) -l:$(GNLNAME) -o $(NAME)
-	@echo "$(GREEN)✅ Created $@$(NC)"
+	@printf "$(BLUE)🔗 Creating Executable $@...$(NC)\n"
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJS) $(MLX) -L$(LIBDIR) -l:$(LIBNAME) -L$(GNLDIR) -l:$(GNLNAME) -lSDL2 -o $(NAME)
+	@printf "$(GREEN)✅ Created $@$(NC)\n"
 	
-%.o : %.c
+$(OBJ_DIR)/%.o : %.c
+	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	
 clean: libclean
-	@echo "$(RED)🧹 Cleaning...$(NC)"
+	@printf "$(RED)🧹 Cleaning...$(NC)\n"
 	@rm -rf $(OBJS)
 
 libclean:
-	@echo "$(RED)🧹 Cleaning... lib-ft$(NC)"
+	@printf "$(RED)🧹 Cleaning... lib-ft$(NC)\n"
 	@make -C $(LIBDIR) fclean --no-print-directory
-	@echo "$(RED)🧹 Cleaning... GNL$(NC)"
+	@printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
 	@make -C $(GNLDIR) fclean --no-print-directory
+# @printf "$(RED)🧹 Cleaning... GNL$(NC)\n"
+# @make -C $(MLXDIR) fclean --no-print-directory
 
 fclean: clean libclean
-	@echo "$(RED)🗑️ Removing Executable $(NAME)...$(NC)"
+	@printf "$(RED)🗑️ Removing Executable $(NAME)...$(NC)\n"
 	@rm -rf $(NAME)
 
 re: fclean all
 
 help:
-	@echo "$(PURPLE)=== Makefile Help ===$(NC)"
-	@echo "$(PURPLE)all:$(NC) Build the library"
-	@echo "$(PURPLE)clean:$(NC) Remove object files"
-	@echo "$(PURPLE)fclean:$(NC) Remove object files and library"
-	@echo "$(PURPLE)re:$(NC) Rebuild the library from scratch"
-	@echo "$(PURPLE)help:$(NC) Show this help message"
-	@echo "$(PURPLE)credit:$(NC) Show the people who help with this project"
+	@printf "$(PURPLE)=== Makefile Help ===$(NC)\n"
+	@printf "$(PURPLE)all:$(NC) Build the library\n"
+	@printf "$(PURPLE)clean:$(NC) Remove object files\n"
+	@printf "$(PURPLE)fclean:$(NC) Remove object files and library\n"
+	@printf "$(PURPLE)re:$(NC) Rebuild the library from scratch\n"
+	@printf "$(PURPLE)help:$(NC) Show this help message\n"
+	@printf "$(PURPLE)credit:$(NC) Show the people who help with this project\n"
 	
 
 .PHONY: all libs clean libclean fclean re help
