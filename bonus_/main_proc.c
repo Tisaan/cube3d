@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 15:24:28 by von               #+#    #+#             */
-/*   Updated: 2026/06/02 16:41:34 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/03 13:07:47 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,12 +254,12 @@ bool	generate_map(t_map_simu *map, long int seed)
 		throw_error_bonus(ERR_MALLOC_BNS);
 		return (false);
 	}
-	int_to_bin_str(seed, (char *)str_seed);
+	int_to_bin_str(seed, str_seed);
 	gen_map_algo(map, str_seed, val, 0);
 	link_zero(map);
 	place_struct(map, str_seed);
 	apply_wall(map);
-	//place_door(map);
+	place_door(map);
 	free(str_seed);
 	if (map_empty(map))
 	{
@@ -314,8 +314,6 @@ t_data	*main_proc(long int seed)
 		free(data);
 		return (NULL);
 	}
-	debug_seed(map, seed, 0);
-	debug_seed(map, seed, 1);
 	data->map = convert_map_simu_to_map(map);
 	return (data);
 }

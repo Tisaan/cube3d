@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spawn.c                                            :+:      :+:    :+:   */
+/*   spawn_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 01:19:29 by von               #+#    #+#             */
-/*   Updated: 2026/06/01 16:37:15 by von              ###   ########.fr       */
+/*   Updated: 2026/06/03 12:52:17 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_map	*convert_map_simu_to_map(t_map_simu *map)
 	nmap->start[0] = map->spawn.zero;
 	nmap->start[1] = map->spawn.one;
 	nmap->start[2] = map->spawn.two;
+	free(map);
 	return (nmap);
 }
 

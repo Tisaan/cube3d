@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:30:15 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/01 16:33:46 by von              ###   ########.fr       */
+/*   Updated: 2026/06/03 12:35:44 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 
 static void	set_player_orientation(t_player *player, t_direction_id dir)
 {
-	if (dir == NO)
+	if (dir == NO || dir == 'N')
 	{
 		set_vect(&player->dir, 0, -1);
 		set_vect(&player->camera, 0.66, 0);
 	}
-	else if (dir == SO)
+	else if (dir == SO || dir == 'S')
 	{
 		set_vect(&player->dir, 0, 1);
 		set_vect(&player->camera, -0.66, 0);
 	}
-	else if (dir == WE)
+	else if (dir == WE || dir == 'W')
 	{
 		set_vect(&player->dir, -1, 0);
 		set_vect(&player->camera, 0, -0.66);
 	}
-	else if (dir == EA)
+	else if (dir == EA || dir == 'E')
 	{
 		set_vect(&player->dir, 1, 0);
 		set_vect(&player->camera, 0, 0.66);
