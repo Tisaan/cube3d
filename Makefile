@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/02 17:46:07 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/03 18:21:38 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,8 @@ SRC_GEN =   door_bonus.c \
 			spawn_bonus.c \
 			utils_bonus.c \
 			utils2_bonus.c \
+			utils3_bonus.c \
+			utils4_bonus.c \
 			wall_bonus.c
 
 SUB_DIR = parsing utils hooks raycast player generation

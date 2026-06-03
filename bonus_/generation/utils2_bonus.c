@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 16:05:33 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 16:37:59 by von              ###   ########.fr       */
+/*   Updated: 2026/06/03 18:27:18 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,57 @@ int	nb_zero_neighbour(t_map_simu *map, int x, size_t y)
 		i++;
 	}
 	return (count);
+}
+
+void	place_zero(t_map_simu *map, int i, int j)
+{
+	if (map->map[i - 2][j] == '0')
+		map->map[i - 1][j] = '0';
+	if (map->map[i + 2][j] == '0')
+		map->map[i + 1][j] = '0';
+	if (map->map[i][j - 2] == '0')
+		map->map[i][j - 1] = '0';
+	if (map->map[i][j + 2] == '0')
+		map->map[i][j + 1] = '0';
+	if (map->map[i - 2][j - 2] == '0')
+		map->map[i - 1][j - 2] = '0';
+	if (map->map[i + 2][j + 2] == '0')
+		map->map[i + 1][j + 2] = '0';
+	if (map->map[i - 2][j + 2] == '0')
+		map->map[i - 1][j + 2] = '0';
+	if (map->map[i + 2][j - 2] == '0')
+		map->map[i + 1][j - 2] = '0';
+}
+
+void	place_point(t_map_simu *map, t_point prev, t_point pos)
+{
+	while (prev.x < pos.x || prev.y < pos.y)
+	{
+		if (prev.y < pos.y)
+			map->map[prev.x][++prev.y] = '0';
+		if (prev.x < pos.x)
+			map->map[++prev.x][prev.y] = '0';
+	}
+	while (prev.x > pos.x || prev.y > pos.y)
+	{
+		if (prev.y > pos.y)
+			map->map[prev.x][--prev.y] = '0';
+		if (prev.x > pos.x)
+			map->map[--prev.x][prev.y] = '0';
+	}
+}
+
+bool	addpointfree(t_pointlist *list, t_point pos, t_map_simu *map)
+{
+	if ((pos.x < map->height && pos.x >= 0)
+		&& (pos.y < map->width && pos.y >= 0))
+	{
+		if (addpoint(list, pos) < 0)
+		{
+			place_point_loop(map, list);
+			free_pointlist(list);
+			return (false);
+		}
+	}
+	return (true);
 }
