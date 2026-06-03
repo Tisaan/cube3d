@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 16:30:08 by von              ###   ########.fr       */
+/*   Updated: 2026/06/03 12:46:01 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define CUBE3D_H
 # ifndef WALL_SIZE
 #  define WALL_SIZE 64
+# endif
+# ifndef MINI_MAP_SIZE
+#  define MINI_MAP_SIZE 200
 # endif
 
 #include <stdbool.h>
@@ -72,6 +75,7 @@ typedef struct s_data
 	mlx_window		win;
 	mlx_image		wall_assets[4];
 	mlx_image		frame;
+	mlx_image		mini_map;
 	mlx_color		ceil_color;
 	mlx_color		floor_color;
 	t_timer			timer;
@@ -97,6 +101,7 @@ void	key_hooks(int key, void *param);
 void	key_up_hook(int key, void *param);
 void	window_hook(int event, void *param);
 void	render(void *param);
+void	update_mini_map(void *param);
 void	ray_hook(void *param);
 
 

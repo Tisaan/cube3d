@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/02 16:25:34 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/03 12:35:18 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ int	init_game(t_data *data)
 	data->frame = mlx_new_image(data->mlx, data->win_infos.width,
 			data->win_infos.height);
 	if (data->frame == MLX_NULL_HANDLE)
+		return (-ERROR_LOAD_ASSET);
+	data->mini_map = mlx_new_image(data->mlx, MINI_MAP_SIZE, MINI_MAP_SIZE);
+	if (data->mini_map == MLX_NULL_HANDLE)
 		return (-ERROR_LOAD_ASSET);
 	data->keys = (t_keys){0};
 	data->floor_color = rgb_to_color(data->plans_color[1], 100);

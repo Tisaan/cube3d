@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/02 17:46:07 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/03 12:49:46 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,14 +49,14 @@ SRC_PARSING = 	path.c \
 				map_utils.c \
 				map_utils2.c
 
-SRC_UTILS =		free.c \
+SRC_UTILS =		free_bonus.c \
 				debug.c \
 				vectors.c \
 				utils2.c \
 				utils.c
 
 SRC_RAYCAST =	player.c \
-				render.c \
+				render_bonus.c \
 				ray.c \
 				ray_utils.c \
 				dda.c \
@@ -68,7 +68,7 @@ SRC_PLAYER = move.c \
 			 rotate.c
 
 SRC_GEN =   door_bonus.c \
-			free_bonus.c \
+			free_seed_bonus.c \
 			gen_seed_bonus.c \
 			method_bonus.c \
 			spawn_bonus.c \

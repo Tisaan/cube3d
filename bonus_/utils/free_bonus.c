@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 16:29:14 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/03 12:36:50 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	clean_exit(t_data *data, bool img_destroy)
 			mlx_destroy_image(data->mlx, data->wall_assets[3]);
 		if (data->frame != MLX_NULL_HANDLE)
 			mlx_destroy_image(data->mlx, data->frame);
+		if (data->mini_map != MLX_NULL_HANDLE)
+			mlx_destroy_image(data->mlx, data->mini_map);
 	}
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_context(data->mlx);
