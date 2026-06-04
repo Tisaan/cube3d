@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/03 12:46:01 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/03 18:15:07 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #  define WALL_SIZE 64
 # endif
 # ifndef MINI_MAP_SIZE
-#  define MINI_MAP_SIZE 200
+#  define MINI_MAP_SIZE 160
 # endif
 
 #include <stdbool.h>

@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:08:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/06 19:42:15 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/03 18:30:10 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ void	init_pip_boy(t_img *img, t_data *data);
 void	ft_print_error(const char *msg);
 int		render_2D_map(t_data *data);
 void	display_texture_id(int id);
+void	display_viewport(char **viewport);
+void	secure_display(char *str);
 
 #endif

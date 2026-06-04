@@ -6,11 +6,12 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 17:04:03 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/03 12:45:42 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/03 17:56:47 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../includes/bonus.h"
 
 void	update_mini_map(void *param)
 {
@@ -22,6 +23,7 @@ void	update_mini_map(void *param)
 	color.rgba = 0xFFFFFFFF;
 	data = (t_data *)param;
 	y = 0;
+	set_mini_map_pixels(data);
 	while (y < MINI_MAP_SIZE)
 	{
 		x = 0;

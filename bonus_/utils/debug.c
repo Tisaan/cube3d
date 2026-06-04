@@ -6,13 +6,35 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/02 14:56:40 by von              ###   ########.fr       */
+/*   Updated: 2026/06/03 19:25:37 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/player.h"
 
+void	secure_display(char *str)
+{
+	static bool	display = true;
+
+	if (!display)
+		return ;
+	else
+		display = false;
+	write(1, str, ft_strlen(str));
+}
+
+void	display_viewport(char **viewport)
+{
+	static bool	display = true;
+
+	if (!display)
+		return ;
+	else
+	 	display = false;
+	for (int i = 0; viewport[i]; i++)
+		printf("%d, %s\n", i, viewport[i]);
+}
 
 void	display_texture_id(int id)
 {

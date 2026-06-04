@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/03 12:49:46 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/06/03 17:18:48 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRC_UTILS =		free_bonus.c \
 				debug.c \
 				vectors.c \
 				utils2.c \
-				utils.c
+				utils.c \
+				mini_map_bonus.c
 
 SRC_RAYCAST =	player.c \
 				render_bonus.c \

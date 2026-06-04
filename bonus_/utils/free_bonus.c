@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/03 12:36:50 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/03 17:39:31 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ void	free_map(t_data *data)
 	{
 		free(data->map->grid[i]);
 		i++;
+	}
+	if (data->map->viewport)
+	{
+		i = 0;
+		while (data->map->viewport[i])
+		{
+			free(data->map->viewport[i]);
+			i++;
+		}
 	}
 	free(data->map->grid);
 	if (data->map->start)
