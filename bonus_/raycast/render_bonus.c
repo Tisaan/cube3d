@@ -29,8 +29,6 @@ static void	place_remove_player(t_player *player, t_map *map, bool remove)
 
 void	update_mini_map(void *param)
 {
-	// int		x;
-	// int		y;
 	int		ret;
 	t_data	*data;
 	mlx_color	color;
@@ -41,26 +39,12 @@ void	update_mini_map(void *param)
 	ret = set_viewport(data->player, data->map);
 	if (ret < 0)
 		return ;
-	system("clear");
-	for (int i = 0; i < 11; i++)
-		printf("%d, <%s>\n", i, data->map->viewport[i]);
 	set_mini_map_pixels(data);
 	for (int i = 0; i <= 11; i++)
 		free(data->map->viewport[i]);
 	free(data->map->viewport);
 	data->map->viewport = NULL;
 	place_remove_player(data->player, data->map, true);
-	// y = 0;
-	// while (y < MINI_MAP_SIZE)
-	// {
-	// 	x = 0;
-	// 	while (x < MINI_MAP_SIZE)
-	// 	{
-	// 		mlx_set_image_pixel(data->mlx, data->mini_map, x, y, color);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
 }
 
 void	render(void *param)

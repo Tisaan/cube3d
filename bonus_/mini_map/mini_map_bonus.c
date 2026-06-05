@@ -22,14 +22,14 @@ static char	*dup_viewport_line(t_player *p, t_map *map, int map_x, int map_y)
 	if (!line)
 		return (NULL);
 	i = 0;
-	while(map_x < 0 && i < 11)
+	while (map_x < 0 && i < 11)
 	{
 		line[i++] = ' ';
 		map_x++;
 	}
 	while (map->grid[map_y][map_x] && i < 11)
 	{
-		if (map_y == (int)p->pos.y / WALL_SIZE && map_x == (int)p->pos.x / WALL_SIZE)
+		if (map_y == p->pos.y / WALL_SIZE && map_x == p->pos.x / WALL_SIZE)
 			line[i] = 'P';
 		else
 			line[i] = map->grid[map_y][map_x];
@@ -39,7 +39,7 @@ static char	*dup_viewport_line(t_player *p, t_map *map, int map_x, int map_y)
 	while (i < 11)
 		line[i++] = ' ';
 	line[i] = '\0';
-	return (line); 
+	return (line);
 }
 
 static void	clear_viewport(t_map *map, int i)
@@ -49,25 +49,46 @@ static void	clear_viewport(t_map *map, int i)
 	free(map->viewport);
 }
 
+static int	fill_start_with_space(t_map *map, int *i, int *map_y)
+{
+	while (*map_y < 0)
+	{
+		map->viewport[*i] = ft_strdup("           ");
+		if (!map->viewport[*i])
+		{
+			clear_viewport(map, *i);
+			return (-ERROR_MALLOC);
+		}
+		*i += 1;
+		*map_y += 1;
+	}
+	return (NO_ERROR);
+}
+
+static int	fill_end_with_space(t_map *map, int *i)
+{
+	while (*i < 11)
+	{
+		map->viewport[*i] = ft_strdup("           ");
+		if (!map->viewport[*i])
+		{
+			clear_viewport(map, *i);
+			return (-ERROR_MALLOC);
+		}
+		*i += 1;
+	}
+	return (NO_ERROR);
+}
+
 int	fill_viewport(t_player *player, t_map *map, t_point view)
 {
-	static bool	display = true;
 	int	map_y;
 	int	i;
 
 	map_y = view.y;
 	i = 0;
-	while (map_y < 0)
-	{
-		map->viewport[i] = ft_strdup("           ");
-		if (!map->viewport[i])
-		{
-			clear_viewport(map, i);
-			return (-ERROR_MALLOC);
-		}
-		i++;
-		map_y++;
-	}
+	if (fill_start_with_space(map, &i, &map_y) != 0)
+		return (-ERROR_MALLOC);
 	while (map->grid[map_y] && i < 11)
 	{
 		map->viewport[i] = dup_viewport_line (player, map, view.x, map_y);
@@ -79,26 +100,14 @@ int	fill_viewport(t_player *player, t_map *map, t_point view)
 		map_y++;
 		i++;
 	}
-	while (i < 11)
-	{
-		map->viewport[i] = ft_strdup("           ");
-		if (!map->viewport[i])
-		{
-			clear_viewport(map, i);
-			return (-ERROR_MALLOC);
-		}
-		i++;
-	}
-	if (display)
-		printf("i: %d\n", i);
-	display = false;
+	if (fill_end_with_space(map, &i) != 0)
+		return (-ERROR_MALLOC);
 	map->viewport[i] = NULL;
 	return (NO_ERROR);
 }
 
 int	set_viewport(t_player *player, t_map *map)
 {
-	static bool	display = true;
 	t_point	view_pos;
 
 	map->viewport = malloc(sizeof(char *) * (11 + 1));
@@ -106,10 +115,7 @@ int	set_viewport(t_player *player, t_map *map)
 		return (-ERROR_MALLOC);
 	view_pos.x = (int)(player->pos.x / WALL_SIZE) - 5;
 	view_pos.y = (int)(player->pos.y / WALL_SIZE) - 5;
-	if (display)
-		printf("view(%d, %d)\n", view_pos.x, view_pos.y);
 	if (fill_viewport(player, map, view_pos) < 0)
-		return(-ERROR_MALLOC);
-	display = false;
+		return (-ERROR_MALLOC);
 	return (NO_ERROR);
 }
