@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 16:34:32 by von              ###   ########.fr       */
+/*   Updated: 2026/06/05 16:06:57 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@ static void	movement_hooks(int key, t_data *data)
 {
 	if (key == W_KEY)
 		data->keys.w = true;
-	if (key == A_KEY)
+	else if (key == A_KEY)
 		data->keys.a = true;
-	if (key == S_KEY)
+	else if (key == S_KEY)
 		data->keys.s = true;
-	if (key == D_KEY)
+	else if (key == D_KEY)
 		data->keys.d = true;
-	if (key == LEFT)
+	else if (key == LEFT)
 		data->keys.left = true;
-	if (key == RIGHT)
+	else if (key == RIGHT)
 		data->keys.right = true;
+	else if (key == E_KEY)
+		data->keys.e = true;
 }
 
 void	key_up_hook(int key, void *param)
@@ -37,16 +39,18 @@ void	key_up_hook(int key, void *param)
 	data = (t_data *)param;
 	if (key == W_KEY)
 		data->keys.w = false;
-	if (key == S_KEY)
+	else if (key == S_KEY)
 		data->keys.s = false;
-	if (key == A_KEY)
+	else if (key == A_KEY)
 		data->keys.a = false;
-	if (key == D_KEY)
+	else if (key == D_KEY)
 		data->keys.d = false;
-	if (key == LEFT)
+	else if (key == LEFT)
 		data->keys.left = false;
-	if (key == RIGHT)
+	else if (key == RIGHT)
 		data->keys.right = false;
+	else if (key == E_KEY)
+		data->keys.e = false;
 }
 
 void	key_hooks(int key, void *param)

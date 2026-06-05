@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:15:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/01 16:33:26 by von              ###   ########.fr       */
+/*   Updated: 2026/06/05 18:12:18 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static bool	is_wall(t_data *data, float x, float y)
 	if (tile_y < 0 || tile_y >= data->map->height)
 		return (true);
 	if (data->map->grid[tile_y][tile_x] == '1'
-		|| data->map->grid[tile_y][tile_x] == ' ')
+		|| data->map->grid[tile_y][tile_x] == ' '
+		|| (data->map->grid[tile_y][tile_x] == 'D' &&
+			data->map_door[tile_y][tile_x] == close_state))
 		return (true);
 	return (false);
 }

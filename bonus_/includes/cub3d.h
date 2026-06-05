@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 16:30:08 by von              ###   ########.fr       */
+/*   Updated: 2026/06/05 18:45:38 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 #include "player.h"
 #include "utils.h"
 
+#define DOOR_ASSET_CLOSE "assets/wood.png"
+#define DOOR_ASSET_OPEN "assets/pillar.png"
+
 typedef mlx_window_create_info	t_win_infos;
 
 typedef enum	e_key_code
@@ -44,6 +47,7 @@ typedef enum	e_key_code
 	A_KEY = 4,
 	S_KEY = 22,
 	D_KEY = 7,
+	E_KEY = 8,
 	UP = 82,
 	LEFT = 80,
 	DOWN = 81,
@@ -62,9 +66,19 @@ typedef struct	s_keys
 	bool	a;
 	bool	s;
 	bool	d;
+	bool	e;
 	bool	left;
 	bool	right;
 }			t_keys;
+
+typedef enum	e_state_obj
+{
+	close_state,
+	opening_state,
+	closing_state,
+	open_state,
+	not_door_state,
+}				t_state_obj;
 
 typedef struct s_data
 {
@@ -72,11 +86,13 @@ typedef struct s_data
 	mlx_window		win;
 	mlx_image		wall_assets[4];
 	mlx_image		frame;
+	mlx_image		door_asset[2];
 	mlx_color		ceil_color;
 	mlx_color		floor_color;
 	t_timer			timer;
 	t_win_infos		win_infos;
 	t_map			*map;
+	t_state_obj		**map_door;
 	t_texture_path	texture[4];
 	t_prgb			plans_color[2];
 	t_player		*player;
@@ -98,6 +114,7 @@ void	key_up_hook(int key, void *param);
 void	window_hook(int event, void *param);
 void	render(void *param);
 void	ray_hook(void *param);
+void	hook_door(void *param);
 
 
 #endif

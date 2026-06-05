@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:14:07 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/28 13:22:59 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/05 17:10:50 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 # define OBJS_H
 
 #include "raycast.h"
+#include "cub3d.h"
+
 
 typedef struct	s_obj
 {
-	int	start;
-	int	end;
-	int	height;
-	int	cliping;
+	int		start;
+	int		end;
+	int		height;
+	int		cliping;
+	union {
+		t_state_obj state;
+	};
 }		t_obj;
 
 t_obj	get_obj(t_win_infos *win, float wall_dist);

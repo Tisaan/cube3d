@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/03 12:24:50 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/05 16:01:08 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ static int	ready(t_data *data)
 	data->mlx = mlx_init();
 	data->win_infos = (t_win_infos){0};
 	ret = init_wall_assets(data);
+	if (ret < 0)
+	{
+		free_map(data);
+		free_texture_paths(data);
+		return (ret);
+	}
+	ret = init_door(data);
 	if (ret < 0)
 	{
 		free_map(data);

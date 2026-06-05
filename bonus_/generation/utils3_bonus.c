@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 17:46:35 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/03 18:45:42 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/05 15:26:40 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ bool	place_gen_algo(
 		{
 			if (!addpointfree(list, *pos, map))
 				return (true);
-			pos->x += ((int [8])DIR_X)[(map->iter - VARIANT_GEN_X) % 8];
-			pos->y += ((int [8])DIR_Y)[(map->iter - VARIANT_GEN_Y) % 8];
+			pos->x += ((int [8])DIR_X)[(map->iter - (i + VARIANT_GEN_X)) % 8];
+			pos->y += ((int [8])DIR_Y)[(map->iter - (i - VARIANT_GEN_Y)) % 8];
 			if (++total == map->iter)
 			{
 				free_pointlist(list);

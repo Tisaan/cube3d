@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/03 18:21:38 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/05 17:03:59 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_PARSING = 	path.c \
 				map_data.c \
 				parser_utils.c \
 				init.c \
+				init_utils.c \
 				map_utils.c \
 				map_utils2.c
 
@@ -62,7 +63,7 @@ SRC_RAYCAST =	player.c \
 				dda.c \
 				objs.c
 
-SRC_HOOKS = hooks.c
+SRC_HOOKS = hooks.c \
 
 SRC_PLAYER = move.c \
 			 rotate.c

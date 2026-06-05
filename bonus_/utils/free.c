@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/03 12:44:07 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/05 18:46:54 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ void	clean_exit(t_data *data, bool img_destroy)
 			mlx_destroy_image(data->mlx, data->wall_assets[3]);
 		if (data->frame != MLX_NULL_HANDLE)
 			mlx_destroy_image(data->mlx, data->frame);
+		if (data->door_asset[0] != MLX_NULL_HANDLE)
+			mlx_destroy_image(data->mlx, data->door_asset[0]);
+		if (data->door_asset[1] != MLX_NULL_HANDLE)
+			mlx_destroy_image(data->mlx, data->door_asset[1]);
 	}
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_context(data->mlx);

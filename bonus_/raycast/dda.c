@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:48:33 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/01 16:33:38 by von              ###   ########.fr       */
+/*   Updated: 2026/06/05 18:23:48 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static bool	check_collision(t_data *data, t_vect tile)
 {
 	if ((int)tile.x >= (int)ft_strlen(data->map->grid[(int)tile.y]))
 		return (true);
-	if (data->map->grid[(int)tile.y][(int)tile.x] != '0')
+	else if (data->map->grid[(int)tile.y][(int)tile.x] != '0')
 		return (true);
 	return (false);
 }
@@ -105,6 +105,7 @@ float	dda(t_ray *ray, t_data *data)
 		is_colliding = check_collision(data, tile);
 	}
 	set_ray_face(ray);
+	set_type_ray(data, tile, ray);
 	dist = calc_wall_dist(ray);
 	return (dist);
 }

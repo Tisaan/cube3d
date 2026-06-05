@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/02 16:25:34 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/05 18:47:46 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,27 @@ int	init_game(t_data *data)
 	data->floor_color = rgb_to_color(data->plans_color[1], 100);
 	data->ceil_color = rgb_to_color(data->plans_color[0], 100);
 	return (NO_ERROR);
+}
+
+int	init_door(t_data *data)
+{
+	int	width;
+	int	height;
+	int	ret;
+
+	data->door_asset[0] = mlx_new_image_from_file(data->mlx, DOOR_ASSET_CLOSE, &width, &height);
+	data->door_asset[1] = mlx_new_image_from_file(data->mlx, DOOR_ASSET_OPEN, &width, &height);
+	ret = 0;
+	if (data->door_asset[0] == MLX_NULL_HANDLE || data->door_asset[1] == MLX_NULL_HANDLE)
+		ret = -ERROR_LOAD_ASSET;
+	if (width != WALL_SIZE || height != WALL_SIZE)
+		ret = -ERROR_IMG_SIZE;
+	if (ret < 0)
+	{
+		mlx_destroy_image(data->mlx, data->door_asset[0]);
+		mlx_destroy_image(data->mlx, data->door_asset[1]);
+		return (ret);
+	}
+	ret = init_map_door(data);
+	return (ret);
 }
