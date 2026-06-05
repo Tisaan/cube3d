@@ -15,37 +15,43 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static char	*dup_str_section(char *str, int start, int end)
+static char	*dup_str_chunk(char *str, int start, int size)
 {
 	static bool	display = true;
-	char	*section;
-	int		size;
+	char	*chunk;
+	int		offset;
+	int		len;
 	int		i;
 	int		j;
-	int		offset;
 
-	size = end - start + 1;
-	offset = 0;
-	if (display)
-	{
-		printf("end: %d, start: %d, size: %d, str: %s\n", end, start, size, str);
-		display = false;
-	}
-	section = malloc(sizeof(char) * size + 1);
-	if (!section)
+	chunk = malloc(sizeof(char) * size + 1);
+	if (!chunk)
 		return (NULL);
+	// if (display)
+	// {
+	// 	printf("str: %s, len: %d, start: %d, size: %d\n", str, (int)ft_strlen(str), start, size);
+	// }
+	if (start < 0)
+		start = 0;
+	offset = 0;
+	len = (int)ft_strlen(str);
+	if (len < size)
+		offset = (size - len) / 2;
 	i = 0;
-	if ((int)ft_strlen(str) < size)
-		offset = (size - ft_strlen(str)) / 2;
 	while (i < offset)
-		section[i++] = ' ';
-	j = 0;
-	while (str[j])
-		section[i++] = str[j++];
+		chunk[i++] = ' ';
+	j = start;
 	while (i < size)
-		section[i++] = ' ';
-	section[i] = '\0';
-	return (section);
+	{
+		if (str[j])
+			chunk[i] = str[j++];
+		else
+		 	chunk[i] = ' ';
+		i++;
+	}
+	chunk[i] = '\0';
+	display = false;
+	return (chunk);
 }
 
 static char	*set_space_section(int size)
@@ -70,9 +76,9 @@ static char	*set_space_section(int size)
 	return (section);
 }
 
+
 char	**set_viewport(t_map *map, t_player *p, int size)
 {	
-	static bool	display = true;
 	char	**viewport;
 	int		viewport_y;
 	int		j;
@@ -81,21 +87,11 @@ char	**set_viewport(t_map *map, t_player *p, int size)
 	viewport = malloc(sizeof(char *) * size + 1);
 	if (!viewport)
 		return (NULL);
-	offset = size / 2;
-	if (map->height < size)
-	{
-		if (display)
-			printf("hello\n");
-		offset = (size - map->height) / 2;
-	}
+	offset = (size - map->height) / 2;
+	if (offset < 0)
+		offset = 0;
 	viewport_y = (int)(p->pos.y / WALL_SIZE) - offset;
 	j = 0;
-	if (display)
-	{
-		printf("size: %d, offset: %d\n", size, offset);
-		printf("map height: %d\n", map->height);
-		printf("=====VIEWPORT=====\n");
-	}
 	while(viewport_y < 0 || (j < offset && map->height < size))
 	{
 		viewport[j] = set_space_section(size);
@@ -104,33 +100,14 @@ char	**set_viewport(t_map *map, t_player *p, int size)
 			ft_freeptr((void **)viewport);
 			return (NULL);
 		}
-		if (display)
-		{
-			printf("viewp[%d]: <%s>\n", j, viewport[j]);
-		}
 		j++;
 		if (viewport_y < 0)
 			viewport_y++;
 	}
-	// while (j < offset)
-	// {
-	// 	viewport[j] = dup_str_section(map->grid[viewport_y], p->pos.x / WALL_SIZE - offset, p->pos.x / WALL_SIZE + offset);
-	// 	if (!viewport[j])
-	// 	{
-	// 		ft_freeptr((void **)viewport);
-	// 		return (NULL);
-	// 	}
-	// 	if (display)
-	// 	{
-	// 		printf("viewp[%d]: <%s>\n", j, viewport[j]);
-	// 	}
-	// 	j++;
-	// 	viewport_y++;
-	// }
 	while (j < size)
 	{
 		if (map->grid[viewport_y])
-			viewport[j] = dup_str_section(map->grid[viewport_y], p->pos.x / WALL_SIZE - offset, p->pos.x / WALL_SIZE + offset);
+			viewport[j] = dup_str_chunk(map->grid[viewport_y], p->pos.x / WALL_SIZE - offset, size);
 		else
 			viewport[j] = set_space_section(size);
 		if (!viewport[j])
@@ -138,17 +115,10 @@ char	**set_viewport(t_map *map, t_player *p, int size)
 			ft_freeptr((void **)viewport);
 			return (NULL);
 		}
-		if (display)
-		{
-			printf("viewp[%d]: <%s>\n", j, viewport[j]);
-		}
 		j++;
 		if (map->grid[viewport_y])
 			viewport_y++;
 	}
-	if (display)
-		printf("\n");
-	display = false;
 	viewport[j] = NULL;
 	return (viewport);
 }
@@ -162,17 +132,20 @@ int	set_mini_map_pixels(t_data *data)
 
 	wall_size = MINI_MAP_SIZE / 10;
 	// player_size = wall_size / 2;
+	place_player(data, data->map->grid);
 	viewport = set_viewport(data->map, data->player, wall_size);
 	if (!viewport)
 	{
 		printf("NULL\n");
 		return (-ERROR_MALLOC);
 	}
+	data->map->grid[(int)data->player->pos.y / WALL_SIZE][(int)data->player->pos.x / WALL_SIZE] = '0';
 	if (display)
 	{
-		printf("player.pos(%d, %d)\n", (int)data->player->pos.x / WALL_SIZE, (int)data->player->pos.y / WALL_SIZE);
 		display = false;
 	}
-	// display_viewport(viewport);
+	system("clear");
+	display_viewport(viewport);
+	printf("player.pos(%d, %d)\n", (int)data->player->pos.x / WALL_SIZE, (int)data->player->pos.y / WALL_SIZE);
 	return (NO_ERROR);
 }

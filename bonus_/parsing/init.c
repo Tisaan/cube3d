@@ -6,11 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/03 12:35:18 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/05 15:19:48 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../includes/mini_map.h"
 
 void	init_map_data(t_data *data)
 {
@@ -69,7 +70,7 @@ int	init_game(t_data *data)
 			data->win_infos.height);
 	if (data->frame == MLX_NULL_HANDLE)
 		return (-ERROR_LOAD_ASSET);
-	data->mini_map = mlx_new_image(data->mlx, MINI_MAP_SIZE, MINI_MAP_SIZE);
+	data->mini_map = mlx_new_image(data->mlx, 176, 176);
 	if (data->mini_map == MLX_NULL_HANDLE)
 		return (-ERROR_LOAD_ASSET);
 	data->keys = (t_keys){0};

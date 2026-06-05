@@ -26,14 +26,9 @@ void	secure_display(char *str)
 
 void	display_viewport(char **viewport)
 {
-	static bool	display = true;
-
-	if (!display)
-		return ;
-	else
-	 	display = false;
+	printf("coucou");
 	for (int i = 0; viewport[i]; i++)
-		printf("%d, %s\n", i, viewport[i]);
+		printf("<%s>\n", viewport[i]);
 }
 
 void	display_texture_id(int id)

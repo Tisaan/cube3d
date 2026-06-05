@@ -68,6 +68,8 @@ void	free_all(t_data *data, int fd)
 	free_texture_paths(data);
 	if (data->player)
 		free(data->player);
+	if (data)
+		free(data);
 }
 
 void	clear_gnl_buffer(int fd)
