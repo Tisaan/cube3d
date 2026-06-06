@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/05 15:25:00 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/06 14:12:06 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 //----------[tweak de la gen]------
 # define BIG
 # if defined(BIG)
-#  define VARIANT_GEN_Y map->ori_y
-#  define VARIANT_GEN_X map->ori_x
+#  define VARIANT_GEN_Y (i + map->ori_y)
+#  define VARIANT_GEN_X (i + map->ori_x)
 # elif defined(MINI)
-#  define VARIANT_GEN_X 0
-#  define VARIANT_GEN_Y 0
+#  define VARIANT_GEN_X (i)
+#  define VARIANT_GEN_Y (i)
 # else
-#  define VARIANT_GEN_X map->ori_x
-#  define VARIANT_GEN_Y map->ori_y
+#  define VARIANT_GEN_X (i + map->ori_y + map->ori_x)
+#  define VARIANT_GEN_Y (i + map->ori_y + map->ori_x)
 # endif
 
 typedef struct s_int3

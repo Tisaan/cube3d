@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/05 17:24:03 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/06 15:10:42 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	set_obj_pixels(t_data *d, t_ray *ray, t_obj obj, int xs[2])
 	int			y;
 
 	step = (float)WALL_SIZE / obj.height;
+	if (d->map->grid[(int)ray->tile.y][(int)ray->tile.x] == 'D')
+		obj.cliping += 5;
 	curr_pos = obj.cliping * step;
 	y = obj.start;
 	while (y < obj.end)

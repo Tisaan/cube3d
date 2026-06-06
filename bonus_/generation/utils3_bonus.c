@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 17:46:35 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/05 15:26:40 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/06 14:19:04 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ bool	place_gen_algo(
 		{
 			if (!addpointfree(list, *pos, map))
 				return (true);
-			pos->x += ((int [8])DIR_X)[(map->iter - (i + VARIANT_GEN_X)) % 8];
-			pos->y += ((int [8])DIR_Y)[(map->iter - (i - VARIANT_GEN_Y)) % 8];
+			pos->x += ((int [8])DIR_X)[abs(map->iter - VARIANT_GEN_X) % 8];
+			pos->y += ((int [8])DIR_Y)[abs(map->iter - VARIANT_GEN_Y) % 8];
 			if (++total == map->iter)
 			{
 				free_pointlist(list);
@@ -111,7 +111,7 @@ t_map_simu	*init_map(t_data *data, long int seed)
 	map = seed_to_mapsimu(seed);
 	map->map = ft_calloc(map->height + 1, sizeof(char *));
 	i = 0;
-	while (i <= map->height)
+	while (i < map->height)
 	{
 		map->map[i] = ft_calloc(sizeof(char), map->width + 1);
 		ft_memset(map->map[i], ' ', map->width);

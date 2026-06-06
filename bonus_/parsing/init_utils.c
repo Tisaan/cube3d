@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:52:40 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/05 17:25:55 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/06 14:41:37 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	init_map_door(t_data *data)
 	if (!data->map_door)
 		return (-ERROR_MALLOC);
 	i = 0;
-	while (i <= data->map->height)
+	while (i < data->map->height)
 	{
-		data->map_door[i] = ft_calloc(data->map->width, sizeof(t_state_obj));
+		data->map_door[i] = ft_calloc(data->map->width + 1, sizeof(t_state_obj));
 		if (!data->map_door[i])
 		{
 			ft_freeptr((void **)data->map_door);
@@ -32,10 +32,10 @@ int	init_map_door(t_data *data)
 		i++;
 	}
 	i = 0;
-	while (i <= data->map->height)
+	while (i < data->map->height)
 	{
 		j = 0;
-		while (j <= data->map->width)
+		while (j < data->map->width)
 		{
 			if (data->map->grid[i][j] == 'D')
 				data->map_door[i][j] = close_state;

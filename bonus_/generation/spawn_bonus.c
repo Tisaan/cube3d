@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 01:19:29 by von               #+#    #+#             */
-/*   Updated: 2026/06/03 12:52:17 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/06 14:45:50 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_map	*convert_map_simu_to_map(t_map_simu *map)
 		return (NULL);
 	nmap->grid = map->map;
 	nmap->height = map->height;
-	nmap->width = map->height;
+	nmap->width = map->width;
 	nmap->start = ft_calloc(sizeof(int), 3);
 	if (!nmap->start)
 		return (NULL);

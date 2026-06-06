@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/05 18:46:54 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/06 14:17:56 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	free_map(t_data *data)
 		free(data->map->grid[i++]);
 	}
 	free(data->map->grid);
+	i = 0;
+	while (i <= data->map->height)
+	{
+		free(data->map_door[i++]);
+	}
+	free(data->map_door);
 	if (data->map->start)
 		free(data->map->start);
 	if (data->map)

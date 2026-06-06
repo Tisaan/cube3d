@@ -6,12 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 11:40:09 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/05 18:40:02 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/06 15:20:25 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycast.h"
 #include "../includes/objs.h"
+#include "../includes/bonus.h"
 
 void	set_ray_side(t_ray *ray, t_vect *tile, t_vect step)
 {
@@ -60,12 +61,20 @@ void	udpate_doors(t_ray *ray, t_data *d)
 {
 	if (ray->type == door_type)
 	{
-		if (d->map_door[(int)ray->tile.y][(int)ray->tile.x] == close_state && d->keys.e)
+		// if ((d->map_door[(int)ray->tile.y][(int)ray->tile.x] == close_state || d->map_door[(int)ray->tile.y][(int)ray->tile.x] == open_state) && d->keys.e)
+		// {
+		// 	printf("dist[%f, %f]\n", ray->delta_dist.x, ray->delta_dist.y);
+		// }
+		if (d->map_door[(int)ray->tile.y][(int)ray->tile.x] == close_state && d->keys.e
+		&& ray->delta_dist.x <= 2.0f && ray->delta_dist.y <= 2.0f
+	&& face_same_dir(ray, d->player))
 		{
 			d->map_door[(int)ray->tile.y][(int)ray->tile.x] = open_state;
 			d->keys.e = false;
 		}
-		else if (d->map_door[(int)ray->tile.y][(int)ray->tile.x] == open_state && d->keys.e)
+		else if (d->map_door[(int)ray->tile.y][(int)ray->tile.x] == open_state && d->keys.e
+		&& ray->delta_dist.x <= 2.0f && ray->delta_dist.y <= 2.0f
+	&& face_same_dir(ray, d->player))
 		{
 			d->map_door[(int)ray->tile.y][(int)ray->tile.x] = close_state;
 			d->keys.e = false;

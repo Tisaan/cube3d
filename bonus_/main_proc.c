@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 15:24:28 by von               #+#    #+#             */
-/*   Updated: 2026/06/03 18:22:37 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/06 14:20:51 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	place_struct(t_map_simu *map)
 	i = 0;
 	len = ft_strlen(map->seed);
 	index = 0;
-	while (i <= map->height)
+	while (i < map->height)
 	{
 		j = 0;
-		while (j <= map->width)
+		while (j < map->width)
 		{
 			if (map->map[i][j] == '0' && nb_zero_neighbour(map, i, j) >= 6
 				&& map->seed[(len + index++) % len] == '1')

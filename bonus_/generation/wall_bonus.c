@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall.c                                             :+:      :+:    :+:   */
+/*   wall_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 10:55:44 by von              ###   ########.fr       */
+/*   Updated: 2026/06/06 14:21:40 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	wall_border(t_map_simu *map)
 	int	x;
 
 	x = 0;
-	while (x <= map->width)
+	while (x < map->width)
 	{
 		if (map->map[0][x] == '0')
 			map->map[0][x] = '1';
-		if (map->map[map->height][x] == '0')
-			map->map[map->height][x] = '1';
+		if (map->map[map->height - 1][x] == '0')
+			map->map[map->height - 1][x] = '1';
 		x++;
 	}
 	x = 0;
-	while (x <= map->height)
+	while (x < map->height)
 	{
 		if (map->map[x][0] == '0')
 			map->map[x][0] = '1';
