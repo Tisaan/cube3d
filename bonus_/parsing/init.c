@@ -13,6 +13,19 @@
 #include "../includes/cub3d.h"
 #include "../includes/mini_map.h"
 
+bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos)
+{
+	infos->title = "cub3D";
+	infos->width = 1280;
+	infos->height = 720;
+	infos->is_fullscreen = false;
+	infos->is_resizable = false;
+	*win = mlx_new_window(mlx, infos);
+	if (*win == MLX_NULL_HANDLE)
+		return (false);
+	return (true);
+}
+
 void	init_map_data(t_data *data)
 {
 	data->texture[0].path = NULL;

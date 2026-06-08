@@ -10,35 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 # ifndef WALL_SIZE
 #  define WALL_SIZE 64
 # endif
-# ifndef MINI_MAP_SIZE
-#  define MINI_MAP_SIZE 160
-# endif
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/time.h>
-#include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/time.h>
+# include <math.h>
 
-#include "../../libft/libft.h"
-#include "../../gnl/get_next_line.h"
-#include "../../mlx/includes/mlx.h"
-#include "../../mlx/includes/mlx_extended.h"
+# include "../../libft/libft.h"
+# include "../../gnl/get_next_line.h"
+# include "../../mlx/includes/mlx.h"
+# include "../../mlx/includes/mlx_extended.h"
 
-#include "parsing.h"
-#include "player.h"
-#include "utils.h"
+# include "parsing.h"
+# include "player.h"
+# include "utils.h"
 
 typedef mlx_window_create_info	t_win_infos;
 
-typedef enum	e_key_code
+typedef enum e_key_code
 {
 	Q_KEY = 20,
 	ESC_KEY = 41,
@@ -53,13 +50,13 @@ typedef enum	e_key_code
 	RIGHT = 79
 }	t_key_code;
 
-typedef enum	e_win_event
+typedef enum e_win_event
 {
 	WIN_CLOSE = 0,
 	WIN_RESIZE = 8,
 }	t_win_event;
 
-typedef struct	s_keys
+typedef struct s_keys
 {
 	bool	w;
 	bool	a;
@@ -88,7 +85,7 @@ typedef struct s_data
 	float			delta;
 }				t_data;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	mlx_image	asset;
 	char		*path;
@@ -103,6 +100,5 @@ void	window_hook(int event, void *param);
 void	render(void *param);
 void	update_mini_map(void *param);
 void	ray_hook(void *param);
-
 
 #endif

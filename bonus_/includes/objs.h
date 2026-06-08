@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	OBJS_H
+#ifndef OBJS_H
 # define OBJS_H
 
-#include "raycast.h"
+# include "raycast.h"
 
-typedef struct	s_obj
+typedef struct s_obj
 {
 	int	start;
 	int	end;

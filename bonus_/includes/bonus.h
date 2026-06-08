@@ -13,24 +13,24 @@
 #ifndef BONUS_H
 # define BONUS_H
 
-#include "cub3d.h"
-#include <pthread.h>
+# include "cub3d.h"
+# include <pthread.h>
 
-#define dir_x {1, -1, 1, 0, 0, -1, 1, -1}
-#define dir_y {-1, 1, -1, 0, 0, 1, -1, 1}
+# define dir_x {1, -1, 1, 0, 0, -1, 1, -1}
+# define dir_y {-1, 1, -1, 0, 0, 1, -1, 1}
 
 //----------[tweak de la gen]------
-#define big
-#if defined(big)
-# define variant_gen_y (i + map->ori_y)
-# define variant_gen_x (i + map->ori_x)
-#elif defined(mini)
+# define big
+# if defined(big)
+#  define variant_gen_y (i + map->ori_y)
+#  define variant_gen_x (i + map->ori_x)
+# elif defined(mini)
 # define variant_gen_x (i)
 # define variant_gen_y (i)
 #else
 # define variant_gen_x (i + map->ori_y + map->ori_x)
 # define variant_gen_y (i + map->ori_y + map->ori_x)
-#endif
+# endif
 
 typedef struct s_int3
 {
@@ -47,11 +47,11 @@ typedef struct s_int2
 
 typedef struct s_point
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }				t_point;
 
-typedef struct	s_pointlist
+typedef struct s_pointlist
 {
 	t_point	*point;
 	int		curr;
@@ -73,7 +73,7 @@ typedef struct s_map_simu
 	int		count;
 }				t_map_simu;
 
-typedef enum	s_error_map_gen
+typedef enum s_error_map_gen
 {
 	ERR_ARGS,
 	SEED_INVALID,
@@ -83,17 +83,16 @@ typedef enum	s_error_map_gen
 	ERROR_MAX_BNS
 }				t_error_map_map;
 
-
 //-----------[pointlist/method.c]-----
 t_pointlist	*initpoints(int size);
-int	addpoint(t_pointlist *l, t_point p);
-void	resetpointlist(t_pointlist *l);
-void	free_pointlist(t_pointlist *l);
+int			addpoint(t_pointlist *l, t_point p);
+void		resetpointlist(t_pointlist *l);
+void		free_pointlist(t_pointlist *l);
 
 //----------[utils.c]-----------
 int			add_digit_number(long int nb);
 void		throw_error_bonus(int err);
-bool    	map_empty(t_map_simu *map);
+bool		map_empty(t_map_simu *map);
 bool		had_space_neighbour(t_map_simu *map, int x, size_t y);
 void		int_to_bin_str(unsigned long num, char *dest);
 int			nb_zero_neighbour(t_map_simu *map, int x, size_t y);
@@ -106,16 +105,16 @@ void		place_door(t_map_simu *map);
 void		apply_wall(t_map_simu *map);
 
 //----------[gen_seed.c]-----------
-long int	gen_seed();
+long int	gen_seed(void);
 t_map_simu	*seed_to_mapsimu(long int seed);
 bool		check_seed(long seed);
-void 		debug_seed(t_map_simu *map, long int seed, bool print);
+void		debug_seed(t_map_simu *map, long int seed, bool print);
 
 //----------[spawn.c]-----------
 int			place_spawn(t_map_simu *map);
 t_map		*convert_map_simu_to_map(t_map_simu *map);
 
 //----------[main_proc.c]-------
-t_data	*main_proc(long int seed);
+t_data		*main_proc(long int seed);
 
 #endif
