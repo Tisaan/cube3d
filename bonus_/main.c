@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/03 12:27:11 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/08 12:10:20 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,38 +77,40 @@ static int	process(t_data *data)
 	return (NO_ERROR);
 }
 
-int	main(int ac, char **av)
+static int	handle_seed(t_data *data, char **av, long int *seed)
 {
-	t_data		*data;
-	int			ret;
-	long int	seed;
-
-
-	if (ac == 3 && ft_strncmp(av[1], "seed\0", 5) == 0)
+	if (ft_strlen(av[2]) == (size_t)skip_digits(av[2]) && ft_strlen(av[2]) == 12)
 	{
-		if (ft_strlen(av[2]) == (size_t)skip_digits(av[2]) && ft_strlen(av[2]) == 12)
-		{
-			seed = ft_atol(av[2]);
-			if (seed < 0 || !check_seed(seed))
-			{
-				throw_error_bonus(SEED_INVALID);
-				return (1);
-			}
-			data = main_proc(seed);
-			if (!data)
-				return (1);
-			set_default(data);
-		}
-		else
+		*seed = ft_atol(av[2]);
+		if (*seed < 0 || !check_seed(*seed))
 		{
 			throw_error_bonus(SEED_INVALID);
 			return (1);
 		}
+		data = main_proc(*seed);
+		if (!data)
+			return (1);
+		set_default(data);
 	}
+	else
+	{
+		throw_error_bonus(SEED_INVALID);
+		return (1);
+	}
+	return (NO_ERROR);
+}
+
+static int	handle_main_args(t_data *data, int ac, char **av, long int *seed)
+{
+	int	ret;
+
+	ret = NO_ERROR;
+	if (ac == 3 && ft_strncmp(av[1], "seed\0", 5) == 0)
+		ret = handle_seed(data, av, seed);
 	else if (ac == 2 && ft_strncmp(av[1], "seed\0", 5) == 0)
 	{
-		seed = gen_seed();
-		data = main_proc(seed);
+		*seed = gen_seed();
+		data = main_proc(*seed);
 		if (!data)
 			return (1);
 		set_default(data);
@@ -128,6 +130,63 @@ int	main(int ac, char **av)
 		ft_print_error("Invalid number of arguments.\n");
 		return (1);
 	}
+	return (ret);
+}
+
+int	main(int ac, char **av)
+{
+	t_data		*data;
+	int			ret;
+	long int	seed;
+
+
+	data = NULL;
+	if (handle_main_args(data, ac, av, &seed) != NO_ERROR)
+		return (1);
+	// if (ac == 3 && ft_strncmp(av[1], "seed\0", 5) == 0)
+	// {
+	// 	if (ft_strlen(av[2]) == (size_t)skip_digits(av[2]) && ft_strlen(av[2]) == 12)
+	// 	{
+	// 		seed = ft_atol(av[2]);
+	// 		if (seed < 0 || !check_seed(seed))
+	// 		{
+	// 			throw_error_bonus(SEED_INVALID);
+	// 			return (1);
+	// 		}
+	// 		data = main_proc(seed);
+	// 		if (!data)
+	// 			return (1);
+	// 		set_default(data);
+	// 	}
+	// 	else
+	// 	{
+	// 		throw_error_bonus(SEED_INVALID);
+	// 		return (1);
+	// 	}
+	// }
+	// else if (ac == 2 && ft_strncmp(av[1], "seed\0", 5) == 0)
+	// {
+	// 	seed = gen_seed();
+	// 	data = main_proc(seed);
+	// 	if (!data)
+	// 		return (1);
+	// 	set_default(data);
+	// }
+	// else if (ac == 2)
+	// {	
+	// 	data = ft_calloc(sizeof(t_data), 1);
+	// 	if (!data)
+	// 	{
+	// 		throw_error(ERROR_MALLOC);
+	// 		return (1);
+	// 	}
+	// 	parse(av[1], data);
+	// }
+	// else
+	// {
+	// 	ft_print_error("Invalid number of arguments.\n");
+	// 	return (1);
+	// }
 	if (data->map == NULL)
 		return (1);
 	ret = ready(data);
