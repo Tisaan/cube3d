@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/06 15:22:57 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/08 16:52:18 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NC     := \033[0m # No Color
 
 # --- Compilation ---
 NAME = cub3D
-CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes 
+CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes -fsanitize=address 
 CC	= cc
 
 # --- Directory ---
@@ -60,6 +60,7 @@ SRC_RAYCAST =	player.c \
 				render.c \
 				ray.c \
 				ray_utils.c \
+				ray_utils2.c \
 				dda.c \
 				objs.c
 

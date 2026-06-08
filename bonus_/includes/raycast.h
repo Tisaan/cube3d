@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:09:42 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/06 15:19:51 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/08 16:13:57 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ typedef struct	s_ray
 	t_direction_id	face;
 	t_type   		type;
 	union {
-		t_vect	tile;
+		struct {
+			t_vect	tile;
+			bool	open;
+		};
 	};
 }					t_ray;
 

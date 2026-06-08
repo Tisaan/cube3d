@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 12:21:06 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/06 14:21:40 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/08 16:39:04 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	wall(t_map_simu *map, int x, int y)
 	int	j;
 
 	i = -1;
-	while (i <= 1)
+	while (i <= 1 && (x + i) < map->height)
 	{
 		j = -1;
-		while (j <= 1)
+		while (j <= 1 && (y + j) < map->width)
 		{
 			if (map->map[x + i][y + j] == ' ')
 				map->map[x + i][y + j] = '1';
