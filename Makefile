@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/09 14:12:59 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/09 14:55:18 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CC	= cc
 INC_DIR = ./includes
 
 SRC_DIR = srcs
-BONUS_DIR = bonus_
+BONUS_DIR = bonus
 
 DIR = $(SRC_DIR)
 ifeq ($(MAKECMDGOALS), bonus)

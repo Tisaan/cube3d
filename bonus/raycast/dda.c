@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:48:33 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/08 16:24:53 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 15:17:28 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,11 @@ static bool	check_collision(t_data *data, t_vect tile)
 	if ((int)tile.x >= (int)ft_strlen(data->map->grid[(int)tile.y]))
 		return (true);
 	else if (data->map->grid[(int)tile.y][(int)tile.x] == 'D'
-	 	&& data->map_door[(int)tile.y][(int)tile.x] == open_state)
+		&& data->map_door[(int)tile.y][(int)tile.x] == open_state)
 		return (true);
 	else if (data->map->grid[(int)tile.y][(int)tile.x] == 'D'
-	 	&& data->map_door[(int)tile.y][(int)tile.x] == open_state)
-	 	return (false);
-	
+		&& data->map_door[(int)tile.y][(int)tile.x] == open_state)
+		return (false);
 	else if (data->map->grid[(int)tile.y][(int)tile.x] != '0')
 		return (true);
 	return (false);

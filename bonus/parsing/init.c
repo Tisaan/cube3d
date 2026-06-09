@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/09 14:12:06 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 15:15:04 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ int	init_game(t_data *data)
 	ret = init_player(data);
 	if (ret < 0)
 		return (ret);
+	ret = init_door(data);
+	if (ret < 0)
+	{
+		free_map(data);
+		free_texture_paths(data);
+		return (ret);
+	}
 	data->frame = mlx_new_image(data->mlx, data->win_infos.width,
 			data->win_infos.height);
 	if (data->frame == MLX_NULL_HANDLE)
@@ -87,27 +94,4 @@ int	init_game(t_data *data)
 	data->floor_color = rgb_to_color(data->plans_color[1], 100);
 	data->ceil_color = rgb_to_color(data->plans_color[0], 100);
 	return (NO_ERROR);
-}
-
-int	init_door(t_data *data)
-{
-	int	width;
-	int	height;
-	int	ret;
-
-	data->door_asset[0] = mlx_new_image_from_file(data->mlx, DOOR_ASSET_CLOSE, &width, &height);
-	data->door_asset[1] = mlx_new_image_from_file(data->mlx, DOOR_ASSET_OPEN, &width, &height);
-	ret = 0;
-	if (data->door_asset[0] == MLX_NULL_HANDLE || data->door_asset[1] == MLX_NULL_HANDLE)
-		ret = -ERROR_LOAD_ASSET;
-	if (width != WALL_SIZE || height != WALL_SIZE)
-		ret = -ERROR_IMG_SIZE;
-	if (ret < 0)
-	{
-		mlx_destroy_image(data->mlx, data->door_asset[0]);
-		mlx_destroy_image(data->mlx, data->door_asset[1]);
-		return (ret);
-	}
-	ret = init_map_door(data);
-	return (ret);
 }

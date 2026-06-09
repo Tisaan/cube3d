@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gen_seed.c                                         :+:      :+:    :+:   */
+/*   gen_seed_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:23:22 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/30 13:01:48 by von              ###   ########.fr       */
+/*   Updated: 2026/06/09 15:04:07 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/bonus.h"
+#include "../includes/bonus.h"
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
@@ -44,11 +44,31 @@ long int	gen_seed(void)
 	return (value);
 }
 
+void	init_dir(t_map_simu *map)
+{
+	map->dir_x[0] = 1;
+	map->dir_x[1] = -1;
+	map->dir_x[2] = 1;
+	map->dir_x[3] = 0;
+	map->dir_x[4] = 0;
+	map->dir_x[5] = -1;
+	map->dir_x[6] = 1;
+	map->dir_x[7] = -1;
+	map->dir_y[0] = -1;
+	map->dir_y[1] = 1;
+	map->dir_y[2] = -1;
+	map->dir_y[3] = 0;
+	map->dir_y[4] = 0;
+	map->dir_y[5] = 1;
+	map->dir_y[6] = -1;
+	map->dir_y[7] = 1;
+}
+
 t_map_simu	*seed_to_mapsimu(long int seed)
 {
 	t_map_simu	*map;
 
-	map = calloc(sizeof(t_map_simu), 1);
+	map = ft_calloc(sizeof(t_map_simu), 1);
 	if (!map)
 		return (NULL);
 	map->len = ft_count_digits(seed);
@@ -58,44 +78,6 @@ t_map_simu	*seed_to_mapsimu(long int seed)
 	map->width = ((long)(seed / 100) % 1000) / 4;
 	map->iter = seed % 100 * 100;
 	map->door = ((float)(seed % 10) / 10);
-	map->count = 0;
+	init_dir(map);
 	return (map);
-}
-
-void	debug_seed(t_map_simu *map, long int seed, bool print)
-{
-	int		i;
-	bool	found;
-
-	if (print)
-	{
-		i = 0;
-		found = false;
-		printf("map:\n");
-		while (i <= map->height)
-		{
-			if (ft_isempty(map->map[i]) && !found)
-			{
-				i++;
-				continue ;
-			}
-			if (!ft_isempty(map->map[i]) && !found)
-				found = true;
-			if (!ft_isempty(map->map[i]) && found)
-				printf("%s\n", map->map[i]);
-			i++;
-		}
-		printf("end map\n");
-		return ;
-	}
-	printf("seed:%ld\n", seed);
-	printf("len:%d\n", map->len);
-	printf("ori_x:%d\n", map->ori_x);
-	printf("ori_y:%d\n", map->ori_y);
-	printf("height:%d\n", map->height);
-	printf("width:%d\n", map->width);
-	printf("iter:%d\n", map->iter);
-	printf("door:%f\n", map->door);
-	printf("spawn:{%d, %d, %d}\n", map->spawn.zero,
-		map->spawn.one, map->spawn.two);
 }

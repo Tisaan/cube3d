@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 16:05:33 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/05 14:52:58 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 15:05:07 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	nb_zero_neighbour(t_map_simu *map, int x, size_t y)
 	count = 0;
 	while (i < 8)
 	{
-		nx = x + ((int [8])DIR_X)[i];
-		ny = y + ((int [8])DIR_Y)[i];
+		nx = x + map->dir_x[i];
+		ny = y + map->dir_y[i];
 		if (nx >= 0 && nx < map->height && ny >= 0 && ny < map->width)
 		{
 			if (map->map[nx][ny] == '0')

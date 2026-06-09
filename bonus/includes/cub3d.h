@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 14:11:13 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 15:09:35 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # include "player.h"
 # include "utils.h"
 
-#define DOOR_ASSET_CLOSE "assets/wood.png"
-#define DOOR_ASSET_OPEN "assets/pillar.png"
+# define DOOR_ASSET_CLOSE "assets/wood.png"
+# define DOOR_ASSET_OPEN "assets/pillar.png"
 
 typedef mlx_window_create_info	t_win_infos;
 
@@ -71,7 +71,7 @@ typedef struct s_keys
 	bool	right;
 }			t_keys;
 
-typedef enum	e_state_obj
+typedef enum e_state_obj
 {
 	close_state,
 	opening_state,

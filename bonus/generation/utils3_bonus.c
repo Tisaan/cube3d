@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 17:46:35 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/06 14:19:04 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 15:08:42 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ bool	place_gen_algo(
 		{
 			if (!addpointfree(list, *pos, map))
 				return (true);
-			pos->x += ((int [8])DIR_X)[abs(map->iter - VARIANT_GEN_X) % 8];
-			pos->y += ((int [8])DIR_Y)[abs(map->iter - VARIANT_GEN_Y) % 8];
+			pos->x += map->dir_x[abs(map->iter - (i + map->ori_y)) % 8];
+			pos->y += map->dir_y[abs(map->iter - (i + map->ori_y)) % 8];
 			if (++total == map->iter)
 			{
 				free_pointlist(list);
@@ -79,9 +79,9 @@ void	l_shape(t_point *pos, int i, t_map_simu *map)
 		(*pos).x = (*pos).x + num;
 		(*pos).y = (*pos).y - 2;
 	}
-	(*pos).x += ((int [8])DIR_X)[(map->iter - i
+	(*pos).x += map->dir_x[(map->iter - i
 			+ ((map->ori_x + i) % 2 == 0)) % 8];
-	(*pos).y += ((int [8])DIR_Y)[(map->iter - i
+	(*pos).y += map->dir_y[(map->iter - i
 			+ ((map->ori_y + i) % 2 == 1)) % 8];
 }
 

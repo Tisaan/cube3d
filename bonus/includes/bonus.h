@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 14:10:57 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 15:08:27 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,6 @@
 
 # include "cub3d.h"
 # include <pthread.h>
-
-# define dir_x {1, -1, 1, 0, 0, -1, 1, -1}
-# define dir_y {-1, 1, -1, 0, 0, 1, -1, 1}
-
-//----------[tweak de la gen]------
-# define big
-# if defined(big)
-#  define variant_gen_y (i + map->ori_y)
-#  define variant_gen_x (i + map->ori_x)
-# elif defined(mini)
-# define variant_gen_x (i)
-# define variant_gen_y (i)
-#else
-# define variant_gen_x (i + map->ori_y + map->ori_x)
-# define variant_gen_y (i + map->ori_y + map->ori_x)
-# endif
 
 typedef struct s_int3
 {
@@ -65,6 +49,8 @@ typedef struct s_map_simu
 	float	door;
 	t_int3	spawn;
 	char	*seed;
+	int		dir_x[8];
+	int		dir_y[8];
 }				t_map_simu;
 
 typedef enum s_error_map_gen
