@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:09:42 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/09 15:11:05 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 17:07:53 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_ray
 	t_vect			side_dist;
 	t_direction_id	face;
 	t_type			type;
+	int				texture_y;
 	union
 	{
 		struct
@@ -49,7 +50,7 @@ void	set_ray_face(t_ray *ray);
 void	set_ray_side(t_ray *ray, t_vect *tile, t_vect step);
 void	set_type_ray(t_data *data, t_vect tyle, t_ray *ray);
 void	get_pixel(t_ray *ray, mlx_color *pixel, t_data *d,
-			int xs[2], int texture_y);
+			int xs[2]);
 bool	face_same_dir(t_ray *ray, t_player *p);
 
 #endif

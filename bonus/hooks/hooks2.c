@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:54:55 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 16:28:34 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 16:59:52 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	update_mouse_rot(t_data *d)
 			rotate_vect(&d->player->dir, -(d->delta * PLAYER_ROT_SPEED));
 			rotate_vect(&d->player->camera, -(d->delta * PLAYER_ROT_SPEED));
 		}
-		mlx_mouse_move(d->mlx, d->win, WIN_HEIGHT / 2,  WIN_WIDTH / 2);
+		mlx_mouse_move(d->mlx, d->win, WIN_HEIGHT / 2, WIN_WIDTH / 2);
 	}
 }

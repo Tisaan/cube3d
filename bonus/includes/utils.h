@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:25:47 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/08 11:31:07 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/09 17:35:08 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ void		free_viewport(t_data *data);
 void		time_update(void *param);
 void		start_timer(t_timer *timer);
 
-void		set_default(t_data *data);
+int			set_default(t_data *data);
 
 #endif

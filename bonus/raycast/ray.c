@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/06 15:39:44 by von              ###   ########.fr       */
+/*   Updated: 2026/06/09 17:06:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	set_obj_pixels(t_data *d, t_ray *ray, t_obj obj, int xs[2])
 	while (y < obj.end)
 	{
 		texture_y = clamp_pos((int)curr_pos, 0, WALL_SIZE - 1);
-		get_pixel(ray, &pixel, d, xs, texture_y);
+		ray->texture_y = texture_y;
+		get_pixel(ray, &pixel, d, xs);
 		mlx_set_image_pixel(d->mlx, d->frame, xs[0], y++, pixel);
 		curr_pos += step;
 	}

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 11:40:09 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/09 15:20:10 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 17:08:23 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ void	udpate_doors(t_ray *ray, t_data *d)
 	}
 }
 
-void	get_pixel(t_ray *ray, mlx_color *pixel, t_data *d, int xs[2], int texture_y)
+void	get_pixel(t_ray *ray, mlx_color *pixel, t_data *d, int xs[2])
 {
 	udpate_doors(ray, d);
 	if (ray->type == wall_type)
 		*pixel = mlx_get_image_pixel(d->mlx, d->wall_assets[ray->face],
-				xs[1], texture_y);
-	else if (d->map_door[(int)ray->tile.y][(int)ray->tile.x] == close_state || d->map_door[(int)ray->tile.y][(int)ray->tile.x] == closing_state)
+				xs[1], ray->texture_y);
+	else if (d->map_door[(int)ray->tile.y][(int)ray->tile.x] == close_state)
 		*pixel = mlx_get_image_pixel(d->mlx, d->door_asset[0],
-				xs[1], texture_y);
+				xs[1], ray->texture_y);
 	else
 		*pixel = mlx_get_image_pixel(d->mlx, d->door_asset[1],
-				xs[1], texture_y);
+				xs[1], ray->texture_y);
 }

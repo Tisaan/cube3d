@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 16:14:42 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 17:34:55 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	handle_seed_args(t_data **data, int ac, char **av, long int *seed)
 			*data = main_proc(*seed);
 			if (!data || !*data)
 				return (1);
-			set_default(*data);
+			return (set_default(*data));
 		}
 		else
 		{
@@ -100,7 +100,7 @@ static int	switch_gen(t_data **data, int ac, char **av, long int *seed)
 		*data = main_proc(*seed);
 		if (!data || !*data)
 			return (1);
-		set_default(*data);
+		return (set_default(*data));
 	}
 	else if (ac == 2)
 	{

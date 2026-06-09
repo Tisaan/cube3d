@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 16:19:50 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 17:01:23 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ typedef struct s_keys
 typedef enum e_state_obj
 {
 	close_state,
-	opening_state,
-	closing_state,
 	open_state,
 	not_door_state,
 }				t_state_obj;
