@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 14:12:24 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 16:06:29 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	free_all(t_data *data, int fd)
 	free_texture_paths(data);
 	if (data->player)
 		free(data->player);
+	if (data->mouse_pos)
+		free(data->mouse_pos);
 	if (data)
 		free(data);
 }

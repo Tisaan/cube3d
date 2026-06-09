@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:52:40 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 15:16:19 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 16:25:52 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	set_map_door(t_data *data)
 int	init_map_door(t_data *data)
 {
 	int	i;
-	int	j;
 
 	data->map_door = ft_calloc(data->map->height + 1, sizeof(t_state_obj *));
 	if (!data->map_door)
@@ -81,4 +80,17 @@ int	init_door(t_data *data)
 	}
 	ret = init_map_door(data);
 	return (ret);
+}
+
+int	init_mouse(t_data *d)
+{
+	t_vect	*v;
+
+	v = malloc(sizeof(t_vect));
+	if (!v)
+		return (-ERROR_MALLOC);
+	set_vect(v, WIN_HEIGHT / 2, WIN_WIDTH / 2);
+	d->mouse_pos = v;
+	mlx_mouse_hide(d->mlx);
+	return (NO_ERROR);
 }

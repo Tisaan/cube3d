@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 14:53:55 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 16:14:42 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int	process(t_data *data)
 	mlx_on_event(data->mlx, data->win, MLX_WINDOW_EVENT, window_hook, data);
 	mlx_add_loop_hook(data->mlx, time_update, data);
 	mlx_add_loop_hook(data->mlx, update_player_pos, data);
+	mlx_add_loop_hook(data->mlx, (void (*)())update_mouse_rot, data);
 	mlx_add_loop_hook(data->mlx, update_player_rot, data);
 	mlx_add_loop_hook(data->mlx, update_mini_map, data);
 	mlx_add_loop_hook(data->mlx, ray_hook, data);

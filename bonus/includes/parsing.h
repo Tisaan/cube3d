@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 14:11:44 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 16:20:15 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int		init_game(t_data *data);
 int		init_door(t_data *data);
 int		init_map_door(t_data *data);
 bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos);
+int		init_mouse(t_data *d);
 
 // --- PATH ---
 char	*get_path(char *line);

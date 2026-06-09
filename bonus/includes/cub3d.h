@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 15:09:35 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 16:19:50 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # include "parsing.h"
 # include "player.h"
 # include "utils.h"
+
+# define WIN_HEIGHT 720
+# define WIN_WIDTH 1280
 
 # define DOOR_ASSET_CLOSE "assets/wood.png"
 # define DOOR_ASSET_OPEN "assets/pillar.png"
@@ -98,6 +101,7 @@ typedef struct s_data
 	t_prgb			plans_color[2];
 	t_player		*player;
 	t_keys			keys;
+	t_vect			*mouse_pos;			
 	float			delta;
 }				t_data;
 
@@ -115,7 +119,7 @@ void	key_up_hook(int key, void *param);
 void	window_hook(int event, void *param);
 void	render(void *param);
 void	update_mini_map(void *param);
+void	update_mouse_rot(t_data *d);
 void	ray_hook(void *param);
-void	hook_door(void *param);
 
 #endif

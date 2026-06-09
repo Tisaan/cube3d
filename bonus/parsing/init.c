@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/09 15:15:04 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 16:24:07 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos)
 {
 	infos->title = "cub3D";
-	infos->width = 1280;
-	infos->height = 720;
+	infos->width = WIN_WIDTH;
+	infos->height = WIN_HEIGHT;
 	infos->is_fullscreen = false;
 	infos->is_resizable = false;
 	*win = mlx_new_window(mlx, infos);
