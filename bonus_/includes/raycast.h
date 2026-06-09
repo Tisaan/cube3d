@@ -6,11 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:09:42 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/08 16:13:57 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 14:11:28 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	RAYCAST_H
+#ifndef RAYCAST_H
 # define RAYCAST_H
 # include "cub3d.h"
 #include "parsing.h"
@@ -22,7 +22,7 @@ typedef enum	e_type
 	wall_type,
 }				t_type;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	int				side;
 	t_vect			dir;
@@ -39,7 +39,7 @@ typedef struct	s_ray
 }					t_ray;
 
 // Raycaster main functions
-int	raycast(t_data *data, t_player *player);
+int		raycast(t_data *data, t_player *player);
 float	dda(t_ray *ray, t_data *data);
 
 // Ray util functions

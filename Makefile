@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/08 16:52:18 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/09 14:12:59 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,14 +50,18 @@ SRC_PARSING = 	path.c \
 				map_utils.c \
 				map_utils2.c
 
-SRC_UTILS =		free.c \
+SRC_UTILS =		free_bonus.c \
 				debug.c \
 				vectors.c \
 				utils2.c \
-				utils.c
+				utils.c \
+
+SRC_MINI_MAP =	mini_map_bonus.c \
+				render_mini_map.c \
+				viewport_utils.c
 
 SRC_RAYCAST =	player.c \
-				render.c \
+				render_bonus.c \
 				ray.c \
 				ray_utils.c \
 				ray_utils2.c \
@@ -70,7 +74,7 @@ SRC_PLAYER = move.c \
 			 rotate.c
 
 SRC_GEN =   door_bonus.c \
-			free_bonus.c \
+			free_seed_bonus.c \
 			gen_seed_bonus.c \
 			method_bonus.c \
 			spawn_bonus.c \
@@ -80,7 +84,7 @@ SRC_GEN =   door_bonus.c \
 			utils4_bonus.c \
 			wall_bonus.c
 
-SUB_DIR = parsing utils hooks raycast player generation
+SUB_DIR = parsing utils hooks raycast player generation mini_map
 
 else
 
@@ -121,7 +125,7 @@ VPATH := $(DIR) \
 
 
 ifeq ($(MAKECMDGOALS), bonus)
-	SRCS = main.c main_proc.c $(SRC_UTILS) $(SRC_PARSING) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER) $(SRC_GEN)
+	SRCS = main.c main_proc.c $(SRC_UTILS) $(SRC_PARSING) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER) $(SRC_GEN) $(SRC_MINI_MAP)
 else
 	SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER)
 endif

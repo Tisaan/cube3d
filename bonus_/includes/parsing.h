@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/05 17:03:14 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 14:11:44 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdbool.h>
+# include "../../mlx/includes/mlx.h"
 // --- ERROR ---
 
 typedef enum e_error_map
@@ -24,7 +25,7 @@ typedef enum e_error_map
 	INC_CHAR,
 	EMPT_MAP,
 	INV_MAP,
-	INV_CUT_MAP, 
+	INV_CUT_MAP,
 	INV_WALL_MAP,
 	NOT_ENO_STRT,
 	TOO_MUCH_STRT,
@@ -44,11 +45,13 @@ typedef enum e_error_map
 
 // --- STRUCT ---
 
-typedef struct s_data	t_data;
+typedef struct s_data			t_data;
+typedef mlx_window_create_info	t_win_infos;
 
 // ---- TEXTURE ----
 
-typedef enum e_direction_id{
+typedef enum e_direction_id
+{
 	NO,
 	SO,
 	WE,
@@ -62,15 +65,17 @@ typedef struct s_texture_path
 	t_direction_id	dir;
 }				t_texture_path;
 
-typedef enum e_pceilfloor{
+typedef enum e_pceilfloor
+{
 	CEILING = 5,
 	FLOOR = 6,
 	EMPT
 }			t_pceilfloor;
 
-typedef struct s_prgb{
-	int rgb[3];
-	t_pceilfloor type;
+typedef struct s_prgb
+{
+	int				rgb[3];
+	t_pceilfloor	type;
 }				t_prgb;
 
 // ---- MAP ----
@@ -78,6 +83,7 @@ typedef struct s_prgb{
 typedef struct s_map
 {
 	char	**grid;
+	char	**viewport;
 	int		width;
 	int		height;
 	int		*start;// [0] = x, [1] = y, [2] = direction
@@ -97,6 +103,7 @@ int		init_wall_assets(t_data *data);
 int		init_game(t_data *data);
 int		init_door(t_data *data);
 int		init_map_door(t_data *data);
+bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos);
 
 // --- PATH ---
 char	*get_path(char *line);

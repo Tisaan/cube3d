@@ -6,11 +6,25 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/05 18:47:46 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 14:12:06 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../includes/mini_map.h"
+
+bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos)
+{
+	infos->title = "cub3D";
+	infos->width = 1280;
+	infos->height = 720;
+	infos->is_fullscreen = false;
+	infos->is_resizable = false;
+	*win = mlx_new_window(mlx, infos);
+	if (*win == MLX_NULL_HANDLE)
+		return (false);
+	return (true);
+}
 
 void	init_map_data(t_data *data)
 {
@@ -62,12 +76,12 @@ int	init_game(t_data *data)
 	ret = init_player(data);
 	if (ret < 0)
 		return (ret);
-	// ret = init_wall_assets(data);
-	// if (ret < 0)
-	// 	return (ret);
 	data->frame = mlx_new_image(data->mlx, data->win_infos.width,
 			data->win_infos.height);
 	if (data->frame == MLX_NULL_HANDLE)
+		return (-ERROR_LOAD_ASSET);
+	data->mini_map = mlx_new_image(data->mlx, 176, 176);
+	if (data->mini_map == MLX_NULL_HANDLE)
 		return (-ERROR_LOAD_ASSET);
 	data->keys = (t_keys){0};
 	data->floor_color = rgb_to_color(data->plans_color[1], 100);

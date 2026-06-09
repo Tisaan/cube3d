@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/05 16:01:08 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 14:11:56 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@
 #include "includes/bonus.h"
 #include <sys/wait.h>
 #include <unistd.h>
-
-static bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos)
-{
-	infos->title = "cub3D";
-	infos->width = 1280;
-	infos->height = 720;
-	infos->is_fullscreen = false;
-	infos->is_resizable = false;
-	*win = mlx_new_window(mlx, infos);
-	if (*win == MLX_NULL_HANDLE)
-		return (false);
-	return (true);
-}
 
 static int	ready(t_data *data)
 {
@@ -76,11 +63,67 @@ static int	process(t_data *data)
 	mlx_add_loop_hook(data->mlx, time_update, data);
 	mlx_add_loop_hook(data->mlx, update_player_pos, data);
 	mlx_add_loop_hook(data->mlx, update_player_rot, data);
+	mlx_add_loop_hook(data->mlx, update_mini_map, data);
 	mlx_add_loop_hook(data->mlx, ray_hook, data);
 	mlx_add_loop_hook(data->mlx, render, data);
 	start_timer(&data->timer);
 	mlx_loop(data->mlx);
 	return (NO_ERROR);
+}
+
+static int	handle_seed_args(t_data **data, int ac, char **av, long int *seed)
+{
+	if (ac == 3 && ft_strncmp(av[1], "seed\0", 5) == 0)
+	{
+		if (ft_strlen(av[2]) == (size_t)skip_digits(av[2])
+			&& ft_strlen(av[2]) == 12)
+		{
+			*seed = ft_atol(av[2]);
+			if (*seed < 0 || !check_seed(*seed))
+			{
+				throw_error_bonus(SEED_INVALID);
+				return (1);
+			}
+			*data = main_proc(*seed);
+			if (!data || !*data)
+				return (1);
+			set_default(*data);
+		}
+		else
+		{
+			throw_error_bonus(SEED_INVALID);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+static int	switch_gen(t_data **data, int ac, char **av, long int *seed)
+{
+	if (ac == 2 && ft_strncmp(av[1], "seed\0", 5) == 0)
+	{
+		*seed = gen_seed();
+		*data = main_proc(*seed);
+		if (!data || !*data)
+			return (1);
+		set_default(*data);
+	}
+	else if (ac == 2)
+	{
+		*data = ft_calloc(sizeof(t_data), 1);
+		if (!data || !*data)
+		{
+			throw_error(ERROR_MALLOC);
+			return (1);
+		}
+		parse(av[1], *data);
+	}
+	else
+	{
+		ft_print_error("Error:\nInvalid number of arguments.\n");
+		return (1);
+	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -89,53 +132,14 @@ int	main(int ac, char **av)
 	int			ret;
 	long int	seed;
 
-
-	if (ac == 3 && ft_strncmp(av[1], "seed\0", 5) == 0)
-	{
-		if (ft_strlen(av[2]) == (size_t)skip_digits(av[2]) && ft_strlen(av[2]) == 12)
-		{
-			seed = ft_atol(av[2]);
-			if (seed < 0 || !check_seed(seed))
-			{
-				throw_error_bonus(SEED_INVALID);
-				return (1);
-			}
-			data = main_proc(seed);
-			if (!data)
-				return (1);
-			set_default(data);
-		}
-		else
-		{
-			throw_error_bonus(SEED_INVALID);
-			return (1);
-		}
-	}
-	else if (ac == 2 && ft_strncmp(av[1], "seed\0", 5) == 0)
-	{
-		seed = gen_seed();
-		data = main_proc(seed);
-		if (!data)
-			return (1);
-		set_default(data);
-	}
-	else if (ac == 2)
-	{	
-		data = ft_calloc(sizeof(t_data), 1);
-		if (!data)
-		{
-			throw_error(ERROR_MALLOC);
-			return (1);
-		}
-		parse(av[1], data);
-	}
-	else
-	{
-		ft_print_error("Invalid number of arguments.\n");
+	data = NULL;
+	if (handle_seed_args(&data, ac, av, &seed) != 0)
 		return (1);
-	}
+	else if (switch_gen(&data, ac, av, &seed) != 0)
+		return (1);
 	if (data->map == NULL)
 		return (1);
+	write(2, "ahah\n", 5);
 	ret = ready(data);
 	if (ret < 0)
 		return (ret);

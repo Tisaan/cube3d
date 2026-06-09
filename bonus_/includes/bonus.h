@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/06 14:12:06 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 14:10:57 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 # include "cub3d.h"
 # include <pthread.h>
 
-# define DIR_X {1, -1, 1, 0, 0, -1, 1, -1}
-# define DIR_Y {-1, 1, -1, 0, 0, 1, -1, 1}
+# define dir_x {1, -1, 1, 0, 0, -1, 1, -1}
+# define dir_y {-1, 1, -1, 0, 0, 1, -1, 1}
 
 //----------[tweak de la gen]------
-# define BIG
-# if defined(BIG)
-#  define VARIANT_GEN_Y (i + map->ori_y)
-#  define VARIANT_GEN_X (i + map->ori_x)
-# elif defined(MINI)
-#  define VARIANT_GEN_X (i)
-#  define VARIANT_GEN_Y (i)
-# else
-#  define VARIANT_GEN_X (i + map->ori_y + map->ori_x)
-#  define VARIANT_GEN_Y (i + map->ori_y + map->ori_x)
+# define big
+# if defined(big)
+#  define variant_gen_y (i + map->ori_y)
+#  define variant_gen_x (i + map->ori_x)
+# elif defined(mini)
+# define variant_gen_x (i)
+# define variant_gen_y (i)
+#else
+# define variant_gen_x (i + map->ori_y + map->ori_x)
+# define variant_gen_y (i + map->ori_y + map->ori_x)
 # endif
 
 typedef struct s_int3

@@ -22,13 +22,13 @@
 #  define PLAYER_ROT_SPEED	3.0f
 # endif
 
-#include "parsing.h"
+# include "parsing.h"
 # include "vectors.h"
 # include "../../mlx/includes/mlx.h"
 
 typedef struct s_data	t_data;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	t_vect		camera;
 	t_vect		pos;

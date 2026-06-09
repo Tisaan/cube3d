@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   mini_map.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 11:08:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/03 18:30:10 by pcaplat          ###   ########.fr       */
+/*   Created: 2026/06/05 15:28:15 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/06/08 10:39:30 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
-# include "cub3d.h"
+#ifndef MINI_MAP_H
+# define MINI_MAP_H
+# include "../includes/cub3d.h"
+# include "../includes/bonus.h"
 
-void	display_map_data(t_data data);
-void	display_player_data(t_player *player);
-void	init_pip_boy(t_img *img, t_data *data);
-void	ft_print_error(const char *msg);
-int		render_2D_map(t_data *data);
-void	display_texture_id(int id);
-void	display_viewport(char **viewport);
-void	secure_display(char *str);
+int		set_viewport(t_player *player, t_map *map);
+void	set_mini_map_pixels(t_data *data);
+void	clear_viewport(t_map *map, int i);
+int		fill_end_with_space(t_map *map, int *i);
+int		fill_start_with_space(t_map *map, int *i, int *map_y);
+int		fill_viewport(t_player *player, t_map *map, t_point view);
 
 #endif

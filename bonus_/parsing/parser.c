@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/02 17:54:12 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/03 17:36:46 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_map	*init_map_metadata(int size)
 		throw_error(-ERROR_MALLOC);
 	if (!map->grid)
 		return (NULL);
+	map->viewport = NULL;
 	map->start = NULL;
 	return (map);
 }

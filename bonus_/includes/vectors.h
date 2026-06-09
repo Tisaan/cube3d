@@ -13,7 +13,7 @@
 #ifndef VECTORS_H
 # define VECTORS_H
 
- typedef struct s_vect
+typedef struct s_vect
 {
 	float	x;
 	float	y;
