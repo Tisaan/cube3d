@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/09 16:24:07 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/10 08:46:25 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos)
 	*win = mlx_new_window(mlx, infos);
 	if (*win == MLX_NULL_HANDLE)
 		return (false);
+	mlx_set_font_scale(mlx, "default", FONT_SIZE);
 	return (true);
 }
 

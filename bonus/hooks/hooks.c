@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/05 16:06:57 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/10 08:09:52 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,14 @@ void	key_hooks(int key, void *param)
 			mlx_set_window_fullscreen(data->mlx, data->win, false);
 		}
 	}
+	else if (key == F3_KEY)
+	{
+		if (data->keys.f3 == true)
+			data->keys.f3 = false;
+		else
+		 data->keys.f3 = true;
+	}
+		display_game_infos(data);
 	movement_hooks(key, data);
 }
 

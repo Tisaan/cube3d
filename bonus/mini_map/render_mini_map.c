@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 18:11:52 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/05 18:43:25 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/10 07:44:36 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	fill_pixels(t_data *data, int x, int y, mlx_color color)
 {
-	char		**view;
+	// char		**view;
 	int			i;
 	int			j;
-	int			count;
+	// int			count;
 
-	view = data->map->viewport;
+	// view = data->map->viewport;
 	i = y * 16;
-	count = 0;
+	// count = 0;
 	while (i < (y * 16) + 16)
 	{
 		j = x * 16;
