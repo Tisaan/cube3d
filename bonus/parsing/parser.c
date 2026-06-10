@@ -1,0 +1,122 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/06/03 17:36:46 by pcaplat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub3d.h"
+#include "../includes/utils.h"
+#include <stdbool.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int	map_size(char *name);
+
+t_map	*init_map_metadata(int size)
+{
+	t_map	*map;
+
+	map = ft_calloc(sizeof(t_map), 1);
+	if (!map)
+		throw_error(ERROR_MALLOC);
+	if (!map)
+		return (NULL);
+	map->grid = ft_calloc(sizeof(char *), (size + 1));
+	if (!map->grid)
+		throw_error(-ERROR_MALLOC);
+	if (!map->grid)
+		return (NULL);
+	map->viewport = NULL;
+	map->start = NULL;
+	return (map);
+}
+
+static int	get_and_check_map(t_data *data, int fd)
+{
+	int	err;
+
+	err = get_map(fd, data->map, 0);
+	if (err < 0)
+		return (err);
+	err = check_map(data->map);
+	if (err < 0)
+		return (err);
+	return (NO_ERROR);
+}
+
+t_data	*parse_map(int fd, t_data *data, int size_file)
+{
+	int		count;
+	int		err;
+
+	count = 0;
+	data->map = init_map_metadata(size_file - count);
+	if (!data->map)
+		return (NULL);
+	err = parse_map_data(fd, data, &count);
+	if (err < 0)
+	{
+		clear_gnl_buffer(fd);
+		close(fd);
+		throw_error(err);
+		return (NULL);
+	}
+	data->map->height = size_file - count;
+	err = get_and_check_map(data, fd);
+	if (err < 0)
+	{
+		clear_gnl_buffer(fd);
+		throw_error(err);
+		return (NULL);
+	}
+	return (data);
+}
+
+static int	parse_step(t_data *data, char *map_path, int size)
+{
+	int		fd;
+	void	*ptr;
+
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+	{
+		throw_error(ERROR_OPEN);
+		return (ERROR_OPEN);
+	}
+	ptr = parse_map(fd, data, size);
+	if (!ptr)
+	{
+		free_map(data);
+		free_texture_paths(data);
+		close(fd);
+		return (-1);
+	}
+	close(fd);
+	return (0);
+}
+
+void	parse(char *map_path, t_data *data)
+{
+	int		size_file;
+
+	data->map = NULL;
+	if (!ft_strendwith(map_path, ".cub"))
+	{
+		throw_error(INC_EXT);
+		return ;
+	}
+	size_file = map_size(map_path);
+	if (size_file < 0)
+	{
+		throw_error(size_file);
+		return ;
+	}
+	if (parse_step(data, map_path, size_file) < 0)
+		return ;
+}

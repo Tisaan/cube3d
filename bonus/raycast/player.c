@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:30:15 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/09 16:22:00 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/09 16:23:03 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 
 static void	set_player_orientation(t_player *player, t_direction_id dir)
 {
-	if (dir == NO)
+	if (dir == NO || dir == 'N')
 	{
 		set_vect(&player->dir, 0, -1);
 		set_vect(&player->camera, 0.66, 0);
 	}
-	else if (dir == SO)
+	else if (dir == SO || dir == 'S')
 	{
 		set_vect(&player->dir, 0, 1);
 		set_vect(&player->camera, -0.66, 0);
 	}
-	else if (dir == WE)
+	else if (dir == WE || dir == 'W')
 	{
 		set_vect(&player->dir, -1, 0);
 		set_vect(&player->camera, 0, -0.66);
 	}
-	else if (dir == EA)
+	else if (dir == EA || dir == 'E')
 	{
 		set_vect(&player->dir, 1, 0);
 		set_vect(&player->camera, 0, 0.66);
@@ -46,5 +46,7 @@ int	init_player(t_data *data)
 	data->player->pos.x = data->map->start[1] * WALL_SIZE + WALL_SIZE / 2.0f;
 	data->player->pos.y = data->map->start[0] * WALL_SIZE + WALL_SIZE / 2.0f;
 	set_player_orientation(data->player, data->map->start[2]);
+	if (init_mouse(data) < 0)
+		return (-ERROR_MALLOC);
 	return (NO_ERROR);
 }
