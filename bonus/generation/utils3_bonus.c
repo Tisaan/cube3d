@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 17:46:35 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 17:12:44 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/10 10:48:31 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_map_simu	*init_map(t_data *data, long int seed)
 		ft_memset(map->map[i], ' ', map->width);
 		i++;
 	}
-	if (!generate_map(map, seed))
+	if (!generate_map(data, map, seed))
 	{
 		free(data);
 		return (NULL);

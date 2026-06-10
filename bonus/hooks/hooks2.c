@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:54:55 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/10 08:45:02 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/10 12:32:58 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,31 @@ void	update_mouse_rot(t_data *d)
 	}
 }
 
-static char	*set_fps_prompt(char *fps, char *prompt)
+static char	*set_prompt(char *prefix, char *postfix, bool free_postfix)
 {
 	char	*tmp;
 	int		len;
 	int		i;
 	int		j;
 
-	len = ft_strlen(fps) + ft_strlen(prompt);
-	tmp = malloc(sizeof(char) * len + 1);
+	len = ft_strlen(postfix);
+	len += ft_strlen(prefix);
+	tmp = malloc(sizeof(char) * (len + 1));
 	if (!tmp)
 	{
-		free(fps);
+		if (free_postfix)
+			free(postfix);
 		return (NULL);
 	}
 	i = 0;
 	j = 0;
-	while (prompt[i] && j < len)
-		tmp[j++] = prompt[i++];
+	while (prefix[i] && j < len)
+		tmp[j++] = prefix[i++];
 	i = 0;
-	while (fps[i] && j < len)
-		tmp[j++] = fps[i];
-	free(fps);
+	while (postfix[i] && j < len)
+		tmp[j++] = postfix[i];
+	if (free_postfix)
+		free(postfix);
 	tmp[j] = '\0';
 	return (tmp);
 }
@@ -76,9 +79,14 @@ void	display_game_infos(void *param)
 		throw_error(-ERROR_MALLOC);
 		return ;
 	}
-	fps = set_fps_prompt(fps, "FPS: ");
+	fps = set_prompt("FPS: ", fps, true);
 	if (fps == NULL)
 		return ;
-	mlx_string_put(data->mlx, data->win, 10 + FONT_SIZE, 10 + FONT_SIZE, color, fps);
+	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE, 15 + FONT_SIZE, color, fps);
+	free(fps);
+	fps = set_prompt("SEED: ", data->seed, false);
+	if (!fps)
+		return ;
+	mlx_string_put(data->mlx, data->win, 30 + FONT_SIZE, 30 + FONT_SIZE, color, fps);
 	free(fps);
 }

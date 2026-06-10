@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 15:08:27 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/10 10:48:55 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		place_point_loop(t_map_simu *map, t_pointlist *p);
 t_map_simu	*init_map(t_data *data, long int seed);
 bool		place_bound(t_map_simu *map, t_point *pos, int *index,
 				t_pointlist *list);
-bool		generate_map(t_map_simu *map, long int seed);
+bool		generate_map(t_data *data, t_map_simu *map, long int seed);
 
 //----------[free.c]-----------
 void		free_t_map_simu(t_map_simu *map);

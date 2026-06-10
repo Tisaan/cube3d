@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/10 08:44:00 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/10 10:40:25 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_data
 	t_player		*player;
 	t_keys			keys;
 	t_vect			*mouse_pos;			
+	char			*seed;
 	float			delta;
 }				t_data;
 

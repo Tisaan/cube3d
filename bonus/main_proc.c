@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 15:24:28 by von               #+#    #+#             */
-/*   Updated: 2026/06/09 17:11:36 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/10 12:34:38 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,17 @@ void	gen_map_algo(t_map_simu *map, t_point *pos)
 	free_pointlist(list);
 }
 
-bool	generate_map(t_map_simu *map, long int seed)
+void	generate_map_process(t_map_simu *map, long int seed, const t_point val)
+{
+	int_to_bin_str(seed, map->seed);
+	gen_map_algo(map, (t_point *)&val);
+	link_zero(map);
+	place_struct(map);
+	apply_wall(map);
+	place_door(map);
+}
+
+bool	generate_map(t_data *data, t_map_simu *map, long int seed)
 {
 	const t_point	val = {.x = map->ori_x,
 		.y = map->ori_y};
@@ -84,13 +94,10 @@ bool	generate_map(t_map_simu *map, long int seed)
 		throw_error_bonus(ERR_MALLOC_BNS);
 		return (false);
 	}
-	int_to_bin_str(seed, map->seed);
-	gen_map_algo(map, (t_point *)&val);
-	link_zero(map);
-	place_struct(map);
-	apply_wall(map);
-	place_door(map);
-	free(map->seed);
+	generate_map_process(map, seed, val);
+	data->seed = map->seed;
+	for (int i = 0; data->seed[i]; i++)
+		write(1, &data->seed[i], 1);
 	if (map_empty(map))
 	{
 		throw_error_bonus(MAP_EMPTY_GEN);
