@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:54:55 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/10 12:32:58 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/10 12:53:26 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*set_prompt(char *prefix, char *postfix, bool free_postfix)
 		tmp[j++] = prefix[i++];
 	i = 0;
 	while (postfix[i] && j < len)
-		tmp[j++] = postfix[i];
+		tmp[j++] = postfix[i++];
 	if (free_postfix)
 		free(postfix);
 	tmp[j] = '\0';
@@ -87,6 +87,6 @@ void	display_game_infos(void *param)
 	fps = set_prompt("SEED: ", data->seed, false);
 	if (!fps)
 		return ;
-	mlx_string_put(data->mlx, data->win, 30 + FONT_SIZE, 30 + FONT_SIZE, color, fps);
+	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE, 45 + FONT_SIZE, color, fps);
 	free(fps);
 }

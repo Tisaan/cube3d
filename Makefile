@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
+#    By: von <von@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/09 17:02:55 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/10 12:57:35 by von              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NC     := \033[0m # No Color
 
 # --- Compilation ---
 NAME = cub3D
-CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes
+CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes 
 CC	= cc
 
 # --- Directory ---

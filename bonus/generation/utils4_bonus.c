@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:15:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/03 18:30:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/10 12:42:56 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ bool	place_bound(
 	int *index,
 	t_pointlist *list
 ){
-	map->map[pos->x][pos->y] = map->seed[(ft_strlen(map->seed) + (*index)++)
-		% ft_strlen(map->seed)];
+
+	size_t	len;
+
+	len = ft_strlen(map->seed);
+	map->map[pos->x][pos->y] = map->seed[(len + (*index)++)
+		% len];
 	if (!addpointfree(list, *pos, map))
 		return (true);
 	place_point_loop(map, list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 16:06:29 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/10 12:54:54 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	free_map(t_data *data)
 	free(data->map_door);
 	if (data->map->start)
 		free(data->map->start);
+	if (data->seed)
+		free(data->seed);
 	if (data->map)
 		free(data->map);
 }

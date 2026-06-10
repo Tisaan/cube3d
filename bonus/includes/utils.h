@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:25:47 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/10 08:42:52 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/10 12:48:22 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void		start_timer(t_timer *timer);
 void		display_game_infos(void *param);
 
 int			set_default(t_data *data);
+char		*str_seed(long int n);
 
 #endif

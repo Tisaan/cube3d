@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_proc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 15:24:28 by von               #+#    #+#             */
-/*   Updated: 2026/06/10 12:34:38 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/10 12:56:58 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,19 @@ bool	generate_map(t_data *data, t_map_simu *map, long int seed)
 		return (false);
 	}
 	generate_map_process(map, seed, val);
-	data->seed = map->seed;
+	free(map->seed);
+	data->seed = str_seed(seed);
+	if (!data->seed)
+	{
+		throw_error_bonus(MAP_EMPTY_GEN);
+		free_t_map_simu(map);
+		return (false);
+	}
 	for (int i = 0; data->seed[i]; i++)
 		write(1, &data->seed[i], 1);
 	if (map_empty(map))
 	{
+		free(data->seed);
 		throw_error_bonus(MAP_EMPTY_GEN);
 		free_t_map_simu(map);
 		return (false);
