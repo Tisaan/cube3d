@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/12 14:17:58 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/12 14:57:00 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # ifndef SPRITE_FRAMES
 #  define SPRITE_FRAMES	7
 # endif
+# ifndef SPRITE_RATIO
+#  define SPRITE_RATIO	0.40f
+# endif
 # ifndef ANIM_SPEED
 #  define ANIM_SPEED	0.1f
 # endif
@@ -49,6 +52,7 @@ typedef struct s_animated_sprite_2d
 	int			height;
 	int			x;
 	int			y;
+	float		scale;
 }				t_animated_sprite_2d;
 
 typedef struct s_player
@@ -67,5 +71,6 @@ int		init_player_sprite(t_data *data);
 void	update_player_pos(void *param);
 void	update_player_rot(void *param);
 void	set_sprite_pos(t_win_infos win, t_animated_sprite_2d *sprite);
+void	set_sprite_scale(t_win_infos win, t_animated_sprite_2d *sprite);
 
 #endif

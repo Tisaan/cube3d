@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 17:04:03 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/12 14:26:09 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/12 15:03:19 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static void	render_player_sprite(t_data *data)
 	t_animated_sprite_2d	*s;
 
 	s = &data->player->sprite;
-	mlx_put_image_to_window(data->mlx, data->win, s->spritesheet[0], s->x, s->y);
+	mlx_put_transformed_image_to_window(data->mlx, data->win, s->spritesheet[0],
+			s->x, s->y, s->scale, s->scale, 0.0f);
 }
 
 void	render(void *param)
