@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 14:19:36 by von               #+#    #+#             */
-/*   Updated: 2026/06/11 11:44:17 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/12 18:27:21 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,22 @@ int	set_default(t_data *data)
 	if (set_default_texture(data) < 0)
 		return (-ERROR_MALLOC);
 	return (NO_ERROR);
+}
+
+char	*str_seed(long int n)
+{
+	char	*s;
+	int		i;
+
+	s = ft_calloc(sizeof(char), 13);
+	if (!s)
+		return (s);
+	s[12] = '\0';
+	i = 12;
+	while (i--)
+	{
+		s[i] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (s);
 }

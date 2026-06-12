@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/10 08:09:52 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/12 15:29:01 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	key_up_hook(int key, void *param)
 		data->keys.right = false;
 	else if (key == E_KEY)
 		data->keys.e = false;
+	else if (key == F_KEY)
+		data->keys.f = false;
 }
 
 void	key_hooks(int key, void *param)
@@ -62,17 +64,10 @@ void	key_hooks(int key, void *param)
 		mlx_loop_end(data->mlx);
 	else if (key == F_KEY)
 	{
-		if (data->win_infos.is_fullscreen == false)
-		{
-			data->win_infos.is_fullscreen = true;
-			mlx_set_window_fullscreen(data->mlx, data->win, true);
-		}
-		else
-		{
-			data->win_infos.is_fullscreen = false;
-			mlx_restore_window(data->mlx, data->win);
-			mlx_set_window_fullscreen(data->mlx, data->win, false);
-		}
+		if (data->player->can_shoot)
+			start_shoot_animation(data);
+		data->player->can_shoot = false;
+		data->keys.f = true;
 	}
 	else if (key == F3_KEY)
 	{
@@ -81,7 +76,7 @@ void	key_hooks(int key, void *param)
 		else
 		 data->keys.f3 = true;
 	}
-		display_game_infos(data);
+	display_game_infos(data);
 	movement_hooks(key, data);
 }
 

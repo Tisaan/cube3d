@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 16:06:29 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/12 13:22:15 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	free_map(t_data *data)
 	free(data->map_door);
 	if (data->map->start)
 		free(data->map->start);
+	if (data->seed)
+		free(data->seed);
 	if (data->map)
 		free(data->map);
 }
@@ -113,6 +115,7 @@ void	clean_exit(t_data *data, bool img_destroy)
 			mlx_destroy_image(data->mlx, data->door_asset[1]);
 		if (data->mini_map != MLX_NULL_HANDLE)
 			mlx_destroy_image(data->mlx, data->mini_map);
+		destroy_sprite_assets(data);
 	}
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_context(data->mlx);

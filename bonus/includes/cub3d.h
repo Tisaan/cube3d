@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/10 08:44:00 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/12 15:23:47 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_keys
 	bool	s;
 	bool	d;
 	bool	e;
+	bool	f;
 	bool	left;
 	bool	right;
 	bool	f3;
@@ -105,6 +106,7 @@ typedef struct s_data
 	t_player		*player;
 	t_keys			keys;
 	t_vect			*mouse_pos;			
+	char			*seed;
 	float			delta;
 }				t_data;
 
@@ -124,5 +126,6 @@ void	render(void *param);
 void	update_mini_map(void *param);
 void	update_mouse_rot(t_data *d);
 void	ray_hook(void *param);
+void	handle_mouse_clic(int event, void *param);
 
 #endif

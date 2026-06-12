@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: von <von@student.42.fr>                    +#+  +:+       +#+         #
+#    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/10 12:26:52 by von              ###   ########.fr        #
+#    Updated: 2026/06/12 18:27:47 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NC     := \033[0m # No Color
 
 # --- Compilation ---
 NAME = cub3D
-CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes -fsanitize=adress
+CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes 
 CC	= cc
 
 # --- Directory ---
@@ -51,6 +51,7 @@ SRC_PARSING = 	path.c \
 				map_utils2.c
 
 SRC_UTILS =		free_bonus.c \
+				destroy_img_bonus.c \
 				debug.c \
 				vectors.c \
 				utils2.c \
@@ -72,7 +73,9 @@ SRC_HOOKS = hooks.c \
 			hooks2.c 
 
 SRC_PLAYER = move.c \
-			 rotate.c
+			 rotate.c \
+			 sprite_bonus.c \
+			 sprite_animation_bonus.c
 
 SRC_GEN =   door_bonus.c \
 			free_seed_bonus.c \
@@ -213,5 +216,4 @@ help:
 	@printf "$(PURPLE)help:$(NC) Show this help message\n"
 	@printf "$(PURPLE)credit:$(NC) Show the people who help with this project\n"
 	
-
 .PHONY: all libs clean bonus libclean fclean re help
