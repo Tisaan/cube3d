@@ -6,7 +6,7 @@
 #    By: von <von@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/10 12:57:35 by von              ###   ########.fr        #
+#    Updated: 2026/06/12 14:19:58 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC_PARSING = 	path.c \
 				map_utils2.c
 
 SRC_UTILS =		free_bonus.c \
+				destroy_img_bonus.c \
 				debug.c \
 				vectors.c \
 				utils2.c \
@@ -72,7 +73,9 @@ SRC_HOOKS = hooks.c \
 			hooks2.c 
 
 SRC_PLAYER = move.c \
-			 rotate.c
+			 rotate.c \
+			 sprite_bonus.c \
+			 sprite_animation_bonus.c
 
 SRC_GEN =   door_bonus.c \
 			free_seed_bonus.c \
@@ -213,5 +216,4 @@ help:
 	@printf "$(PURPLE)help:$(NC) Show this help message\n"
 	@printf "$(PURPLE)credit:$(NC) Show the people who help with this project\n"
 	
-
 .PHONY: all libs clean bonus libclean fclean re help

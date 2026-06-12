@@ -6,16 +6,14 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:25:47 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/10 12:48:22 by von              ###   ########.fr       */
+/*   Updated: 2026/06/12 14:12:33 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 # include <sys/time.h>
-# include "cub3d.h"
-
-typedef struct s_data	t_data;
+# include "parsing.h"
 
 typedef struct s_timer
 {
@@ -27,6 +25,7 @@ typedef struct s_timer
 void		free_all(t_data *data, int fd);
 void		free_texture_paths(t_data *data);
 void		free_map(t_data *data);
+void		destroy_sprite_assets(t_data *data);
 void		clear_gnl_buffer(int fd);
 void		clean_exit(t_data *data, bool img_destroy);
 float		ft_abs(float nb);
