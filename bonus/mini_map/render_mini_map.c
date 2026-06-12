@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 18:11:52 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/05 18:43:25 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/10 08:55:30 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	fill_pixels(t_data *data, int x, int y, mlx_color color)
 {
-	char		**view;
+	// char		**view;
 	int			i;
 	int			j;
-	int			count;
+	// int			count;
 
-	view = data->map->viewport;
+	// view = data->map->viewport;
 	i = y * 16;
-	count = 0;
+	// count = 0;
 	while (i < (y * 16) + 16)
 	{
 		j = x * 16;
@@ -52,6 +52,8 @@ void	set_mini_map_pixels(t_data *data)
 				color.rgba = 0x1c1c1cFF;
 			else if (data->map->viewport[y][x] == 'P')
 				color.rgba = 0x00b7faFF;
+			else if (data->map->viewport[y][x] == 'D')
+				color.rgba = 0x5c3619FF;
 			else
 				color.rgba = 0x000000FF;
 			fill_pixels(data, x, y, color);

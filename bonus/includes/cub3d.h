@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 17:01:23 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/10 08:44:00 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define CUB3D_H
 # ifndef WALL_SIZE
 #  define WALL_SIZE 64
+# endif
+# ifndef FONT_SIZE
+#  define FONT_SIZE 20
 # endif
 
 # include <stdbool.h>
@@ -54,7 +57,8 @@ typedef enum e_key_code
 	UP = 82,
 	LEFT = 80,
 	DOWN = 81,
-	RIGHT = 79
+	RIGHT = 79,
+	F3_KEY = 60
 }	t_key_code;
 
 typedef enum e_win_event
@@ -72,6 +76,7 @@ typedef struct s_keys
 	bool	e;
 	bool	left;
 	bool	right;
+	bool	f3;
 }			t_keys;
 
 typedef enum e_state_obj

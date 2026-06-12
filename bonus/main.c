@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/12 15:30:16 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/12 15:34:33 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	process(t_data *data)
 	mlx_add_loop_hook(data->mlx, update_mini_map, data);
 	mlx_add_loop_hook(data->mlx, ray_hook, data);
 	mlx_add_loop_hook(data->mlx, render, data);
+	mlx_add_loop_hook(data->mlx, display_game_infos, data);
 	start_timer(&data->timer);
 	mlx_loop(data->mlx);
 	return (NO_ERROR);
