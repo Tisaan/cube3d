@@ -126,5 +126,6 @@ void	render(void *param);
 void	update_mini_map(void *param);
 void	update_mouse_rot(t_data *d);
 void	ray_hook(void *param);
+void	handle_mouse_clic(int event, void *param);
 
 #endif
