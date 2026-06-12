@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/12 14:57:00 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/12 16:07:20 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ typedef struct s_animated_sprite_2d
 	int			height;
 	int			x;
 	int			y;
+	int			frame;
 	float		scale;
+	float		anim_time;
+	bool		is_playing;
 }				t_animated_sprite_2d;
 
 typedef struct s_player
@@ -63,13 +66,15 @@ typedef struct s_player
 	t_vect					dir;
 	t_vect					dest;
 	int						size;
-	bool					is_shooting;
+	bool					can_shoot;
 }							t_player;
 
 int		init_player(t_data *data);
 int		init_player_sprite(t_data *data);
 void	update_player_pos(void *param);
 void	update_player_rot(void *param);
+void	update_sprite_frame(t_data *data);
+void	start_shoot_animation(t_data *data);
 void	set_sprite_pos(t_win_infos win, t_animated_sprite_2d *sprite);
 void	set_sprite_scale(t_win_infos win, t_animated_sprite_2d *sprite);
 

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:30:15 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/12 14:57:26 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/12 16:09:04 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ int	init_player(t_data *data)
 	ret = init_player_sprite(data);
 	if (ret < 0)
 		return (ret);
-	data->player->sprite.anim_timer = (t_timer ){0};
+	data->player->sprite.frame = 0;
+	data->player->sprite.is_playing = false;
 	set_sprite_scale(data->win_infos, &data->player->sprite);
 	set_sprite_pos(data->win_infos, &data->player->sprite);
-	data->player->is_shooting = false;
+	data->player->can_shoot = true;
 	return (NO_ERROR);
 }
