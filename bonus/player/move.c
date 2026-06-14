@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:15:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/12 15:18:28 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 12:22:48 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ static bool	is_wall(t_data *data, float x, float y)
 		return (true);
 	if (data->map->grid[tile_y][tile_x] == '1'
 		|| data->map->grid[tile_y][tile_x] == ' '
-		|| (data->map->grid[tile_y][tile_x] == 'D' &&
-			data->map_door[tile_y][tile_x] == close_state))
+		|| data->map->doors[tile_y][tile_x] == '1')
 		return (true);
 	return (false);
 }

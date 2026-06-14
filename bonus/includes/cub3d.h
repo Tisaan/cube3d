@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/12 15:23:47 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 10:23:37 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ void	update_mini_map(void *param);
 void	update_mouse_rot(t_data *d);
 void	ray_hook(void *param);
 void	handle_mouse_clic(int event, void *param);
+char	**set_doors_map(t_data *data);
 
 #endif

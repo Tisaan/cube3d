@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/10 10:21:33 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 10:17:40 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_prgb
 typedef struct s_map
 {
 	char	**grid;
+	char	**doors;
 	char	**viewport;
 	char	*path;
 	int		width;
