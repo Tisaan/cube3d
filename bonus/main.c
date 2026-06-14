@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/14 16:12:52 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 16:47:04 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,17 @@ void	toogle_door_state(void *param)
 		return ;
 	if (data->keys.e && !data->keys.e_lock)
 	{
-		for (int i = 0; data->map->doors[i]; i++)
-			printf("%s\n", data->map->doors[i]);
-		printf("\n");
-		if (data->player->pos.y > (float)(py * WALL_SIZE))
-			return ;
 		if (data->map->doors[py][px] == ' ')
 			return ;
 		if (data->map->doors[py][px] == '1')
 			data->map->doors[py][px] = '0';
 		else
+		{
+			data->player->pos.x -= data->player->dir.x * WALL_SIZE * 0.1f;
+			data->player->pos.y -= data->player->dir.y * WALL_SIZE * 0.1f;
 			data->map->doors[py][px] = '1';
+		}
 		data->keys.e_lock = true;
-		for (int i = 0; data->map->doors[i]; i++)
-			printf("%s\n", data->map->doors[i]);
-		printf("\n");
 	}
 }
 
