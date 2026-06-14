@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/14 16:06:15 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 16:12:52 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	toogle_door_state(void *param)
 		for (int i = 0; data->map->doors[i]; i++)
 			printf("%s\n", data->map->doors[i]);
 		printf("\n");
+		if (data->player->pos.y > (float)(py * WALL_SIZE))
+			return ;
 		if (data->map->doors[py][px] == ' ')
 			return ;
 		if (data->map->doors[py][px] == '1')
