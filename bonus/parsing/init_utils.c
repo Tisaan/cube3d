@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:52:40 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/09 16:25:52 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/14 09:23:02 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	set_map_door(t_data *data)
 	while (i < data->map->height)
 	{
 		j = 0;
-		while (j < data->map->width)
+		while (j < data->map->width && j < (int)ft_strlen(data->map->grid[i]))
 		{
 			if (data->map->grid[i][j] == 'D')
 				data->map_door[i][j] = close_state;

@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/12 13:22:15 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 08:57:37 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	free_map(t_data *data)
 	i = 0;
 	while (i <= data->map->height)
 	{
-		free(data->map_door[i++]);
+		if (data->map_door && data->map_door[i])
+			free(data->map_door[i]);
+		i++;
 	}
 	free(data->map_door);
 	if (data->map->start)
