@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/14 12:04:42 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 14:59:04 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,11 @@ int	init_game(t_data *data)
 	if (data->mini_map == MLX_NULL_HANDLE)
 		return (-ERROR_LOAD_ASSET);
 	data->keys = (t_keys){0};
+	data->keys.e_lock = false;
 	data->floor_color = rgb_to_color(data->plans_color[1], 100);
 	data->ceil_color = rgb_to_color(data->plans_color[0], 100);
 	data->map->doors = set_doors_map(data);
 	if (!data->map->doors)
 		return (-ERROR_MALLOC);
-	for (int i = 0; data->map->grid[i]; i++)
-		printf("%s\n", data->map->grid[i]);
 	return (NO_ERROR);
 }

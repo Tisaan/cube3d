@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/14 10:23:37 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 14:48:14 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_keys
 	bool	s;
 	bool	d;
 	bool	e;
+	bool	e_lock;
 	bool	f;
 	bool	left;
 	bool	right;

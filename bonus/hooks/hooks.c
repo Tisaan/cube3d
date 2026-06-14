@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/14 12:16:34 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 15:14:13 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ static void	movement_hooks(int key, t_data *data)
 	else if (key == RIGHT)
 		data->keys.right = true;
 	else if (key == E_KEY)
-		data->keys.e = true;
+	{
+		if (!data->keys.e_lock)
+		{
+			data->keys.e = true;
+			// data->keys.e_lock = true;
+		}
+	}
 }
 
 void	key_up_hook(int key, void *param)
@@ -50,7 +56,10 @@ void	key_up_hook(int key, void *param)
 	else if (key == RIGHT)
 		data->keys.right = false;
 	else if (key == E_KEY)
+	{
 		data->keys.e = false;
+		data->keys.e_lock = false;
+	}
 	else if (key == F_KEY)
 		data->keys.f = false;
 }

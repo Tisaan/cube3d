@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/14 08:35:20 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 16:06:15 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,35 @@
 #include "includes/bonus.h"
 #include <sys/wait.h>
 #include <unistd.h>
+
+void	toogle_door_state(void *param)
+{
+	t_data	*data;
+	int		px;
+	int		py;
+
+	data = (t_data *)param;
+	px = (int)(data->player->pos.x / WALL_SIZE + data->player->dir.x * 1.0f);
+	py = (int)(data->player->pos.y / WALL_SIZE+ data->player->dir.y * 1.0f);
+	if (py < 0 || py >= data->map->height || px < 0 || px >= data->map->width)
+		return ;
+	if (data->keys.e && !data->keys.e_lock)
+	{
+		for (int i = 0; data->map->doors[i]; i++)
+			printf("%s\n", data->map->doors[i]);
+		printf("\n");
+		if (data->map->doors[py][px] == ' ')
+			return ;
+		if (data->map->doors[py][px] == '1')
+			data->map->doors[py][px] = '0';
+		else
+			data->map->doors[py][px] = '1';
+		data->keys.e_lock = true;
+		for (int i = 0; data->map->doors[i]; i++)
+			printf("%s\n", data->map->doors[i]);
+		printf("\n");
+	}
+}
 
 static int	ready(t_data *data)
 {
@@ -59,6 +88,7 @@ static int	process(t_data *data)
 	mlx_add_loop_hook(data->mlx, update_player_pos, data);
 	mlx_add_loop_hook(data->mlx, update_player_rot, data);
 	mlx_add_loop_hook(data->mlx, update_mini_map, data);
+	mlx_add_loop_hook(data->mlx, toogle_door_state, data);
 	mlx_add_loop_hook(data->mlx, ray_hook, data);
 	mlx_add_loop_hook(data->mlx, render, data);
 	mlx_add_loop_hook(data->mlx, display_game_infos, data);

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 11:40:09 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/14 12:18:41 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 15:54:47 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void	set_type_ray(t_data *data, t_vect tyle, t_ray *ray)
 		ray->type = door_type;
 		ray->tile = tyle;
 	}
-	else if (data->map->grid[(int)tyle.y][(int)tyle.x] == '1')
+	else
 		ray->type = wall_type;
+	// else if (data->map->grid[(int)tyle.y][(int)tyle.x] == '1')
+	// 	ray->type = wall_type;
 }
 
 void	udpate_doors(t_ray *ray, t_data *d)
@@ -79,24 +81,23 @@ void	udpate_doors(t_ray *ray, t_data *d)
 	// 		d->keys.e = false;
 	// 	}
 	// }
-	
 	if (ray->type == door_type)
 	{
-		if (d->keys.e)
+		if (d->keys.e && !d->keys.e_lock)
 		{
 			printf("e enable!\n");
 			if (d->map->doors[(int)ray->tile.y][(int)ray->tile.x] == '1')
 				d->map->doors[(int)ray->tile.y][(int)ray->tile.x] = '0';
 			else
 				d->map->doors[(int)ray->tile.y][(int)ray->tile.x] = '1';
-			d->keys.e = false;
+			d->keys.e_lock = true;
 		}
 	}
 }
 
 void	get_pixel(t_ray *ray, mlx_color *pixel, t_data *d, int xs[2])
 {
-	udpate_doors(ray, d);
+	// udpate_doors(ray, d);
 	if (ray->type == wall_type)
 		*pixel = mlx_get_image_pixel(d->mlx, d->wall_assets[ray->face],
 				xs[1], ray->texture_y);
