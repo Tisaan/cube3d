@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 14:46:51 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 16:25:21 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/14 09:40:19 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	check_char_present_map(char *line, int *find, int len)
 		return (-NOT_ENO_STRT);
 	else if (is_pattern_char_present(line, "01") && !*find)
 		*find = 1;
-	else if (skip_pattern(line, " 01NEWS") == len)
+	else if (skip_pattern(line, " 0D1NEWS") == len)
 		find[1] = 1;
-	else if (skip_pattern(line, " 01NEWS") != len -1)
+	else if (skip_pattern(line, " 0D1NEWS") != len -1)
 		return (-INC_CHAR);
 	return (1);
 }
