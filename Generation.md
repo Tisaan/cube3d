@@ -75,7 +75,7 @@
 			i++;
 		}
 		link_zero(map);// place '0' between adjacent one
-		connect_region(map);// connect the 2 biggest region with a path
+		place_struct(map, seed);//place "random" '1' for more wall
 		apply_wall(map);// place wall around '0'
 		place_door(map);// place the doors
 		place_start(map);// place the spawn point
@@ -87,8 +87,8 @@
  &emsp;- doors are the only non-deterministic "object" of the generation 'cause there are generate with the help of pseudo-randomness.
 
 ### spawn-reference:
-	- we use the chebychev distance to get the closest possible spawn point. MAX(abs(**ori_x** - **x**), abs(**ori_y** - **y**))
+- we use the chebychev distance to get the closest possible spawn point. MAX(abs(**ori_x** - **x**), abs(**ori_y** - **y**))
 
 ### algorithm-reference:
-	- already-place `'0`': we only check for `'0'` and not `'1'` 'cause we want `'1'` to be replace to maximize the size of the map
-	- connect-region : we use a depth-first search algorithm bind with the von-neuman neighboor to find the biggest '0' 's region
+- already-place `'0'`': we only check for `'0'` and not `'1'` 'cause we want `'1'` to be replace to maximize the size of the map
+- place_struct: for each cell, if it's an `'0'` and have more than 6 `'0'`'s neighboor replace it with a `'1'`
