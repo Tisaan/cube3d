@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 15:13:20 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 16:30:31 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	process(t_data *data)
 
 static int	handle_seed_args(t_data **data, int ac, char **av, long int *seed)
 {
-	if (ac == 3 && ft_strncmp(av[1], "seed\0", 5) == 0)
+	if (ac == 3 && ft_strncmp(av[1], "seed", 4) == 0)
 	{
 		if (ft_strlen(av[2]) == (size_t)skip_digits(av[2])
 			&& ft_strlen(av[2]) == 12)
@@ -81,7 +81,8 @@ static int	handle_seed_args(t_data **data, int ac, char **av, long int *seed)
 			{
 				throw_error_bonus(SEED_INVALID);
 				return (1);
-			}
+			}	if (handle_seed_args(&data, ac, av, &seed) != 0)
+		return (1);
 			*data = main_proc(*seed);
 			if (!data || !*data)
 				return (1);

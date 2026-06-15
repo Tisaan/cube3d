@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 16:25:19 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 16:05:47 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	map_size(char *name)
 
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("ERROR");
 		return (-ERROR_OPEN);
-	}
 	size = 0;
 	line = get_next_line(fd);
 	while (line)

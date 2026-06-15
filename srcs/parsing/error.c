@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:23:04 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 15:37:48 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 15:56:27 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ static inline char	**get_tab_error(void)
 		"The path of one of the texture is invalid\n",
 		("Invalid color format, make sure to use only"
 			" 3 unsigned short numbers !\n"),
-		"Malloc Error\n",
 	};
-
+	add_error(error);
 	return ((char **)error);
 }
 
