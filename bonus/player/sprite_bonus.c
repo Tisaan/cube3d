@@ -6,12 +6,12 @@
 /*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 10:18:18 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/12 13:16:06 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:04:37 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/player.h"
-#include "../includes/cub3d.h"
+#include "../includes/player_bonus.h"
+#include "../includes/cub3d_bonus.h"
 
 static void	clear_spritesheet(t_data *data, mlx_image **spritesheet, int i)
 {

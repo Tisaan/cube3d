@@ -6,12 +6,12 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:04:11 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/03 19:25:37 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:09:58 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-#include "../includes/player.h"
+#include "../includes/cub3d_bonus.h"
+#include "../includes/player_bonus.h"
 
 void	secure_display(char *str)
 {

@@ -6,11 +6,11 @@
 /*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 13:17:10 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/12 13:29:49 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:06:28 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	destroy_sprite_assets(t_data *data)
 {

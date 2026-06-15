@@ -6,13 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 17:04:03 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/14 15:38:56 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:06:19 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-#include "../includes/mini_map.h"
-#include "../includes/utils.h"
+#include "../includes/cub3d_bonus.h"
+#include "../includes/mini_map_bonus.h"
+#include "../includes/utils_bonus.h"
 
 static void	place_remove_player(t_player *player, t_data *d, bool remove)
 {

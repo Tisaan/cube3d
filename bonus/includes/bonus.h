@@ -6,14 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:30:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/10 10:48:55 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 13:58:39 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BONUS_H
 # define BONUS_H
 
-# include "cub3d.h"
+# include "cub3d_bonus.h"
 # include <pthread.h>
 
 typedef struct s_int3
