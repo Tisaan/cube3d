@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:01:24 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 16:07:32 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 16:30:18 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 #  define PLAYER_ROT_SPEED	3.0f
 # endif
 
-#include "parsing.h"
+# include "parsing.h"
 # include "vectors.h"
-# include "../mlx/includes/mlx.h"
+# include "../../mlx/includes/mlx.h"
 
 typedef struct s_data	t_data;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	t_vect		camera;
 	t_vect		pos;

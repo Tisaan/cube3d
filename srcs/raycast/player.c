@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:30:15 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/22 16:15:14 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/09 16:22:00 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/player.h"
-#include "../../includes/cub3d.h"
+#include "../includes/player.h"
+#include "../includes/cub3d.h"
 
 static void	set_player_orientation(t_player *player, t_direction_id dir)
 {

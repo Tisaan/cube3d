@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 00:26:14 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/22 17:24:15 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 16:34:14 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	set_vect(t_vect *vect, float x, float y)
 {

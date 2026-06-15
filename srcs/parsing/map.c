@@ -6,11 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 15:57:11 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 11:39:38 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:19 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 int	map_size(char *name)
 {

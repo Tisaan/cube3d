@@ -6,12 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/01 11:38:37 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:16 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
-#include "../../includes/utils.h"
+#include "../includes/cub3d.h"
+#include "../includes/utils.h"
 #include <stdbool.h>
 #include <fcntl.h>
 #include <unistd.h>

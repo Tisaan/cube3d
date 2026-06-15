@@ -6,15 +6,15 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 10:33:31 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:09 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-#include "../includes/parsing.h"
-#include "../includes/debug.h"
-#include "../includes/utils.h"
-#include "../includes/player.h"
+#include "includes/cub3d.h"
+#include "includes/parsing.h"
+#include "includes/debug.h"
+#include "includes/utils.h"
+#include "includes/player.h"
 #include <sys/wait.h>
 #include <unistd.h>
 

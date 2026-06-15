@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:00:26 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/28 13:26:45 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/05 14:43:05 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
-#include "../../includes/raycast.h"
-#include "../../includes/objs.h"
+#include "../includes/cub3d.h"
+#include "../includes/raycast.h"
+#include "../includes/objs.h"
 
 static int	get_texture_x(t_player *p, t_ray *ray, float wall_dist)
 {

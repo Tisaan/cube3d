@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:56:21 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/01 10:29:52 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/14 10:25:38 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	init_map_data(t_data *data)
 {
@@ -62,9 +62,6 @@ int	init_game(t_data *data)
 	ret = init_player(data);
 	if (ret < 0)
 		return (ret);
-	// ret = init_wall_assets(data);
-	// if (ret < 0)
-	// 	return (ret);
 	data->frame = mlx_new_image(data->mlx, data->win_infos.width,
 			data->win_infos.height);
 	if (data->frame == MLX_NULL_HANDLE)

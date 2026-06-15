@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:48:33 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/28 11:44:27 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/05 14:42:59 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
-#include "../../includes/raycast.h"
-#include "../../includes/utils.h"
+#include "../includes/cub3d.h"
+#include "../includes/raycast.h"
+#include "../includes/utils.h"
 #include <math.h>
 
 static void	calc_side_dist_x(t_player *p, t_ray *r, t_vect *tile, t_vect *step)

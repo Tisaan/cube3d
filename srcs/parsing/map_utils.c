@@ -6,11 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:40:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 12:09:40 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:23 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 int	get_dir(int c)
 {

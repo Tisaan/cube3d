@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/05/21 15:36:08 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 15:09:03 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
-#include <stddef.h>
-#include <stdbool.h>
+#ifndef PARSING_BONUS_H
+# define PARSING_BONUS_H
+
+# include <stddef.h>
+# include <stdbool.h>
+# include "../../mlx/includes/mlx.h"
 // --- ERROR ---
 
 typedef enum e_error_map
@@ -23,7 +25,7 @@ typedef enum e_error_map
 	INC_CHAR,
 	EMPT_MAP,
 	INV_MAP,
-	INV_CUT_MAP, 
+	INV_CUT_MAP,
 	INV_WALL_MAP,
 	NOT_ENO_STRT,
 	TOO_MUCH_STRT,
@@ -38,16 +40,19 @@ typedef enum e_error_map
 	ERROR_PATH_TEXTURE,
 	ERROR_INV_COLOR,
 	ERROR_MALLOC,
+	ERROR_ARGS,
 	ERROR_MAX,
 }		t_error_map;
 
 // --- STRUCT ---
 
-typedef struct s_data	t_data;
+typedef struct s_data			t_data;
+typedef mlx_window_create_info	t_win_infos;
 
 // ---- TEXTURE ----
 
-typedef enum e_direction_id{
+typedef enum e_direction_id
+{
 	NO,
 	SO,
 	WE,
@@ -61,15 +66,17 @@ typedef struct s_texture_path
 	t_direction_id	dir;
 }				t_texture_path;
 
-typedef enum e_pceilfloor{
+typedef enum e_pceilfloor
+{
 	CEILING = 5,
 	FLOOR = 6,
 	EMPT
 }			t_pceilfloor;
 
-typedef struct s_prgb{
-	int rgb[3];
-	t_pceilfloor type;
+typedef struct s_prgb
+{
+	int				rgb[3];
+	t_pceilfloor	type;
 }				t_prgb;
 
 // ---- MAP ----
@@ -77,16 +84,18 @@ typedef struct s_prgb{
 typedef struct s_map
 {
 	char	**grid;
+	char	**doors;
+	char	**viewport;
+	char	*path;
 	int		width;
 	int		height;
 	int		*start;// [0] = x, [1] = y, [2] = direction
 }				t_map;
 
-t_data	parse(char *map_path);
+void	parse(char *map_path, t_data *data);
 int		get_map(int fd, t_map *data, int i);
 bool	around_step(t_map *map, int x, size_t y);
 int		walled(t_map *map);
-int		get_start(t_map *map);
 int		check_map(t_map *map);
 int		parse_map_data(int fd, t_data *data, int *count);
 
@@ -95,6 +104,10 @@ int		parse_map_data(int fd, t_data *data, int *count);
 void	init_map_data(t_data *data);
 int		init_wall_assets(t_data *data);
 int		init_game(t_data *data);
+int		init_door(t_data *data);
+int		init_map_door(t_data *data);
+bool	init_window(mlx_context mlx, mlx_window *win, t_win_infos *infos);
+int		init_mouse(t_data *d);
 
 // --- PATH ---
 char	*get_path(char *line);

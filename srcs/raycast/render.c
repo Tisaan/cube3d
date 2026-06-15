@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 17:04:03 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/19 14:14:04 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/01 16:33:56 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	render(void *param)
 {

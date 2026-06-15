@@ -6,11 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:23:04 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 09:23:24 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:36 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 const char	**get_tab_error(void)
 {

@@ -6,11 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 14:46:51 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/01 12:02:07 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/02 16:25:21 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 char	*repline(char *line, int fd, int *rep, int count)
 {

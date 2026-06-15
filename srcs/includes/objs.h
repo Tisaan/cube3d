@@ -1,13 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_img.c                                        :+:      :+:    :+:   */
+/*   objs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/04 14:05:31 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/05/04 14:06:24 by pcaplat          ###   ########.fr       */
+/*   Created: 2026/05/28 12:14:07 by pcaplat           #+#    #+#             */
+/*   Updated: 2026/05/28 13:22:59 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#ifndef OBJS_H
+# define OBJS_H
+
+# include "raycast.h"
+
+typedef struct s_obj
+{
+	int	start;
+	int	end;
+	int	height;
+	int	cliping;
+}		t_obj;
+
+t_obj	get_obj(t_win_infos *win, float wall_dist);
+
+#endif
