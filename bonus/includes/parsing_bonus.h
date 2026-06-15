@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 15:09:03 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 17:16:23 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_map
 	int		*start;// [0] = x, [1] = y, [2] = direction
 }				t_map;
 
-void	parse(char *map_path, t_data *data);
+int		parse(char *map_path, t_data **data);
 int		get_map(int fd, t_map *data, int i);
 bool	around_step(t_map *map, int x, size_t y);
 int		walled(t_map *map);

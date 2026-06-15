@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:30:00 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 14:03:22 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 17:43:55 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <unistd.h>
-
-int	map_size(char *name);
 
 t_map	*init_map_metadata(int size)
 {
@@ -94,6 +92,7 @@ static int	parse_step(t_data *data, char *map_path, int size)
 	{
 		free_map(data);
 		free_texture_paths(data);
+		free(data);
 		close(fd);
 		return (-1);
 	}
@@ -101,22 +100,26 @@ static int	parse_step(t_data *data, char *map_path, int size)
 	return (0);
 }
 
-void	parse(char *map_path, t_data *data)
+int	parse(char *map_path, t_data **data)
 {
 	int		size_file;
 
-	data->map = NULL;
+	(*data)->map = NULL;
 	if (!ft_strendwith(map_path, ".cub"))
 	{
+		free(*data);
 		throw_error(INC_EXT);
-		return ;
+		return (INC_EXT);
 	}
 	size_file = map_size(map_path);
 	if (size_file < 0)
 	{
+		free(*data);
 		throw_error(size_file);
-		return ;
+		return (size_file);
 	}
-	if (parse_step(data, map_path, size_file) < 0)
-		return ;
+	size_file = parse_step(*data, map_path, size_file);
+	if (size_file < 0)
+		return (size_file);
+	return (NO_ERROR);
 }

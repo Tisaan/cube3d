@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:23:04 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 15:56:27 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 18:03:00 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static inline char	**get_tab_error(void)
 		("Invalid color format, make sure to use only"
 			" 3 unsigned short numbers !\n"),
 	};
+
 	add_error(error);
 	return ((char **)error);
 }

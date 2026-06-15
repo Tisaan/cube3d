@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 16:30:31 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 17:24:41 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ready(t_data *data)
 	return (ret);
 }
 
-static int	process(t_data *data)
+static void	process(t_data *data)
 {
 	mlx_on_event(data->mlx, data->win, MLX_KEYDOWN, key_hooks, data);
 	mlx_on_event(data->mlx, data->win, MLX_KEYUP, key_up_hook, data);
@@ -66,7 +66,6 @@ static int	process(t_data *data)
 	mlx_add_loop_hook(data->mlx, display_game_infos, data);
 	start_timer(&data->timer);
 	mlx_loop(data->mlx);
-	return (NO_ERROR);
 }
 
 static int	handle_seed_args(t_data **data, int ac, char **av, long int *seed)
@@ -81,12 +80,11 @@ static int	handle_seed_args(t_data **data, int ac, char **av, long int *seed)
 			{
 				throw_error_bonus(SEED_INVALID);
 				return (1);
-			}	if (handle_seed_args(&data, ac, av, &seed) != 0)
-		return (1);
+			}
 			*data = main_proc(*seed);
 			if (!data || !*data)
 				return (1);
-			return (set_default(*data));
+			return (set_default(*data, seed));
 		}
 		else
 		{
@@ -105,7 +103,7 @@ static int	switch_gen(t_data **data, int ac, char **av, long int *seed)
 		*data = main_proc(*seed);
 		if (!data || !*data)
 			return (1);
-		return (set_default(*data));
+		return (set_default(*data, seed));
 	}
 	else if (ac == 2)
 	{
@@ -115,7 +113,7 @@ static int	switch_gen(t_data **data, int ac, char **av, long int *seed)
 			throw_error(ERROR_MALLOC);
 			return (1);
 		}
-		parse(av[1], *data);
+		return (parse(av[1], data));
 	}
 	else
 	{
@@ -129,24 +127,22 @@ int	main(int ac, char **av)
 {
 	t_data		*data;
 	int			ret;
-	long int	seed;
+	long int	seed[2];
 
 	data = NULL;
-	if (handle_seed_args(&data, ac, av, &seed) != 0)
+	seed[1] = 0;
+	if (handle_seed_args(&data, ac, av, seed) != 0)
 		return (1);
-	else if (switch_gen(&data, ac, av, &seed) != 0)
+	else if (seed[1] == 0 && switch_gen(&data, ac, av, seed) != 0)
 		return (1);
-	if (data->map == NULL)
+	if (data && data->map == NULL)
 		return (1);
 	ret = ready(data);
 	if (ret < 0)
-		return (ret);
-	ret = process(data);
+		free(data);
 	if (ret < 0)
-		throw_error(ret);
-	if (ret == -ERROR_LOAD_ASSET)
-		clean_exit(data, false);
-	else
-		clean_exit(data, true);
+		return (ret);
+	process(data);
+	clean_exit(data, true);
 	return (ret < 0);
 }

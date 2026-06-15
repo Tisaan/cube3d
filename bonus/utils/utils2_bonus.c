@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 14:19:36 by von               #+#    #+#             */
-/*   Updated: 2026/06/15 14:20:12 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 17:02:11 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	set_default_texture(t_data *data)
 	return (ret);
 }
 
-int	set_default(t_data *data)
+int	set_default(t_data *data, long *seed)
 {
 	data->plans_color[0] = (t_prgb){.type = CEILING, .rgb[0] = 200,
 		.rgb[1] = 180, .rgb[2] = 160};
@@ -49,6 +49,7 @@ int	set_default(t_data *data)
 		.rgb[2] = 255};
 	if (set_default_texture(data) < 0)
 		return (-ERROR_MALLOC);
+	seed[1] = 1;
 	return (NO_ERROR);
 }
 

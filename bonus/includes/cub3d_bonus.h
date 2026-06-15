@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 14:45:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 17:00:06 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_data
 	t_prgb			plans_color[2];
 	t_player		*player;
 	t_keys			keys;
-	t_vect			*mouse_pos;			
+	t_vect			*mouse_pos;
 	char			*seed;
 	float			delta;
 }				t_data;
