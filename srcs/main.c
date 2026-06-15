@@ -6,13 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 16:25:09 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 15:35:21 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 #include "includes/parsing.h"
-#include "includes/debug.h"
 #include "includes/utils.h"
 #include "includes/player.h"
 #include <sys/wait.h>
@@ -82,7 +81,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		ft_print_error("Invalid number of arguments.\n");
+		throw_error(ERROR_ARGS);
 		return (1);
 	}
 	data = (t_data){0};

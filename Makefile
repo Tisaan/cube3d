@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/15 15:27:55 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/15 15:38:08 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,7 +103,6 @@ SRC_PARSING = 	error.c \
 				path.c \
 
 SRC_UTILS =		free.c \
-				debug.c \
 				vectors.c \
 				utils.c
 

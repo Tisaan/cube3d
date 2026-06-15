@@ -12,7 +12,6 @@
 
 #include "../includes/cub3d.h"
 #include "../includes/utils.h"
-#include "../includes/debug.h"
 
 static int	parse_colors(t_data *data, char *line, int *i, int id)
 {

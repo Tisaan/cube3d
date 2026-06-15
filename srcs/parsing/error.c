@@ -6,15 +6,21 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 11:23:04 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 16:25:36 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 15:37:48 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-const char	**get_tab_error(void)
+void	add_error(char **error)
 {
-	static const char	*error[ERROR_MAX] = {
+	error[ERROR_MALLOC] = "Malloc Error\n";
+	error[ERROR_ARGS] = "Invalid number of arguments.\n";
+}
+
+static inline char	**get_tab_error(void)
+{
+	static char	*error[ERROR_MAX] = {
 		"WTF an error has been thrown\n",
 		"the map provided is not a .cub file\n",
 		"An unrecognize character has been found\n",
@@ -38,14 +44,16 @@ const char	**get_tab_error(void)
 		"Malloc Error\n",
 	};
 
-	return ((const char **)error);
+	return ((char **)error);
 }
 
 void	throw_error(int err)
 {
-	const char	**error = get_tab_error();
+	char	**error;
 
+	error = get_tab_error();
 	err = abs(err);
+	ft_putstr_fd("Error\n", 2);
 	if (err <= ERROR_MAX)
 	{
 		ft_putstr_fd((char *)error[err], 2);
