@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 10:26:08 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/08 11:34:41 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 13:48:41 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static char	*dup_viewport_line(t_player *p, t_map *map, int map_x, int map_y)
 	{
 		if (map_y == p->pos.y / WALL_SIZE && map_x == p->pos.x / WALL_SIZE)
 			line[i] = 'P';
+		else if (map->doors[map_y][map_x] == '1')
+			line[i] = 'D';
 		else
 			line[i] = map->grid[map_y][map_x];
 		i++;
