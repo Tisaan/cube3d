@@ -6,7 +6,7 @@
 /*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/10 12:40:02 by von              ###   ########.fr       */
+/*   Updated: 2026/06/12 15:23:47 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # include "player.h"
 # include "utils.h"
 
-# define WIN_HEIGHT 1080
-# define WIN_WIDTH 1920
+# define WIN_HEIGHT 720
+# define WIN_WIDTH 1280
 
 # define DOOR_ASSET_CLOSE "assets/wood.png"
 # define DOOR_ASSET_OPEN "assets/pillar.png"
@@ -74,6 +74,7 @@ typedef struct s_keys
 	bool	s;
 	bool	d;
 	bool	e;
+	bool	f;
 	bool	left;
 	bool	right;
 	bool	f3;
@@ -125,5 +126,6 @@ void	render(void *param);
 void	update_mini_map(void *param);
 void	update_mouse_rot(t_data *d);
 void	ray_hook(void *param);
+void	handle_mouse_clic(int event, void *param);
 
 #endif

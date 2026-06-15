@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:30:15 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/09 16:23:03 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/12 16:09:04 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	set_player_orientation(t_player *player, t_direction_id dir)
 
 int	init_player(t_data *data)
 {
+	int	ret;
+
 	data->player = malloc(sizeof(t_player) * 1);
 	if (!data->player)
 		return (-ERROR_MALLOC);
@@ -48,5 +50,13 @@ int	init_player(t_data *data)
 	set_player_orientation(data->player, data->map->start[2]);
 	if (init_mouse(data) < 0)
 		return (-ERROR_MALLOC);
+	ret = init_player_sprite(data);
+	if (ret < 0)
+		return (ret);
+	data->player->sprite.frame = 0;
+	data->player->sprite.is_playing = false;
+	set_sprite_scale(data->win_infos, &data->player->sprite);
+	set_sprite_pos(data->win_infos, &data->player->sprite);
+	data->player->can_shoot = true;
 	return (NO_ERROR);
 }

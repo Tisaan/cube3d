@@ -90,3 +90,16 @@ void	display_game_infos(void *param)
 	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE, 45 + FONT_SIZE, color, fps);
 	free(fps);
 }
+
+void	handle_mouse_clic(int event, void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	if (event == 1)
+	{
+		if (data->player->can_shoot)
+			start_shoot_animation(data);
+		data->player->can_shoot = false;
+	}
+}
