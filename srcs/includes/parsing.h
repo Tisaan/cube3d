@@ -12,8 +12,8 @@
 
 #ifndef PARSING_H
 # define PARSING_H
-#include <stddef.h>
-#include <stdbool.h>
+# include <stddef.h>
+# include <stdbool.h>
 // --- ERROR ---
 
 typedef enum e_error_map
@@ -23,7 +23,7 @@ typedef enum e_error_map
 	INC_CHAR,
 	EMPT_MAP,
 	INV_MAP,
-	INV_CUT_MAP, 
+	INV_CUT_MAP,
 	INV_WALL_MAP,
 	NOT_ENO_STRT,
 	TOO_MUCH_STRT,
@@ -47,7 +47,8 @@ typedef struct s_data	t_data;
 
 // ---- TEXTURE ----
 
-typedef enum e_direction_id{
+typedef enum e_direction_id
+{
 	NO,
 	SO,
 	WE,
@@ -61,16 +62,18 @@ typedef struct s_texture_path
 	t_direction_id	dir;
 }				t_texture_path;
 
-typedef enum e_pceilfloor{
+typedef enum e_pceilfloor
+{
 	CEILING = 5,
 	FLOOR = 6,
 	EMPT
 }			t_pceilfloor;
 
-typedef struct s_prgb{
-	int rgb[3];
-	t_pceilfloor type;
-}				t_prgb;
+typedef struct s_prgb
+{
+	int				rgb[3];
+	t_pceilfloor	type;
+}					t_prgb;
 
 // ---- MAP ----
 

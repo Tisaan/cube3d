@@ -12,12 +12,12 @@
 
 #ifndef UTILS_H
 # define UTILS_H
-#include <sys/time.h>
-#include "cub3d.h"
+# include <sys/time.h>
+# include "cub3d.h"
 
 typedef struct s_data	t_data;
 
-typedef struct	s_timer
+typedef struct s_timer
 {
 	struct timeval	current_time;
 	struct timeval	start_time;
@@ -34,7 +34,7 @@ mlx_color	rgb_to_color(t_prgb rgb, int alpha);
 int			clamp_pos(int p, int min, int max);
 
 //timer
-void	time_update(void *param);
-void	start_timer(t_timer *timer);
+void		time_update(void *param);
+void		start_timer(t_timer *timer);
 
 #endif
