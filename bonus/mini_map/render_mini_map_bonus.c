@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_mini_map_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 18:11:52 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 13:59:15 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:46:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 static void	fill_pixels(t_data *data, int x, int y, mlx_color color)
 {
-	// char		**view;
 	int			i;
 	int			j;
-	// int			count;
 
-	// view = data->map->viewport;
 	i = y * 16;
-	// count = 0;
 	while (i < (y * 16) + 16)
 	{
 		j = x * 16;
@@ -60,5 +56,32 @@ void	set_mini_map_pixels(t_data *data)
 			x++;
 		}
 		y++;
+	}
+}
+
+void	toogle_door_state(void *param)
+{
+	t_data	*data;
+	int		px;
+	int		py;
+
+	data = (t_data *)param;
+	px = (int)(data->player->pos.x / WALL_SIZE + data->player->dir.x);
+	py = (int)(data->player->pos.y / WALL_SIZE + data->player->dir.y);
+	if (py < 0 || py >= data->map->height || px < 0 || px >= data->map->width)
+		return ;
+	if (data->keys.e && !data->keys.e_lock)
+	{
+		if (data->map->doors[py][px] == ' ')
+			return ;
+		else if (data->map->doors[py][px] == '1')
+			data->map->doors[py][px] = '0';
+		else
+		{
+			data->player->pos.x -= data->player->dir.x * WALL_SIZE * 0.1f;
+			data->player->pos.y -= data->player->dir.y * WALL_SIZE * 0.1f;
+			data->map->doors[py][px] = '1';
+		}
+		data->keys.e_lock = true;
 	}
 }

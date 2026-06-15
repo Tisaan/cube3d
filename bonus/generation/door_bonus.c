@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:19:07 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/14 12:00:46 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:38:58 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	*set_doors_map_line(char *base_line)
 			base_line[i] = '0';
 		}
 		else
-		 	line[i] = ' ';
+			line[i] = ' ';
 		i++;
 	}
 	line[i] = '\0';
@@ -101,7 +101,5 @@ char	**set_doors_map(t_data *data)
 		i++;
 	}
 	doors_map[i] = NULL;
-	for (int i = 0; doors_map[i]; i++)
-		printf("%s\n", doors_map[i]);
 	return (doors_map);
 }

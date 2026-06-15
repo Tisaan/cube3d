@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:25:47 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 14:22:51 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 15:21:05 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_timer
 void		free_all(t_data *data, int fd);
 void		free_texture_paths(t_data *data);
 void		free_map(t_data *data);
+void		free_doors_map(t_data *d);
 void		destroy_sprite_assets(t_data *data);
 void		clear_gnl_buffer(int fd);
 void		clean_exit(t_data *data, bool img_destroy);

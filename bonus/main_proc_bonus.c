@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_proc_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 15:24:28 by von               #+#    #+#             */
-/*   Updated: 2026/06/15 13:44:09 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:38:02 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,6 @@ void	gen_map_algo(t_map_simu *map, t_point *pos)
 	free_pointlist(list);
 }
 
-void	generate_map_process(t_map_simu *map, long int seed, const t_point val)
-{
-	int_to_bin_str(seed, map->seed);
-	gen_map_algo(map, (t_point *)&val);
-	link_zero(map);
-	place_struct(map);
-	apply_wall(map);
-	place_door(map);
-}
-
 bool	generate_map(t_data *data, t_map_simu *map, long int seed)
 {
 	const t_point	val = {.x = map->ori_x,
@@ -97,17 +87,10 @@ bool	generate_map(t_data *data, t_map_simu *map, long int seed)
 	generate_map_process(map, seed, val);
 	free(map->seed);
 	data->seed = str_seed(seed);
-	if (!data->seed)
+	if (!data->seed || map_empty(map))
 	{
-		throw_error_bonus(MAP_EMPTY_GEN);
-		free_t_map_simu(map);
-		return (false);
-	}
-	for (int i = 0; data->seed[i]; i++)
-		write(1, &data->seed[i], 1);
-	if (map_empty(map))
-	{
-		free(data->seed);
+		if (data->seed)
+			free(data->seed);
 		throw_error_bonus(MAP_EMPTY_GEN);
 		free_t_map_simu(map);
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 16:40:50 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 14:23:01 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 15:13:20 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,9 @@
 #include "includes/utils_bonus.h"
 #include "includes/player_bonus.h"
 #include "includes/bonus.h"
+#include "includes/mini_map_bonus.h"
 #include <sys/wait.h>
 #include <unistd.h>
-
-void	toogle_door_state(void *param)
-{
-	t_data	*data;
-	int		px;
-	int		py;
-
-	data = (t_data *)param;
-	px = (int)(data->player->pos.x / WALL_SIZE + data->player->dir.x);
-	py = (int)(data->player->pos.y / WALL_SIZE+ data->player->dir.y);
-	if (py < 0 || py >= data->map->height || px < 0 || px >= data->map->width)
-		return ;
-	if (data->keys.e && !data->keys.e_lock)
-	{
-		if (data->map->doors[py][px] == ' ')
-			return ;
-		else if (data->map->doors[py][px] == '1')
-			data->map->doors[py][px] = '0';
-		else
-		{
-			data->player->pos.x -= data->player->dir.x * WALL_SIZE * 0.1f;
-			data->player->pos.y -= data->player->dir.y * WALL_SIZE * 0.1f;
-			data->map->doors[py][px] = '1';
-		}
-		data->keys.e_lock = true;
-	}
-}
 
 static int	ready(t_data *data)
 {
@@ -144,7 +118,7 @@ static int	switch_gen(t_data **data, int ac, char **av, long int *seed)
 	}
 	else
 	{
-		ft_print_error("Error:\nInvalid number of arguments.\n");
+		throw_error(ERROR_ARGS);
 		return (1);
 	}
 	return (0);

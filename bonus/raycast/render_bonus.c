@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 17:04:03 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 14:06:19 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 15:01:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static void	place_remove_player(t_player *player, t_data *d, bool remove)
 	tile_y = player->pos.y / WALL_SIZE;
 	if (!remove)
 		d->map->grid[tile_y][tile_x] = 'P';
-	else if (d->map_door[tile_y][tile_x] != not_door_state)
-		d->map->grid[tile_y][tile_x] = 'D';
 	else
 		d->map->grid[tile_y][tile_x] = '0';
 }
@@ -51,8 +49,9 @@ static void	render_player_sprite(t_data *data)
 
 	s = &data->player->sprite;
 	update_sprite_frame(data);
-	mlx_put_transformed_image_to_window(data->mlx, data->win, s->spritesheet[s->frame],
-			s->x, s->y, s->scale, s->scale, 0.0f);
+	mlx_put_transformed_image_to_window(data->mlx, data->win,
+		s->spritesheet[s->frame],
+		s->x, s->y, s->scale, s->scale, 0.0f);
 }
 
 void	render(void *param)

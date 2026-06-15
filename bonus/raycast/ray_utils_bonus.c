@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 11:40:09 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 14:06:06 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:41:36 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,10 @@ void	set_type_ray(t_data *data, t_vect tyle, t_ray *ray)
 	}
 	else
 		ray->type = wall_type;
-	// else if (data->map->grid[(int)tyle.y][(int)tyle.x] == '1')
-	// 	ray->type = wall_type;
 }
 
 void	udpate_doors(t_ray *ray, t_data *d)
 {
-	// if (ray->type == door_type)
-	// {
-	// 	if (d->map_door[(int)ray->tile.y][(int)ray->tile.x] == close_state
-	// 		&& d->keys.e && ray->delta_dist.x <= 2.0f
-	// 		&& ray->delta_dist.y <= 2.0f && face_same_dir(ray, d->player))
-	// 	{
-	// 		d->map_door[(int)ray->tile.y][(int)ray->tile.x] = open_state;
-	// 		d->keys.e = false;
-	// 	}
-	// 	else if (
-	// 		d->map_door[(int)d->player->pos.y / WALL_SIZE]
-	// 		[(int)d->player->pos.x / WALL_SIZE] == not_door_state
-	// 		&& d->map_door[(int)ray->tile.y][(int)ray->tile.x] == open_state
-	// 		&& d->keys.e && ray->delta_dist.x <= 2.0f
-	// 		&& ray->delta_dist.y <= 2.0f && face_same_dir(ray, d->player))
-	// 	{
-	// 		d->map_door[(int)ray->tile.y][(int)ray->tile.x] = close_state;
-	// 		d->keys.e = false;
-	// 	}
-	// }
 	if (ray->type == door_type)
 	{
 		if (d->keys.e && !d->keys.e_lock)
@@ -97,14 +75,10 @@ void	udpate_doors(t_ray *ray, t_data *d)
 
 void	get_pixel(t_ray *ray, mlx_color *pixel, t_data *d, int xs[2])
 {
-	// udpate_doors(ray, d);
 	if (ray->type == wall_type)
 		*pixel = mlx_get_image_pixel(d->mlx, d->wall_assets[ray->face],
 				xs[1], ray->texture_y);
 	else if (d->map->doors[(int)ray->tile.y][(int)ray->tile.x] == '1')
 		*pixel = mlx_get_image_pixel(d->mlx, d->door_asset[0],
 				xs[1], ray->texture_y);
-	// else
-	// 	*pixel = mlx_get_image_pixel(d->mlx, d->door_asset[1],
-	// 			xs[1], ray->texture_y);
 }

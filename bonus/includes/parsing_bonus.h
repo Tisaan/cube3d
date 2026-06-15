@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:43:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 13:52:20 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 15:09:03 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef enum e_error_map
 	ERROR_PATH_TEXTURE,
 	ERROR_INV_COLOR,
 	ERROR_MALLOC,
+	ERROR_ARGS,
 	ERROR_MAX,
 }		t_error_map;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:28:15 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 13:51:10 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:35:02 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	clear_viewport(t_map *map, int i);
 int		fill_end_with_space(t_map *map, int *i);
 int		fill_start_with_space(t_map *map, int *i, int *map_y);
 int		fill_viewport(t_player *player, t_map *map, t_point view);
+void	toogle_door_state(void *param);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:27:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 13:50:21 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:45:30 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ typedef struct s_data
 	t_timer			timer;
 	t_win_infos		win_infos;
 	t_map			*map;
-	t_state_obj		**map_door;
 	t_texture_path	texture[4];
 	t_prgb			plans_color[2];
 	t_player		*player;

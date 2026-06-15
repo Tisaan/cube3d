@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_animation_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 13:31:29 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 14:04:28 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:40:12 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	update_sprite_frame(t_data *data)
 {
 	t_animated_sprite_2d	*sprite;
 
-	sprite = &data->player->sprite; 
+	sprite = &data->player->sprite;
 	if (!sprite->is_playing)
 		return ;
 	sprite->anim_time += data->delta;

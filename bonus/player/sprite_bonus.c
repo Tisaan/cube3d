@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 10:18:18 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 14:04:37 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:40:42 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static int	fill_spritesheet(t_data *d, t_animated_sprite_2d *s)
 			clear_spritesheet(d, &s->spritesheet, i - 1);
 			return (-ERROR_MALLOC);
 		}
-		s->spritesheet[i] =
-			mlx_new_image_from_file(d->mlx, path, &s->width, &s->height);
+		s->spritesheet[i]
+			= mlx_new_image_from_file(d->mlx, path, &s->width, &s->height);
 		if (!s->spritesheet[i])
 		{
 			clear_spritesheet(d, &s->spritesheet, i - 1);

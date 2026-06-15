@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 10:26:08 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 14:23:14 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/15 14:50:45 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,26 @@ static char	*dup_viewport_line(t_player *p, t_map *map, int map_x, int map_y)
 	int		i;
 
 	line = malloc(sizeof(char) * (11 + 1));
-	if (!line)
-		return (NULL);
 	i = 0;
-	while (map_x < 0 && i < 11)
+	while (line && map_x < 0 && i < 11)
 	{
 		line[i++] = ' ';
 		map_x++;
 	}
-	while (map->grid[map_y][map_x] && i < 11)
+	while (line && map->grid[map_y][map_x] && i < 11)
 	{
 		if (map_y == p->pos.y / WALL_SIZE && map_x == p->pos.x / WALL_SIZE)
-			line[i] = 'P';
+			line[i++] = 'P';
 		else if (map->doors[map_y][map_x] == '1')
-			line[i] = 'D';
+			line[i++] = 'D';
 		else
-			line[i] = map->grid[map_y][map_x];
-		i++;
+			line[i++] = map->grid[map_y][map_x];
 		map_x++;
 	}
-	while (i < 11)
+	while (line && i < 11)
 		line[i++] = ' ';
-	line[i] = '\0';
+	if (line)
+		line[i] = '\0';
 	return (line);
 }
 

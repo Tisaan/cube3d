@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:54:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 14:06:35 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 15:27:29 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,12 @@ void	free_map(t_data *data)
 		return ;
 	i = 0;
 	while (i <= data->map->height)
-	{
 		free(data->map->grid[i++]);
-	}
-	if (data->map->viewport)
-	{
-		i = 0;
-		while (data->map->viewport[i])
-		{
-			free(data->map->viewport[i]);
-			i++;
-		}
-	}
 	free(data->map->grid);
-	i = 0;
-	while (i <= data->map->height)
-	{
-		if (data->map_door && data->map_door[i])
-			free(data->map_door[i]);
-		i++;
-	}
-	free(data->map_door);
+	if (data->map->viewport)
+		ft_freeptr((void **)data->map->viewport);
+	if (data->map->doors)
+		free_doors_map(data);
 	if (data->map->start)
 		free(data->map->start);
 	if (data->seed)

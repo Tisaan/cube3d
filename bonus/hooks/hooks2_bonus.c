@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:54:55 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 13:57:58 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:53:14 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,20 @@ void	display_game_infos(void *param)
 	color.rgba = 0xFFFFFFFF;
 	fps = ft_itoa(data->timer.fps);
 	if (!fps)
-	{
 		throw_error(-ERROR_MALLOC);
+	if (!fps)
 		return ;
-	}
 	fps = set_prompt("FPS: ", fps, true);
 	if (fps == NULL)
 		return ;
-	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE, 15 + FONT_SIZE, color, fps);
+	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE,
+		15 + FONT_SIZE, color, fps);
 	free(fps);
 	fps = set_prompt("SEED: ", data->seed, false);
 	if (!fps)
 		return ;
-	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE, 45 + FONT_SIZE, color, fps);
+	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE,
+		45 + FONT_SIZE, color, fps);
 	free(fps);
 }
 

@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/15 14:14:16 by pcaplat          ###   ########.fr        #
+#    Updated: 2026/06/15 15:27:55 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NC     := \033[0m # No Color
 
 # --- Compilation ---
 NAME = cub3D
-CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes 
+CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes -fsanitize=address
 CC	= cc
 
 # --- Directory ---
@@ -51,8 +51,8 @@ SRC_PARSING = 	path_bonus.c \
 				map_utils2_bonus.c
 
 SRC_UTILS =		free_bonus.c \
+				free_bonus2.c \
 				destroy_img_bonus.c \
-				debug.c \
 				vectors_bonus.c \
 				utils2_bonus.c \
 				utils_bonus.c \

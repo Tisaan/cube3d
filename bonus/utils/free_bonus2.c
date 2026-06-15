@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objs_bonus.h                                       :+:      :+:    :+:   */
+/*   free_bonus2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/28 12:14:07 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/15 14:45:10 by tseche           ###   ########.fr       */
+/*   Created: 2026/06/15 15:24:27 by tseche            #+#    #+#             */
+/*   Updated: 2026/06/15 15:30:02 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJS_BONUS_H
-# define OBJS_BONUS_H
+#include "../includes/cub3d_bonus.h"
 
-# include "raycast_bonus.h"
-# include "cub3d_bonus.h"
-
-typedef struct s_obj
+void	free_doors_map(t_data *d)
 {
-	int		start;
-	int		end;
-	int		height;
-	int		cliping;
-}		t_obj;
+	int	i;
 
-t_obj	get_obj(t_win_infos *win, float wall_dist);
-
-#endif
+	i = 0;
+	while (d->map->doors[i])
+		free(d->map->doors[i++]);
+	free(d->map->doors);
+}

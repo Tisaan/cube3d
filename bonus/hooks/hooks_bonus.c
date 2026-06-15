@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/15 13:58:16 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:53:38 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ static void	movement_hooks(int key, t_data *data)
 	else if (key == E_KEY)
 	{
 		if (!data->keys.e_lock)
-		{
 			data->keys.e = true;
-			// data->keys.e_lock = true;
-		}
 	}
 }
 
@@ -83,7 +80,7 @@ void	key_hooks(int key, void *param)
 		if (data->keys.f3 == true)
 			data->keys.f3 = false;
 		else
-		 data->keys.f3 = true;
+			data->keys.f3 = true;
 	}
 	display_game_infos(data);
 	movement_hooks(key, data);
