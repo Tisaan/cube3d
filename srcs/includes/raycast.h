@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	RAYCAST_H
+#ifndef RAYCAST_H
 # define RAYCAST_H
 # include "cub3d.h"
-#include "parsing.h"
+# include "parsing.h"
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	int				side;
 	t_vect			dir;
@@ -25,7 +25,7 @@ typedef struct	s_ray
 }					t_ray;
 
 // Raycaster main functions
-int	raycast(t_data *data, t_player *player);
+int		raycast(t_data *data, t_player *player);
 float	dda(t_ray *ray, t_data *data);
 
 // Ray util functions
