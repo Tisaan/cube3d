@@ -6,13 +6,13 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 14:29:30 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/08 11:03:35 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 13:59:06 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 #include "../includes/bonus.h"
-#include "../includes/mini_map.h"
+#include "../includes/mini_map_bonus.h"
 
 int	fill_start_with_space(t_map *map, int *i, int *map_y)
 {

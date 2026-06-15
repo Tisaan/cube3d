@@ -6,11 +6,11 @@
 /*   By: pcaplat </var/spool/mail/pcaplat>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 13:31:29 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/06/12 16:03:51 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/06/15 14:04:28 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	set_sprite_pos(t_win_infos win, t_animated_sprite_2d *sprite)
 {

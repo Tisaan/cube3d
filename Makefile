@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/12 18:27:47 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/15 14:14:16 by pcaplat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,41 +39,41 @@ endif
 OBJ_DIR = ./obj/$(DIR)
 
 ifeq ($(MAKECMDGOALS), bonus)
-SRC_PARSING = 	path.c \
-				parser.c \
-				map.c \
-				error.c \
-				map_data.c \
-				parser_utils.c \
-				init.c \
-				init_utils.c \
-				map_utils.c \
-				map_utils2.c
+SRC_PARSING = 	path_bonus.c \
+				parser_bonus.c \
+				map_bonus.c \
+				error_bonus.c \
+				map_data_bonus.c \
+				parser_utils_bonus.c \
+				init_bonus.c \
+				init_utils_bonus.c \
+				map_utils_bonus.c \
+				map_utils2_bonus.c
 
 SRC_UTILS =		free_bonus.c \
 				destroy_img_bonus.c \
 				debug.c \
-				vectors.c \
-				utils2.c \
-				utils.c \
+				vectors_bonus.c \
+				utils2_bonus.c \
+				utils_bonus.c \
 
 SRC_MINI_MAP =	mini_map_bonus.c \
-				render_mini_map.c \
-				viewport_utils.c
+				render_mini_map_bonus.c \
+				viewport_utils_bonus.c
 
-SRC_RAYCAST =	player.c \
+SRC_RAYCAST =	player_bonus.c \
 				render_bonus.c \
-				ray.c \
-				ray_utils.c \
-				ray_utils2.c \
-				dda.c \
-				objs.c
+				ray_bonus.c \
+				ray_utils_bonus.c \
+				ray_utils2_bonus.c \
+				dda_bonus.c \
+				objs_bonus.c
 
-SRC_HOOKS = hooks.c \
-			hooks2.c 
+SRC_HOOKS = hooks_bonus.c \
+			hooks2_bonus.c 
 
-SRC_PLAYER = move.c \
-			 rotate.c \
+SRC_PLAYER = move_bonus.c \
+			 rotate_bonus.c \
 			 sprite_bonus.c \
 			 sprite_animation_bonus.c
 
@@ -82,10 +82,10 @@ SRC_GEN =   door_bonus.c \
 			gen_seed_bonus.c \
 			method_bonus.c \
 			spawn_bonus.c \
-			utils_bonus.c \
-			utils2_bonus.c \
-			utils3_bonus.c \
-			utils4_bonus.c \
+			utils_gen_bonus.c \
+			utils2_gen_bonus.c \
+			utils3_gen_bonus.c \
+			utils4_gen_bonus.c \
 			wall_bonus.c
 
 SUB_DIR = parsing utils hooks raycast player generation mini_map
@@ -129,7 +129,7 @@ VPATH := $(DIR) \
 
 
 ifeq ($(MAKECMDGOALS), bonus)
-	SRCS = main.c main_proc.c $(SRC_UTILS) $(SRC_PARSING) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER) $(SRC_GEN) $(SRC_MINI_MAP)
+	SRCS = main_bonus.c main_proc_bonus.c $(SRC_UTILS) $(SRC_PARSING) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER) $(SRC_GEN) $(SRC_MINI_MAP)
 else
 	SRCS = main.c $(SRC_PARSING) $(SRC_UTILS) $(SRC_HOOKS) $(SRC_RAYCAST) $(SRC_PLAYER)
 endif

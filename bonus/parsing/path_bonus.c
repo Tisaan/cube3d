@@ -1,0 +1,107 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/28 17:22:03 by tseche            #+#    #+#             */
+/*   Updated: 2026/06/15 14:03:49 by pcaplat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub3d_bonus.h"
+
+int	get_rel_path(char *line)
+{
+	int	len;
+	int	dot;
+	int	slash;
+
+	len = 0;
+	dot = 0;
+	slash = 0;
+	while (!ft_isalpha(*line))
+	{
+		if (*line == '/' && slash == 0)
+			dot = 0;
+		else if (*line == '.' && dot <= 2)
+			dot++;
+		else if (*line == '/' || *line == '.')
+			return (-ERROR_INV_PATH_TEXTURE);
+		else if (*line == '"' || *line == '\'')
+			return (-ERROR_INV_PATH_TEXTURE);
+		line++;
+		len++;
+	}
+	return (len);
+}
+
+int	len_path(char *line, int quote[2])
+{
+	char	*cpy;
+
+	cpy = line;
+	while (*line && *line != '\n')
+	{
+		if ((*line == '(' || *line == ')') && quote[1])
+			break ;
+		else if (*line == '(' || *line == ')')
+			return (-ERROR_INV_PATH_TEXTURE);
+		else if (*line == '\'' && (quote[1] == 0 || quote[0] == '\''))
+			return (-ERROR_INV_PATH_TEXTURE);
+		else if (*line == '"' && (quote[1] == 0 || quote[0] == '"'))
+			return (-ERROR_INV_PATH_TEXTURE);
+		line++;
+	}
+	return (line - cpy);
+}
+
+int	set_texture_path(t_texture_path *textures, char *line, int id, int *i)
+{
+	char	*path;
+	int		j;
+
+	j = 0;
+	while (j < 4)
+	{
+		if (textures[j].path)
+		{
+			if ((t_direction_id)id == textures[j].dir)
+				return (-ERROR_MULTIPLE_TEXTURE);
+		}
+		j++;
+	}
+	path = get_path(&line[*i]);
+	if (!path)
+		return (-ERROR_MALLOC);
+	textures[id].dir = id;
+	textures[id].path = path;
+	return (true);
+}
+
+char	*get_path(char *line)
+{
+	int		quote[2];
+	char	*str;
+	int		pre;
+	char	*cpy;
+	int		len;
+
+	cpy = line;
+	line += skip_spaces(line);
+	if (*line == '\'' || *line == '"')
+		quote[1] = 1;
+	if (*line == '\'' || *line == '"')
+		quote[0] = *line++;
+	pre = get_rel_path(line);
+	if (pre == -ERROR_INV_PATH_TEXTURE)
+		return (NULL);
+	len = len_path(&line[pre], quote);
+	if (len == -7)
+		return (NULL);
+	str = ft_substr(cpy, 0, pre + line - cpy + len);
+	if (!str)
+		return (NULL);
+	return (str);
+}
