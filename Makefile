@@ -21,7 +21,7 @@ NC     := \033[0m # No Color
 
 # --- Compilation ---
 NAME = cub3D
-CFLAGS = -Wall -Werror -Wextra -g -I mlx/includes -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -I mlx/includes
 CC	= cc
 
 # --- Directory ---

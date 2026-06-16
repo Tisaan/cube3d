@@ -121,5 +121,6 @@ int	parse(char *map_path, t_data **data)
 	size_file = parse_step(*data, map_path, size_file);
 	if (size_file < 0)
 		return (size_file);
+	(*data)->seed = NULL;
 	return (NO_ERROR);
 }

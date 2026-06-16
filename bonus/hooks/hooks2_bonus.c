@@ -63,6 +63,22 @@ static char	*set_prompt(char *prefix, char *postfix, bool free_postfix)
 	return (tmp);
 }
 
+static int	display_seed(t_data *data, mlx_color color)
+{
+	char	*str;
+
+	str = set_prompt("SEED: ", data->seed, false);
+	if (!str)
+	{
+		throw_error(-ERROR_MALLOC);
+		return (-ERROR_MALLOC);
+	}
+	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE,
+		45 + FONT_SIZE, color, str);
+	free(str);
+	return (NO_ERROR);
+}
+
 void	display_game_infos(void *param)
 {
 	t_data		*data;
@@ -84,12 +100,11 @@ void	display_game_infos(void *param)
 	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE,
 		15 + FONT_SIZE, color, fps);
 	free(fps);
-	fps = set_prompt("SEED: ", data->seed, false);
-	if (!fps)
-		return ;
-	mlx_string_put(data->mlx, data->win, 15 + FONT_SIZE,
-		45 + FONT_SIZE, color, fps);
-	free(fps);
+	if (data->seed)
+	{
+		if (display_seed(data, color) < 0)
+			return ;
+	}
 }
 
 void	handle_mouse_clic(int event, void *param)

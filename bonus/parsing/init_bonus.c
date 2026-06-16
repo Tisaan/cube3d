@@ -90,8 +90,8 @@ int	init_game(t_data *data)
 	if (data->frame == MLX_NULL_HANDLE && data->mini_map == MLX_NULL_HANDLE)
 		return (-ERROR_LOAD_ASSET);
 	data->keys = (t_keys){0};
-	data->floor_color = rgb_to_color(data->plans_color[1], 100);
-	data->ceil_color = rgb_to_color(data->plans_color[0], 100);
+	data->floor_color = rgb_to_color(data->plans_color[1], 0xFF);
+	data->ceil_color = rgb_to_color(data->plans_color[0], 0xFF);
 	data->map->doors = set_doors_map(data);
 	if (!data->map->doors)
 		return (-ERROR_MALLOC);

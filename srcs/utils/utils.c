@@ -26,8 +26,6 @@ mlx_color	rgb_to_color(t_prgb rgb, int alpha)
 
 	if (alpha < 0)
 		alpha = 0;
-	if (alpha > 100)
-		alpha = 100;
 	color.r = rgb.rgb[0];
 	color.g = rgb.rgb[1];
 	color.b = rgb.rgb[2];

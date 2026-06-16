@@ -56,20 +56,6 @@ void	key_hooks(int key, void *param)
 	data = (t_data *)param;
 	if (key == Q_KEY || key == ESC_KEY)
 		mlx_loop_end(data->mlx);
-	else if (key == F_KEY)
-	{
-		if (data->win_infos.is_fullscreen == false)
-		{
-			data->win_infos.is_fullscreen = true;
-			mlx_set_window_fullscreen(data->mlx, data->win, true);
-		}
-		else
-		{
-			data->win_infos.is_fullscreen = false;
-			mlx_restore_window(data->mlx, data->win);
-			mlx_set_window_fullscreen(data->mlx, data->win, false);
-		}
-	}
 	movement_hooks(key, data);
 }
 
